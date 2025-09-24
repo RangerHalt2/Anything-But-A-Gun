@@ -36,7 +36,7 @@ public class InputManager : MonoBehaviour
     //LB: Instance Handler
     public static InputManager Instance { get; private set; }
 
-    void Start()
+    void Awake()
     {
         //LB: Handles instance related stuff, still unsure where and when the destroy code runs? It never seems necessary
         if (Instance == null)
@@ -95,4 +95,5 @@ public class InputManager : MonoBehaviour
         jumpAction.Disable();
         scrollAction.Disable();
     }
+
 }
