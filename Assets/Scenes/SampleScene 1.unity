@@ -307,6 +307,66 @@ MonoBehaviour:
   m_ShadowLayerMask: 1
   m_RenderingLayers: 1
   m_ShadowRenderingLayers: 1
+--- !u!1 &591312670
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 591312672}
+  - component: {fileID: 591312671}
+  m_Layer: 0
+  m_Name: Input Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &591312671
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 591312670}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06ad0a8717e40fa4ba9b4a1cefd70b74, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InputManager
+  playerControls: {fileID: -944628639613478452, guid: 537f40378745e784c8bfb1977e217387, type: 3}
+  actionMapName: Player
+  movement: Movement
+  fire: Fire
+  altFire: AltFire
+  jump: Jump
+  mouseScrollY: MouseScrollY
+  scrollAction:
+    m_Name: 
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: ce8d033b-dd5d-426a-b95f-e8a2ecb795da
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+--- !u!4 &591312672
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 591312670}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 6.34175, y: 1.46215, z: -3.55142}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &738359018
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -656,8 +716,8 @@ GameObject:
   - component: {fileID: 1785599801}
   - component: {fileID: 1785599800}
   - component: {fileID: 1785599799}
-  - component: {fileID: 1785599798}
   - component: {fileID: 1785599803}
+  - component: {fileID: 1785599804}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -665,24 +725,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1785599798
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1785599797}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6e11f03ace7ae134885c3398a5dcd61f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::WeaponHandler
-  starterWeapon: {fileID: 2719607922738401809, guid: bf4560e93c0aa904dbd752275a0b37f5, type: 3}
-  weapons: []
-  currentWeapon: {fileID: 0}
-  weaponSlot: 0
-  newWeapon: {fileID: 0}
-  weaponLocation: {fileID: 1149472972}
 --- !u!136 &1785599799
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -791,7 +833,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Unity.InputSystem::UnityEngine.InputSystem.PlayerInput
   m_Actions: {fileID: -944628639613478452, guid: 537f40378745e784c8bfb1977e217387, type: 3}
-  m_NotificationBehavior: 0
+  m_NotificationBehavior: 2
   m_UIInputModule: {fileID: 0}
   m_DeviceLostEvent:
     m_PersistentCalls:
@@ -828,6 +870,26 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &1785599804
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1785599797}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e11f03ace7ae134885c3398a5dcd61f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WeaponHandler
+  starterWeapon: {fileID: 2719607922738401809, guid: bf4560e93c0aa904dbd752275a0b37f5, type: 3}
+  weapons: []
+  currentWeapon: {fileID: 0}
+  weaponSlot: 0
+  newWeapon: {fileID: 0}
+  weaponLocation: {fileID: 1149472972}
+  inputManager: {fileID: 591312671}
+  scrollValue: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -838,3 +900,4 @@ SceneRoots:
   - {fileID: 1785599802}
   - {fileID: 82708034}
   - {fileID: 738359018}
+  - {fileID: 591312672}

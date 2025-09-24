@@ -8,27 +8,30 @@ using UnityEngine.InputSystem;
 
 public class InputManager : MonoBehaviour
 {
-    [SerializeField] private InputActionAsset playerControls;
+    [SerializeField] public InputActionAsset playerControls;
 
-    [SerializeField] private string actionMapName = "Player";//This should be the name of the entire mapping
+    [SerializeField] public string actionMapName = "Player";//This should be the name of the entire mapping
 
     //LB: These should be the names of individual input readings for the broad inputs like WASD is part of movement and jumping assigns spacebar and A/Circle on controllers
     [SerializeField] private string movement = "Movement";
     [SerializeField] private string fire = "Fire";
     [SerializeField] private string altFire = "AltFire";
     [SerializeField] private string jump = "Jump";
+    [SerializeField] private string mouseScrollY = "MouseScrollY";
 
     //LB: This is an action input, each one needs one assigned
     private InputAction moveAction;
     private InputAction fireAction;
     private InputAction altFireAction;
     private InputAction jumpAction;
+    public InputAction scrollAction;
 
     //LB: This is the getters and setters for the inputs, this will be used to manage their values overall
     public Vector2 MoveInput { get; private set; }
     public bool FireInput { get; private set; }
     public bool AltFireInput { get; private set; }
     public bool JumpInput { get; private set; }
+    public float MouseScrollInput { get; private set; }
 
     //LB: Instance Handler
     public static InputManager Instance { get; private set; }
@@ -51,6 +54,7 @@ public class InputManager : MonoBehaviour
         fireAction = playerControls.FindActionMap(actionMapName).FindAction(fire);
         altFireAction = playerControls.FindActionMap(actionMapName).FindAction(altFire);
         jumpAction = playerControls.FindActionMap(actionMapName).FindAction(jump);
+        scrollAction = playerControls.FindActionMap(actionMapName).FindAction(mouseScrollY);
         RegisterInputActions();
     }
 
@@ -68,6 +72,9 @@ public class InputManager : MonoBehaviour
 
         jumpAction.performed += context => JumpInput = true;
         jumpAction.canceled += context => JumpInput = false;
+
+        scrollAction.performed += context => MouseScrollInput = context.ReadValue<float>();
+        scrollAction.canceled += context => MouseScrollInput = 0f;
     }
 
     //LB: Enable and Disable the actions
@@ -77,6 +84,7 @@ public class InputManager : MonoBehaviour
         fireAction.Enable();
         altFireAction.Enable();
         jumpAction.Enable();
+        scrollAction.Enable();
     }
 
     private void OnDisable()
@@ -85,5 +93,6 @@ public class InputManager : MonoBehaviour
         fireAction.Disable();
         altFireAction.Disable();
         jumpAction.Disable();
+        scrollAction.Disable();
     }
 }

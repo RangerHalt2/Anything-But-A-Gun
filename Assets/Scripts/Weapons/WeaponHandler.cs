@@ -16,16 +16,30 @@ public class WeaponHandler : MonoBehaviour
     public GameObject newWeapon; //For if a player picks up a new gun.
     public Transform weaponLocation; //Where the weapon is in the player's POV
 
-    private float scrollValue;
+    public InputManager inputManager;
+    public float scrollValue;
+
+    void Awake() 
+    {
+        inputManager = new InputManager();
+    }
+    void OnEnable()
+    {
+        inputManager.scrollAction.performed += OnSwitchGun;
+    }
+    void OnDisable() 
+    {
+        inputManager.scrollAction.performed -= OnSwitchGun;
+    }
 
     void Start()
     {
-
         weapons.Add(starterWeapon);
         currentWeapon = Instantiate(weapons[0]);
         weaponSlot = 0;
-        
     }
+
+    
 
     void Update()
     {
@@ -35,16 +49,16 @@ public class WeaponHandler : MonoBehaviour
     }
 
     //NOT WORKING! IDK WHY
-    public void OnSwitchGun(InputAction.CallbackContext ctx) //When the player want's to rotate to a different weapon in their wheel
+    void OnSwitchGun(InputAction.CallbackContext ctx) //When the player want's to rotate to a different weapon in their wheel
     {
         scrollValue = ctx.ReadValue<float>();
-        Debug.Log(scrollValue);
+        Debug.Log("Mouse Scrolled");
 
         //If player scrolls
         if (scrollValue > 0) //Scroll up
         {
             currentWeapon.SetActive(false); //Deactivate (not destroy) current weapon
-            if (weaponSlot > weapons.Count - 1) //Actually check if it's a gun. If not, change to base
+            if (weaponSlot > weapons.Count - 1) //Actually check if it's a gun. If not, change back to first gun
             {
                 currentWeapon = weapons[0];
                 weaponSlot = 0;
@@ -71,9 +85,7 @@ public class WeaponHandler : MonoBehaviour
             currentWeapon.SetActive(true); //And activate it
             //Play equip animation and activate new current weapon
         }
-
-
-
+        
     }
 
     void AddWeapon(GameObject addWeapon)
