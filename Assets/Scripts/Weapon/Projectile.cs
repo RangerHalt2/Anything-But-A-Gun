@@ -27,6 +27,10 @@ public class Projectile : MonoBehaviour
     [SerializeField] private bool piercing;
     [Tooltip("Determines whether the projectile will impact with or ricochet off of walls.")]
     public WallBehavior wallBehavior;
+    [Tooltip("Determines whether the projectile will be effected by gravity.")]
+    [SerializeField] private bool bulletDrop;
+    [Tooltip("Multiplier for gravity when bullet drop is enabled.")]
+    [SerializeField] private float gravityMultiplier = 1.0f;
 
     // Referenece to the Projectile's's Rigidbody
     private Rigidbody rb;
@@ -42,6 +46,8 @@ public class Projectile : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        // Turn off default gravity since we'll be using a custom one
+        rb.useGravity = false;
 
         // Check if Rigidbody is present
         if (rb != null)
@@ -62,6 +68,18 @@ public class Projectile : MonoBehaviour
     void Update()
     {
 
+    }
+
+    void FixedUpdate()
+    {
+        if (!bulletDrop)
+        {
+            return;
+        }
+        else
+        {
+            rb.AddForce(Physics.gravity * gravityMultiplier, ForceMode.Acceleration);
+        }
     }
 
     // Destroys the gameObject after a set delay defined by lifeTime
