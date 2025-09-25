@@ -35,9 +35,14 @@ public class WeaponHandler : MonoBehaviour
         currentWeapon.transform.position = weaponLocation.position;
 
         SwitchGun();
+        FireWeapon();
     }
 
-    //NOT WORKING! IDK WHY
+    void FireWeapon() 
+    {
+        currentWeapon.GetComponent<IWeapon>().Shoot();
+    }
+
     void SwitchGun() //When the player want's to rotate to a different weapon in their wheel
     {
         scrollValue = inputManager.scrollAction.ReadValue<float>();
