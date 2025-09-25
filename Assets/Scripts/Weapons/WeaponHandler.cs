@@ -19,73 +19,78 @@ public class WeaponHandler : MonoBehaviour
     public InputManager inputManager;
     public float scrollValue;
 
-    void Awake() 
-    {
-        inputManager = new InputManager();
-    }
-    void OnEnable()
-    {
-        inputManager.scrollAction.performed += OnSwitchGun;
-    }
-    void OnDisable() 
-    {
-        inputManager.scrollAction.performed -= OnSwitchGun;
-    }
-
+    
     void Start()
     {
-        weapons.Add(starterWeapon);
-        currentWeapon = Instantiate(weapons[0]);
+        weapons.Add(Instantiate(starterWeapon));
+        currentWeapon = weapons[0];
         weaponSlot = 0;
     }
-
-    
 
     void Update()
     {
         if (newWeapon != null)
         { AddWeapon(newWeapon); }
+
         currentWeapon.transform.position = weaponLocation.position;
+
+        SwitchGun();
     }
 
     //NOT WORKING! IDK WHY
-    void OnSwitchGun(InputAction.CallbackContext ctx) //When the player want's to rotate to a different weapon in their wheel
+    void SwitchGun() //When the player want's to rotate to a different weapon in their wheel
     {
-        scrollValue = ctx.ReadValue<float>();
-        Debug.Log("Mouse Scrolled");
+        scrollValue = inputManager.scrollAction.ReadValue<float>();
+
+        if (weapons.Count > 1 && scrollValue != 0)
+        {
+            currentWeapon.SetActive(false); //Deactivate (not destroy) current weapon
+        }
+        else
+        {
+            return;
+        }
 
         //If player scrolls
         if (scrollValue > 0) //Scroll up
         {
-            currentWeapon.SetActive(false); //Deactivate (not destroy) current weapon
-            if (weaponSlot > weapons.Count - 1) //Actually check if it's a gun. If not, change back to first gun
+            weaponSlot++;
+
+            if (weaponSlot >= weapons.Count) //Actually check if it's a gun. If not, change back to first gun
             {
-                currentWeapon = weapons[0];
                 weaponSlot = 0;
+                currentWeapon = weapons[weaponSlot];
             }
             else
             {
-                currentWeapon = weapons[weaponSlot + 1]; //Set current weapon to next weapon
+                currentWeapon = weapons[weaponSlot]; //Set current weapon to next weapon ((((((((ERROR HERE))))))))
             }
-            currentWeapon.SetActive(true); //And activate it
+            
             //Play equip animation and activate new current weapon
         }
         else if (scrollValue < 0) //Scroll down
         {
-            currentWeapon.SetActive(false); //Deactivate (not destroy) current weapon
+            weaponSlot--;
             if (weaponSlot < 0) //Actually check if it's a gun. If not, change to base
             {
-                currentWeapon = weapons[weapons.Count];
                 weaponSlot = weapons.Count - 1;
+                currentWeapon = weapons[weaponSlot];
             }
             else
             {
-                currentWeapon = weapons[weaponSlot - 1]; //Set current weapon to next weapon
+                currentWeapon = weapons[weaponSlot]; //Set current weapon to next weapon ((((((((ERROR HERE))))))))
             }
-            currentWeapon.SetActive(true); //And activate it
+
             //Play equip animation and activate new current weapon
+            
         }
-        
+
+        if (currentWeapon.activeSelf == false)
+        {
+            currentWeapon.SetActive(true); //And activate it
+            Debug.Log(currentWeapon);
+        }
+
     }
 
     void AddWeapon(GameObject addWeapon)
@@ -93,18 +98,12 @@ public class WeaponHandler : MonoBehaviour
         if (weapons != null)
         {
             currentWeapon.SetActive(false);
-            weapons.Add(addWeapon); //Adds the weapon to the list of weapons available.
-            currentWeapon = Instantiate(addWeapon); //Create the actual weapon and make it active
+            weapons.Add(Instantiate(addWeapon)); //Adds the weapon to the list of weapons available.
+            weaponSlot = weapons.Count - 1;
+            currentWeapon = weapons[weaponSlot]; //Create the actual weapon and make it active
             currentWeapon.SetActive(true);
             newWeapon = null; //So that it doesn't endlessly add the same weapon.
-            weaponSlot = weapons.Count - 1;
-            Debug.Log(weaponSlot);
-
-            //For debugging to make sure the list is updated
-            foreach (GameObject item in weapons)
-            {
-                Debug.Log(item);
-            }
+            
         }
     }
 }
