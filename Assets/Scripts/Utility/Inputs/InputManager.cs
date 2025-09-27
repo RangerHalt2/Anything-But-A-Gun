@@ -18,6 +18,8 @@ public class InputManager : MonoBehaviour
     [SerializeField] private string altFire = "AltFire";
     [SerializeField] private string jump = "Jump";
     [SerializeField] private string mouseScrollY = "MouseScrollY";
+    [SerializeField] private string look = "Look";
+    [SerializeField] private string sprint = "Sprint";
 
     //LB: This is an action input, each one needs one assigned
     private InputAction moveAction;
@@ -25,6 +27,8 @@ public class InputManager : MonoBehaviour
     private InputAction altFireAction;
     private InputAction jumpAction;
     public InputAction scrollAction;
+    public InputAction lookAction;
+    public InputAction sprintAction;
 
     //LB: This is the getters and setters for the inputs, this will be used to manage their values overall
     public Vector2 MoveInput { get; private set; }
@@ -32,6 +36,8 @@ public class InputManager : MonoBehaviour
     public bool AltFireInput { get; private set; }
     public bool JumpInput { get; private set; }
     public float MouseScrollInput { get; private set; }
+    public Vector2 LookInput { get; private set; }
+    public bool SprintInput { get; private set; }
 
     //LB: Instance Handler
     public static InputManager Instance { get; private set; }
@@ -55,6 +61,8 @@ public class InputManager : MonoBehaviour
         altFireAction = playerControls.FindActionMap(actionMapName).FindAction(altFire);
         jumpAction = playerControls.FindActionMap(actionMapName).FindAction(jump);
         scrollAction = playerControls.FindActionMap(actionMapName).FindAction(mouseScrollY);
+        lookAction = playerControls.FindActionMap(actionMapName).FindAction(look);
+        sprintAction = playerControls.FindActionMap(actionMapName).FindAction(sprint);
         RegisterInputActions();
     }
 
@@ -75,6 +83,12 @@ public class InputManager : MonoBehaviour
 
         scrollAction.performed += context => MouseScrollInput = context.ReadValue<float>();
         scrollAction.canceled += context => MouseScrollInput = 0f;
+
+        lookAction.performed += context => LookInput = context.ReadValue<Vector2>();
+        lookAction.canceled += context => LookInput = Vector2.zero;
+
+        sprintAction.performed += context => SprintInput = true;
+        sprintAction.canceled += context => SprintInput = false;
     }
 
     //LB: Enable and Disable the actions
@@ -85,6 +99,8 @@ public class InputManager : MonoBehaviour
         altFireAction.Enable();
         jumpAction.Enable();
         scrollAction.Enable();
+        lookAction.Enable();
+        sprintAction.Enable();
     }
 
     private void OnDisable()
@@ -94,6 +110,8 @@ public class InputManager : MonoBehaviour
         altFireAction.Disable();
         jumpAction.Disable();
         scrollAction.Disable();
+        lookAction.Disable();
+        sprintAction.Disable();
     }
 
 }
