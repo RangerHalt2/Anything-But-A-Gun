@@ -48,6 +48,8 @@ public class Hitscan : MonoBehaviour
 
     public void Shoot()
     {
+        Debug.Log("BANG!");
+
         // Set the direction of the raycast to the bulletSpawnPoint
         Vector3 direction = bulletSpawnPoint.forward;
 

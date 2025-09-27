@@ -10,19 +10,19 @@ public class WeaponHandler : MonoBehaviour
     public GameObject starterWeapon;
 
     //Exactly what weapons we have
-    public List<GameObject> weapons = new List<GameObject>(); //List instead of an array for constant updating
-    public GameObject currentWeapon; //The weapon currently in the player's hands
-    public int weaponSlot; //Which weapon in slot we're holding
+    private List<GameObject> weapons = new List<GameObject>(); //List instead of an array for constant updating
+    private GameObject currentWeapon; //The weapon currently in the player's hands
+    private int weaponSlot; //Which weapon in slot we're holding
     public GameObject newWeapon; //For if a player picks up a new gun.
-    public Transform weaponLocation; //Where the weapon is in the player's POV
+    [SerializeField] private Transform weaponLocation; //Where the weapon is in the player's POV
 
-    public InputManager inputManager;
-    public float scrollValue;
+    [SerializeField] private InputManager inputManager;
+    private float scrollValue;
 
     
     void Start()
     {
-        weapons.Add(Instantiate(starterWeapon));
+        weapons.Add(Instantiate(starterWeapon, this.transform));
         currentWeapon = weapons[0];
         weaponSlot = 0;
     }
@@ -32,20 +32,31 @@ public class WeaponHandler : MonoBehaviour
         if (newWeapon != null)
         { AddWeapon(newWeapon); }
 
-        currentWeapon.transform.position = weaponLocation.position;
+        if (currentWeapon != null)
+        {
+            currentWeapon.transform.position = weaponLocation.position;
+        }
 
         SwitchGun();
-        FireWeapon();
+        FireWeapon(); //FOR TESTING
     }
 
-    void FireWeapon() 
+    void FireWeapon() //FOR TESTING
     {
-        currentWeapon.GetComponent<IWeapon>().Shoot();
+        currentWeapon.GetComponent<IWeapon>().Shoot();//FOR TESTING
+    }
+
+    void ReloadWeapon() 
+    { 
+        currentWeapon.GetComponent<IWeapon>().Reload(); //For the future
     }
 
     void SwitchGun() //When the player want's to rotate to a different weapon in their wheel
     {
-        scrollValue = inputManager.scrollAction.ReadValue<float>();
+        if (inputManager != null)
+        {
+            scrollValue = inputManager.scrollAction.ReadValue<float>();
+        }
 
         if (weapons.Count > 1 && scrollValue != 0)
         {
@@ -68,7 +79,7 @@ public class WeaponHandler : MonoBehaviour
             }
             else
             {
-                currentWeapon = weapons[weaponSlot]; //Set current weapon to next weapon ((((((((ERROR HERE))))))))
+                currentWeapon = weapons[weaponSlot]; //Set current weapon to next weapon
             }
             
             //Play equip animation and activate new current weapon
@@ -83,7 +94,7 @@ public class WeaponHandler : MonoBehaviour
             }
             else
             {
-                currentWeapon = weapons[weaponSlot]; //Set current weapon to next weapon ((((((((ERROR HERE))))))))
+                currentWeapon = weapons[weaponSlot]; //Set current weapon to next weapon
             }
 
             //Play equip animation and activate new current weapon
@@ -103,7 +114,7 @@ public class WeaponHandler : MonoBehaviour
         if (weapons != null)
         {
             currentWeapon.SetActive(false);
-            weapons.Add(Instantiate(addWeapon)); //Adds the weapon to the list of weapons available.
+            weapons.Add(Instantiate(addWeapon, this.transform)); //Adds the weapon to the list of weapons available.
             weaponSlot = weapons.Count - 1;
             currentWeapon = weapons[weaponSlot]; //Create the actual weapon and make it active
             currentWeapon.SetActive(true);

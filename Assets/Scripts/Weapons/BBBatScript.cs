@@ -1,10 +1,11 @@
 using UnityEngine;
+using System.Collections;
 
-public class BBBatScript : MonoBehaviour , IWeapon
+public class BBBatScript : MonoBehaviour, IWeapon
 {
     public int health = 10; //Health of the melee weapon
 
-    private bool striking = false;
+    public bool striking = false;
 
     void Update()
     {
@@ -18,22 +19,29 @@ public class BBBatScript : MonoBehaviour , IWeapon
     {
         if (_other.tag == "Enemy" && striking) // If it's an enemy, the bat has health, and the player presses shoot, attack the enemy
         {
-            //_other.gameObject.GetComponent<EnemyController>().LoseLife(); Make him lose life
+            //_other.gameObject.GetComponent<EnemyController>().LoseLife(); Make enemy/damageable lose life
             Debug.Log("Oh hey!, an enemy!");
             health--;
-
-            striking = false;
-        }
-        else 
-        {
-            striking = false;
         }
     }
 
     public void Shoot() //Required method for interface IWeapon
     {
-        //Animate Attack
+        if (!striking)
+        {
+            StartCoroutine(CLASH());
+            //Animate Attack
+        }
+    }
+
+    IEnumerator CLASH()
+    {
         striking = true;
-        //Deal damage to enemy (Don't have yet)
+        yield return new WaitForSeconds(2);
+        striking = false;
+    }
+
+    public void Reload()
+    {
     }
 }

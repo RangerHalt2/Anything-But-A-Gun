@@ -20,7 +20,7 @@ public class Projectile : MonoBehaviour
     [Tooltip("The teamID of the Projectile")]
     [SerializeField] private float teamID;
     [Tooltip("The amount of damage dealt to a target")]
-    [SerializeField] private float damage;
+    [SerializeField] public float damage;
 
     [Header("Special Properties")]
     [Tooltip("Determines whether the projectile is able to pierce through, and deal damage, to multiple objects.")]
