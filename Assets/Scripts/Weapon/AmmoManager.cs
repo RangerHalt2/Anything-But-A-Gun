@@ -37,8 +37,18 @@ public class AmmoManager : MonoBehaviour
     }
 
     [Header("Display Settings")]
+    [Tooltip("Reference to the player's crosshair.")]
+    [SerializeField] private GameObject crosshair;
     [Tooltip("Reference to TMPro Ammo Counter.")]
     [SerializeField] private TextMeshProUGUI ammoDisplayText;
+
+    [Header("FX Settings")]
+    [Tooltip("Reference to a prefab for an effect which triggers when the player reloads their weapon.")]
+    public GameObject reloadEffect;
+
+    [Header("Debug Settings")]
+    [Tooltip("Prevents ammuntion from being deducted from the magazine when enabled. Allows for infinite ammo without needing to reload.")]
+    [SerializeField] private bool bottomlessMagazines;
     #endregion
 
     #region Getters and Setters
@@ -80,14 +90,21 @@ public class AmmoManager : MonoBehaviour
         {
             reloading = false;
             StopCoroutine(Reload()); // Stop the reload coroutine
+            if (crosshair != null)
+            {
+                crosshair.SetActive(true);
+            }
         }
 
         // If player's current ammo is greater than 0 and player is not currently reloading, reduce current ammo by 1
         if (currentAmmo > 0 && !reloading)
         {
-            // Reduce current ammo by ammoConsumption
-            currentAmmo -= ammoConsumption;
-
+            if (!bottomlessMagazines)
+            {
+                // Reduce current ammo by ammoConsumption
+                currentAmmo -= ammoConsumption;
+            }
+            
             updateDisplay();
             return;
         }
@@ -109,80 +126,97 @@ public class AmmoManager : MonoBehaviour
 
     private IEnumerator Reload()
     {
-        switch (reloadMode)
+        // Disable the player's crosshair for the duration of the reloading process
+        if (crosshair != null)
         {
-            // Reload method for weapons that use a "Magazine"
-            case ReloadMode.Magazine:
-                // Set the reloading bool to true
-                reloading = true;
+            crosshair.SetActive(false);
+        }
 
-                updateDisplay();
+        // Play the reloading Effect for the weapon
+        if (reloadEffect != null)
+        {
+            Instantiate(reloadEffect, transform.position, transform.rotation, null);
+        }
 
-                yield return new WaitForSeconds(reloadTime);
-
-                // If reloading has not been cancelled
-                if (reloading)
-                {
-                    // If the player has infinite reserve ammo
-                    if (reserveAmmo == -1)
-                    {
-                        // Set current ammo to the capacity
-                        currentAmmo = ammoCapacity;
-                    }
-                    // Else if the player currently has more than enough ammo in reserve to fully reload...
-                    else if (reserveAmmo >= ammoCapacity)
-                    {
-                        // Fully reload their magazine
-                        currentAmmo = ammoCapacity;
-                        // Reduce reserve ammo by the capacity of the weapon
-                        reserveAmmo -= ammoCapacity;
-                    }
-                    // If the player does not have enough ammo to fully reload their weapon
-                    else
-                    {
-                        // Set current ammo to the amount of ammo in reserve
-                        currentAmmo = reserveAmmo;
-                        // Set the reserve Ammo to 0
-                        reserveAmmo = 0;
-                    }
-                }
-                // Set reloading to false
-                reloading = false;
-                updateDisplay();
-                break;
-            // Reload method for weapons that reload each round individually
-            case ReloadMode.IndividualRounds:
-                // Set reloading bool to true
-                reloading = true;
-                updateDisplay();
-
-                while (currentAmmo < ammoCapacity && (reserveAmmo > 0 || reserveAmmo == -1))
-                {
-                    // Wait for reload time
-                    yield return new WaitForSeconds(reloadTime);
-
-                    // Check if reloading has been canceled
-                    if (!reloading)
-                    {
-                        break;
-                    }
-
-                    // Add one round to the player's current ammo
-                    currentAmmo += 1;
-
-                    if (reserveAmmo > 0)
-                    {
-                        reserveAmmo -= 1;
-                    }
+        switch (reloadMode)
+            {
+                // Reload method for weapons that use a "Magazine"
+                case ReloadMode.Magazine:
+                    // Set the reloading bool to true
+                    reloading = true;
 
                     updateDisplay();
-                }
-                // Set reloading to false
-                reloading = false;
-                updateDisplay();
-                break;
-            default:
-                break;
+
+                    yield return new WaitForSeconds(reloadTime);
+
+                    // If reloading has not been cancelled
+                    if (reloading)
+                    {
+                        // If the player has infinite reserve ammo
+                        if (reserveAmmo == -1)
+                        {
+                            // Set current ammo to the capacity
+                            currentAmmo = ammoCapacity;
+                        }
+                        // Else if the player currently has more than enough ammo in reserve to fully reload...
+                        else if (reserveAmmo >= ammoCapacity)
+                        {
+                            // Fully reload their magazine
+                            currentAmmo = ammoCapacity;
+                            // Reduce reserve ammo by the capacity of the weapon
+                            reserveAmmo -= ammoCapacity;
+                        }
+                        // If the player does not have enough ammo to fully reload their weapon
+                        else
+                        {
+                            // Set current ammo to the amount of ammo in reserve
+                            currentAmmo = reserveAmmo;
+                            // Set the reserve Ammo to 0
+                            reserveAmmo = 0;
+                        }
+                    }
+                    // Set reloading to false
+                    reloading = false;
+                    updateDisplay();
+                    break;
+                // Reload method for weapons that reload each round individually
+                case ReloadMode.IndividualRounds:
+                    // Set reloading bool to true
+                    reloading = true;
+                    updateDisplay();
+
+                    while (currentAmmo < ammoCapacity && (reserveAmmo > 0 || reserveAmmo == -1))
+                    {
+                        // Wait for reload time
+                        yield return new WaitForSeconds(reloadTime);
+
+                        // Check if reloading has been canceled
+                        if (!reloading)
+                        {
+                            break;
+                        }
+
+                        // Add one round to the player's current ammo
+                        currentAmmo += 1;
+
+                        if (reserveAmmo > 0)
+                        {
+                            reserveAmmo -= 1;
+                        }
+
+                        updateDisplay();
+                    }
+                    // Set reloading to false
+                    reloading = false;
+                    updateDisplay();
+                    break;
+                default:
+                    break;
+            }
+        // Re-enable the crosshair once the reload has been completed
+        if (crosshair != null)
+        {
+            crosshair.SetActive(true);
         }
     }
 

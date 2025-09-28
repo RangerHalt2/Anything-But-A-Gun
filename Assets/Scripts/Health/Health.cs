@@ -17,6 +17,10 @@ public class Health : MonoBehaviour
     [SerializeField] public float currentHealth = 1f;
 
     [Header("Display Settings")]
+    [Tooltip("Determines if the Health Bar is active before taking damage")]
+    [SerializeField] private bool healthBarActiveOnStartup;
+    // Tracks if the healthbar is currently active
+    private bool healthBarActive;
     [Tooltip("Reference to healthbar prefab. Optional.")]
     [SerializeField] private HealthBar healthBar;
     [Tooltip("Reference to TMPro Object used to track current AP. Optional.")]
@@ -46,7 +50,14 @@ public class Health : MonoBehaviour
         {
             healthBar.SetMaxHealth(maxHealth);
         }
+
         updateDisplay();
+
+        // If the health bar is not meant to be active immediatly, deactivate it
+        if (healthBar != null && !healthBarActiveOnStartup)
+        {
+            healthBar.Deactivate();
+        }
     }
 
     // Update is called once per frame
@@ -121,6 +132,8 @@ public class Health : MonoBehaviour
         if (healthBar != null)
         {
             healthBar.SetHealth(currentHealth);
+            healthBar.Activate();
+            healthBarActive = true;
         }
     }
 }
