@@ -61,6 +61,10 @@ public class PlayerController : MonoBehaviour
         {
             weaponHandler.FireWeapon();
         }
+        if (inputs.ReloadInput) 
+        { 
+            weaponHandler.ReloadWeapon();
+        }
 
         TimerDecrement();
     }

@@ -20,6 +20,7 @@ public class InputManager : MonoBehaviour
     [SerializeField] private string mouseScrollY = "MouseScrollY";
     [SerializeField] private string look = "Look";
     [SerializeField] private string sprint = "Sprint";
+    [SerializeField] private string reload = "Reload";
 
     //LB: This is an action input, each one needs one assigned
     private InputAction moveAction;
@@ -29,6 +30,7 @@ public class InputManager : MonoBehaviour
     public InputAction scrollAction;
     public InputAction lookAction;
     public InputAction sprintAction;
+    public InputAction reloadAction;
 
     //LB: This is the getters and setters for the inputs, this will be used to manage their values overall
     public Vector2 MoveInput { get; private set; }
@@ -38,6 +40,7 @@ public class InputManager : MonoBehaviour
     public float MouseScrollInput { get; private set; }
     public Vector2 LookInput { get; private set; }
     public bool SprintInput { get; private set; }
+    public bool ReloadInput { get; private set; }
 
     //LB: Instance Handler
     public static InputManager Instance { get; private set; }
@@ -63,6 +66,7 @@ public class InputManager : MonoBehaviour
         scrollAction = playerControls.FindActionMap(actionMapName).FindAction(mouseScrollY);
         lookAction = playerControls.FindActionMap(actionMapName).FindAction(look);
         sprintAction = playerControls.FindActionMap(actionMapName).FindAction(sprint);
+        reloadAction = playerControls.FindActionMap(actionMapName).FindAction(reload);
         RegisterInputActions();
     }
 
@@ -89,6 +93,9 @@ public class InputManager : MonoBehaviour
 
         sprintAction.performed += context => SprintInput = true;
         sprintAction.canceled += context => SprintInput = false;
+
+        reloadAction.performed += context => ReloadInput = true;
+        reloadAction.canceled += context => ReloadInput = false;
     }
 
     //LB: Enable and Disable the actions
@@ -101,6 +108,7 @@ public class InputManager : MonoBehaviour
         scrollAction.Enable();
         lookAction.Enable();
         sprintAction.Enable();
+        reloadAction.Enable();
     }
 
     private void OnDisable()
@@ -112,6 +120,7 @@ public class InputManager : MonoBehaviour
         scrollAction.Disable();
         lookAction.Disable();
         sprintAction.Disable();
+        reloadAction.Disable();
     }
 
 }
