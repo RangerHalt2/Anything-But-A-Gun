@@ -6410,6 +6410,7 @@ GameObject:
   - component: {fileID: 1098175532}
   - component: {fileID: 1098175535}
   - component: {fileID: 1098175534}
+  - component: {fileID: 1098175537}
   m_Layer: 0
   m_Name: Beanpole_red_transparent
   m_TagString: Untagged
@@ -6545,6 +6546,25 @@ MonoBehaviour:
   attackRange: 10
   playerInSightRange: 0
   playerInAttackRange: 0
+--- !u!114 &1098175537
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1098175531}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7aaedb4a5edcc3643988ac4f00966e8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Health
+  teamID: 1
+  maxHealth: 100
+  currentHealth: 100
+  healthBar: {fileID: 0}
+  healthDisplayText: {fileID: 0}
+  hitEffect: {fileID: 1679044714977926775, guid: 227ededbef0066649ae73724748f7732, type: 3}
+  deathEffect: {fileID: 615666183915522401, guid: 9240d42a70497a842b241983850f223e, type: 3}
 --- !u!4 &1108301351 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6835345494275988164, guid: e02415a4afbe82249b24109d4ec2efd0, type: 3}
@@ -12768,7 +12788,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2651782160796664015, guid: 6e79526cb5b40544c91f9ac79610f37c, type: 3}
       propertyPath: m_TagString
-      value: Untagged
+      value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 2996655205196840286, guid: 6e79526cb5b40544c91f9ac79610f37c, type: 3}
       propertyPath: m_Layer
@@ -12785,6 +12805,10 @@ PrefabInstance:
     - target: {fileID: 3488080672531317121, guid: 6e79526cb5b40544c91f9ac79610f37c, type: 3}
       propertyPath: sensitivity
       value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 3697654237576190790, guid: 6e79526cb5b40544c91f9ac79610f37c, type: 3}
+      propertyPath: m_TagString
+      value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 4615339006202645375, guid: 6e79526cb5b40544c91f9ac79610f37c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -12837,6 +12861,10 @@ PrefabInstance:
     - target: {fileID: 7831667878175394738, guid: 6e79526cb5b40544c91f9ac79610f37c, type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8378748094684698937, guid: 6e79526cb5b40544c91f9ac79610f37c, type: 3}
+      propertyPath: m_TagString
+      value: Player
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
