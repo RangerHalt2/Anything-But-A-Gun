@@ -12,7 +12,7 @@ public class EnemyAI : MonoBehaviour
     [Header("Set Walk Point")]
     [SerializeField]private Vector3 walkPoint;
     [SerializeField]private bool walkPointSet;
-    [SerializeField]private float walkPointRange = 10;
+    [SerializeField]private float walkPointRange = 10f;
 
     [Header("Attack Cooldown")]
     [SerializeField]private float timeBetweenAttacks = 2.5f;
@@ -24,8 +24,8 @@ public class EnemyAI : MonoBehaviour
     [SerializeField]private float bulletForce = 10f;
 
     [Header("Sight and Attack Range")]
-    [SerializeField]private float sightRange = 10;
-    [SerializeField]public float attackRange = 10;
+    [SerializeField]private float sightRange = 10f;
+    [SerializeField]public float attackRange = 10f;
     [SerializeField]private bool playerInSightRange;
     [SerializeField]public bool playerInAttackRange;
 
