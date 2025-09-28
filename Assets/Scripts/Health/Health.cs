@@ -32,6 +32,8 @@ public class Health : MonoBehaviour
     [Tooltip("Reference to prefab for an effect which triggers when the object is destroyed. Optional.")]
     public GameObject deathEffect;
 
+    [Tooltip("Toggle this if this is on the player")]
+    [SerializeField] private bool isPlayer;
 
     #endregion
 
@@ -117,7 +119,12 @@ public class Health : MonoBehaviour
 
         // Destroy the game object
         Debug.Log(gameObject.name + " has died.");
-        Destroy(gameObject);
+        if(!isPlayer)
+            Destroy(gameObject);
+        else if (isPlayer)
+        {
+
+        }
     }
 
     public void updateDisplay()
