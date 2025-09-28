@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class HealthBar : MonoBehaviour
 {
+    [Tooltip("Healthbar GameObject.")]
+    [SerializeField] private GameObject healthBar;
     [Tooltip("Slider component from Healthbar Prefab.")]
     [SerializeField] private Slider slider;
 
@@ -32,5 +34,15 @@ public class HealthBar : MonoBehaviour
 
         // Update Color
         fill.color = gradient.Evaluate(slider.normalizedValue);
+    }
+
+    // Enables the health Bar Gameobject
+    public void Activate()
+    {
+        healthBar.SetActive(true);
+    }
+    public void Deactivate()
+    {
+        healthBar.SetActive(false);
     }
 }
