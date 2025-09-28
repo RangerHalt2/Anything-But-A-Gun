@@ -35,11 +35,17 @@ public class Health : MonoBehaviour
     [Tooltip("Toggle this if this is on the player")]
     [SerializeField] private bool isPlayer;
 
+    [SerializeField] private GameObject gameOverCanvas;
+    [SerializeField] private GameObject inGameCanvas;
+
+    public bool isDead;
+
     #endregion
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        isDead = false;
         // Automatically kill object if it has 0 or less health
         if (currentHealth <= 0)
         {
@@ -123,7 +129,10 @@ public class Health : MonoBehaviour
             Destroy(gameObject);
         else if (isPlayer)
         {
-
+            isDead = true;
+            gameOverCanvas.SetActive(true);
+            inGameCanvas.SetActive(false);
+            Cursor.lockState = CursorLockMode.None;
         }
     }
 

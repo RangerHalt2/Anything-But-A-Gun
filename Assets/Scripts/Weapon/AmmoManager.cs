@@ -40,6 +40,7 @@ public class AmmoManager : MonoBehaviour
     [Tooltip("Reference to the player's crosshair.")]
     [SerializeField] private GameObject crosshair;
     [Tooltip("Reference to TMPro Ammo Counter.")]
+    private GameObject ammoCounter;
     [SerializeField] private TextMeshProUGUI ammoDisplayText;
 
     [Header("FX Settings")]
@@ -73,6 +74,7 @@ public class AmmoManager : MonoBehaviour
     {
         // Set current Ammo to maximum
         currentAmmo = ammoCapacity;
+        ammoDisplayText = GameObject.FindGameObjectWithTag("AmmoCounter").GetComponent<TextMeshProUGUI>();
 
         updateDisplay();
     }
@@ -233,12 +235,12 @@ public class AmmoManager : MonoBehaviour
                 }
                 else
                 {
-                    ammoDisplayText.text = string.Format(currentAmmo + " / " + ammoCapacity + " (Reserve: " + reserveAmmo + ")");
+                    ammoDisplayText.text = string.Format(currentAmmo+"");
                 }
             }
             else
             {
-                ammoDisplayText.text = string.Format("Reloading!!! " + currentAmmo + " / " + ammoCapacity);
+                //ammoDisplayText.text = string.Format("Reloading!!! " + currentAmmo + " / " + ammoCapacity);
             }
         }
     }

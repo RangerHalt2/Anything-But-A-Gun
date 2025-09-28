@@ -13,9 +13,12 @@ public class CameraRotation : MonoBehaviour
 
     private float rotationX;
 
+    private Health playerHealth;
+
     private void Start()
     {
         inputs = GameObject.FindAnyObjectByType<InputManager>();
+        playerHealth = GetComponentInParent<Health>();
     }
 
     private void Rotate(Vector2 Rotation)
@@ -27,6 +30,7 @@ public class CameraRotation : MonoBehaviour
 
     private void Update()
     {
+        if(playerHealth.isDead) return;
         Rotate(inputs.LookInput);
     }
 

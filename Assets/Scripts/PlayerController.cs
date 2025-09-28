@@ -16,6 +16,8 @@ public class PlayerController : MonoBehaviour
     private WeaponHandler weaponHandler;
     private InputManager inputs;
 
+    private Health playerHealth;
+
     private float rotationY;
     private float verticalForce;
 
@@ -23,6 +25,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked; //This might better belong on a different script? Unsure
+        playerHealth = GetComponent<Health>();
         characterController = GetComponent<CharacterController>();
         inputs = GameObject.FindAnyObjectByType<InputManager>();
         weaponHandler = GetComponent<WeaponHandler>();
@@ -49,6 +52,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (playerHealth.isDead) return;
         Move(inputs.MoveInput);
         Rotate(inputs.LookInput);
 
