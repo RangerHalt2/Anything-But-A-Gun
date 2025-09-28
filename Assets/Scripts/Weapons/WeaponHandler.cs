@@ -19,10 +19,13 @@ public class WeaponHandler : MonoBehaviour
     [SerializeField] private InputManager inputManager;
     private float scrollValue;
 
+    private Transform cameraTransform;
+
     
     void Start()
     {
-        weapons.Add(Instantiate(starterWeapon, this.transform));
+        cameraTransform = GetComponentInChildren<CameraRotation>().gameObject.transform;
+        weapons.Add(Instantiate(starterWeapon, cameraTransform));
         currentWeapon = weapons[0];
         weaponSlot = 0;
     }
@@ -36,6 +39,8 @@ public class WeaponHandler : MonoBehaviour
         {
             currentWeapon.transform.position = weaponLocation.position;
         }
+
+        SwitchGun();
     }
 
     public void FireWeapon()
@@ -111,7 +116,7 @@ public class WeaponHandler : MonoBehaviour
         if (weapons != null)
         {
             currentWeapon.SetActive(false);
-            weapons.Add(Instantiate(addWeapon, this.transform)); //Adds the weapon to the list of weapons available.
+            weapons.Add(Instantiate(addWeapon, cameraTransform)); //Adds the weapon to the list of weapons available.
             weaponSlot = weapons.Count - 1;
             currentWeapon = weapons[weaponSlot]; //Create the actual weapon and make it active
             currentWeapon.SetActive(true);

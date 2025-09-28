@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float jumpForce = 5f;
     [SerializeField] private float gravity = -30f;
 
+    private WeaponHandler weaponHandler;
     private InputManager inputs;
 
     private float rotationY;
@@ -24,6 +25,7 @@ public class PlayerController : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked; //This might better belong on a different script? Unsure
         characterController = GetComponentInChildren<CharacterController>();
         inputs = GameObject.FindAnyObjectByType<InputManager>();
+        weaponHandler = GetComponent<WeaponHandler>();
     }
 
     private void Move(Vector2 MovementVector)
@@ -53,6 +55,11 @@ public class PlayerController : MonoBehaviour
         if(inputs.JumpInput == true && characterController.isGrounded)
         {
             verticalForce = jumpForce; //The Jump itself is handled in the Move() method handling gravity, making use of CharacterController instead of RigidBody
+        }
+
+        if (inputs.FireInput)
+        {
+            weaponHandler.FireWeapon();
         }
 
         TimerDecrement();

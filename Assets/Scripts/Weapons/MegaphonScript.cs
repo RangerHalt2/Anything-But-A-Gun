@@ -60,11 +60,6 @@ public class MegaphonScript : MonoBehaviour, IWeapon
                 projectileSpawnPoint = GameObject.Find("ProjectileSpawnPoint").transform;
 
             }
-            if (projectileSpawnPoint != null)
-            {
-                projectileGameObject.transform.SetParent(projectileSpawnPoint);
-
-            }
         }
     }
 }
