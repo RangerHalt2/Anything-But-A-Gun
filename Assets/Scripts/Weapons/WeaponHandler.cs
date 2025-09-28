@@ -36,19 +36,16 @@ public class WeaponHandler : MonoBehaviour
         {
             currentWeapon.transform.position = weaponLocation.position;
         }
-
-        SwitchGun();
-        FireWeapon(); //FOR TESTING
     }
 
-    void FireWeapon() //FOR TESTING
+    public void FireWeapon()
     {
-        currentWeapon.GetComponent<IWeapon>().Shoot();//FOR TESTING
+        currentWeapon.GetComponent<IWeapon>().Shoot();
     }
 
-    void ReloadWeapon() 
+    public void ReloadWeapon() 
     { 
-        currentWeapon.GetComponent<IWeapon>().Reload(); //For the future
+        currentWeapon.GetComponent<IWeapon>().Reload();
     }
 
     void SwitchGun() //When the player want's to rotate to a different weapon in their wheel
