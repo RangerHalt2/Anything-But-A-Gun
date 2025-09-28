@@ -37,6 +37,8 @@ public class EnemyAI : MonoBehaviour
 
     private void FixedUpdate()
     {
+        transform.LookAt(player);
+
         playerInSightRange = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
         playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
 
@@ -101,8 +103,6 @@ public class EnemyAI : MonoBehaviour
 
     private void Attacking()
     {
-        transform.LookAt(player);
-
         if(!alreadyAttacked)
         {
             Shoot();
