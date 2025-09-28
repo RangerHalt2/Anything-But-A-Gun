@@ -8,32 +8,41 @@ using UnityEngine.InputSystem;
 
 public class InputManager : MonoBehaviour
 {
-    [SerializeField] private InputActionAsset playerControls;
+    [SerializeField] public InputActionAsset playerControls;
 
-    [SerializeField] private string actionMapName = "Player";//This should be the name of the entire mapping
+    [SerializeField] public string actionMapName = "Player";//This should be the name of the entire mapping
 
     //LB: These should be the names of individual input readings for the broad inputs like WASD is part of movement and jumping assigns spacebar and A/Circle on controllers
     [SerializeField] private string movement = "Movement";
     [SerializeField] private string fire = "Fire";
     [SerializeField] private string altFire = "AltFire";
     [SerializeField] private string jump = "Jump";
+    [SerializeField] private string mouseScrollY = "MouseScrollY";
+    [SerializeField] private string look = "Look";
+    [SerializeField] private string sprint = "Sprint";
 
     //LB: This is an action input, each one needs one assigned
     private InputAction moveAction;
     private InputAction fireAction;
     private InputAction altFireAction;
     private InputAction jumpAction;
+    public InputAction scrollAction;
+    public InputAction lookAction;
+    public InputAction sprintAction;
 
     //LB: This is the getters and setters for the inputs, this will be used to manage their values overall
     public Vector2 MoveInput { get; private set; }
     public bool FireInput { get; private set; }
     public bool AltFireInput { get; private set; }
     public bool JumpInput { get; private set; }
+    public float MouseScrollInput { get; private set; }
+    public Vector2 LookInput { get; private set; }
+    public bool SprintInput { get; private set; }
 
     //LB: Instance Handler
     public static InputManager Instance { get; private set; }
 
-    void Start()
+    void Awake()
     {
         //LB: Handles instance related stuff, still unsure where and when the destroy code runs? It never seems necessary
         if (Instance == null)
@@ -51,6 +60,9 @@ public class InputManager : MonoBehaviour
         fireAction = playerControls.FindActionMap(actionMapName).FindAction(fire);
         altFireAction = playerControls.FindActionMap(actionMapName).FindAction(altFire);
         jumpAction = playerControls.FindActionMap(actionMapName).FindAction(jump);
+        scrollAction = playerControls.FindActionMap(actionMapName).FindAction(mouseScrollY);
+        lookAction = playerControls.FindActionMap(actionMapName).FindAction(look);
+        sprintAction = playerControls.FindActionMap(actionMapName).FindAction(sprint);
         RegisterInputActions();
     }
 
@@ -68,6 +80,15 @@ public class InputManager : MonoBehaviour
 
         jumpAction.performed += context => JumpInput = true;
         jumpAction.canceled += context => JumpInput = false;
+
+        scrollAction.performed += context => MouseScrollInput = context.ReadValue<float>();
+        scrollAction.canceled += context => MouseScrollInput = 0f;
+
+        lookAction.performed += context => LookInput = context.ReadValue<Vector2>();
+        lookAction.canceled += context => LookInput = Vector2.zero;
+
+        sprintAction.performed += context => SprintInput = true;
+        sprintAction.canceled += context => SprintInput = false;
     }
 
     //LB: Enable and Disable the actions
@@ -77,6 +98,9 @@ public class InputManager : MonoBehaviour
         fireAction.Enable();
         altFireAction.Enable();
         jumpAction.Enable();
+        scrollAction.Enable();
+        lookAction.Enable();
+        sprintAction.Enable();
     }
 
     private void OnDisable()
@@ -85,5 +109,9 @@ public class InputManager : MonoBehaviour
         fireAction.Disable();
         altFireAction.Disable();
         jumpAction.Disable();
+        scrollAction.Disable();
+        lookAction.Disable();
+        sprintAction.Disable();
     }
+
 }
