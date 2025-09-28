@@ -23,7 +23,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked; //This might better belong on a different script? Unsure
-        characterController = GetComponentInChildren<CharacterController>();
+        characterController = GetComponent<CharacterController>();
         inputs = GameObject.FindAnyObjectByType<InputManager>();
         weaponHandler = GetComponent<WeaponHandler>();
     }
