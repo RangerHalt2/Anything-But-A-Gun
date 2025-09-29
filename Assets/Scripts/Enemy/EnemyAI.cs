@@ -79,6 +79,8 @@ public class EnemyAI : MonoBehaviour
 
     private void Patrolling()
     {
+        agent.isStopped = false;
+        
         if(!walkPointSet) 
         {
             SearchWalkPoint();
@@ -98,11 +100,15 @@ public class EnemyAI : MonoBehaviour
         
     private void Chase()
     {
+        agent.isStopped = false;
         agent.SetDestination(player.position);
     }
 
     private void Attacking()
     {
+        agent.SetDestination(transform.position);
+        agent.isStopped = true;
+
         if(!alreadyAttacked)
         {
             Shoot();
