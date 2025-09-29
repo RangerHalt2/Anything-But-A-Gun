@@ -15,6 +15,8 @@ public class BBBatScript : MonoBehaviour, IWeapon
 
     private AmmoManager ammoManager;
 
+    [SerializeField] private GameObject whackEffect;
+
     [Tooltip("This is a sort of back-end buffer time to how frequently the player can hit the enemy with the baseball bat")]
     [SerializeField] private float attackCooldownBuffer = 0.5f;
     private float attackTimer = 0;
@@ -61,6 +63,10 @@ public class BBBatScript : MonoBehaviour, IWeapon
             enemyHealth.TakeDamage(damage);
             health--;
             ammoManager.Fire();
+            if(whackEffect != null)
+            {
+                Instantiate(whackEffect, transform.position, transform.rotation, null);
+            }
             attackTimer = attackCooldownBuffer;
         }
     }

@@ -40,6 +40,10 @@ public class Health : MonoBehaviour
 
     public bool isDead;
 
+    [SerializeField] private GameObject damageNoise;
+    private float damageTimer = 0f;
+    private float damageCooldown = 0.5f;
+
     #endregion
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -71,7 +75,7 @@ public class Health : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        damageTimer -= Time.deltaTime;
     }
 
     // Applies a certain amount of damage to an object
@@ -79,6 +83,11 @@ public class Health : MonoBehaviour
     {
         // Subtract the damage amount from the health of the object
         currentHealth -= damageAmount;
+        if(damageNoise != null && damageTimer <= 0)
+        {
+            damageTimer = damageCooldown;
+            Instantiate(damageNoise, transform.position, transform.rotation, null);
+        }
         Debug.Log(gameObject.name + " took " + damageAmount + " damage. Current Health: " + currentHealth + "/" + maxHealth + ".");
         updateDisplay();
 

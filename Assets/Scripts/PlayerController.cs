@@ -18,6 +18,8 @@ public class PlayerController : MonoBehaviour
 
     private Health playerHealth;
 
+    private WinEvent winEvent;
+
     private float rotationY;
     private float verticalForce;
 
@@ -29,6 +31,7 @@ public class PlayerController : MonoBehaviour
         characterController = GetComponent<CharacterController>();
         inputs = GameObject.FindAnyObjectByType<InputManager>();
         weaponHandler = GetComponent<WeaponHandler>();
+        winEvent = GameObject.FindAnyObjectByType<WinEvent>();
     }
 
     private void Move(Vector2 MovementVector)
@@ -52,7 +55,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (playerHealth.isDead) return;
+        if (playerHealth.isDead || winEvent.hasWon) return;
         Move(inputs.MoveInput);
         Rotate(inputs.LookInput);
 

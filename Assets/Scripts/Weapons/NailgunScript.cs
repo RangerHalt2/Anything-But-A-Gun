@@ -1,3 +1,4 @@
+using System.Threading;
 using UnityEngine;
 
 public class NailgunScript : MonoBehaviour, IWeapon
@@ -6,6 +7,13 @@ public class NailgunScript : MonoBehaviour, IWeapon
     [SerializeField] private AmmoManager ammoManager;
     [SerializeField] private Hitscan hitscan;
     private float lastFired = Mathf.NegativeInfinity;
+
+    //Logan: This needs a prefab, ryan has a test one and I also made a test one, it allows us to spawn a noise basically and have it play
+    //       Cooldown is there so it doesn't spam it per tick.
+    private float clickCooldown = 0.5f;
+    private float clickTimer = 0;
+    [SerializeField] private GameObject clickEffect;
+    [SerializeField] private GameObject gunShot;
 
     public void Shoot()
     {
@@ -23,9 +31,21 @@ public class NailgunScript : MonoBehaviour, IWeapon
                         if (hitscan != null)
                         {
                             hitscan.Shoot();
+                            if(gunShot != null)
+                        {
+                            Instantiate(gunShot, transform.position, transform.rotation, null);
+                        }
                         }
                     // Update lastFired
                     lastFired = Time.timeSinceLevelLoad;
+                }
+            }
+            else
+            {
+                if (clickEffect != null && clickTimer <= 0)
+                {
+                    clickTimer = clickCooldown;
+                    Instantiate(clickEffect, transform.position, transform.rotation, null);
                 }
             }
         }
@@ -39,5 +59,10 @@ public class NailgunScript : MonoBehaviour, IWeapon
             // Reload the shooter
             ammoManager.ReloadWeapon();
         }
+    }
+
+    private void Update()
+    {
+        clickTimer -= Time.deltaTime;
     }
 }

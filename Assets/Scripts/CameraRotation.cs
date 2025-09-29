@@ -15,10 +15,12 @@ public class CameraRotation : MonoBehaviour
 
     private Health playerHealth;
 
+    private WinEvent winEvent;
     private void Start()
     {
         inputs = GameObject.FindAnyObjectByType<InputManager>();
         playerHealth = GetComponentInParent<Health>();
+        winEvent = GameObject.FindAnyObjectByType<WinEvent>();
     }
 
     private void Rotate(Vector2 Rotation)
@@ -30,7 +32,7 @@ public class CameraRotation : MonoBehaviour
 
     private void Update()
     {
-        if(playerHealth.isDead) return;
+        if(playerHealth.isDead || winEvent.hasWon) return;
         Rotate(inputs.LookInput);
     }
 

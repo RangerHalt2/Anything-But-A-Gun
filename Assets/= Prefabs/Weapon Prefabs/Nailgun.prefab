@@ -140,7 +140,7 @@ MonoBehaviour:
   teamID: 0
   damage: 10
   bulletSpawnPoint: {fileID: 519912207177028976}
-  addBulletSpread: 1
+  addBulletSpread: 0
   bulletSpreadVariance: {x: 0.1, y: 0.1, z: 0.1}
   maxRange: 1000
   shootingSystem: {fileID: 0}
@@ -161,6 +161,8 @@ MonoBehaviour:
   fireRate: 0.75
   ammoManager: {fileID: 785455090434947426}
   hitscan: {fileID: 3161134012043242097}
+  clickEffect: {fileID: 9061005177392946849, guid: 3a22977f8fecec540ac19600cc354706, type: 3}
+  gunShot: {fileID: 5383701307693267320, guid: 5dcf3c15003edf94f8dcf5208f138c04, type: 3}
 --- !u!114 &785455090434947426
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -173,7 +175,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df2d13e84e38fb446a97a180533aba8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AmmoManager
-  reserveAmmo: 20
+  reserveAmmo: -1
   ammoCapacity: 10
   currentAmmo: 10
   ammoConsumption: 1
@@ -182,7 +184,7 @@ MonoBehaviour:
   reloadMode: 0
   crosshair: {fileID: 0}
   ammoDisplayText: {fileID: 0}
-  reloadEffect: {fileID: 0}
+  reloadEffect: {fileID: 6985806122707607359, guid: 95346eec370133543a2372ec2afd4783, type: 3}
   bottomlessMagazines: 0
 --- !u!65 &4591394418674582347
 BoxCollider:
