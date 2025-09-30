@@ -38,11 +38,11 @@ public class BBBatScript : MonoBehaviour, IWeapon
     void OnTriggerStay(Collider _other) //Detect if an enemy is near
     {
         Debug.Log("Something entered the trigger");
-        enemyHealth = _other.GetComponent<Health>();
+        enemyHealth = _other.GetComponentInParent<Health>();
 
         if (enemyHealth == null)
         {
-            Debug.Log("No Health Script");
+            Debug.Log("No Health Script" + _other.gameObject.name);
             //return;
         }
         else

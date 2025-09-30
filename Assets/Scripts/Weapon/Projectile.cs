@@ -93,7 +93,7 @@ public class Projectile : MonoBehaviour
     void OnTriggerEnter(Collider collider)
     {
         // Attempt to reference the health script on the collided object
-        Health health = collider.gameObject.GetComponent<Health>();
+        Health health = collider.gameObject.GetComponentInParent<Health>();
 
         // If the object has a health script
         if (health != null)
