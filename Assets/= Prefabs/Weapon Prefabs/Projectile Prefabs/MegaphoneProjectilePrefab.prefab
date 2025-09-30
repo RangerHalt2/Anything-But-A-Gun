@@ -31,8 +31,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 2.001, y: 0.33378005, z: -0.0020895004}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -70,11 +70,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Projectile
   speed: 15
-  lifeTime: 1000
+  lifeTime: 3
   teamID: 0
   damage: 0
   piercing: 0
-  wallBehavior: 1
+  wallBehavior: 0
   bulletDrop: 0
   gravityMultiplier: 1
 --- !u!54 &5258742335422185819
@@ -116,8 +116,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0e5819eac9007e4d83cd84541893ec2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MegaphoneProjectileScript
-  targetScale: 4
-  growthSpeed: 1
+  targetScale: 8
+  growthSpeed: 2
   projectile: {fileID: -6608494925588196765}
   maxDamage: 7
 --- !u!212 &3181884935048645386
