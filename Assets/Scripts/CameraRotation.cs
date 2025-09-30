@@ -25,7 +25,7 @@ public class CameraRotation : MonoBehaviour
 
     private void Rotate(Vector2 Rotation)
     {
-        rotationX += -Rotation.y * sensitivity * Time.deltaTime;
+        rotationX += -Rotation.y * sensitivity;
         rotationX = Mathf.Clamp(rotationX, minLookingAngle, maxLookingAngle);
         transform.localRotation = Quaternion.Euler(rotationX, 0, 0);
     }
