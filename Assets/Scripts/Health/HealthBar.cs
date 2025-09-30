@@ -7,8 +7,6 @@ public class HealthBar : MonoBehaviour
 {
     [Tooltip("Healthbar GameObject.")]
     [SerializeField] private GameObject healthBar;
-    [Tooltip("Slider component from Healthbar Prefab.")]
-    [SerializeField] private Slider slider;
 
     [Tooltip("Gradient of colors which the health bar will use.")]
     [SerializeField] private Gradient gradient;
@@ -16,11 +14,12 @@ public class HealthBar : MonoBehaviour
     [Tooltip("Fill object from Healthbar Prefab.")]
     [SerializeField] private Image fill;
 
+    private float maxHealth = 100f;
+
     public void SetMaxHealth(float health)
     {
-        // Set Slider to max
-        slider.maxValue = health;
-        slider.value = health;
+        maxHealth = health;
+        SetHealth(health);
 
         // Update Color
         fill.color = gradient.Evaluate(1f);
@@ -30,10 +29,11 @@ public class HealthBar : MonoBehaviour
     public void SetHealth(float health)
     {
         // Set the slider's value to the current percentage of health the object has
-        slider.value = health;
+        float fillPercent = Mathf.Clamp01(health / maxHealth);
+        fill.fillAmount = fillPercent;
 
         // Update Color
-        fill.color = gradient.Evaluate(slider.normalizedValue);
+        fill.color = gradient.Evaluate(fillPercent);
     }
 
     // Enables the health Bar Gameobject
