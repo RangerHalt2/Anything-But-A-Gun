@@ -109,7 +109,7 @@ public class EnemyAI : MonoBehaviour
         agent.SetDestination(transform.position);
         agent.isStopped = true;
 
-        if(!alreadyAttacked)
+        if (!alreadyAttacked && HasLineOfSight())
         {
             Shoot();
             alreadyAttacked = true;
@@ -135,6 +135,18 @@ public class EnemyAI : MonoBehaviour
                 rb.AddForce(direction * bulletForce, ForceMode.Impulse);
             }
         }
+    }
+
+    private bool HasLineOfSight()
+    {
+        Vector3 direction = (player.position - firePoint.position).normalized;
+        float distance = Vector3.Distance(firePoint.position, player.position);
+
+        if (Physics.Raycast(firePoint.position, direction, out RaycastHit hit, distance))
+        {
+            return hit.transform.CompareTag("Player");
+        }
+        return false;
     }
 
     private void ResetAttack()

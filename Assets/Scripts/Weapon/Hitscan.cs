@@ -74,13 +74,27 @@ public class Hitscan : MonoBehaviour
                 Destroy(impact, 1f);
             }
 
-            // Deal damage to target object
-            Health targetHealth = hit.collider.GetComponent<Health>();
+            // Deal damage to target object // MG - Grab the parent of the object with the Head and Body colliders 
+            Health targetHealth = hit.collider.GetComponentInParent<Health>();
             // If the target object has a health component and the teamID is different than the one assigned to the weapon
             if (targetHealth != null && targetHealth.teamID != this.teamID)
             {
+                float appliedDamage = damage;
+
+                // MG - Compares collider with Tag Head to deal double dmg
+                if(hit.collider.CompareTag("Head"))
+                {
+                    appliedDamage *= 2f;
+                    Debug.Log("Headshot");
+                }
+                // MG - Compares collider with Tag Body to deal normal dmg
+                if(hit.collider.CompareTag("Body"))
+                {
+                    appliedDamage = damage;
+                    Debug.Log("Body shot.");
+                }
                 // Deal the weapon's damage to the target
-                targetHealth.TakeDamage(damage);
+                targetHealth.TakeDamage(appliedDamage);
             }
         }
         else
