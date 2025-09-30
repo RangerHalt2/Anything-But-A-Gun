@@ -59,7 +59,7 @@ public class WeaponHandler : MonoBehaviour
             scrollValue = inputManager.scrollAction.ReadValue<float>();
         }
 
-        if (weapons.Count > 1 && scrollValue != 0)
+        if (weapons.Count > 1 && scrollValue != 0 && !currentWeapon.GetComponent<AmmoManager>().IsReloading())
         {
             currentWeapon.SetActive(false); //Deactivate (not destroy) current weapon
         }
@@ -69,7 +69,7 @@ public class WeaponHandler : MonoBehaviour
         }
 
         //If player scrolls
-        if (scrollValue > 0) //Scroll up
+        if (scrollValue > 0 && !currentWeapon.GetComponent<AmmoManager>().IsReloading()) //Scroll up
         {
             weaponSlot++;
 
@@ -87,7 +87,7 @@ public class WeaponHandler : MonoBehaviour
             
             //Play equip animation and activate new current weapon
         }
-        else if (scrollValue < 0) //Scroll down
+        else if (scrollValue < 0 && !currentWeapon.GetComponent<AmmoManager>().IsReloading()) //Scroll down
         {
             weaponSlot--;
             if (weaponSlot < 0) //Actually check if it's a gun. If not, change to base
