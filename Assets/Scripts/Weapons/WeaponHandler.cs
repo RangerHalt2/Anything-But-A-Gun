@@ -77,10 +77,12 @@ public class WeaponHandler : MonoBehaviour
             {
                 weaponSlot = 0;
                 currentWeapon = weapons[weaponSlot];
+                currentWeapon.GetComponent<AmmoManager>().updateDisplay();
             }
             else
             {
                 currentWeapon = weapons[weaponSlot]; //Set current weapon to next weapon
+                currentWeapon.GetComponent<AmmoManager>().updateDisplay();
             }
             
             //Play equip animation and activate new current weapon
@@ -92,10 +94,12 @@ public class WeaponHandler : MonoBehaviour
             {
                 weaponSlot = weapons.Count - 1;
                 currentWeapon = weapons[weaponSlot];
+                currentWeapon.GetComponent<AmmoManager>().updateDisplay();
             }
             else
             {
                 currentWeapon = weapons[weaponSlot]; //Set current weapon to next weapon
+                currentWeapon.GetComponent<AmmoManager>().updateDisplay();
             }
 
             //Play equip animation and activate new current weapon
@@ -119,6 +123,7 @@ public class WeaponHandler : MonoBehaviour
             weaponSlot = weapons.Count - 1;
             currentWeapon = weapons[weaponSlot]; //Create the actual weapon and make it active
             currentWeapon.SetActive(true);
+            //currentWeapon.GetComponent<AmmoManager>().updateDisplay();
             newWeapon = null; //So that it doesn't endlessly add the same weapon.
             
         }
