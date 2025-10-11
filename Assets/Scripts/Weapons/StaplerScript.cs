@@ -1,7 +1,7 @@
 using System.Threading;
 using UnityEngine;
 
-public class NailgunScript : MonoBehaviour, IWeapon
+public class StaplerScript : MonoBehaviour, IWeapon
 {
     [SerializeField] private float fireRate = 0.25f;
     [SerializeField] private AmmoManager ammoManager;
