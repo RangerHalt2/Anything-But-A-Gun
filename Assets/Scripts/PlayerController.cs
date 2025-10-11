@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
     private CharacterController characterController;
 
     [SerializeField] private float movementSpeed = 10f;
+    [SerializeField] private float sprintMultiplier = 2f;
 
     [SerializeField] private float sensitivity = 10f;
 
@@ -53,7 +54,7 @@ public class PlayerController : MonoBehaviour
     {
         //Default Base Case
         Vector3 move = transform.forward * MovementVector.y + transform.right * MovementVector.x;
-        move = movementSpeed * Time.deltaTime * move;
+        move = movementSpeed /** (inputs.SprintInput? sprintMultiplier : 1)*/ * Time.deltaTime * move;
         characterController.Move(move);
 
         verticalForce = verticalForce + gravity * Time.deltaTime;
