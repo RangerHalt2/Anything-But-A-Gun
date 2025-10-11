@@ -1721,6 +1721,11 @@ CapsuleCollider:
   m_Height: 1
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!4 &277310141 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2118403805752224804, guid: 6e79526cb5b40544c91f9ac79610f37c, type: 3}
+  m_PrefabInstance: {fileID: 1943554078}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &294082104
 GameObject:
   m_ObjectHideFlags: 0
@@ -3883,6 +3888,11 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 26b7a36227bffc347bb1b7276bd65892, type: 3}
   m_PrefabInstance: {fileID: 1120184567}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &749082471 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2264189080371545452, guid: 6e79526cb5b40544c91f9ac79610f37c, type: 3}
+  m_PrefabInstance: {fileID: 1943554078}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &791258866
 PrefabInstance:
@@ -12447,8 +12457,24 @@ PrefabInstance:
       value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 5808801276267967896, guid: 6e79526cb5b40544c91f9ac79610f37c, type: 3}
+      propertyPath: dashCd
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 5808801276267967896, guid: 6e79526cb5b40544c91f9ac79610f37c, type: 3}
       propertyPath: gravity
       value: -15
+      objectReference: {fileID: 0}
+    - target: {fileID: 5808801276267967896, guid: 6e79526cb5b40544c91f9ac79610f37c, type: 3}
+      propertyPath: dashTime
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 5808801276267967896, guid: 6e79526cb5b40544c91f9ac79610f37c, type: 3}
+      propertyPath: dashForce
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5808801276267967896, guid: 6e79526cb5b40544c91f9ac79610f37c, type: 3}
+      propertyPath: dashSpeed
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 5808801276267967896, guid: 6e79526cb5b40544c91f9ac79610f37c, type: 3}
       propertyPath: jumpForce
@@ -12459,8 +12485,20 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5808801276267967896, guid: 6e79526cb5b40544c91f9ac79610f37c, type: 3}
+      propertyPath: playerCam
+      value: 
+      objectReference: {fileID: 749082471}
+    - target: {fileID: 5808801276267967896, guid: 6e79526cb5b40544c91f9ac79610f37c, type: 3}
+      propertyPath: orientation
+      value: 
+      objectReference: {fileID: 277310141}
+    - target: {fileID: 5808801276267967896, guid: 6e79526cb5b40544c91f9ac79610f37c, type: 3}
       propertyPath: sensitivity
       value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5808801276267967896, guid: 6e79526cb5b40544c91f9ac79610f37c, type: 3}
+      propertyPath: currentDashCharges
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6992609722709419847, guid: 6e79526cb5b40544c91f9ac79610f37c, type: 3}
       propertyPath: field of view
