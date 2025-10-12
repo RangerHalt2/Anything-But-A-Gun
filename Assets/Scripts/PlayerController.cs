@@ -23,18 +23,36 @@ public class PlayerController : MonoBehaviour
 
     private float rotationY;
     private float verticalForce;
-    
+
+    public static PlayerController Instance;
+
     [Space(5)]
     [Header("Dash Variables")]
     [SerializeField] private float dashForce; //How strong the dash is
     [SerializeField] private float dashTime; //The time the player spends dashing
-    [SerializeField] private int maxDashLimit = 3; //The number of times that the player can dash
-    [SerializeField] private float currentDashCharges; //The number of dashes the player currently has
+    [SerializeField] public int maxDashLimit = 3; //The number of times that the player can dash
+    [SerializeField] private int dashes; //The number of dashes the player currently has
     [SerializeField] private float dashCharge = 0f; //How much charge the player has to get a new dash
     [SerializeField] private float dashChargeTime = 5f; //How long the player needs to get a new dash
     [SerializeField] private float dashCd = 0.25f; //Don't immediately dash again after the first dash
+    public delegate void OnDashChangedDelegate();
+    [HideInInspector] public OnDashChangedDelegate onDashChangedCallback;
     private bool canDash = true;
 
+
+    void Awake() 
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            Instance = this;
+        }
+
+        DontDestroyOnLoad(gameObject);
+    }
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -47,7 +65,7 @@ public class PlayerController : MonoBehaviour
         weaponHandler = GetComponent<WeaponHandler>();
         winEvent = GameObject.FindAnyObjectByType<WinEvent>();
 
-        currentDashCharges = maxDashLimit;
+        Dashes = maxDashLimit;
     }
 
     private void Move(Vector2 MovementVector)
@@ -69,7 +87,7 @@ public class PlayerController : MonoBehaviour
 
     private void StartDash()
     {
-        if (canDash && currentDashCharges > 0)
+        if (canDash && dashes > 0)
         {
             StartCoroutine(Dash());
         }
@@ -78,7 +96,7 @@ public class PlayerController : MonoBehaviour
 
     private IEnumerator Dash()
     {
-        currentDashCharges--;
+        Dashes--;
         canDash = false;
         float startTime = Time.time;
         Vector3 dashDirection = transform.forward;
@@ -118,18 +136,35 @@ public class PlayerController : MonoBehaviour
         }
 
         //Dash variable regulation
-        if (currentDashCharges < maxDashLimit)
+        if (Dashes < maxDashLimit)
         {
             dashCharge += Time.deltaTime; //This one says if you don't have the max dash charges, build up to a new one
         }
         if (dashCharge >= dashChargeTime)
         { 
             dashCharge = 0;
-            currentDashCharges++; //This one says if you have enough charge for a new dash, store the new dash
+            Dashes++; //This one says if you have enough charge for a new dash, store the new dash
         }
 
 
         TimerDecrement();
+    }
+
+    public int Dashes 
+    {
+        get { return dashes; }
+        set
+        {
+            if (dashes != value)
+            {
+                dashes = Mathf.Clamp(value, 0, maxDashLimit);
+
+                if (onDashChangedCallback != null)
+                {
+                    onDashChangedCallback.Invoke();
+                }
+            }
+        }
     }
 
     //LB: Any and all future timers for the player will be managed in this area
