@@ -24,6 +24,13 @@ public class Hitscan : MonoBehaviour
     [Tooltip("Determines how range (in Units) the weapon has")]
     [SerializeField] private float maxRange = 1000f;
 
+    [Header("Ricochet Settings")]
+    [Tooltip("Determines whether or not the weapon can ricochet.")]
+    [SerializeField] private bool canRicochet = false;
+    [Tooltip("Determines how many times a bullet is allowed to ricochet before despawning. Must be a value greater than 0 for Ricochet to function.")]
+    [SerializeField] private int maxBounces = 0;
+    private int currentBounces;
+
 
     [Header("Visual Settings")]
     [Tooltip("The particle system that is used when the player fires the gun")]
@@ -48,8 +55,6 @@ public class Hitscan : MonoBehaviour
 
     public void Shoot()
     {
-        Debug.Log("BANG!");
-
         // Set the direction of the raycast to the bulletSpawnPoint
         Vector3 direction = bulletSpawnPoint.forward;
 
@@ -57,56 +62,96 @@ public class Hitscan : MonoBehaviour
         if (addBulletSpread)
         {
             direction += new Vector3(Random.Range(-bulletSpreadVariance.x, bulletSpreadVariance.x), Random.Range(-bulletSpreadVariance.y, bulletSpreadVariance.y), Random.Range(-bulletSpreadVariance.z, bulletSpreadVariance.z));
+            direction.Normalize();
         }
 
-        Ray ray = new Ray(bulletSpawnPoint.position, direction);
-        RaycastHit hit;
-
-        Vector3 hitPoint;
-        if (Physics.Raycast(ray, out hit, maxRange))
+        Vector3 origin = bulletSpawnPoint.position;
+        float remainingDistance = maxRange;
+        currentBounces = 0;
+        
+        // While the bullet is allowed to continue ricocheting
+        while (remainingDistance > 0)
         {
-            hitPoint = hit.point;
+            Ray ray = new Ray(bulletSpawnPoint.position, direction);
+            RaycastHit hit;
 
-            // If an impact system is assigned, play it where the bullet hit
-            if (impactSystem != null)
+            if (Physics.Raycast(ray, out hit, remainingDistance))
             {
-                ParticleSystem impact = Instantiate(impactSystem, hit.point, Quaternion.LookRotation(hit.normal));
-                Destroy(impact, 1f);
-            }
+                float distanceTraveled = Vector3.Distance(origin, hit.point);
+                remainingDistance -= distanceTraveled;
 
-            // Deal damage to target object // MG - Grab the parent of the object with the Head and Body colliders 
-            Health targetHealth = hit.collider.GetComponentInParent<Health>();
-            // If the target object has a health component and the teamID is different than the one assigned to the weapon
-            if (targetHealth != null && targetHealth.teamID != this.teamID)
+                Vector3 hitPoint = hit.point;
+
+                // If an impact system is assigned, play it where the bullet hit
+                if (impactSystem != null)
+                {
+                    ParticleSystem impact = Instantiate(impactSystem, hit.point, Quaternion.LookRotation(hit.normal));
+                    Destroy(impact, 1f);
+                }
+
+                // If a bulletTrail has been assinged, play it
+                if (bulletTrail != null)
+                {
+                    TrailRenderer trail = Instantiate(bulletTrail, origin, Quaternion.identity);
+                    StartCoroutine(SpawnTrail(trail, hitPoint));
+                }
+
+                // Deal damage to target object // MG - Grab the parent of the object with the Head and Body colliders 
+                Health targetHealth = hit.collider.GetComponentInParent<Health>();
+                // If the target object has a health component and the teamID is different than the one assigned to the weapon
+                if (targetHealth != null && targetHealth.teamID != this.teamID)
+                {
+                    float appliedDamage = damage;
+
+                    // MG - Compares collider with Tag Head to deal double dmg
+                    if (hit.collider.CompareTag("Head"))
+                    {
+                        appliedDamage *= 2f;
+                        Debug.Log("Hitscan: Headshot");
+                    }
+                    // MG - Compares collider with Tag Body to deal normal dmg
+                    if (hit.collider.CompareTag("Body"))
+                    {
+                        appliedDamage = damage;
+                        Debug.Log("Hitscan: Body shot.");
+                    }
+                    // Deal the weapon's damage to the target
+                    targetHealth.TakeDamage(appliedDamage);
+
+                    // Stop ricocheting after hitting a valid target
+                    break;
+                }
+                // If the hitscan can ricochet, and the maximum amount of bounces has not been reached
+                if (canRicochet && currentBounces < maxBounces)
+                {
+                    currentBounces++;
+                    // Reflect the direction of the bullet
+                    direction = Vector3.Reflect(direction, hit.normal);
+                    // Create a new origin at an offset to prevent an immediate rehit
+                    origin = hit.point + hit.normal * 0.01f;
+                    
+                    continue;
+                }
+                // Else, if there is no ricochet allowed, or the maximum amount of bounces has been reached
+                else
+                {
+                    // Break out of the loop
+                    break;
+                }
+            }
+            // If nothing was hit, simulate the bullet trail anyways
+            else
             {
-                float appliedDamage = damage;
+                Vector3 hitPoint = origin + direction * remainingDistance;
 
-                // MG - Compares collider with Tag Head to deal double dmg
-                if(hit.collider.CompareTag("Head"))
+                if (bulletTrail != null)
                 {
-                    appliedDamage *= 2f;
-                    Debug.Log("Headshot");
+                    TrailRenderer trail = Instantiate(bulletTrail, origin, Quaternion.identity);
+                    StartCoroutine(SpawnTrail(trail, hitPoint));
                 }
-                // MG - Compares collider with Tag Body to deal normal dmg
-                if(hit.collider.CompareTag("Body"))
-                {
-                    appliedDamage = damage;
-                    Debug.Log("Body shot.");
-                }
-                // Deal the weapon's damage to the target
-                targetHealth.TakeDamage(appliedDamage);
+
+                break;
             }
-        }
-        else
-        {
-            // If nothing was hit, simulate trail for point
-            hitPoint = ray.origin + ray.direction * maxRange;
-        }
-        // Render bullet trail, if assigned
-        if (bulletTrail != null)
-        {
-            TrailRenderer trail = Instantiate(bulletTrail, bulletSpawnPoint.position, Quaternion.identity);
-            StartCoroutine(SpawnTrail(trail, hitPoint));
         }
     }
 
