@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.Mathematics;
 using UnityEngine;
 
 public class NewMonoBehaviourScript : MonoBehaviour
@@ -13,7 +12,7 @@ public class NewMonoBehaviourScript : MonoBehaviour
 
     public Vector2 size;
     public int startPos = 0;
-    public GameObject room;
+    [SerializeField] GameObject[] room;
     public Vector2 offset;
     List<Cell> board;
 
@@ -31,6 +30,7 @@ public class NewMonoBehaviourScript : MonoBehaviour
 
     void GenerateDungeon()
     {
+        int index =  Random.Range(0, room.Length);
         for (int i = 0; i < size.x; i++)
         {
             for (int j = 0; j < size.y; j++)
@@ -39,11 +39,12 @@ public class NewMonoBehaviourScript : MonoBehaviour
                 if (currentCell.visited)
                 {
 
-
-                    var newRoom = Instantiate(room, new Vector3(i * offset.x, 0, -j * offset.y), quaternion.identity, transform).GetComponent<RoomBehaviour>();
+                    Vector3 spawnPostion = new Vector3(i * offset.x, 0, -j * offset.y);
+                    var newRoom = Instantiate(room, spawnPostion, Quaternion.identity, transform).GetComponent<RoomBehaviour>();
                     newRoom.UpdateRoom(currentCell.status);
 
                     newRoom.name += " " + i + "-" + j;
+
                 }
             }
 
