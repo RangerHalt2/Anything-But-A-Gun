@@ -99,9 +99,10 @@ GameObject:
   - component: {fileID: 7252943354794029462}
   - component: {fileID: 8456658997244272520}
   - component: {fileID: 7240490139092656049}
+  - component: {fileID: -6795824228135107553}
   m_Layer: 0
   m_Name: BrickPrefab
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -305,6 +306,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &-6795824228135107553
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3695943591121391829}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa4112cfead147841a21145ad71f5bbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyManagerCooperation
+  enemyManager: {fileID: 0}
 --- !u!1 &6065764785548395232
 GameObject:
   m_ObjectHideFlags: 0

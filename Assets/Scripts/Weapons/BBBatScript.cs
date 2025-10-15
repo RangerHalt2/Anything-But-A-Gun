@@ -4,17 +4,11 @@ using System.Collections;
 public class BBBatScript : MonoBehaviour, IWeapon
 {
     [SerializeField] private int health = 10; //Health of the melee weapon
-
     [SerializeField] private int teamID;
-
     [SerializeField] private float damage = 15;
-
     private bool striking = false;
-
     private Health enemyHealth;
-
     private AmmoManager ammoManager;
-
     [SerializeField] private GameObject whackEffect;
 
     [Tooltip("This is a sort of back-end buffer time to how frequently the player can hit the enemy with the baseball bat")]
