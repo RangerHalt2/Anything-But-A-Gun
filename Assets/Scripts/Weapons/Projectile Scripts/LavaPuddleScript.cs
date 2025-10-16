@@ -16,7 +16,7 @@ public class LavaPuddleScript : MonoBehaviour
         }
     }
 
-    void OnTriggerEnter(Collider _other)
+    void OnTriggerStay(Collider _other)
     {
         // Attempt to reference the health script on the collided object
         Health health = _other.gameObject.GetComponentInParent<Health>();
