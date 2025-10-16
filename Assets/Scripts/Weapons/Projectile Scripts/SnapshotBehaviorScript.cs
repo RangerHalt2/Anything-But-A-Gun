@@ -19,6 +19,8 @@ public class SnapshotBehaviorScript : MonoBehaviour
 
     [SerializeField] private float snapshotTimer = 20f; //The amount of time that the snapshot sticks around.
 
+    [SerializeField] private bool timesUp = false;
+
     void OnEnable()
     {
         if (copyOf != null)
@@ -63,6 +65,7 @@ public class SnapshotBehaviorScript : MonoBehaviour
             snapshotTimer -= 1 * Time.deltaTime;
             if (snapshotTimer < 0)
             {
+                timesUp = true;
                 Destroy(gameObject);
             }
 
@@ -97,6 +100,17 @@ public class SnapshotBehaviorScript : MonoBehaviour
                     myHealth.ReceiveHealing(theirHealth.currentHealth - intermediaryHealth); //Increase my health
                     intermediaryHealth = theirHealth.currentHealth;
                 }
+            }
+        }
+    }
+
+    void OnDestroy()
+    {
+        if (!timesUp) 
+        {
+            if (theirHealth != null) 
+            {
+                theirHealth.Die();
             }
         }
     }
