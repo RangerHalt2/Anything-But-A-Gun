@@ -17,6 +17,10 @@ public class Health : MonoBehaviour
     [SerializeField] public float currentHealth = 1f;
 
     [Header("Display Settings")]
+    [Tooltip("Determines if the Health Bar is active before taking damage")]
+    [SerializeField] private bool healthBarActiveOnStartup;
+    // Tracks if the healthbar is currently active
+    private bool healthBarActive;
     [Tooltip("Reference to healthbar prefab. Optional.")]
     [SerializeField] private HealthBar healthBar;
     [Tooltip("Reference to TMPro Object used to track current AP. Optional.")]
@@ -28,12 +32,24 @@ public class Health : MonoBehaviour
     [Tooltip("Reference to prefab for an effect which triggers when the object is destroyed. Optional.")]
     public GameObject deathEffect;
 
+    [Tooltip("Toggle this if this is on the player")]
+    [SerializeField] private bool isPlayer;
+
+    [SerializeField] private GameObject gameOverCanvas;
+    [SerializeField] private GameObject inGameCanvas;
+
+    public bool isDead;
+
+    [SerializeField] private GameObject damageNoise;
+    private float damageTimer = 0f;
+    private float damageCooldown = 0.5f;
 
     #endregion
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        isDead = false;
         // Automatically kill object if it has 0 or less health
         if (currentHealth <= 0)
         {
@@ -46,13 +62,20 @@ public class Health : MonoBehaviour
         {
             healthBar.SetMaxHealth(maxHealth);
         }
+
         updateDisplay();
+
+        // If the health bar is not meant to be active immediatly, deactivate it
+        if (healthBar != null && !healthBarActiveOnStartup)
+        {
+            healthBar.Deactivate();
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        damageTimer -= Time.deltaTime;
     }
 
     // Applies a certain amount of damage to an object
@@ -60,6 +83,11 @@ public class Health : MonoBehaviour
     {
         // Subtract the damage amount from the health of the object
         currentHealth -= damageAmount;
+        if(damageNoise != null && damageTimer <= 0)
+        {
+            damageTimer = damageCooldown;
+            Instantiate(damageNoise, transform.position, transform.rotation, null);
+        }
         Debug.Log(gameObject.name + " took " + damageAmount + " damage. Current Health: " + currentHealth + "/" + maxHealth + ".");
         updateDisplay();
 
@@ -106,7 +134,15 @@ public class Health : MonoBehaviour
 
         // Destroy the game object
         Debug.Log(gameObject.name + " has died.");
-        Destroy(gameObject);
+        if(!isPlayer)
+            Destroy(gameObject);
+        else if (isPlayer)
+        {
+            isDead = true;
+            gameOverCanvas.SetActive(true);
+            inGameCanvas.SetActive(false);
+            Cursor.lockState = CursorLockMode.None;
+        }
     }
 
     public void updateDisplay()
@@ -121,6 +157,8 @@ public class Health : MonoBehaviour
         if (healthBar != null)
         {
             healthBar.SetHealth(currentHealth);
+            healthBar.Activate();
+            healthBarActive = true;
         }
     }
 }

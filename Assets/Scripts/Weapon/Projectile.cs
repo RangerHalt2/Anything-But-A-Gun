@@ -20,13 +20,22 @@ public class Projectile : MonoBehaviour
     [Tooltip("The teamID of the Projectile")]
     [SerializeField] private float teamID;
     [Tooltip("The amount of damage dealt to a target")]
-    [SerializeField] private float damage;
+    [SerializeField] public float damage;
 
     [Header("Special Properties")]
     [Tooltip("Determines whether the projectile is able to pierce through, and deal damage, to multiple objects.")]
     [SerializeField] private bool piercing;
     [Tooltip("Determines whether the projectile will impact with or ricochet off of walls.")]
     public WallBehavior wallBehavior;
+    [Tooltip("Determines the maximum amount of bounces. Only utilized if the projectile has the Ricochet wall behavior. Must be a value greater than 0.")]
+    [SerializeField] private int maxBounces = 0;
+    // How many times the projectile has bounced
+    private int currentBounces = 0;
+    
+    [Tooltip("Determines whether the projectile will be effected by gravity.")]
+    [SerializeField] private bool bulletDrop;
+    [Tooltip("Multiplier for gravity when bullet drop is enabled.")]
+    [SerializeField] private float gravityMultiplier = 1.0f;
 
     // Referenece to the Projectile's's Rigidbody
     private Rigidbody rb;
@@ -42,6 +51,8 @@ public class Projectile : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        // Turn off default gravity since we'll be using a custom one
+        rb.useGravity = false;
 
         // Check if Rigidbody is present
         if (rb != null)
@@ -54,7 +65,7 @@ public class Projectile : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning(gameObject.name + " is missing a rigidbody. Projectile Script cannot function properly without it!");
+            Debug.LogWarning("Projectile: " + gameObject.name + " is missing a rigidbody. Projectile Script cannot function properly without it!");
         }
     }
 
@@ -62,6 +73,18 @@ public class Projectile : MonoBehaviour
     void Update()
     {
 
+    }
+
+    void FixedUpdate()
+    {
+        if (!bulletDrop)
+        {
+            return;
+        }
+        else
+        {
+            rb.AddForce(Physics.gravity * gravityMultiplier, ForceMode.Acceleration);
+        }
     }
 
     // Destroys the gameObject after a set delay defined by lifeTime
@@ -75,7 +98,7 @@ public class Projectile : MonoBehaviour
     void OnTriggerEnter(Collider collider)
     {
         // Attempt to reference the health script on the collided object
-        Health health = collider.gameObject.GetComponent<Health>();
+        Health health = collider.gameObject.GetComponentInParent<Health>();
 
         // If the object has a health script
         if (health != null)
@@ -106,7 +129,7 @@ public class Projectile : MonoBehaviour
                     break;
                 // Ricochet
                 case WallBehavior.Ricochet:
-                    // Currently Unimplemented
+                    SimulateRicochet(collider);
                     break;
                 // Default Case, should never be called
                 default:
@@ -114,4 +137,33 @@ public class Projectile : MonoBehaviour
             }
         }
     }
+
+    #region Special Properties
+    private void SimulateRicochet(Collider collider)
+    {
+        // If the current bounces are greater than or equal to the maximum amount of bounces...
+        if (currentBounces >= maxBounces)
+        {
+            // Destroy the projectile
+            Destroy(gameObject);
+            return;
+        }
+        // Do a raycast from the current postion backwards to try and get the normal
+        RaycastHit hit;
+        Vector3 direction = rb.linearVelocity.normalized;
+
+        if(Physics.Raycast(transform.position, direction, out hit, 1.0f))
+        {
+            Vector3 normal = hit.normal;
+            Vector3 reflectedDirection = Vector3.Reflect(direction, normal);
+
+            // Update Projectile velocity
+            rb.linearVelocity = reflectedDirection * speed;
+            // Rotate projectile to face the new direction
+            transform.forward = reflectedDirection;
+            // Increment currentBounces
+            currentBounces++;
+        }
+    }
+    #endregion
 }
