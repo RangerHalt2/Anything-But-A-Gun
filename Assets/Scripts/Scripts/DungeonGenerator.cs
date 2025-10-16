@@ -40,7 +40,7 @@ public class NewMonoBehaviourScript : MonoBehaviour
                 {
 
                     Vector3 spawnPostion = new Vector3(i * offset.x, 0, -j * offset.y);
-                    var newRoom = Instantiate(room, spawnPostion, Quaternion.identity, transform).GetComponent<RoomBehaviour>();
+                    var newRoom = Instantiate(room[i], spawnPostion, Quaternion.identity, transform).GetComponent<RoomBehaviour>();
                     newRoom.UpdateRoom(currentCell.status);
 
                     newRoom.name += " " + i + "-" + j;
