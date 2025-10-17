@@ -52,11 +52,9 @@ public class EnemyAI : MonoBehaviour
 
     private void FixedUpdate()
     {
-        // Check if player is within detection and attack ranges
         playerInSightRange = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
         playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
 
-        // Look at player for orientation (optional, can be smoothed or removed)
         transform.LookAt(player);
 
         if (playerInSightRange)
@@ -91,7 +89,6 @@ public class EnemyAI : MonoBehaviour
             Patrolling();
         }
 
-        // Reset detection sprite trigger if player has left sight range
         if (!playerInSightRange && hasShownDetectionSprite)
         {
             hasShownDetectionSprite = false;
