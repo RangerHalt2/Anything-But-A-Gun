@@ -10,12 +10,13 @@ GameObject:
   m_Component:
   - component: {fileID: 995542501288051087}
   - component: {fileID: 855069458224287064}
+  - component: {fileID: 2371825411297778615}
   - component: {fileID: -6608494925588196765}
   - component: {fileID: 5258742335422185819}
   - component: {fileID: 2946710538748124991}
   - component: {fileID: 2607439379532860027}
   - component: {fileID: 9216868528787951740}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Lava Lamp Projectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -52,11 +53,32 @@ SphereCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 0
+  serializedVersion: 3
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!135 &2371825411297778615
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1506664740527934108}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
   m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.5
+  m_Radius: 0.55
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &-6608494925588196765
 MonoBehaviour:
