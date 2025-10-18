@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-
+    #region Variables
     private CharacterController characterController;
 
     [SerializeField] private float movementSpeed = 10f;
@@ -38,7 +38,11 @@ public class PlayerController : MonoBehaviour
     public delegate void OnDashChangedDelegate();
     [HideInInspector] public OnDashChangedDelegate onDashChangedCallback;
     private bool canDash = true;
+    #endregion
 
+    #region Getters/Setters
+    public CharacterController GetCharacterController() { return characterController; }
+    #endregion
 
     void Awake() 
     {

@@ -31,6 +31,10 @@ public class Projectile : MonoBehaviour
     [SerializeField] private int maxBounces = 0;
     // How many times the projectile has bounced
     private int currentBounces = 0;
+
+    //LB: Adding a cooldown on how often the ball can bounce, just by a fraction of a second
+    private float bounceCooldown = 0.2f;
+    private float bounceTimer = 0;
     
     [Tooltip("Determines whether the projectile will be effected by gravity.")]
     [SerializeField] private bool bulletDrop;
@@ -72,7 +76,7 @@ public class Projectile : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        bounceCooldown -= Time.deltaTime;
     }
 
     void FixedUpdate()
@@ -141,6 +145,7 @@ public class Projectile : MonoBehaviour
     #region Special Properties
     private void SimulateRicochet(Collider collider)
     {
+        if (bounceTimer > 0) return;
         // If the current bounces are greater than or equal to the maximum amount of bounces...
         if (currentBounces >= maxBounces)
         {
@@ -163,6 +168,11 @@ public class Projectile : MonoBehaviour
             transform.forward = reflectedDirection;
             // Increment currentBounces
             currentBounces++;
+            bounceTimer = bounceCooldown;
+        }
+        else
+        {
+            Debug.Log("Richochet did NOT hit a wall with it's raycast!");
         }
     }
     #endregion
