@@ -33,7 +33,8 @@ public class Player_Level : MonoBehaviour
     public void AddEXP(float EXP)
     {
         this.EXP += EXP;
-        this.EXP = Mathf.Round(this.EXP); 
+        this.EXP = Mathf.Round(this.EXP);
+        CalculateLevel();
     }
 
     #region Calculate Level with Formula
