@@ -95,6 +95,10 @@ public class EnemyAI : MonoBehaviour
         }
     }
 
+    //TO DO: Manage an "Alerted" variable in the patrol functions and chasing functions
+    //TO DO: Check if line of sight, call the ShowDetectionSprite(), Call the Chase() function
+    //public void AlertEnemy()
+
     private void Patrolling()
     {
         agent.isStopped = false;
