@@ -21,7 +21,9 @@ public class WeaponHandler : MonoBehaviour
 
     [SerializeField] private Transform gunHolder;
 
-    
+    //LB: Added this as a getter
+    public GameObject GetCurrentWeapon() { return currentWeapon;}
+
     void Start()
     {
         weapons.Add(Instantiate(starterWeapon, gunHolder));

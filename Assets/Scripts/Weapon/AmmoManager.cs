@@ -67,6 +67,18 @@ public class AmmoManager : MonoBehaviour
     {
         return reloading;
     }
+
+    //LB: Added a function to cancel the reload, it returns true if the reload is cancelled and false if it cannot be cancelled
+    public bool CancelReload()
+    {
+        bool ret = true;
+        if(canCancelReload)
+            StopCoroutine(Reload());
+        else
+            ret = false;
+
+        return ret;
+    }
     #endregion
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
