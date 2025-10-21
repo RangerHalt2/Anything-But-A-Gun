@@ -9,7 +9,7 @@ public class TitlePage : MonoBehaviour
 
     public void PlayGame ()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        SceneManager.LoadScene("level1.2");
     }
     public void QuitGame()
     {
