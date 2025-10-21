@@ -45,6 +45,8 @@ GameObject:
   - component: {fileID: 1989173093453620736}
   - component: {fileID: 2310130074892170060}
   - component: {fileID: 1009154439553706555}
+  - component: {fileID: -213408061627447092}
+  - component: {fileID: 373497531155728522}
   m_Layer: 0
   m_Name: Air Frier
   m_TagString: Untagged
@@ -188,3 +190,42 @@ MonoBehaviour:
   ammoDisplayText: {fileID: 0}
   reloadEffect: {fileID: 0}
   bottomlessMagazines: 0
+--- !u!114 &-213408061627447092
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9077750917603778609}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65fe7dc33c7c0004089552333126b3b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WeaponCollectScript
+--- !u!54 &373497531155728522
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9077750917603778609}
+  serializedVersion: 5
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0

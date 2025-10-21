@@ -23,8 +23,6 @@ public class WeaponHandler : MonoBehaviour
 
     [SerializeField] private Transform gunHolder;
 
-    [SerializeField] private GameObject emptyWeaponCollectible;
-
     //LB: Added this as a getter
     public GameObject GetCurrentWeapon() { return currentWeapon;}
 
@@ -138,6 +136,8 @@ public class WeaponHandler : MonoBehaviour
             System.Type newScriptName = newWeaponType.GetType();
             string nameOfNewScript = newScriptName.Name;
 
+            currentWeapon.SetActive(false);
+
             if (nameOfNewScript != null)
             {
                 foreach (GameObject heldWeapon in weapons)
@@ -157,13 +157,19 @@ public class WeaponHandler : MonoBehaviour
 
                 }
 
-                currentWeapon.SetActive(false);
-                weapons.Add(Instantiate(addWeapon, gunHolder)); //Adds the weapon to the list of weapons available.
+                weapons.Add(addWeapon); //Adds the weapon to the list of weapons available.
                 weaponSlot = weapons.Count - 1;
                 currentWeapon = weapons[weaponSlot]; //Create the actual weapon and make it active
+                addWeapon.transform.SetParent(weaponLocation);
+                addWeapon.transform.position = weaponLocation.transform.position;
+                addWeapon.transform.rotation = weaponLocation.transform.rotation;
+                addWeapon.GetComponent<WeaponCollectScript>().enabled = false;
                 currentWeapon.SetActive(true);
+                currentWeapon.GetComponent<AmmoManager>().updateDisplay();
                 //currentWeapon.GetComponent<AmmoManager>().updateDisplay();
                 newWeapon = null; //So that it doesn't endlessly add the same weapon.
+
+                Debug.Log(weapons.Count);
             }
         }
     }
@@ -171,8 +177,12 @@ public class WeaponHandler : MonoBehaviour
     void DropWeapon(GameObject dropWeapon) //Spawns a collectible that will allow you to recollect the weapon.
     {
         Vector3 spawnPoint = transform.position + transform.forward * 2;
-        GameObject newWeaponCollectible = Instantiate(emptyWeaponCollectible, spawnPoint, transform.rotation); //Spawn the collectible in front of the player
-        newWeaponCollectible.GetComponent<WeaponCollectScript>().definedWeapon = dropWeapon;
-        dropWeapon.transform.SetParent(newWeaponCollectible.transform);
+        //Spawn the collectible in front of the player
+        dropWeapon.transform.SetParent(null);
+        dropWeapon.transform.position = spawnPoint;
+        dropWeapon.SetActive(true);
+        dropWeapon.GetComponent<WeaponCollectScript>().enabled = true;
+        dropWeapon.GetComponent<WeaponCollectScript>().collected = false;
+
     }
 }

@@ -3,13 +3,13 @@ using UnityEngine;
 public class WeaponCollectScript : MonoBehaviour
 {
     //Weapon that will be acquired when this is touched
-    public GameObject definedWeapon;
-
     private AmmoManager ammoManager;
+
+    public bool collected = false;
 
     void OnTriggerEnter(Collider _other) 
     {
-        if (_other.tag == "Player")
+        if (_other.CompareTag("Player") && !collected)
         {
             WeaponHandler handler = _other.GetComponentInParent<WeaponHandler>();
             ammoManager = handler.GetCurrentWeapon().GetComponent<AmmoManager>();
@@ -22,9 +22,8 @@ public class WeaponCollectScript : MonoBehaviour
             }
 
             //Telling the Weapon Handler to add this weapon as a new weapon
-            handler.newWeapon = definedWeapon;
-
-            Destroy(gameObject);
+            handler.newWeapon = gameObject;
+            collected = true;
         }
     }
 }

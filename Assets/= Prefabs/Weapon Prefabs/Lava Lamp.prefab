@@ -45,6 +45,8 @@ GameObject:
   - component: {fileID: 5318346251965327607}
   - component: {fileID: 1802305520914099029}
   - component: {fileID: 1285534625640415471}
+  - component: {fileID: -5931017466666987082}
+  - component: {fileID: 3856324083559678794}
   m_Layer: 0
   m_Name: Lava Lamp
   m_TagString: Untagged
@@ -184,3 +186,42 @@ MonoBehaviour:
   ammoManager: {fileID: 1802305520914099029}
   projectilePrefab: {fileID: 1506664740527934108, guid: 736e25b32e28ad64abbd7d6b3117cf27, type: 3}
   projectileSpawnPoint: {fileID: 2341579381627065503}
+--- !u!114 &-5931017466666987082
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3634324867199572480}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65fe7dc33c7c0004089552333126b3b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WeaponCollectScript
+--- !u!54 &3856324083559678794
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3634324867199572480}
+  serializedVersion: 5
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
