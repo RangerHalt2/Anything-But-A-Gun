@@ -31,25 +31,7 @@ public class BBBatScript : MonoBehaviour, IWeapon
 
     void OnTriggerStay(Collider _other) //Detect if an enemy is near
     {
-        Debug.Log("Something entered the trigger");
         enemyHealth = _other.GetComponentInParent<Health>();
-
-        if (enemyHealth == null)
-        {
-            Debug.Log("No Health Script" + _other.gameObject.name);
-            //return;
-        }
-        else
-        {
-            if (enemyHealth.teamID == teamID)
-            {
-                Debug.Log("Viewing Player");
-            }
-            if(enemyHealth.teamID == 1)
-            {
-                Debug.Log("Viewing Enemy");
-            }
-        }
 
             if (enemyHealth != null && enemyHealth.teamID != teamID && striking && attackTimer <= 0 && ammoManager.GetCurrentAmmo() > 0) // If it's an enemy, the bat has health, and the player presses shoot, attack the enemy
         {

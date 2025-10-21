@@ -3,7 +3,7 @@ using UnityEngine;
 public class WeaponCollectScript : MonoBehaviour
 {
     //Weapon that will be acquired when this is touched
-    [SerializeField] private GameObject definedWeapon;
+    public GameObject definedWeapon;
 
     private AmmoManager ammoManager;
 

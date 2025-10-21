@@ -49,6 +49,7 @@ public class CameraWeaponScript : MonoBehaviour, IWeapon
         if (_other.gameObject.CompareTag("Body")) 
         {
             enemiesInRange.Add(_other.gameObject);
+            Debug.Log("Found enemy!!");
         }
     }
 

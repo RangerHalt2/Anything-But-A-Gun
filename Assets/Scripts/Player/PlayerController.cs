@@ -87,7 +87,7 @@ public class PlayerController : MonoBehaviour
 
         if (characterController.isGrounded) verticalForce = 0f;
 
-        Debug.Log("Vertical Force: " +  verticalForce);
+        //Debug.Log("Vertical Force: " +  verticalForce);
 
         characterController.Move(new Vector3(0, verticalForce, 0) * Time.deltaTime);
     }
