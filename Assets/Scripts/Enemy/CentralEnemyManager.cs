@@ -46,7 +46,6 @@ public class CentralEnemyManager : MonoBehaviour
             }
         }
 
-        Debug.Log("Closest Enemy Found!!!");
         return closestEnemy;
     }
 

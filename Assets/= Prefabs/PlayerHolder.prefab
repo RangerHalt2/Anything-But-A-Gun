@@ -48,10 +48,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
   movementSpeed: 10
-  sprintMulti: 2
+  sprintMultiplier: 2
   sensitivity: 10
   jumpForce: 10
   gravity: -30
+  terminalVelocity: -60
+  dashForce: 0
+  dashTime: 0
+  maxDashLimit: 3
+  dashes: 0
+  dashCharge: 0
+  dashChargeTime: 5
+  dashCd: 0.25
 --- !u!114 &3398571290749484056
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -130,6 +138,7 @@ MonoBehaviour:
   newWeapon: {fileID: 151647689765970786, guid: ea8f91e2aa239c04eae960872c0c23bf, type: 3}
   weaponLocation: {fileID: 455567464696260592}
   inputManager: {fileID: 0}
+  weaponSwitchRate: 0.1
   gunHolder: {fileID: 0}
 --- !u!1 &2996655205196840286
 GameObject:
@@ -332,7 +341,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.8309999, y: -0.016000032, z: 0.54900026}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5256620709295122454}

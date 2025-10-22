@@ -129,7 +129,7 @@ public class WeaponHandler : MonoBehaviour
     {
         if (weapons != null)
         {
-            bool overlap = false; //Check if the weapon we're trying to pick up is of a type we already have
+            //Check if the weapon we're trying to pick up is of a type we already have
 
             IWeapon newWeaponType = addWeapon.GetComponent<IWeapon>();
 
@@ -149,7 +149,6 @@ public class WeaponHandler : MonoBehaviour
 
                     if (nameOfHeldScript == nameOfNewScript) //If we already have this weapon, drop the current weapon and replace it with the new one.
                     { 
-                        overlap = true;
                         weapons.Remove(heldWeapon);
                         DropWeapon(heldWeapon);
                         break;
@@ -159,17 +158,19 @@ public class WeaponHandler : MonoBehaviour
 
                 weapons.Add(addWeapon); //Adds the weapon to the list of weapons available.
                 weaponSlot = weapons.Count - 1;
-                currentWeapon = weapons[weaponSlot]; //Create the actual weapon and make it active
-                addWeapon.transform.SetParent(weaponLocation);
-                addWeapon.transform.position = weaponLocation.transform.position;
-                addWeapon.transform.rotation = weaponLocation.transform.rotation;
-                addWeapon.GetComponent<WeaponCollectScript>().enabled = false;
+                currentWeapon = weapons[weaponSlot]; //Make the current weapon the new weapon we just added
+                
+                Vector3 scale = currentWeapon.transform.localScale;
+
+                currentWeapon.transform.SetParent(weaponLocation, true); //"True" refers to the world position of the object remaining true (look up worldPositionStays) making sure it's not scaled weird
+                currentWeapon.transform.position = gunHolder.transform.position;
+                currentWeapon.transform.rotation = gunHolder.transform.rotation;
+                currentWeapon.transform.localScale = scale;
+                currentWeapon.GetComponent<WeaponCollectScript>().enabled = false;
                 currentWeapon.SetActive(true);
                 currentWeapon.GetComponent<AmmoManager>().updateDisplay();
                 //currentWeapon.GetComponent<AmmoManager>().updateDisplay();
                 newWeapon = null; //So that it doesn't endlessly add the same weapon.
-
-                Debug.Log(weapons.Count);
             }
         }
     }
@@ -177,12 +178,16 @@ public class WeaponHandler : MonoBehaviour
     void DropWeapon(GameObject dropWeapon) //Spawns a collectible that will allow you to recollect the weapon.
     {
         Vector3 spawnPoint = transform.position + transform.forward * 2;
+        Vector3 scale = dropWeapon.transform.localScale;
         //Spawn the collectible in front of the player
         dropWeapon.transform.SetParent(null);
+        dropWeapon.transform.localScale = scale;
         dropWeapon.transform.position = spawnPoint;
         dropWeapon.SetActive(true);
         dropWeapon.GetComponent<WeaponCollectScript>().enabled = true;
-        dropWeapon.GetComponent<WeaponCollectScript>().collected = false;
+        dropWeapon.GetComponent<WeaponCollectScript>().collected = false; //Currently, if you drop the weapon and pick it up too fast, there's a chance to scramble
+                                                                          //it's collected function and make it uncollectible. This won't be an issue if we change to
+                                                                          //interactive pick-ups.
 
     }
 }
