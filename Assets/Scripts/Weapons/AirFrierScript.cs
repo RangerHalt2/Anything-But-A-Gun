@@ -9,8 +9,8 @@ public class AirFrierScript : MonoBehaviour, IWeapon
     private float lastFired = Mathf.NegativeInfinity;
 
     [SerializeField] private float timeOnBox = 5f; //Time to cook the nuggets
-    [SerializeField] private float cookTime = 0f; //Current time the nugget has been cooking
-    [SerializeField] private float cookSpeed = 1f; //Temperature of the oven, ha ha
+    private float cookTime = 0f; //Current time the nugget has been cooking
+    private float cookSpeed = 1f; //Temperature of the oven, ha ha
     [SerializeField] private float coolSpeed = 0.1f; //Speed that the nuggies cool off
 
     //NEEDS UI FOR CHARGE TIME
@@ -21,8 +21,15 @@ public class AirFrierScript : MonoBehaviour, IWeapon
     }
 
     private void Update() 
-    { 
-        cookTime -= coolSpeed;
+    {
+        if (cookTime >= 0)
+        {
+            cookTime -= coolSpeed;
+        }
+        else 
+        {
+            cookTime = 0;
+        }
     }
     
     public void Shoot()

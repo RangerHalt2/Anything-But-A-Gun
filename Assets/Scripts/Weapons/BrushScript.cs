@@ -10,8 +10,8 @@ public class BrushScript : MonoBehaviour, IWeapon
 
     private bool leftSlash = true; //Which direction the slash is bending.
     private float slashAngle = 0f; //Just the angle that the slash bends to
-    [SerializeField] private float slashAngleLeft = 75f;
-    [SerializeField] private float slashAngleRight = 105f;
+    private float slashAngleLeft = 75f;
+    private float slashAngleRight = 105f;
 
     public void Shoot()
     {
