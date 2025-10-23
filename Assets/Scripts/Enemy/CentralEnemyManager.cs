@@ -45,8 +45,9 @@ public class CentralEnemyManager : MonoBehaviour
                 closestEnemy = enemy;
             }
         }
-
+        
         return closestEnemy;
+        
     }
 
     public int ActiveEnemyCount()
