@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class VolleyBallScript : MonoBehaviour, IWeapon
 {
+    [SerializeField] public int level {get; set;}
     
     [SerializeField] private float fireRate = 0.75f;
     private AmmoManager ammoManager;

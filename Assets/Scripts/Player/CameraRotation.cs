@@ -14,6 +14,7 @@ public class CameraRotation : MonoBehaviour
     private float rotationX;
 
     private Health playerHealth;
+    private UIManager uiManager;
 
     private WinEvent winEvent;
     private void Start()
@@ -32,7 +33,10 @@ public class CameraRotation : MonoBehaviour
 
     private void Update()
     {
-        if(playerHealth.isDead || winEvent.hasWon) return;
+        if (playerHealth.isDead || winEvent.hasWon) return;
+
+        if (UIManager.instance != null && UIManager.instance.IsPaused) return;
+        
         Rotate(inputs.LookInput);
     }
 

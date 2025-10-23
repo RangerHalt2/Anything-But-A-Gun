@@ -3,6 +3,8 @@ using System.Collections;
 
 public class BBBatScript : MonoBehaviour, IWeapon
 {
+    [SerializeField] public int level {get; set;}
+
     [SerializeField] private int health = 10; //Health of the melee weapon
     [SerializeField] private int teamID;
     [SerializeField] private float damage = 15;

@@ -2,6 +2,7 @@
 // Manages the UI during gameplay and allows for easy navigation between pages
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem; 
 
 public class UIManager : MonoBehaviour
 {
@@ -16,12 +17,17 @@ public class UIManager : MonoBehaviour
     public int defaultPage = 0;
 
     [Header("Pause Settings")]
+    [Tooltip("Reference to InputActions Asset.")]
+    [SerializeField] private InputActionAsset UIControls;
+    // Reference to pause action from the InputActionsAsset
+    private InputAction pauseAction;
     [Tooltip("The index of the pause page in the pages list.")]
     public int pausePageIndex = 1;
     [Tooltip("Determines whether or not the player is allowed to pause. Set to true to enable pausing.")]
     public bool allowPause = true;
     // Whether or not the game is currently paused
     private bool isPaused = false;
+    public bool IsPaused => isPaused;
 
 
     #endregion
@@ -37,18 +43,28 @@ public class UIManager : MonoBehaviour
         {
             Destroy(this);
         }
+
+        // Get the pause action from the UI Action Map in InputActions
+        var uiMap = UIControls.FindActionMap("UI", true);
+        pauseAction = uiMap.FindAction("Pause", true);
+    }
+
+    private void OnEnable()
+    {
+        pauseAction.performed += OnPausePerformed;
+        UIControls.Enable();
+    }
+
+    private void OnDisable()
+    {
+        pauseAction.performed -= OnPausePerformed;
+        UIControls.Disable();
     }
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         InitilizeFirstPage();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 
     // Sets up the first page. Ensures that only the default page is enabled on startup
@@ -69,7 +85,9 @@ public class UIManager : MonoBehaviour
                 // Go to the default UI Page
                 GoToPage(defaultPage);
                 // Set time scale to 1 (normal speed)
-                Time.timeScale = 1;
+                Time.timeScale = 1f;
+                // Lock the cursor
+                Cursor.lockState = CursorLockMode.Locked;
                 // Update pause boolean
                 isPaused = false;
             }
@@ -79,7 +97,9 @@ public class UIManager : MonoBehaviour
                 // Go to pause UI Page
                 GoToPage(pausePageIndex);
                 // Set time scale to 0 (frozen)
-                Time.timeScale = 0;
+                Time.timeScale = 0f;
+                // Lock the cursor
+                Cursor.lockState = CursorLockMode.None;
                 // Update pause boolean
                 isPaused = true;
             }
@@ -114,6 +134,14 @@ public class UIManager : MonoBehaviour
                     page.gameObject.SetActive(activated);
                 }
             }
+        }
+    }
+
+    private void OnPausePerformed(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            TogglePause();
         }
     }
 }

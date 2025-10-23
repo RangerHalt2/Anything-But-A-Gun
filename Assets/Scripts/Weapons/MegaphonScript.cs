@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class MegaphonScript : MonoBehaviour, IWeapon
 {
+    [SerializeField] public int level {get; set;}
+
     [SerializeField] private float fireRate = 0.25f;
     [SerializeField] private AmmoManager ammoManager;
     [SerializeField] private GameObject projectilePrefab;

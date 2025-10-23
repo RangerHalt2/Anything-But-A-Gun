@@ -22,6 +22,8 @@ public class PlayerController : MonoBehaviour
 
     private WinEvent winEvent;
 
+    private UIManager uiManager;
+
     private float rotationY;
     private float verticalForce = 0;
 
@@ -127,6 +129,10 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         if (playerHealth.isDead || winEvent.hasWon) return;
+
+        if (UIManager.instance != null && UIManager.instance.IsPaused) return;
+            
+        
         Move(inputs.MoveInput);
         Rotate(inputs.LookInput);
 

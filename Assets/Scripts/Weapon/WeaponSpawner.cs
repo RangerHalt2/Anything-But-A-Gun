@@ -1,14 +1,12 @@
 // Created By: Ryan Lupoli
 // This weapon allows for the randomized spawning of weapons within a given level.
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class WeaponSpawner : MonoBehaviour
 {
     #region Variables
     [Header("Probability Settings")]
-    // The combined values of common, uncommon, and rareWeaponChance should not total to be more than 100
     [Tooltip("The weighted chance of a spawned weapon being taken from the common weapons pool.")]
     [SerializeField] private int commonWeaponWeight = 60;
     [Tooltip("The weighted chance of a spawned weapon being taken from the uncommon weapons pool.")]
@@ -24,32 +22,93 @@ public class WeaponSpawner : MonoBehaviour
     [Tooltip("The collection of weapons which make up the rare pool for the weapon spawner. Should consist of weapon collectable prefabs.")]
     [SerializeField] private List<GameObject> rareWeaponPool;
 
-    [Header("Spawning Settings")]
+    [Header("Spawn Level Settings")]
+    [Tooltip("Determines how the weapon spawner will assign weapon levels.")]
+    public SpawnMode mode;
+    // Reference to Player Level manager
+    private Player_Level playerLevel;
+    // The level of the spawned weapon
+    private int spawnedWeaponLevel = 1; // Should never be lower than 1
+    [Tooltip("The lowest possible level a weapon can spawn with")]
+    [SerializeField] private int minLevel = 1;
+    // Highest possible weapon level
+    int maxWeaponLevel;
+
+    [Header("Spawn Location Settings")]
     [Tooltip("Reference to an empty gameobject which functions as a waypoint to define where the generated weapon will be spawned.")]
     [SerializeField] private Transform weaponSpawnWaypoint;
+
+    [Header("DEBUG SETTIGNS")]
+    [Tooltip("Overrides the player's level with the specified integer. If value is -1, then the player's actual level will be read")]
+    [Range (-1, 10)][SerializeField] private int playerLevelOverride = 5;
     #endregion
+
+    public enum SpawnMode
+    {
+        // Always spawns weapons at the Players Level
+        FixedPL,
+        // Spawns a weapon at a random level between the player's current level, and the minLevel of the spawner
+        Random
+    }
+
+    void Awake()
+    {
+        playerLevel = FindFirstObjectByType<Player_Level>();
+        if (playerLevel == null)
+        {
+            Debug.LogWarning("Weapon Spawner: Player_Level not found.");
+        }
+
+        if (playerLevelOverride == -1)
+        {
+            maxWeaponLevel = playerLevel.Level;
+        }
+        else
+        {
+            maxWeaponLevel = playerLevelOverride;
+        }
+    }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        SpawnWeapon();
+    }
+
+    private void SpawnWeapon()
+    {
         if (weaponSpawnWaypoint != null)
         {
             // Generate a random weapon
-            GameObject spawnedWeapon = GetRandomWeapon();
-            // Check if the weapon was spawned properly
-            if (spawnedWeapon != null)
+            GameObject weaponPrefab = GetRandomWeapon();
+            // Check if the weapon was seleceted properly
+            if (weaponPrefab != null)
             {
-                Instantiate(spawnedWeapon, weaponSpawnWaypoint.position, weaponSpawnWaypoint.rotation);
-                Debug.Log("WeaponSpawner: Spawned " + spawnedWeapon.name);
+                // Spawn the weapon
+                GameObject spawnedWeapon = Instantiate(weaponPrefab, weaponSpawnWaypoint.position, weaponSpawnWaypoint.rotation);
+
+                // Find the weapon's script
+                IWeapon weaponComponent = spawnedWeapon.GetComponent<IWeapon>();
+                // Ensure weapon script was found
+                if (weaponComponent != null)
+                {
+                    // Assign the weapon a level
+                    AssignWeaponLevel(weaponComponent);
+                    Debug.Log("WeaponSpawner: Spawned a level " + spawnedWeaponLevel + " " + spawnedWeapon.name + ".");
+                }
+                else
+                {
+                    Debug.LogWarning("WeaponSpawner: Selected weapon is not part of the IWeapon interface!");
+                }
             }
             else
             {
-                Debug.LogWarning("WeaponSpawner: Failed to properly spawn weapon");
+                Debug.LogWarning("WeaponSpawner: Failed to properly spawn weapon!");
             }
         }
         else
         {
-            Debug.LogWarning("WeaponSpawner: Missing WeaponSpawnWaypoint");
+            Debug.LogWarning("WeaponSpawner: Missing WeaponSpawnWaypoint!");
         }
     }
 
@@ -94,6 +153,75 @@ public class WeaponSpawner : MonoBehaviour
         int index = Random.Range(0, pool.Count);
         // Return the selected weapon
         return pool[index];
-            
+    }
+
+    // Assigns a weapon a random level from within a range
+    private void AssignWeaponLevel(IWeapon weapon)
+    {
+        // Assign the maximum possible weapon level, which is the same as the player's level
+        if (maxWeaponLevel < minLevel)
+        {
+            maxWeaponLevel = minLevel;
+        }
+
+        switch (mode)
+        {
+            // FixedPL: Spawns a weapon at the player's current level. Intended mostly for testing purposes
+            case SpawnMode.FixedPL:
+                // Set the weapon's level to the player's level
+                weapon.level = maxWeaponLevel;
+                spawnedWeaponLevel = maxWeaponLevel;
+                break;
+            // Random: Spawns a weapon at a random level between the set floor and the player's current level. If resulting level would be less than 1, weapon level is set to 1
+            case SpawnMode.Random:
+                int range = maxWeaponLevel - minLevel + 1;
+                List<int> levels = new List<int>();
+                List<float> weights = new List<float>();
+                int selectedLevel = 0;
+
+                // Determine the weights for each potential level
+                for (int level = minLevel; level <= maxWeaponLevel; level++)
+                {
+                    // Add the level to the levels list
+                    levels.Add(level);
+                    // Calculate the weight of the level
+                    float weight = Mathf.Pow(level - minLevel + 1, 2);
+                    // Add the weight to the weights list in the same position as the corresponding level in the levels list
+                    weights.Add(weight);
+                }
+
+                // Calculate the total weight
+                float totalWeight = 0f;
+                foreach (var w in weights)
+                {
+                    totalWeight += w;
+                }
+
+                // Choose a random float between 0 and the total weight
+                float randomWeight = Random.Range(0f, totalWeight);
+
+                // Find which level corresponds to the selected weight
+                float cumulative = 0f;
+                for (int curLevel = 0; curLevel  < weights.Count; curLevel++)
+                {
+                    // Add the weight of curLevel to cumulative
+                    cumulative += weights[curLevel];
+                    // If the random weight is less than the current cumulative weight...
+                    if (randomWeight < cumulative)
+                    {
+                        // Set the selected level to the current level in the loop
+                        selectedLevel = levels[curLevel];
+                        // Set the weapon's level to the selected level
+                        weapon.level = selectedLevel;
+                        spawnedWeaponLevel = selectedLevel;
+                        // Break out of the loop
+                        return;
+                    }
+                }
+                // As a failsafe set weapon levels to 0 (should never hapepn)
+                weapon.level = 0;
+                spawnedWeaponLevel = 0;
+                break;
+        }
     }
 }
