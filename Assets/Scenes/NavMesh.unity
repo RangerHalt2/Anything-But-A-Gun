@@ -119,6 +119,54 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &191349178
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 191349180}
+  - component: {fileID: 191349179}
+  m_Layer: 0
+  m_Name: MapGenerator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &191349179
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 191349178}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a036f2ac66f62c445bf3a3cc5c5fa17f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MapGenerator
+  cellPrefab: {fileID: 6458938510258598639, guid: bc526e42dfcf3e04db40b0f48a62a268, type: 3}
+  item: {fileID: 7482667652216324306, guid: e777d69edb8e4924e9b984bdb3ea42c0, type: 3}
+  shop: {fileID: 3625043607559282579, guid: 4621e23dac450b841a5eaaa8cd0cecce, type: 3}
+  boss: {fileID: -2413806693520163455, guid: 6227fc6dd524c4e49b2be832e0c1a7a9, type: 3}
+--- !u!4 &191349180
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 191349178}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &286414177
 GameObject:
   m_ObjectHideFlags: 0
@@ -302,9 +350,8 @@ MonoBehaviour:
   whatIsPlayer:
     serializedVersion: 2
     m_Bits: 8
-  walkPoint: {x: 0, y: 0, z: 0}
-  walkPointSet: 0
-  walkPointRange: 10
+  patrolRange: 10
+  patrolWaitTime: 2
   timeBetweenAttacks: 2.5
   alreadyAttacked: 0
   enemyBulletPrefab: {fileID: 0}
@@ -314,6 +361,8 @@ MonoBehaviour:
   attackRange: 10
   playerInSightRange: 0
   playerInAttackRange: 0
+  detectionSprite: {fileID: 0}
+  detectionDisplayTime: 1
 --- !u!1 &997719866
 GameObject:
   m_ObjectHideFlags: 0
@@ -936,3 +985,4 @@ SceneRoots:
   - {fileID: 1620395420}
   - {fileID: 286414182}
   - {fileID: 1592971504}
+  - {fileID: 191349180}
