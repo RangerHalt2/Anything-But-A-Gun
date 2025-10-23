@@ -6,7 +6,7 @@ public class NuggieSpawner : MonoBehaviour
 
     void OnTriggerEnter(Collider _other)
     {
-        GameObject nuggieGameObject = Instantiate(nuggiePrefab, transform.position, transform.rotation, null);
-        Destroy(gameObject);
+            GameObject nuggieGameObject = Instantiate(nuggiePrefab, transform.position, transform.rotation, null);
+            Destroy(gameObject);
     }
 }

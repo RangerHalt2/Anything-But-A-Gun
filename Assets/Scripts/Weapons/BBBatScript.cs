@@ -4,17 +4,11 @@ using System.Collections;
 public class BBBatScript : MonoBehaviour, IWeapon
 {
     [SerializeField] private int health = 10; //Health of the melee weapon
-
     [SerializeField] private int teamID;
-
     [SerializeField] private float damage = 15;
-
     private bool striking = false;
-
     private Health enemyHealth;
-
     private AmmoManager ammoManager;
-
     [SerializeField] private GameObject whackEffect;
 
     [Tooltip("This is a sort of back-end buffer time to how frequently the player can hit the enemy with the baseball bat")]
@@ -37,25 +31,7 @@ public class BBBatScript : MonoBehaviour, IWeapon
 
     void OnTriggerStay(Collider _other) //Detect if an enemy is near
     {
-        Debug.Log("Something entered the trigger");
         enemyHealth = _other.GetComponentInParent<Health>();
-
-        if (enemyHealth == null)
-        {
-            Debug.Log("No Health Script" + _other.gameObject.name);
-            //return;
-        }
-        else
-        {
-            if (enemyHealth.teamID == teamID)
-            {
-                Debug.Log("Viewing Player");
-            }
-            if(enemyHealth.teamID == 1)
-            {
-                Debug.Log("Viewing Enemy");
-            }
-        }
 
             if (enemyHealth != null && enemyHealth.teamID != teamID && striking && attackTimer <= 0 && ammoManager.GetCurrentAmmo() > 0) // If it's an enemy, the bat has health, and the player presses shoot, attack the enemy
         {

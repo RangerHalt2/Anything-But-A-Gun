@@ -1,14 +1,17 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 public class CameraWeaponScript : MonoBehaviour, IWeapon
 {
     [SerializeField] private float fireRate = 0.25f;
     [SerializeField] private AmmoManager ammoManager;
-    [SerializeField] private GameObject projectilePrefab;
-    [SerializeField] private Transform projectileSpawnPoint;
     private float lastFired = Mathf.NegativeInfinity;
 
-    public void Shoot()
+    [SerializeField] private GameObject enemyCopy; //The copy for the enemy
+
+    private List<GameObject> enemiesInRange = new List<GameObject>();
+
+    public void Shoot() //Haha, because camera?
     {
         // If enough time has passed since the last round was fired
         if ((Time.timeSinceLevelLoad - lastFired) > fireRate)
@@ -21,10 +24,7 @@ public class CameraWeaponScript : MonoBehaviour, IWeapon
                 // If the weapon is not reloading
                 if (!ammoManager.IsReloading())
                 {
-                    if (projectilePrefab != null)
-                    {
-                        SpawnProjectile();
-                    }
+                        SnapCamera();
                     // Update lastFired
                     lastFired = Time.timeSinceLevelLoad;
                 }
@@ -42,8 +42,34 @@ public class CameraWeaponScript : MonoBehaviour, IWeapon
         }
     }
 
-    void SpawnProjectile()
+    //These next 2 just keep track of the enemy's presence in the trigger range
+
+    private void OnTriggerEnter(Collider _other) 
     {
-        //Make this camera based? Or AOE?
+        if (_other.gameObject.CompareTag("Body")) 
+        {
+            enemiesInRange.Add(_other.gameObject);
+            Debug.Log("Found enemy!!");
+        }
+    }
+
+    private void OnTriggerExit(Collider _other)
+    {
+        if (_other.gameObject.CompareTag("Body"))
+        {
+            enemiesInRange.Remove(_other.gameObject);
+        }
+    }
+
+    private void SnapCamera()
+    {
+        foreach (GameObject enemy in enemiesInRange) //Create a snapshot of every enemy in range
+        {
+            GameObject target = enemy.transform.parent.gameObject;
+            GameObject snapshot = Instantiate(enemyCopy, target.transform.position, target.transform.rotation, null);
+            snapshot.SetActive(false);
+            snapshot.GetComponent<SnapshotBehaviorScript>().copyOf = target;
+            snapshot.SetActive(true);
+        }
     }
 }

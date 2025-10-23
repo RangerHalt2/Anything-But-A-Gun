@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-
+    #region Variables
     private CharacterController characterController;
 
     [SerializeField] private float movementSpeed = 10f;
@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private float jumpForce = 5f;
     [SerializeField] private float gravity = -30f;
+    [SerializeField] private float terminalVelocity = -60f;
 
     private WeaponHandler weaponHandler;
     private InputManager inputs;
@@ -22,7 +23,7 @@ public class PlayerController : MonoBehaviour
     private WinEvent winEvent;
 
     private float rotationY;
-    private float verticalForce;
+    private float verticalForce = 0;
 
     public static PlayerController Instance;
 
@@ -38,7 +39,11 @@ public class PlayerController : MonoBehaviour
     public delegate void OnDashChangedDelegate();
     [HideInInspector] public OnDashChangedDelegate onDashChangedCallback;
     private bool canDash = true;
+    #endregion
 
+    #region Getters/Setters
+    public CharacterController GetCharacterController() { return characterController; }
+    #endregion
 
     void Awake() 
     {
@@ -66,6 +71,8 @@ public class PlayerController : MonoBehaviour
         winEvent = GameObject.FindAnyObjectByType<WinEvent>();
 
         Dashes = maxDashLimit;
+
+        if (terminalVelocity > 0) terminalVelocity = -terminalVelocity; //Just makes it negative
     }
 
     private void Move(Vector2 MovementVector)
@@ -76,6 +83,12 @@ public class PlayerController : MonoBehaviour
         characterController.Move(move);
 
         verticalForce = verticalForce + gravity * Time.deltaTime;
+        verticalForce = Mathf.Clamp(verticalForce, terminalVelocity, -terminalVelocity);
+
+        if (characterController.isGrounded) verticalForce = 0f;
+
+        //Debug.Log("Vertical Force: " +  verticalForce);
+
         characterController.Move(new Vector3(0, verticalForce, 0) * Time.deltaTime);
     }
 

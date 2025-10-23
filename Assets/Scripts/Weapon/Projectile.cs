@@ -20,7 +20,7 @@ public class Projectile : MonoBehaviour
     [Tooltip("The teamID of the Projectile")]
     [SerializeField] private float teamID;
     [Tooltip("The amount of damage dealt to a target")]
-    [SerializeField] public float damage;
+    [SerializeField] public float damage; 
 
     [Header("Special Properties")]
     [Tooltip("Determines whether the projectile is able to pierce through, and deal damage, to multiple objects.")]
@@ -31,6 +31,10 @@ public class Projectile : MonoBehaviour
     [SerializeField] private int maxBounces = 0;
     // How many times the projectile has bounced
     private int currentBounces = 0;
+
+    //LB: Adding a cooldown on how often the ball can bounce, just by a fraction of a second
+    private float bounceCooldown = 0.2f;
+    private float bounceTimer = 0;
     
     [Tooltip("Determines whether the projectile will be effected by gravity.")]
     [SerializeField] private bool bulletDrop;
@@ -53,6 +57,7 @@ public class Projectile : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         // Turn off default gravity since we'll be using a custom one
         rb.useGravity = false;
+        rb.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
 
         // Check if Rigidbody is present
         if (rb != null)
@@ -72,7 +77,8 @@ public class Projectile : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        if (bounceTimer > 0)
+            bounceTimer -= Time.deltaTime;
     }
 
     void FixedUpdate()
@@ -94,21 +100,38 @@ public class Projectile : MonoBehaviour
         Destroy(gameObject);
     }
 
-    // Collision Detection
-    void OnTriggerEnter(Collider collider)
+    private void OnCollisionEnter(Collision collision)
     {
-        // Attempt to reference the health script on the collided object
+        ContactPoint contact = collision.contacts[0];
+        HandleCollision(collision.collider, contact.point, contact.normal);
+
+        // Handle ricochet only on collision with walls and if ricochet is enabled
+        if (collision.gameObject.CompareTag("Wall") && wallBehavior == WallBehavior.Ricochet)
+        {
+            SimulateRicochet(collision);
+        }
+    }
+
+    // Collision Detection
+    void OnTriggerEnter(Collider other)
+    {
+        HandleCollision(other, other.ClosestPoint(transform.position), Vector3.zero);
+    }
+
+    private void HandleCollision(Collider collider, Vector3 hitPoint, Vector3 hitNormal)
+    {
+        // Access hit object's health script
         Health health = collider.gameObject.GetComponentInParent<Health>();
 
-        // If the object has a health script
+        // If health script is found...
         if (health != null)
         {
-            // If the teamID of the object is different than the teamID of the projectile
+            // If team ID is different...
             if (health.teamID != teamID)
             {
-                // Deal damage to targets health equal to projectile's damage
+                // Deal damage
                 health.TakeDamage(damage);
-                // If the projectile cannot pierce...
+                // If projectile is not piercing...
                 if (!piercing)
                 {
                     // Destroy the projectile
@@ -117,53 +140,56 @@ public class Projectile : MonoBehaviour
             }
         }
 
-        // If the projectile collides with a wall...
-        if (collider.gameObject.CompareTag("Wall"))
+        // Only destroy on impact if wall behavior is Impact 
+        if (collider.gameObject.CompareTag("Wall") && wallBehavior == WallBehavior.Impact)
         {
-            switch (wallBehavior)
-            {
-                // Impact
-                case WallBehavior.Impact:
-                    // Destroy Projectile
-                    Destroy(gameObject);
-                    break;
-                // Ricochet
-                case WallBehavior.Ricochet:
-                    SimulateRicochet(collider);
-                    break;
-                // Default Case, should never be called
-                default:
-                    break;
-            }
+            Destroy(gameObject);
         }
     }
 
     #region Special Properties
-    private void SimulateRicochet(Collider collider)
+   private void SimulateRicochet(Collision collision)
     {
-        // If the current bounces are greater than or equal to the maximum amount of bounces...
+        if (bounceTimer > 0) return;
+
+        // If the projectile has reached its max bounces...
         if (currentBounces >= maxBounces)
         {
-            // Destroy the projectile
+            // Destroy it
             Destroy(gameObject);
             return;
         }
-        // Do a raycast from the current postion backwards to try and get the normal
-        RaycastHit hit;
-        Vector3 direction = rb.linearVelocity.normalized;
 
-        if(Physics.Raycast(transform.position, direction, out hit, 1.0f))
+        Vector3 normal = collision.contacts[0].normal;
+        Vector3 incomingVelocity = rb.linearVelocity;
+
+        // Reflect velocity using collision normal
+        Vector3 reflectedVelocity = Vector3.Reflect(incomingVelocity, normal);
+
+        // Lose energy on bounce
+        // Keep this value at 1 to have no energy lost
+        float energyLossFactor = 1f;
+        reflectedVelocity *= energyLossFactor;
+
+        // Ensure minimum velocity to avoid stopping completely
+        float minVelocityMagnitude = 1f;
+        if (reflectedVelocity.magnitude < minVelocityMagnitude)
         {
-            Vector3 normal = hit.normal;
-            Vector3 reflectedDirection = Vector3.Reflect(direction, normal);
-
-            // Update Projectile velocity
-            rb.linearVelocity = reflectedDirection * speed;
-            // Rotate projectile to face the new direction
-            transform.forward = reflectedDirection;
-            // Increment currentBounces
-            currentBounces++;
+            reflectedVelocity = reflectedVelocity.normalized * minVelocityMagnitude;
         }
+
+        // Set the velocity to the reflected velocity
+        rb.linearVelocity = reflectedVelocity;
+
+        if (reflectedVelocity != Vector3.zero)
+        {
+            transform.forward = reflectedVelocity.normalized;
+        }
+
+        // Increment current bounces
+        currentBounces++;
+        // Reset the bounce timer
+        bounceTimer = bounceCooldown;
     }
     #endregion
 }
