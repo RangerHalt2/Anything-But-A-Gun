@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class WinEvent : MonoBehaviour
 {
@@ -9,13 +10,7 @@ public class WinEvent : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player") && !hasWon)
-        {
-            hasWon = true;
-            winScreen.SetActive(true);
-            inGameUI.SetActive(false);
-            Cursor.lockState = CursorLockMode.None;
-        }
+        SceneManager.LoadScene("second floor");
     }
 
 }
