@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.AI;
 
-public class NuggieBehaviorScript : MonoBehaviour
+public class NuggieBehaviorScript : MonoBehaviour, IWeaponLevel
 {
     [SerializeField] private float nuggieTimer;
 
@@ -24,13 +24,23 @@ public class NuggieBehaviorScript : MonoBehaviour
 
     [Header("Attack Seetings")]
     [SerializeField] private Transform attackPoint;
-    [SerializeField] private float nuggieDamage = 5;
+    [SerializeField] private float nuggieBaseDamage = 5;
+    [SerializeField] private float nuggieLevelDamage;
+    private float cummulativeDamage;
 
     [Header("Sight and Attack Range")]
     [SerializeField] private float sightRange = 10f;
     [SerializeField] private float attackRange = 10f;
     private bool targetInSightRange;
     private bool targetInAttackRange;
+
+    private WeaponLevel currentWeaponLevel;
+
+    public void SetWeaponLevelReference(WeaponLevel weaponLevel)
+    {
+        currentWeaponLevel = weaponLevel;
+        if (currentWeaponLevel != null) UpdateLevelDamage();
+    }
 
     private void Awake()
     {
@@ -149,7 +159,7 @@ public class NuggieBehaviorScript : MonoBehaviour
     {
         if (target != null)
         {
-            target.gameObject.GetComponent<Health>().TakeDamage(nuggieDamage);
+            target.gameObject.GetComponent<Health>().TakeDamage(nuggieBaseDamage);
         }
     }
 
@@ -168,5 +178,11 @@ public class NuggieBehaviorScript : MonoBehaviour
     private void ResetAttack()
     {
         alreadyAttacked = false;
+    }
+
+    //LB: Updates the weapon's damage for what damage it should do.
+    public void UpdateLevelDamage()
+    {
+        cummulativeDamage = nuggieBaseDamage + (nuggieLevelDamage * (currentWeaponLevel.Level - 1));
     }
 }

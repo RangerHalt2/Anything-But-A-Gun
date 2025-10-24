@@ -5,7 +5,7 @@ using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class Projectile : MonoBehaviour
+public class Projectile : MonoBehaviour, IWeaponLevel
 {
     #region Variables
     [Header("Speed Settings")]
@@ -20,7 +20,11 @@ public class Projectile : MonoBehaviour
     [Tooltip("The teamID of the Projectile")]
     [SerializeField] private float teamID;
     [Tooltip("The amount of damage dealt to a target")]
-    [SerializeField] public float damage; 
+    [SerializeField] public float baseDamage;
+    [Tooltip("Damage to be added per level to the projectile")]
+    [SerializeField] private float levelDamage;
+    private float cummulativeDamage;
+    private WeaponLevel currentWeaponLevel;
 
     [Header("Special Properties")]
     [Tooltip("Determines whether the projectile is able to pierce through, and deal damage, to multiple objects.")]
@@ -40,6 +44,11 @@ public class Projectile : MonoBehaviour
     [SerializeField] private bool bulletDrop;
     [Tooltip("Multiplier for gravity when bullet drop is enabled.")]
     [SerializeField] private float gravityMultiplier = 1.0f;
+
+    public void SetWeaponLevelReference(WeaponLevel weaponLevel)
+    {
+        currentWeaponLevel = weaponLevel;
+    }
 
     // Referenece to the Projectile's's Rigidbody
     private Rigidbody rb;
@@ -129,8 +138,12 @@ public class Projectile : MonoBehaviour
             // If team ID is different...
             if (health.teamID != teamID)
             {
+                if (currentWeaponLevel != null)
+                {
+                    UpdateLevelDamage();
+                }
                 // Deal damage
-                health.TakeDamage(damage);
+                health.TakeDamage(cummulativeDamage);
                 // If projectile is not piercing...
                 if (!piercing)
                 {
@@ -145,6 +158,12 @@ public class Projectile : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+    //LB: Updates the weapon's damage for what damage it should do.
+    public void UpdateLevelDamage()
+    {
+        cummulativeDamage = baseDamage + (levelDamage*(currentWeaponLevel.Level-1));
     }
 
     #region Special Properties

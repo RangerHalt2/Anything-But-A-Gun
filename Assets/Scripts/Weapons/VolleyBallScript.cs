@@ -14,12 +14,15 @@ public class VolleyBallScript : MonoBehaviour, IWeapon
     [Tooltip("Where the projectile should spawn from")]
     [SerializeField] private Transform projectileSpawnPoint;
 
+    private WeaponLevel weaponLevelRef;
+
     private float timer = 0;
 
     private void Start()
     {
         ammoManager = GetComponent<AmmoManager>();
         characterController = GameObject.FindAnyObjectByType<CharacterController>(); //There should only be one Character Controller but if there are more than that this will need to change
+        weaponLevelRef = GetComponent<WeaponLevel>();
     }
 
     //If the player is not reloading and this function is called it should check if the character controller is grounded and spawn the correct projectile
@@ -61,6 +64,9 @@ public class VolleyBallScript : MonoBehaviour, IWeapon
 
         Vector3 rotationEulerAngles = projectile.transform.rotation.eulerAngles;
         projectile.transform.rotation = Quaternion.Euler(rotationEulerAngles);
+
+        Projectile proj = projectile.GetComponent<Projectile>();
+        proj.SetWeaponLevelReference(weaponLevelRef);
     }
 
     //Update Timers 

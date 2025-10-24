@@ -1,8 +1,14 @@
+//Author and Contributor: Logan Baysinger
+//Purpose: Handles the level mechanics on the weapon and is used by other scripts to read the level.
+
+//Note: This code assumes that the highest level a weapon can be IS the player's level at the time. 
+//      So this also assumes that the player's max level dictactes it's max level implictly.
+
 using UnityEngine;
 
 public class WeaponLevel : MonoBehaviour
 {
-    private Player_Level plyrLvl;
+    private Player_Level playerLvl;
 
     [HideInInspector]
     public int Level { get; private set; }
@@ -13,7 +19,7 @@ public class WeaponLevel : MonoBehaviour
     {
         bool ret = true;
         //If the weapon level would be greater than the player's level
-        if (Level+1 > plyrLvl.Level)
+        if (Level+1 > playerLvl.Level)
         {
             ret = false;
             return ret;
@@ -25,7 +31,7 @@ public class WeaponLevel : MonoBehaviour
 
     private void Start()
     {
-        plyrLvl = GetComponent<Player_Level>();
+        playerLvl = GameObject.FindAnyObjectByType<Player_Level>();
     }
 
 }

@@ -4,15 +4,20 @@ using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class Hitscan : MonoBehaviour
+public class Hitscan : MonoBehaviour, IWeaponLevel
 {
     #region Variable
 
     [Header("Damage Settings")]
     [Tooltip("The teamID of the Projectile")]
     [SerializeField] private float teamID;
-    [Tooltip("The amount of damage dealt to a target")]
-    [SerializeField] private float damage;
+    [Tooltip("The amount of damage that the weapon begins with")]
+    [SerializeField] private float baseDamage;
+    [Tooltip("How much damage is added per level")]
+    [SerializeField] private float levelDamage;
+    private float cummulativeDamage;
+    private WeaponLevel currentWeaponLevel;
+
 
     [Header("Spread & Range Settings")]
     [Tooltip("Determines where the raycast will be shot from")]
@@ -45,6 +50,8 @@ public class Hitscan : MonoBehaviour
     void Start()
     {
         bulletSpawnPoint = GameObject.FindAnyObjectByType<Camera>().transform;
+        currentWeaponLevel = GetComponent<WeaponLevel>();
+        UpdateLevelDamage(); //set the initial damage at the level the weapon spawns at.
     }
 
     // Update is called once per frame
@@ -101,7 +108,7 @@ public class Hitscan : MonoBehaviour
                 // If the target object has a health component and the teamID is different than the one assigned to the weapon
                 if (targetHealth != null && targetHealth.teamID != this.teamID)
                 {
-                    float appliedDamage = damage;
+                    float appliedDamage = cummulativeDamage;
 
                     // MG - Compares collider with Tag Head to deal double dmg
                     if (hit.collider.CompareTag("Head"))
@@ -112,7 +119,7 @@ public class Hitscan : MonoBehaviour
                     // MG - Compares collider with Tag Body to deal normal dmg
                     if (hit.collider.CompareTag("Body"))
                     {
-                        appliedDamage = damage;
+                        appliedDamage = cummulativeDamage;
                         Debug.Log("Hitscan: Body shot.");
                     }
                     // Deal the weapon's damage to the target
@@ -172,4 +179,22 @@ public class Hitscan : MonoBehaviour
 
         Destroy(trail.gameObject, trail.time);
     }
+
+    //Calculates the cummulativeDamage that the weapon should do, this function should be called on the weapon levelling up.
+    //Simple floor + (lvl * weaponLvlDamage)
+    public void UpdateLevelDamage()
+    {
+        cummulativeDamage = baseDamage + (levelDamage * (currentWeaponLevel.Level-1));
+    }
+    
+    //Attempts to level the weapon up, if the weapon levels up the damage needs to be recalculated.
+    //This function should be called by the shops or anything that upgrades the weapons level.
+    //Similarly, this function also returns the true or false if it was able to upgrade.
+    public bool UpgradeWeapon()
+    {
+        bool ret = currentWeaponLevel.LevelUpWeapon();
+        if (ret) UpdateLevelDamage();
+        return ret;
+    }
+
 }

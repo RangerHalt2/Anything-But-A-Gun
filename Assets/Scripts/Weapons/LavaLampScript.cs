@@ -10,6 +10,13 @@ public class LavaLampScript : MonoBehaviour, IWeapon
     [SerializeField] private Transform projectileSpawnPoint;
     private float lastFired = Mathf.NegativeInfinity;
 
+    private WeaponLevel weaponLevelRef;
+
+    private void Start()
+    {
+        weaponLevelRef = GetComponent<WeaponLevel>();
+    }
+
     public void Shoot()
     {
         // If enough time has passed since the last round was fired
@@ -66,6 +73,11 @@ public class LavaLampScript : MonoBehaviour, IWeapon
                 projectileSpawnPoint = GameObject.Find("ProjectileSpawnPoint").transform;
 
             }
+            Projectile proj = projectileGameObject.GetComponent<Projectile>();
+            proj.SetWeaponLevelReference(weaponLevelRef);
+
+            LavaProjectileScript lavaProj = projectileGameObject.GetComponent<LavaProjectileScript>();
+            lavaProj.SetWeaponLevelReference(weaponLevelRef);
         }
     }
 }

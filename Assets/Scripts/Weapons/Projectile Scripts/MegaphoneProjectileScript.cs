@@ -29,7 +29,7 @@ public class MegaphoneProjectileScript : MonoBehaviour
 
             transform.localScale = newScale;
 
-            projectile.damage = maxDamage / 1 * 1 / (transform.localScale.x / initialScale.x);
+            projectile.baseDamage = (maxDamage / 1) * (1 / (transform.localScale.x / initialScale.x));
 
             // Stop growing when target scale is reached
             if (transform.localScale.x >= initialScale.x * targetScale)

@@ -10,6 +10,13 @@ public class MegaphonScript : MonoBehaviour, IWeapon
     [SerializeField] private Transform projectileSpawnPoint;
     private float lastFired = Mathf.NegativeInfinity;
 
+    private WeaponLevel weaponLevelRef;
+
+    private void Start()
+    {
+        weaponLevelRef = GetComponent<WeaponLevel>();
+    }
+
     public void Shoot()
     {
         // If enough time has passed since the last round was fired
@@ -51,6 +58,9 @@ public class MegaphonScript : MonoBehaviour, IWeapon
         {
             // Create the projectile
             GameObject projectileGameObject = Instantiate(projectilePrefab, projectileSpawnPoint.transform.position, transform.rotation, null);
+
+            Projectile proj = projectileGameObject.GetComponent<Projectile>();
+            proj.SetWeaponLevelReference(weaponLevelRef);
 
             /*
             // Account for spread

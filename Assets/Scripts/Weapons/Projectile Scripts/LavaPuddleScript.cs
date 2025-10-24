@@ -1,9 +1,19 @@
 using UnityEngine;
 
-public class LavaPuddleScript : MonoBehaviour
+public class LavaPuddleScript : MonoBehaviour, IWeaponLevel
 {
     [SerializeField] private float puddleTimer;
-    [SerializeField] private float damage;
+    [SerializeField] private float baseDamage;
+    [SerializeField] private float levelDamage;
+    private float cummulativeDamage;
+
+    private WeaponLevel currentWeaponLevel;
+
+    public void SetWeaponLevelReference(WeaponLevel weaponLevel)
+    {
+        currentWeaponLevel = weaponLevel;
+        if (currentWeaponLevel != null) UpdateLevelDamage();
+    }
 
     // Update is called once per frame
     void Update()
@@ -25,7 +35,13 @@ public class LavaPuddleScript : MonoBehaviour
         if (health != null)
         {
             // Deal damage to targets health equal to projectile's damage
-            health.TakeDamage(damage);
+            health.TakeDamage(cummulativeDamage);
         }
+    }
+
+    //LB: Updates the weapon's damage for what damage it should do.
+    public void UpdateLevelDamage()
+    {
+        cummulativeDamage = baseDamage + (levelDamage * (currentWeaponLevel.Level - 1));
     }
 }

@@ -1,16 +1,19 @@
 using UnityEngine;
 using System.Collections;
 
-public class BBBatScript : MonoBehaviour, IWeapon
+public class BBBatScript : MonoBehaviour, IWeapon, IWeaponLevel
 {
     [SerializeField] public int level {get; set;}
 
     [SerializeField] private int health = 10; //Health of the melee weapon
     [SerializeField] private int teamID;
-    [SerializeField] private float damage = 15;
+    [SerializeField] private float baseDamage = 15;
+    [SerializeField] private float levelDamage;
+    private float cummulativeDamage;
     private bool striking = false;
     private Health enemyHealth;
     private AmmoManager ammoManager;
+    private WeaponLevel currentWeaponLevel;
     [SerializeField] private GameObject whackEffect;
 
     [Tooltip("This is a sort of back-end buffer time to how frequently the player can hit the enemy with the baseball bat")]
@@ -20,6 +23,9 @@ public class BBBatScript : MonoBehaviour, IWeapon
     private void Start()
     {
         ammoManager = GetComponent<AmmoManager>();
+        currentWeaponLevel = GetComponent<WeaponLevel>();
+        if(currentWeaponLevel != null)
+            UpdateLevelDamage();
     }
 
     void Update()
@@ -38,7 +44,8 @@ public class BBBatScript : MonoBehaviour, IWeapon
             if (enemyHealth != null && enemyHealth.teamID != teamID && striking && attackTimer <= 0 && ammoManager.GetCurrentAmmo() > 0) // If it's an enemy, the bat has health, and the player presses shoot, attack the enemy
         {
             //_other.gameObject.GetComponent<EnemyController>().LoseLife(); Make enemy/damageable lose life
-            enemyHealth.TakeDamage(damage);
+            UpdateLevelDamage(); //Confirm the level damage before DOING damage.
+            enemyHealth.TakeDamage(cummulativeDamage);
             health--;
             ammoManager.Fire();
             if(whackEffect != null)
@@ -68,4 +75,10 @@ public class BBBatScript : MonoBehaviour, IWeapon
     public void Reload()
     {
     }
+
+    public void UpdateLevelDamage()
+    {
+        cummulativeDamage = baseDamage + (levelDamage * (currentWeaponLevel.Level - 1));
+    }
+
 }

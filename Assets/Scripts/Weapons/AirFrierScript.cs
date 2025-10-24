@@ -10,6 +10,8 @@ public class AirFrierScript : MonoBehaviour, IWeapon
     [SerializeField] private Transform projectileSpawnPoint;
     private float lastFired = Mathf.NegativeInfinity;
 
+    private WeaponLevel weaponLevelRef;
+
     [SerializeField] private float timeOnBox = 5f; //Time to cook the nuggets
     private float cookTime = 0f; //Current time the nugget has been cooking
     private float cookSpeed = 1f; //Temperature of the oven, ha ha
@@ -20,6 +22,7 @@ public class AirFrierScript : MonoBehaviour, IWeapon
     private void Awake()
     {
         cookTime = 0f;
+        weaponLevelRef = GetComponent<WeaponLevel>();
     }
 
     private void Update() 
@@ -99,6 +102,12 @@ public class AirFrierScript : MonoBehaviour, IWeapon
                 projectileSpawnPoint = GameObject.Find("ProjectileSpawnPoint").transform;
 
             }
+
+            Projectile proj = projectileGameObject.GetComponent<Projectile>();
+            proj.SetWeaponLevelReference(weaponLevelRef);
+
+            NuggieSpawner ns = projectileGameObject.GetComponent<NuggieSpawner>();
+            ns.SetWeaponLevelReference(weaponLevelRef);
         }
     }
 }
