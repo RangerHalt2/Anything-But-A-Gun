@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: -5568385785312581024}
   - component: {fileID: -3169336971884273044}
   - component: {fileID: 7794552217210630194}
+  - component: {fileID: 1192011955155942802}
   m_Layer: 0
   m_Name: VolleyBallWeapon
   m_TagString: Untagged
@@ -111,7 +112,7 @@ SphereCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 1
   m_ProvidesContacts: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
@@ -167,6 +168,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WeaponCollectScript
   collected: 0
+--- !u!114 &1192011955155942802
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 863773264514965766}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4892176ad31b13847abf3f92f0005b5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WeaponLevel
 --- !u!1 &5441623943686300037
 GameObject:
   m_ObjectHideFlags: 0

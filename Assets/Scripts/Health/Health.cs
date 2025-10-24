@@ -34,6 +34,9 @@ public class Health : MonoBehaviour
 
     [Tooltip("Toggle this if this is on the player")]
     [SerializeField] private bool isPlayer;
+    [Tooltip("How much EXP is given to the player on this NPC's death? Doesn't matter if it's the player")]
+    [SerializeField] private float EXPDrop;
+    private Player_Level playerLevel;
 
     [SerializeField] private GameObject gameOverCanvas;
     [SerializeField] private GameObject inGameCanvas;
@@ -49,6 +52,7 @@ public class Health : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        playerLevel = GameObject.FindAnyObjectByType<Player_Level>();
         isDead = false;
         // Automatically kill object if it has 0 or less health
         if (currentHealth <= 0)
@@ -134,8 +138,11 @@ public class Health : MonoBehaviour
 
         // Destroy the game object
         Debug.Log(gameObject.name + " has died.");
-        if(!isPlayer)
+        if (!isPlayer)
+        {
+            playerLevel.AddEXP(EXPDrop);
             Destroy(gameObject);
+        }
         else if (isPlayer)
         {
             isDead = true;

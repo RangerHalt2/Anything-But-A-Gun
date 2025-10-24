@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 9216862354450597352}
   - component: {fileID: -3932295107658604157}
   - component: {fileID: 973126755458432689}
+  - component: {fileID: -6749029174857571121}
   m_Layer: 0
   m_Name: Baseball Bat
   m_TagString: Untagged
@@ -130,7 +131,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BBBatScript
   health: 25
   teamID: 0
-  damage: 60
+  baseDamage: 15
+  levelDamage: 5
   whackEffect: {fileID: 6015612841358465451, guid: 1d0c6d75c570bbd49bf4edd36fe51c93, type: 3}
   attackCooldownBuffer: 0.8
 --- !u!114 &9216862354450597352
@@ -196,6 +198,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &-6749029174857571121
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2262196305256265501}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4892176ad31b13847abf3f92f0005b5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WeaponLevel
 --- !u!1001 &5123245805822581369
 PrefabInstance:
   m_ObjectHideFlags: 0

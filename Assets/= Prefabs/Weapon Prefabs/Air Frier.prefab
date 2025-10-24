@@ -47,6 +47,7 @@ GameObject:
   - component: {fileID: 1009154439553706555}
   - component: {fileID: -213408061627447092}
   - component: {fileID: 373497531155728522}
+  - component: {fileID: 8983280343220030557}
   m_Layer: 0
   m_Name: Air Frier
   m_TagString: Untagged
@@ -164,8 +165,6 @@ MonoBehaviour:
   projectilePrefab: {fileID: 1506664740527934108, guid: b9920a38b48b53f4982de42a69d7ea85, type: 3}
   projectileSpawnPoint: {fileID: 1039416749780904258}
   timeOnBox: 5
-  cookTime: 0
-  cookSpeed: 1
   coolSpeed: 0.1
 --- !u!114 &1009154439553706555
 MonoBehaviour:
@@ -230,3 +229,15 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &8983280343220030557
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9077750917603778609}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4892176ad31b13847abf3f92f0005b5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WeaponLevel

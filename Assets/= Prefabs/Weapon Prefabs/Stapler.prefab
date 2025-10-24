@@ -46,6 +46,7 @@ GameObject:
   - component: {fileID: -4190929640323173667}
   - component: {fileID: 785455090434947426}
   - component: {fileID: 4591394418674582347}
+  - component: {fileID: 6903462851852635843}
   m_Layer: 0
   m_Name: Stapler
   m_TagString: Untagged
@@ -138,7 +139,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Hitscan
   teamID: 0
-  damage: 25
+  baseDamage: 0
+  levelDamage: 0
   bulletSpawnPoint: {fileID: 519912207177028976}
   addBulletSpread: 0
   bulletSpreadVariance: {x: 0.1, y: 0.1, z: 0.1}
@@ -209,3 +211,15 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.020000003, y: 0.117260516, z: 0.033479203}
   m_Center: {x: 0, y: -0.008312807, z: 0.015006811}
+--- !u!114 &6903462851852635843
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2719607922738401809}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4892176ad31b13847abf3f92f0005b5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WeaponLevel

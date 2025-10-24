@@ -46,6 +46,7 @@ GameObject:
   - component: {fileID: 2150252300496388889}
   - component: {fileID: 1802305520914099029}
   - component: {fileID: 1519371405910464456}
+  - component: {fileID: -6769214916585257692}
   m_Layer: 0
   m_Name: Brush
   m_TagString: Untagged
@@ -162,8 +163,6 @@ MonoBehaviour:
   ammoManager: {fileID: 1802305520914099029}
   projectilePrefab: {fileID: 2858475928119156006, guid: f165c6422bea5914d8f9f24875c41104, type: 3}
   projectileSpawnPoint: {fileID: 2341579381627065503}
-  slashAngleLeft: 15
-  slashAngleRight: -15
 --- !u!114 &1802305520914099029
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -199,3 +198,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65fe7dc33c7c0004089552333126b3b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WeaponCollectScript
+  collected: 0
+--- !u!114 &-6769214916585257692
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3634324867199572480}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4892176ad31b13847abf3f92f0005b5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WeaponLevel
