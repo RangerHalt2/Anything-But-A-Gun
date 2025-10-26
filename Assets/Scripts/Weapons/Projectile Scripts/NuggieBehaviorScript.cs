@@ -59,7 +59,7 @@ public class NuggieBehaviorScript : MonoBehaviour, IWeaponLevel
         {
             target = null;
         }
-
+        Debug.Log(target);
         nuggieTimer -= 1 * Time.deltaTime; //Lifetime of the nuggie
 
         if (nuggieTimer < 0)

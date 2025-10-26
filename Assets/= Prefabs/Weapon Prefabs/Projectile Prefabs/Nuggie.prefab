@@ -44,6 +44,7 @@ GameObject:
   - component: {fileID: 2419229937806603845}
   - component: {fileID: -8911490710267202316}
   - component: {fileID: 2909323677572142072}
+  - component: {fileID: -5367413464848350249}
   m_Layer: 0
   m_Name: Nuggie
   m_TagString: Untagged
@@ -110,7 +111,7 @@ MonoBehaviour:
     m_Bits: 4294967295
   whatIsTarget:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 2048
   walkPointRange: 10
   timeBetweenAttacks: 2.5
   attackPoint: {fileID: 1107406010018794506}
@@ -198,3 +199,30 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!54 &-5367413464848350249
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3436790393776125140}
+  serializedVersion: 5
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
