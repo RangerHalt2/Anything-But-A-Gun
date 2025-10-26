@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 7788148941988491374}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.018000007, y: 0.10500002, z: 2.03}
+  m_LocalPosition: {x: 0.018000007, y: 0.10500002, z: 1.154}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -160,11 +160,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f682b6a85855f14bb06a87fb65ffa6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AirFrierScript
-  fireRate: 0.25
+  fireRate: 0.7
   ammoManager: {fileID: 1009154439553706555}
   projectilePrefab: {fileID: 1506664740527934108, guid: b9920a38b48b53f4982de42a69d7ea85, type: 3}
   projectileSpawnPoint: {fileID: 1039416749780904258}
-  timeOnBox: 5
+  timeOnBox: 15
   coolSpeed: 0.1
 --- !u!114 &1009154439553706555
 MonoBehaviour:
@@ -178,9 +178,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df2d13e84e38fb446a97a180533aba8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AmmoManager
-  reserveAmmo: 20
-  ammoCapacity: 1
-  currentAmmo: 1
+  reserveAmmo: 60
+  ammoCapacity: 4
+  currentAmmo: 4
   ammoConsumption: 1
   reloadTime: 1
   canCancelReload: 0
