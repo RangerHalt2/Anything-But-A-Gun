@@ -6,6 +6,9 @@ public class PlayerController : MonoBehaviour
     #region Variables
     private CharacterController characterController;
 
+    [SerializeField] private Transform headPoint;
+
+    [Header("Base Movement Fields")]
     [SerializeField] private float movementSpeed = 10f;
     [SerializeField] private float sprintMultiplier = 2f;
 
@@ -82,16 +85,16 @@ public class PlayerController : MonoBehaviour
         //Default Base Case
         Vector3 move = transform.forward * MovementVector.y + transform.right * MovementVector.x;
         move = movementSpeed /** (inputs.SprintInput? sprintMultiplier : 1)*/ * Time.deltaTime * move;
-        characterController.Move(move);
 
         verticalForce = verticalForce + gravity * Time.deltaTime;
         verticalForce = Mathf.Clamp(verticalForce, terminalVelocity, -terminalVelocity);
+    
+        move.y = verticalForce * Time.deltaTime;
 
+        characterController.Move(move);
         if (characterController.isGrounded) verticalForce = 0f;
 
-        //Debug.Log("Vertical Force: " +  verticalForce);
-
-        characterController.Move(new Vector3(0, verticalForce, 0) * Time.deltaTime);
+        //Debug.Log("Vertical Force: " + verticalForce);
     }
 
     private void Rotate(Vector2 RotationVector)
@@ -131,15 +134,18 @@ public class PlayerController : MonoBehaviour
         if (playerHealth.isDead || winEvent.hasWon) return;
 
         if (UIManager.instance != null && UIManager.instance.IsPaused) return;
-            
-        
-        Move(inputs.MoveInput);
-        Rotate(inputs.LookInput);
 
-        if(inputs.JumpInput == true && characterController.isGrounded)
+        CheckHeadBump();
+        
+
+        if (inputs.JumpInput == true && characterController.isGrounded)
         {
+            //Debug.Log("Attempting Jump");
             verticalForce = jumpForce; //The Jump itself is handled in the Move() method handling gravity, making use of CharacterController instead of RigidBody
         }
+
+        Move(inputs.MoveInput);
+        Rotate(inputs.LookInput);
 
         if (inputs.FireInput)
         {
@@ -169,6 +175,16 @@ public class PlayerController : MonoBehaviour
         TimerDecrement();
     }
 
+    private void CheckHeadBump()
+    {
+        if (Physics.Raycast(headPoint.position, headPoint.up, 0.1f))
+        {
+            //Debug.Log("Did HIT");
+            if (verticalForce > 0)
+                verticalForce = 0;
+        }
+    }
+
     public int Dashes 
     {
         get { return dashes; }
@@ -191,5 +207,4 @@ public class PlayerController : MonoBehaviour
     {
         
     }
-
 }
