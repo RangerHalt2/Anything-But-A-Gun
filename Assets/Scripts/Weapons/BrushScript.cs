@@ -27,6 +27,7 @@ public class BrushScript : MonoBehaviour, IWeapon
         // If enough time has passed since the last round was fired
         if ((Time.timeSinceLevelLoad - lastFired) > fireRate)
         {
+            Debug.Log("Shooting weapon");
             // If there is an assigned ammo manager, and that ammo manager has at least one round of ammo loaded
             if (ammoManager != null && ammoManager.GetCurrentAmmo() > 0)
             {
@@ -86,8 +87,11 @@ public class BrushScript : MonoBehaviour, IWeapon
                 projectileSpawnPoint = GameObject.Find("ProjectileSpawnPoint").transform;
 
             }
-            Projectile proj = projectileGameObject.GetComponent<Projectile>();
-            proj.SetWeaponLevelReference(weaponLevelRef);
+            Projectile [] projs = projectileGameObject.GetComponentsInChildren<Projectile>();
+            foreach (Projectile proj in projs)
+            {
+                proj.SetWeaponLevelReference(weaponLevelRef);
+            }
         }
     }
 }
