@@ -163,8 +163,8 @@ public class Health : MonoBehaviour
         // If there is a healthBar assigned
         if (healthBar != null)
         {
-            healthBar.SetHealth(currentHealth);
             healthBar.Activate();
+            healthBar.SetHealth(currentHealth);
             healthBarActive = true;
         }
     }

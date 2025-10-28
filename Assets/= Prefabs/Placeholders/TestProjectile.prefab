@@ -12,9 +12,10 @@ GameObject:
   - component: {fileID: 7834988381278974217}
   - component: {fileID: 5039113472887106104}
   - component: {fileID: -4480218045925842740}
+  - component: {fileID: -3630619725355875164}
   - component: {fileID: 1496508787916296602}
   - component: {fileID: 6436263940051997588}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: TestProjectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -107,13 +108,36 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 0
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 1
+  m_Direction: 2
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!136 &-3630619725355875164
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5762768201822907473}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
   m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
-  m_Height: 1
-  m_Direction: 1
+  m_Radius: 0.55
+  m_Height: 1.1
+  m_Direction: 2
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &1496508787916296602
 Rigidbody:
@@ -157,8 +181,10 @@ MonoBehaviour:
   speed: 25
   lifeTime: 2
   teamID: 1
-  damage: 1
-  piercing: 1
+  baseDamage: 10
+  levelDamage: 10
+  piercing: 0
   wallBehavior: 0
+  maxBounces: 0
   bulletDrop: 0
   gravityMultiplier: 1
