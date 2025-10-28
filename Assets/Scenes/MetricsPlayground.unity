@@ -419,6 +419,14 @@ PrefabInstance:
       value: WeaponSpawnerPlaceHolder (1)
       objectReference: {fileID: 0}
     - target: {fileID: 7338413379423430543, guid: a1f0900fd13e2d348bf5568770a6a195, type: 3}
+      propertyPath: isShop
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7338413379423430543, guid: a1f0900fd13e2d348bf5568770a6a195, type: 3}
+      propertyPath: weaponPrice
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7338413379423430543, guid: a1f0900fd13e2d348bf5568770a6a195, type: 3}
       propertyPath: playerLevelOverride
       value: 5
       objectReference: {fileID: 0}
@@ -2195,7 +2203,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.7625001, y: 0.03888574}
   m_AnchorMax: {x: 0.97375, y: 0.15325733}
-  m_AnchoredPosition: {x: 0, y: -7.300049}
+  m_AnchoredPosition: {x: 0, y: -7.299988}
   m_SizeDelta: {x: 31, y: 12}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &994884704
@@ -3160,6 +3168,26 @@ PrefabInstance:
       propertyPath: reloadAction.m_Name
       value: Reload
       objectReference: {fileID: 0}
+    - target: {fileID: 1461595476481832391, guid: db96ae0bd1f6a0844aa72ea910db323b, type: 3}
+      propertyPath: interactAction.m_Name
+      value: Interact
+      objectReference: {fileID: 0}
+    - target: {fileID: 1461595476481832391, guid: db96ae0bd1f6a0844aa72ea910db323b, type: 3}
+      propertyPath: interactAction.m_SingletonActionBindings.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1461595476481832391, guid: db96ae0bd1f6a0844aa72ea910db323b, type: 3}
+      propertyPath: interactAction.m_SingletonActionBindings.Array.data[0].m_Id
+      value: 2f961046-fd77-447f-a91e-9558a8d8b1d5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1461595476481832391, guid: db96ae0bd1f6a0844aa72ea910db323b, type: 3}
+      propertyPath: interactAction.m_SingletonActionBindings.Array.data[0].m_Path
+      value: <Keyboard>/e
+      objectReference: {fileID: 0}
+    - target: {fileID: 1461595476481832391, guid: db96ae0bd1f6a0844aa72ea910db323b, type: 3}
+      propertyPath: interactAction.m_SingletonActionBindings.Array.data[0].m_Action
+      value: Interact
+      objectReference: {fileID: 0}
     - target: {fileID: 4819697221681922954, guid: db96ae0bd1f6a0844aa72ea910db323b, type: 3}
       propertyPath: m_Name
       value: Input Manager
@@ -3964,6 +3992,18 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3398571290749484056, guid: 6e79526cb5b40544c91f9ac79610f37c, type: 3}
+      propertyPath: m_ActionEvents.Array.size
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 3398571290749484056, guid: 6e79526cb5b40544c91f9ac79610f37c, type: 3}
+      propertyPath: m_ActionEvents.Array.data[8].m_ActionId
+      value: 23238557-7f77-4837-8116-8adc0db80ba7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3398571290749484056, guid: 6e79526cb5b40544c91f9ac79610f37c, type: 3}
+      propertyPath: m_ActionEvents.Array.data[8].m_ActionName
+      value: 'Player/Interact[/Keyboard/e]'
+      objectReference: {fileID: 0}
     - target: {fileID: 3488080672531317121, guid: 6e79526cb5b40544c91f9ac79610f37c, type: 3}
       propertyPath: sensitivity
       value: 0.1
@@ -4020,6 +4060,10 @@ PrefabInstance:
       propertyPath: terminalVelocity
       value: -60
       objectReference: {fileID: 0}
+    - target: {fileID: 5808801276267967896, guid: 6e79526cb5b40544c91f9ac79610f37c, type: 3}
+      propertyPath: interactableMask.m_Bits
+      value: 4096
+      objectReference: {fileID: 0}
     - target: {fileID: 6992609722709419847, guid: 6e79526cb5b40544c91f9ac79610f37c, type: 3}
       propertyPath: field of view
       value: 60.000004
@@ -4066,9 +4110,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 3359971604915953116, guid: 6e79526cb5b40544c91f9ac79610f37c, type: 3}
+    - {fileID: 796835866957253673, guid: 6e79526cb5b40544c91f9ac79610f37c, type: 3}
+    - {fileID: 1840295424487795494, guid: 6e79526cb5b40544c91f9ac79610f37c, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2651782160796664015, guid: 6e79526cb5b40544c91f9ac79610f37c, type: 3}
+      insertIndex: 4
+      addedObject: {fileID: 1701176173}
     - targetCorrespondingSourceObject: {fileID: 2651782160796664015, guid: 6e79526cb5b40544c91f9ac79610f37c, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1701176172}
@@ -4133,6 +4182,7 @@ MonoBehaviour:
   hitEffect: {fileID: 0}
   deathEffect: {fileID: 0}
   isPlayer: 1
+  EXPDrop: 0
   gameOverCanvas: {fileID: 0}
   inGameCanvas: {fileID: 0}
   isDead: 0
@@ -4162,6 +4212,19 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1701176173
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1701176168}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31f81b053a4ea834a83d9f8d13b3ec32, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EconomyManager
+  PTOAmount: 5
 --- !u!1 &1733961709
 GameObject:
   m_ObjectHideFlags: 0
@@ -5062,8 +5125,8 @@ PrefabInstance:
       value: WeaponSpawnerPlaceHolder
       objectReference: {fileID: 0}
     - target: {fileID: 7338413379423430543, guid: a1f0900fd13e2d348bf5568770a6a195, type: 3}
-      propertyPath: playerLevelOverride
-      value: 5
+      propertyPath: isShop
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
