@@ -2007,6 +2007,14 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: aa0f180c585aa9e43a703700d91820d8, type: 2}
+    - target: {fileID: 6342354094636654541, guid: 72e923539b9c871408b555dd748268b8, type: 3}
+      propertyPath: m_Size.z
+      value: 1.4131851
+      objectReference: {fileID: 0}
+    - target: {fileID: 6342354094636654541, guid: 72e923539b9c871408b555dd748268b8, type: 3}
+      propertyPath: m_Center.z
+      value: -0.20659256
+      objectReference: {fileID: 0}
     - target: {fileID: 8801666180609765286, guid: 72e923539b9c871408b555dd748268b8, type: 3}
       propertyPath: m_LocalScale.x
       value: 13.343344
@@ -8444,8 +8452,8 @@ Transform:
   m_GameObject: {fileID: 1443590998}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -57.533714, y: 2.430725, z: 38.5166}
-  m_LocalScale: {x: 13.343344, y: 12.5, z: 1}
+  m_LocalPosition: {x: -57.533714, y: 2.430725, z: 39.0058}
+  m_LocalScale: {x: 13.343344, y: 12.5, z: 1.928448}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 314688971}
@@ -8469,8 +8477,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 2.0461535, y: 1, z: 0.58663356}
+  m_Center: {x: 0.42133188, y: 0, z: 0.20668314}
 --- !u!23 &1443591001
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -11814,6 +11822,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 796835866957253673, guid: 6e79526cb5b40544c91f9ac79610f37c, type: 3}
+      propertyPath: maxHealth
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 796835866957253673, guid: 6e79526cb5b40544c91f9ac79610f37c, type: 3}
+      propertyPath: currentHealth
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 1791530072234445037, guid: 6e79526cb5b40544c91f9ac79610f37c, type: 3}
       propertyPath: inputManager
       value: 
@@ -11827,9 +11843,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1205307101}
     - target: {fileID: 1840295424487795494, guid: 6e79526cb5b40544c91f9ac79610f37c, type: 3}
+      propertyPath: maxHealth
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 1840295424487795494, guid: 6e79526cb5b40544c91f9ac79610f37c, type: 3}
       propertyPath: inGameCanvas
       value: 
       objectReference: {fileID: 2110629966}
+    - target: {fileID: 1840295424487795494, guid: 6e79526cb5b40544c91f9ac79610f37c, type: 3}
+      propertyPath: currentHealth
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 1840295424487795494, guid: 6e79526cb5b40544c91f9ac79610f37c, type: 3}
       propertyPath: gameOverCanvas
       value: 
