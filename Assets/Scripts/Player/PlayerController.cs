@@ -44,13 +44,17 @@ public class PlayerController : MonoBehaviour
     public delegate void OnDashChangedDelegate();
     [HideInInspector] public OnDashChangedDelegate onDashChangedCallback;
     private bool canDash = true;
+
+    [Header("Interaction Settings")]
+    [SerializeField] private float interactRange = 3f;
+    [SerializeField] private LayerMask interactableMask;
     #endregion
 
     #region Getters/Setters
     public CharacterController GetCharacterController() { return characterController; }
     #endregion
 
-    void Awake() 
+    void Awake()
     {
         if (Instance != null && Instance != this)
         {
@@ -110,7 +114,7 @@ public class PlayerController : MonoBehaviour
             StartCoroutine(Dash());
         }
     }
-    
+
 
     private IEnumerator Dash()
     {
@@ -151,8 +155,8 @@ public class PlayerController : MonoBehaviour
         {
             weaponHandler.FireWeapon();
         }
-        if (inputs.ReloadInput) 
-        { 
+        if (inputs.ReloadInput)
+        {
             weaponHandler.ReloadWeapon();
         }
         if (inputs.SprintInput)
@@ -166,9 +170,14 @@ public class PlayerController : MonoBehaviour
             dashCharge += Time.deltaTime; //This one says if you don't have the max dash charges, build up to a new one
         }
         if (dashCharge >= dashChargeTime)
-        { 
+        {
             dashCharge = 0;
             Dashes++; //This one says if you have enough charge for a new dash, store the new dash
+        }
+
+        if (inputs.InteractInput)
+        {
+            Interact();
         }
 
 
@@ -205,6 +214,31 @@ public class PlayerController : MonoBehaviour
     //LB: Any and all future timers for the player will be managed in this area
     private void TimerDecrement()
     {
-        
+
+    }
+
+    // RL: This code shoots a raycast to allow the player to interact with objects using the IInteractable interace
+    private void Interact()
+    {
+        // Use the player's camera as the ray origin/direction
+        Camera cam = Camera.main;
+        if (cam == null)
+        {
+            Debug.LogWarning("No main camera found for interaction!");
+            return;
+        }
+
+        Ray ray = new Ray(cam.transform.position, cam.transform.forward);
+
+        // Raycast to check if we hit something interactable
+        if (Physics.Raycast(ray, out RaycastHit hit, interactRange, interactableMask))
+        {
+            IInteractable interactable = hit.collider.GetComponent<IInteractable>();
+
+            if (interactable != null)
+            {
+                interactable.Interact();
+            }
+        }
     }
 }
