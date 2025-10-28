@@ -144,18 +144,14 @@ public class NuggieBehaviorScript : MonoBehaviour, IWeaponLevel
 
     private void Attacking()
     {
+        agent.SetDestination(transform.position);
+        agent.isStopped = true;
 
-        if (gameObject != null)
+        if (!alreadyAttacked && HasLineOfSight())
         {
-            agent.SetDestination(transform.position);
-            agent.isStopped = true;
-
-            if (!alreadyAttacked && HasLineOfSight())
-            {
-                MAULTHEM();
-                alreadyAttacked = true;
-                Invoke(nameof(ResetAttack), timeBetweenAttacks);
-            }
+            MAULTHEM();
+            alreadyAttacked = true;
+            Invoke(nameof(ResetAttack), timeBetweenAttacks);
         }
     }
 

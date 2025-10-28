@@ -21,7 +21,6 @@ public class InputManager : MonoBehaviour
     [SerializeField] private string look = "Look";
     [SerializeField] private string sprint = "Sprint";
     [SerializeField] private string reload = "Reload";
-    [SerializeField] private string interact = "Interact";
 
     //LB: This is an action input, each one needs one assigned
     private InputAction moveAction;
@@ -32,7 +31,6 @@ public class InputManager : MonoBehaviour
     public InputAction lookAction;
     public InputAction sprintAction;
     public InputAction reloadAction;
-    public InputAction interactAction;
 
     //LB: This is the getters and setters for the inputs, this will be used to manage their values overall
     public Vector2 MoveInput { get; private set; }
@@ -43,7 +41,6 @@ public class InputManager : MonoBehaviour
     public Vector2 LookInput { get; private set; }
     public bool SprintInput { get; private set; }
     public bool ReloadInput { get; private set; }
-    public bool InteractInput { get; private set; }
 
     //LB: Instance Handler
     public static InputManager Instance { get; private set; }
@@ -70,10 +67,7 @@ public class InputManager : MonoBehaviour
         lookAction = playerControls.FindActionMap(actionMapName).FindAction(look);
         sprintAction = playerControls.FindActionMap(actionMapName).FindAction(sprint);
         reloadAction = playerControls.FindActionMap(actionMapName).FindAction(reload);
-        interactAction = playerControls.FindActionMap(actionMapName).FindAction(interact);
         RegisterInputActions();
-
-        playerControls.Enable();
     }
 
     //LB: This piece of code handles their values with pseudo functions
@@ -102,9 +96,6 @@ public class InputManager : MonoBehaviour
 
         reloadAction.performed += context => ReloadInput = true;
         reloadAction.canceled += context => ReloadInput = false;
-
-        interactAction.performed += context => InteractInput = true;
-        interactAction.canceled += context => InteractInput = false;
     }
 
     //LB: Enable and Disable the actions
@@ -118,7 +109,6 @@ public class InputManager : MonoBehaviour
         lookAction.Enable();
         sprintAction.Enable();
         reloadAction.Enable();
-        interactAction.Enable();
     }
 
     private void OnDisable()
@@ -131,7 +121,6 @@ public class InputManager : MonoBehaviour
         lookAction.Disable();
         sprintAction.Disable();
         reloadAction.Disable();
-        interactAction.Disable();
     }
 
 }

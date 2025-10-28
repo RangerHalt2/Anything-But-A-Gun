@@ -7,7 +7,6 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour, IWeaponLevel
 {
-    private bool canDealDamage =true;
     #region Variables
     [Header("Speed Settings")]
     [Tooltip("The speed at which the projectile will travel.")]
@@ -139,26 +138,17 @@ public class Projectile : MonoBehaviour, IWeaponLevel
             // If team ID is different...
             if (health.teamID != teamID)
             {
-                if (canDealDamage)
+                if (currentWeaponLevel != null)
                 {
-                    canDealDamage = false;
-
-                    if (currentWeaponLevel != null)
-                    {
-                        UpdateLevelDamage();
-                    }
-                    // Deal damage
-                    health.TakeDamage(baseDamage);
-                    // If projectile is not piercing...
-                    if (!piercing)
-                    {
-                        // Destroy the projectile
-                        Destroy(gameObject);
-                    }
-                    else
-                    {
-                        canDealDamage = true;
-                    }
+                    UpdateLevelDamage();
+                }
+                // Deal damage
+                health.TakeDamage(cummulativeDamage);
+                // If projectile is not piercing...
+                if (!piercing)
+                {
+                    // Destroy the projectile
+                    Destroy(gameObject);
                 }
             }
         }

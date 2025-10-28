@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.AI;
 
 public class NuggieSpawner : MonoBehaviour
 { 
@@ -12,14 +11,11 @@ public class NuggieSpawner : MonoBehaviour
         weaponLevelRef = weaponLevel;
     }
 
-    void OnDestroy()
+    void OnTriggerEnter(Collider _other)
     {
-        NavMeshHit hit;
-        NavMesh.SamplePosition(transform.position, out hit, 5.0f, UnityEngine.AI.NavMesh.AllAreas);
-
-        GameObject nuggieGameObject = Instantiate(nuggiePrefab, hit.position, transform.rotation, null);
-        
-        NuggieBehaviorScript nbs = nuggieGameObject.GetComponent<NuggieBehaviorScript>();
-        nbs.SetWeaponLevelReference(weaponLevelRef);
+            GameObject nuggieGameObject = Instantiate(nuggiePrefab, transform.position, transform.rotation, null);
+            NuggieBehaviorScript nbs = nuggieGameObject.GetComponent<NuggieBehaviorScript>();
+            nbs.SetWeaponLevelReference(weaponLevelRef);
+            Destroy(gameObject);
     }
 }
