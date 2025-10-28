@@ -17,12 +17,15 @@ public class AirFrierScript : MonoBehaviour, IWeapon
     private float cookSpeed = 1f; //Temperature of the oven, ha ha
     [SerializeField] private float coolSpeed = 0.1f; //Speed that the nuggies cool off
 
+    private PlayerController playerRef;
+
     //NEEDS UI FOR CHARGE TIME
 
     private void Awake()
     {
         cookTime = 0f;
         weaponLevelRef = GetComponent<WeaponLevel>();
+        playerRef = GameObject.FindAnyObjectByType<PlayerController>();
     }
 
     private void Update() 

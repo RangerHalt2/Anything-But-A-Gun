@@ -10,6 +10,8 @@ public class BrushScript : MonoBehaviour, IWeapon
     [SerializeField] private Transform projectileSpawnPoint;
     private float lastFired = Mathf.NegativeInfinity;
 
+    private PlayerController playerRef;
+
     private WeaponLevel weaponLevelRef;
 
     private bool leftSlash = true; //Which direction the slash is bending.
@@ -20,6 +22,7 @@ public class BrushScript : MonoBehaviour, IWeapon
     private void Start()
     {
         weaponLevelRef = GetComponent<WeaponLevel>();
+        playerRef = GameObject.FindAnyObjectByType<PlayerController>();
     }
 
     public void Shoot()
@@ -91,6 +94,7 @@ public class BrushScript : MonoBehaviour, IWeapon
             foreach (Projectile proj in projs)
             {
                 proj.SetWeaponLevelReference(weaponLevelRef);
+                Physics.IgnoreCollision(proj.GetComponent<CapsuleCollider>(), playerRef.GetComponent<CharacterController>(), true);
             }
         }
     }
