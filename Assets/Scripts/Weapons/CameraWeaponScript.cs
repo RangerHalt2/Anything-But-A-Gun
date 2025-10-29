@@ -12,6 +12,7 @@ public class CameraWeaponScript : MonoBehaviour, IWeapon
     [SerializeField] private GameObject enemyCopy; //The copy for the enemy
 
     private List<GameObject> enemiesInRange = new List<GameObject>();
+    [SerializeField] private GameObject gunShot;
 
     public void Shoot() //Haha, because camera?
     {

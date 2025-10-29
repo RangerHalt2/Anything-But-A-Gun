@@ -18,6 +18,8 @@ public class AirFrierScript : MonoBehaviour, IWeapon
     [SerializeField] private float coolSpeed = 0.1f; //Speed that the nuggies cool off
 
     private PlayerController playerRef;
+    [SerializeField] private GameObject gunShot;
+
 
     //NEEDS UI FOR CHARGE TIME
 
@@ -61,6 +63,8 @@ public class AirFrierScript : MonoBehaviour, IWeapon
                         {
                             SpawnProjectile();
                             cookTime = 0f;
+                            Instantiate(gunShot, transform.position, transform.rotation, null);
+
                         }
                         // Update lastFired
                         lastFired = Time.timeSinceLevelLoad;

@@ -18,6 +18,8 @@ public class BrushScript : MonoBehaviour, IWeapon
     private float slashAngle = 0f; //Just the angle that the slash bends to
     private float slashAngleLeft = 75f;
     private float slashAngleRight = 105f;
+    [SerializeField] private GameObject gunShot;
+    [SerializeField] private GameObject gunShot2;
 
     private void Start()
     {
@@ -45,11 +47,15 @@ public class BrushScript : MonoBehaviour, IWeapon
                         {
                             slashAngle = slashAngleRight;
                             leftSlash = false;
+                            Instantiate(gunShot, transform.position, transform.rotation, null);
+
                         }
                         else
                         {
                             slashAngle = slashAngleLeft;
                             leftSlash = true;
+                            Instantiate(gunShot2, transform.position, transform.rotation, null);
+
                         }
 
                         SpawnProjectile();

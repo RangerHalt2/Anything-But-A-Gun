@@ -9,6 +9,8 @@ public class LavaLampScript : MonoBehaviour, IWeapon
     [SerializeField] private GameObject projectilePrefab;
     [SerializeField] private Transform projectileSpawnPoint;
     private float lastFired = Mathf.NegativeInfinity;
+    [SerializeField] private GameObject gunShot;
+
 
     private WeaponLevel weaponLevelRef;
 
@@ -34,7 +36,8 @@ public class LavaLampScript : MonoBehaviour, IWeapon
                         if (projectilePrefab != null)
                         {
                             SpawnProjectile();
-                        }
+                            Instantiate(gunShot, transform.position, transform.rotation, null);
+                    }
                         // Update lastFired
                         lastFired = Time.timeSinceLevelLoad;
 

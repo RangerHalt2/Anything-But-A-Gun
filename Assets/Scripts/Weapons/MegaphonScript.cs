@@ -11,6 +11,7 @@ public class MegaphonScript : MonoBehaviour, IWeapon
     private float lastFired = Mathf.NegativeInfinity;
 
     private WeaponLevel weaponLevelRef;
+    [SerializeField] private GameObject gunShot;
 
     private void Start()
     {
@@ -33,6 +34,7 @@ public class MegaphonScript : MonoBehaviour, IWeapon
                     if (projectilePrefab != null)
                     {
                         SpawnProjectile();
+                        Instantiate(gunShot, transform.position, transform.rotation, null);
                     }
                     // Update lastFired
                     lastFired = Time.timeSinceLevelLoad;
