@@ -53,7 +53,7 @@ public class AudioManager : MonoBehaviour
         // If volume is less than 1, mute the audio
         if (volume < 1)
         {
-            volume = .001f;
+            volume = .0001f;
         }
 
         // Reset the position of the slider
