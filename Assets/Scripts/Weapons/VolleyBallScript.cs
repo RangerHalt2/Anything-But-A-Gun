@@ -13,6 +13,7 @@ public class VolleyBallScript : MonoBehaviour, IWeapon
     [SerializeField] private GameObject airProjectilePrefab;
     [Tooltip("Where the projectile should spawn from")]
     [SerializeField] private Transform projectileSpawnPoint;
+    [SerializeField] private GameObject gunShot;
 
     private WeaponLevel weaponLevelRef;
 
@@ -61,6 +62,7 @@ public class VolleyBallScript : MonoBehaviour, IWeapon
         }
 
         GameObject projectile = Instantiate(bullet, projectileSpawnPoint.position, projectileSpawnPoint.rotation, null);
+        Instantiate(gunShot, transform.position, transform.rotation, null);
 
         Vector3 rotationEulerAngles = projectile.transform.rotation.eulerAngles;
         projectile.transform.rotation = Quaternion.Euler(rotationEulerAngles);
