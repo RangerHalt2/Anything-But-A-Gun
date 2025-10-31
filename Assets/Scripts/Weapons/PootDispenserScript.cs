@@ -1,23 +1,16 @@
 using UnityEngine;
 
-public class BrushScript : MonoBehaviour, IWeapon
+public class PootDispenserScript : MonoBehaviour, IWeapon
 {
     [SerializeField] public int level {get; set;}
-    
+
     [SerializeField] private float fireRate = 0.25f;
     [SerializeField] private AmmoManager ammoManager;
     [SerializeField] private GameObject projectilePrefab;
-    [SerializeField] private GameObject leftSlashEffect; //Slash VFX Spot 1
-    [SerializeField] private GameObject rightSlashEffect;//Slash VFX Spot 2
     [SerializeField] private Transform projectileSpawnPoint;
     private float lastFired = Mathf.NegativeInfinity;
 
     private WeaponLevel weaponLevelRef;
-
-    private bool leftSlash = true; //Which direction the slash is bending.
-    private float slashAngle = 0f; //Just the angle that the slash bends to
-    private float slashAngleLeft = 75f;
-    private float slashAngleRight = 105f;
 
     private void Start()
     {
@@ -29,34 +22,27 @@ public class BrushScript : MonoBehaviour, IWeapon
         // If enough time has passed since the last round was fired
         if ((Time.timeSinceLevelLoad - lastFired) > fireRate)
         {
-            // If there is an assigned ammo manager, and that ammo manager has at least one round of ammo loaded
-            if (ammoManager != null && ammoManager.GetCurrentAmmo() > 0)
-            {
-                // Attempt to fire the weapon
-                ammoManager.Fire();
-                // If the weapon is not reloading
-                if (!ammoManager.IsReloading())
+                // If there is an assigned ammo manager, and that ammo manager has at least one round of ammo loaded
+                if (ammoManager != null && ammoManager.GetCurrentAmmo() > 0)
                 {
-                    if (projectilePrefab != null)
+                    // Attempt to fire the weapon
+                    ammoManager.Fire();
+                    // If the weapon is not reloading
+                    if (!ammoManager.IsReloading())
                     {
-                        if (leftSlash)
-                        {
-                            slashAngle = slashAngleRight;
-                            leftSlash = false;
-                        }
-                        else
-                        {
-                            slashAngle = slashAngleLeft;
-                            leftSlash = true;
-                        }
 
-                        SpawnProjectile();
+                        if (projectilePrefab != null)
+                        {
+                            SpawnProjectile();
+                        }
+                        // Update lastFired
+                        lastFired = Time.timeSinceLevelLoad;
+
                     }
-                    // Update lastFired
-                    lastFired = Time.timeSinceLevelLoad;
                 }
-            }
+       
         }
+
     }
 
     public void Reload()
@@ -71,7 +57,6 @@ public class BrushScript : MonoBehaviour, IWeapon
 
     void SpawnProjectile()
     {
-
         // Check that the prefab is valid
         if (projectilePrefab != null)
         {
@@ -80,7 +65,7 @@ public class BrushScript : MonoBehaviour, IWeapon
 
             // Account for spread
             Vector3 rotationEulerAngles = projectileGameObject.transform.rotation.eulerAngles;
-            projectileGameObject.transform.rotation = Quaternion.Euler(rotationEulerAngles.x, rotationEulerAngles.y, rotationEulerAngles.z + slashAngle);
+            projectileGameObject.transform.rotation = Quaternion.Euler(rotationEulerAngles);
 
             // Keep the heirarchy organized
             if (projectileSpawnPoint == null && GameObject.Find("ProjectileSpawnPoint") != null)
@@ -90,6 +75,9 @@ public class BrushScript : MonoBehaviour, IWeapon
             }
             Projectile proj = projectileGameObject.GetComponent<Projectile>();
             proj.SetWeaponLevelReference(weaponLevelRef);
+
+            PootProjectileScript pootProj = projectileGameObject.GetComponent<PootProjectileScript>();
+            pootProj.SetWeaponLevelReference(weaponLevelRef);
         }
     }
 }
