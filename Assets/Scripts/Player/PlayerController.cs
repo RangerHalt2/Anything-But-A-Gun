@@ -34,6 +34,7 @@ public class PlayerController : MonoBehaviour
 
     [Space(5)]
     [Header("Dash Variables")]
+    [SerializeField] private ParticleSystem dashEffect;
     [SerializeField] private float dashForce; //How strong the dash is
     [SerializeField] private float dashTime; //The time the player spends dashing
     [SerializeField] public int maxDashLimit = 3; //The number of times that the player can dash
@@ -107,6 +108,7 @@ public class PlayerController : MonoBehaviour
     {
         if (canDash && dashes > 0)
         {
+            if(dashEffect != null) dashEffect.Play();
             StartCoroutine(Dash());
         }
     }
@@ -128,6 +130,7 @@ public class PlayerController : MonoBehaviour
             characterController.Move(dashDirection * movementSpeed * dashForce * Time.deltaTime);
             yield return null;
         }
+        if (dashEffect != null) dashEffect.Stop();
         yield return new WaitForSeconds(dashCd);
         canDash = true;
     }

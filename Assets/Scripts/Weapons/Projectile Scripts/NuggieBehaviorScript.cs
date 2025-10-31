@@ -25,7 +25,7 @@ public class NuggieBehaviorScript : MonoBehaviour, IWeaponLevel
     [Header("Attack Seetings")]
     [SerializeField] private Transform attackPoint;
     [SerializeField] private float nuggieBaseDamage = 5;
-    [SerializeField] private float nuggieLevelDamage;
+    [SerializeField] private float growthRate = 1.15f;
     private float cummulativeDamage;
 
     [Header("Sight and Attack Range")]
@@ -183,6 +183,6 @@ public class NuggieBehaviorScript : MonoBehaviour, IWeaponLevel
     //LB: Updates the weapon's damage for what damage it should do.
     public void UpdateLevelDamage()
     {
-        cummulativeDamage = nuggieBaseDamage + (nuggieLevelDamage * (currentWeaponLevel.Level - 1));
+        cummulativeDamage = nuggieBaseDamage * Mathf.Pow(growthRate, currentWeaponLevel.Level);
     }
 }

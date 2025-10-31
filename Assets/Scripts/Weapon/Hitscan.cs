@@ -14,7 +14,7 @@ public class Hitscan : MonoBehaviour, IWeaponLevel
     [Tooltip("The amount of damage that the weapon begins with")]
     [SerializeField] private float baseDamage;
     [Tooltip("How much damage is added per level")]
-    [SerializeField] private float levelDamage;
+    [SerializeField] private float growthRate = 1.15f;
     private float cummulativeDamage;
     private WeaponLevel currentWeaponLevel;
 
@@ -184,9 +184,9 @@ public class Hitscan : MonoBehaviour, IWeaponLevel
     //Simple floor + (lvl * weaponLvlDamage)
     public void UpdateLevelDamage()
     {
-        cummulativeDamage = baseDamage + (levelDamage * (currentWeaponLevel.Level-1));
+        cummulativeDamage = baseDamage * Mathf.Pow(growthRate, currentWeaponLevel.Level);
     }
-    
+
     //Attempts to level the weapon up, if the weapon levels up the damage needs to be recalculated.
     //This function should be called by the shops or anything that upgrades the weapons level.
     //Similarly, this function also returns the true or false if it was able to upgrade.

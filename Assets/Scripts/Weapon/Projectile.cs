@@ -22,10 +22,10 @@ public class Projectile : MonoBehaviour, IWeaponLevel
     [Tooltip("The amount of damage dealt to a target")]
     [SerializeField] public float baseDamage;
     [Tooltip("Damage to be added per level to the projectile")]
-    [SerializeField] private float levelDamage;
+    [SerializeField] private float growthRate = 1.15f;
     private float cummulativeDamage;
     private WeaponLevel currentWeaponLevel;
-
+        
     [Header("Special Properties")]
     [Tooltip("Determines whether the projectile is able to pierce through, and deal damage, to multiple objects.")]
     [SerializeField] private bool piercing;
@@ -163,7 +163,7 @@ public class Projectile : MonoBehaviour, IWeaponLevel
     //LB: Updates the weapon's damage for what damage it should do.
     public void UpdateLevelDamage()
     {
-        cummulativeDamage = baseDamage + (levelDamage*(currentWeaponLevel.Level-1));
+        cummulativeDamage = baseDamage * Mathf.Pow(growthRate, currentWeaponLevel.Level);
     }
 
     #region Special Properties
