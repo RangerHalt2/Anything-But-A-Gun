@@ -7,6 +7,8 @@ public class BrushScript : MonoBehaviour, IWeapon
     [SerializeField] private float fireRate = 0.25f;
     [SerializeField] private AmmoManager ammoManager;
     [SerializeField] private GameObject projectilePrefab;
+    [SerializeField] private GameObject leftSlashEffect; //Slash VFX Spot 1
+    [SerializeField] private GameObject rightSlashEffect;//Slash VFX Spot 2
     [SerializeField] private Transform projectileSpawnPoint;
     private float lastFired = Mathf.NegativeInfinity;
 
