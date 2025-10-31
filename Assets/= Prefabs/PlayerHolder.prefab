@@ -59,12 +59,12 @@ MonoBehaviour:
   jumpForce: 9
   gravity: -15
   terminalVelocity: -60
-  dashForce: 0
-  dashTime: 0
+  dashForce: 4
+  dashTime: 0.25
   maxDashLimit: 3
   dashes: 0
   dashCharge: 0
-  dashChargeTime: 5
+  dashChargeTime: 3
   dashCd: 0.25
 --- !u!114 &3398571290749484056
 MonoBehaviour:
@@ -568,7 +568,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.01
-  far clip plane: 90
+  far clip plane: 200
   field of view: 60.000004
   orthographic: 0
   orthographic size: 5
