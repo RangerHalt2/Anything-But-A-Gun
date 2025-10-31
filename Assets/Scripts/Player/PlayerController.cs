@@ -118,7 +118,11 @@ public class PlayerController : MonoBehaviour
         Dashes--;
         canDash = false;
         float startTime = Time.time;
-        Vector3 dashDirection = transform.forward;
+        Vector3 dashDirection = transform.forward * inputs.MoveInput.y + transform.right * inputs.MoveInput.x;
+        if (dashDirection.sqrMagnitude < 0.1 * 0.1f) 
+        {
+            dashDirection = transform.forward;
+        }
 
         while (Time.time < startTime + dashTime)
         {
