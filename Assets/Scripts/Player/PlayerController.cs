@@ -45,6 +45,8 @@ public class PlayerController : MonoBehaviour
     [Header("Interaction Settings")]
     [SerializeField] private float interactRange = 3f;
     [SerializeField] private LayerMask interactableMask;
+    [SerializeField] private float interactCooldown = 0.5f;
+    private bool canInteract = true;
     #endregion
 
     #region Getters/Setters
@@ -208,6 +210,10 @@ public class PlayerController : MonoBehaviour
     // RL: This code shoots a raycast to allow the player to interact with objects using the IInteractable interace
     private void Interact()
     {
+        if (!canInteract) return;
+
+        canInteract = false;
+
         // Use the player's camera as the ray origin/direction
         Camera cam = Camera.main;
         if (cam == null)
@@ -228,5 +234,12 @@ public class PlayerController : MonoBehaviour
                 interactable.Interact();
             }
         }
+        StartCoroutine(InteractionCooldown());
+    }
+
+    private IEnumerator InteractionCooldown()
+    {
+        yield return new WaitForSeconds(interactCooldown);
+        canInteract = true;
     }
 }

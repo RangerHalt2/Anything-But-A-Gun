@@ -9,6 +9,9 @@ public class WeaponSpawner : MonoBehaviour, IInteractable
     #region Variables
     // Tracks whether or not a weapon has already been spawned
     private bool weaponSpawned = false;
+    private GameObject selectedWeapon;
+    private GameObject spawnedWeapon;
+    [SerializeField] private bool spawnWeaponOnStart;
 
     [Header("Probability Settings")]
     [Tooltip("The weighted chance of a spawned weapon being taken from the common weapons pool.")]
@@ -99,33 +102,51 @@ public class WeaponSpawner : MonoBehaviour, IInteractable
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        // Select a Weapon to Spawn
+        selectedWeapon = GetRandomWeapon();
+
+        // If spawner is set to spawn aweapon on start
+        if(spawnWeaponOnStart)
+        {
+            // Spawn a weapon
+            SpawnWeapon();
+            // If spawner is a shop
+            if(isShop)
+            {
+                // Make weapon un-interactable
+                spawnedWeapon.layer = LayerMask.NameToLayer("Default");
+            }
+        }
     }
 
     public void Interact()
     {
-        // If a weapon has not spawned
-        if (!weaponSpawned)
+        if (isShop)
         {
-            // If the Weapon Spawner is a shop
-            if (isShop)
+            // Try to spend the player's money to purchase a weapon
+            if (economyManager.SpendPTO(weaponPrice))
             {
-                // Try to spend the player's money to purchase a weapon
-                if (economyManager.SpendPTO(weaponPrice))
+                // Disable the WeaponShopCanvas
+                weaponShopCanvas.SetActive(false);
+                // If the weapon was spawned on start
+                if (spawnWeaponOnStart)
                 {
-                    // Disable the WeaponShopCanvas
-                    weaponShopCanvas.SetActive(false);
-                    // If the player successfully spent their money, spawn a weapon
+                    // Make it interactable
+                    spawnedWeapon.layer = LayerMask.NameToLayer("Interactable");
+                }
+                else
+                {
+                    // If weapon was not already spawned, spawn it
                     SpawnWeapon();
                 }
-                return;
             }
-            // If a Weapon Spawner is not a shop
-            else
-            {
-                // Spawn a weapon
-                SpawnWeapon();
-            }            
+            return;
+        }
+        // If a weapon has not spawned, and it is not a shop
+        if (!weaponSpawned)
+        {
+            // Spawn a weapon
+            SpawnWeapon();
         }
     }
 
@@ -133,32 +154,23 @@ public class WeaponSpawner : MonoBehaviour, IInteractable
     {
         if (weaponSpawnWaypoint != null)
         {
-            // Generate a random weapon
-            GameObject weaponPrefab = GetRandomWeapon();
-            // Check if the weapon was seleceted properly
-            if (weaponPrefab != null)
-            {
-                // Spawn the weapon
-                GameObject spawnedWeapon = Instantiate(weaponPrefab, weaponSpawnWaypoint.position, weaponSpawnWaypoint.rotation);
+            // Spawn the weapon
+            spawnedWeapon = Instantiate(selectedWeapon, weaponSpawnWaypoint.position, weaponSpawnWaypoint.rotation);
 
-                // Find the weapon's script
-                IWeapon weaponComponent = spawnedWeapon.GetComponent<IWeapon>();
-                // Ensure weapon script was found
-                if (weaponComponent != null)
-                {
-                    // Assign the weapon a level
-                    AssignWeaponLevel(weaponComponent);
-                    weaponSpawned = true;
-                    Debug.Log("WeaponSpawner: Spawned a level " + spawnedWeaponLevel + " " + spawnedWeapon.name + ".");
-                }
-                else
-                {
-                    Debug.LogWarning("WeaponSpawner: Selected weapon is not part of the IWeapon interface!");
-                }
+            // Find the weapon's script
+            IWeapon weaponComponent = spawnedWeapon.GetComponent<IWeapon>();
+            // Ensure weapon script was found
+            if (weaponComponent != null)
+            {
+                // Assign the weapon a level
+                AssignWeaponLevel(weaponComponent);
+                weaponSpawned = true;
+                Debug.Log("WeaponSpawner: Spawned a level " + spawnedWeaponLevel + " " + spawnedWeapon.name + ".");
+                if(!isShop) gameObject.layer = LayerMask.NameToLayer("Default");
             }
             else
             {
-                Debug.LogWarning("WeaponSpawner: Failed to properly spawn weapon!");
+                Debug.LogWarning("WeaponSpawner: Selected weapon is not part of the IWeapon interface!");
             }
         }
         else
