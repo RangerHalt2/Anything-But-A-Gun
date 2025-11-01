@@ -97,7 +97,7 @@ public class PlayerController : MonoBehaviour
         Vector3 move = transform.forward * MovementVector.y + transform.right * MovementVector.x;
         move = movementSpeed /** (inputs.SprintInput? sprintMultiplier : 1)*/ * Time.deltaTime * move;
 
-        Debug.Log("Move: " + move);
+        //Debug.Log("Move: " + move);
 
         //LB: If the player stopped moving manually move them incrementally less for a little
         if (!characterController.isGrounded)
@@ -117,7 +117,6 @@ public class PlayerController : MonoBehaviour
             momentum = Vector3.zero;                                  
         }
         if (!characterController.isGrounded) {
-            Debug.Log("Math check - x:" + (Mathf.Abs(move.x) - 0.005f) + " z: " + (Mathf.Abs(move.z) - 0.005f));
             momentum = new Vector3(( Mathf.Abs(move.x) - momentumDecay < 0f) ? 0f : move.x - (move.x < 0f ? -momentumDecay : momentumDecay),
                 0,
                 (Mathf.Abs(move.z) - momentumDecay < 0f) ? 0f : move.z - (move.z < 0f ? -momentumDecay : momentumDecay));
@@ -125,7 +124,7 @@ public class PlayerController : MonoBehaviour
             if(momentum.z > maxMomentum) momentum.z = maxMomentum;
         }
 
-        Debug.Log("Momentum: " + momentum);
+        //Debug.Log("Momentum: " + momentum);
         //Debug.Log("Vertical Force: " + verticalForce);
     }
 
