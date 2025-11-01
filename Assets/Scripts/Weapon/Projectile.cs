@@ -146,9 +146,14 @@ public class Projectile : MonoBehaviour, IWeaponLevel
                     if (currentWeaponLevel != null)
                     {
                         UpdateLevelDamage();
+                        health.TakeDamage(cummulativeDamage);
                     }
-                    // Deal damage
-                    health.TakeDamage(baseDamage);
+                    else
+                    {
+                        // Deal damage
+                        health.TakeDamage(baseDamage);
+                    }
+                    
                     // If projectile is not piercing...
                     if (!piercing)
                     {
@@ -176,8 +181,14 @@ public class Projectile : MonoBehaviour, IWeaponLevel
         cummulativeDamage = baseDamage + (levelDamage*(currentWeaponLevel.Level-1));
     }
 
+    // Returns the weapon's current damage with level scaling
+    public float CalculateLevelDamage()
+    {
+        return baseDamage + (levelDamage * (currentWeaponLevel.Level - 1));
+    }
+
     #region Special Properties
-   private void SimulateRicochet(Collision collision)
+    private void SimulateRicochet(Collision collision)
     {
         if (bounceTimer > 0) return;
 

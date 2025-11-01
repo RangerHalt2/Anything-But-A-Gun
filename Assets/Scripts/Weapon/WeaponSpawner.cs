@@ -90,6 +90,7 @@ public class WeaponSpawner : MonoBehaviour, IInteractable
         }
         else
         {
+            //Debug.Log("Weapon Spawner: Player Level Overrided. Simulating Level: " + playerLevelOverride);
             maxWeaponLevel = playerLevelOverride;
         }
         // Enable and setup the price display when the spawner is a shop
@@ -225,6 +226,12 @@ public class WeaponSpawner : MonoBehaviour, IInteractable
     // Assigns a weapon a random level from within a range
     private void AssignWeaponLevel(IWeapon weapon)
     {
+        WeaponLevel weaponLevel = spawnedWeapon.GetComponent<WeaponLevel>();
+        if (weaponLevel == null)
+        {
+            Debug.LogWarning("Weapon Spawner: Weapon Level Component not found!");
+        }
+
         // Assign the maximum possible weapon level, which is the same as the player's level
         if (maxWeaponLevel < minLevel)
         {
@@ -236,7 +243,7 @@ public class WeaponSpawner : MonoBehaviour, IInteractable
             // FixedPL: Spawns a weapon at the player's current level. Intended mostly for testing purposes
             case SpawnMode.FixedPL:
                 // Set the weapon's level to the player's level
-                weapon.level = maxWeaponLevel;
+                weaponLevel.SetLevel(maxWeaponLevel);
                 spawnedWeaponLevel = maxWeaponLevel;
                 break;
             // Random: Spawns a weapon at a random level between the set floor and the player's current level. If resulting level would be less than 1, weapon level is set to 1
@@ -279,14 +286,16 @@ public class WeaponSpawner : MonoBehaviour, IInteractable
                         // Set the selected level to the current level in the loop
                         selectedLevel = levels[curLevel];
                         // Set the weapon's level to the selected level
-                        weapon.level = selectedLevel;
+                        // weapon.level = selectedLevel;
+                        weaponLevel.SetLevel(selectedLevel);
                         spawnedWeaponLevel = selectedLevel;
                         // Break out of the loop
                         return;
                     }
                 }
                 // As a failsafe set weapon levels to 0 (should never hapepn)
-                weapon.level = 0;
+                //weapon.level = 0;
+                weaponLevel.SetLevel(0);
                 spawnedWeaponLevel = 0;
                 break;
         }

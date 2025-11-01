@@ -11,7 +11,8 @@ public class WeaponData : ScriptableObject
     [Space]
     [SerializeField] private int level;
     [Header("Damage Settings")]
-    [SerializeField] private float damage;
+    [SerializeField] private float baseDamage;
+    [SerializeField] private float levelDamage;
     [SerializeField] private float fireRate;
 
     [Header("Ammo Settings")]
@@ -45,6 +46,15 @@ public class WeaponData : ScriptableObject
     public int GetWeaponLevel()
     {
         return level;
+    }
+
+    public float GetBaseDamage()
+    {
+        return baseDamage;
+    }
+    public float GetLevelDamage()
+    {
+        return levelDamage;
     }
 
     // Returns the selected Weapon Type as a String

@@ -5,12 +5,15 @@ public class Weapon : MonoBehaviour
 {
     [Header("Scriptable Object")]
     [SerializeField] private WeaponData weaponData;
+    public WeaponData GetWeaponData() => weaponData;
 
     [Header("Key Weapon Components")]
     [SerializeField] private IWeapon weaponInterface;
     [SerializeField] private AmmoManager weaponAmmoManager;
     [SerializeField] private GameObject weaponInfoPanel;
+    [SerializeField] private WeaponLevel weaponLevel;
 
+    [HideInInspector] public float cumulativeDamage;
     private WeaponInfoUI infoUI;
 
     private void Awake()
@@ -29,6 +32,8 @@ public class Weapon : MonoBehaviour
     private void InitializeWeapon()
     {
         if (weaponData == null) return;
+
+        CalculateLevelDamage();
 
         //weaponInterface.fireRate = weaponData.GetFireRate();
 
@@ -57,5 +62,11 @@ public class Weapon : MonoBehaviour
             // Deactivate the panel
             weaponInfoPanel.SetActive(false);
         }
+    }
+
+    public void CalculateLevelDamage()
+    {
+        cumulativeDamage = weaponData.GetBaseDamage() + (weaponData.GetLevelDamage() * (weaponLevel.Level - 1));
+        //Debug.Log("Weapon: Cumulative Damage " + cumulativeDamage);
     }
 }

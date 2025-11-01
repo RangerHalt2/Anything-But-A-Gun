@@ -10,13 +10,32 @@ public class MegaphonScript : MonoBehaviour, IWeapon
     [SerializeField] private Transform projectileSpawnPoint;
     private float lastFired = Mathf.NegativeInfinity;
 
+    // Damage Settings
+    [SerializeField] public float baseDamage { get; set; }
+    [SerializeField] public float levelDamage { get; set; }
+    [HideInInspector] public float cumulativeDamage { get;  set; }
+
     private WeaponLevel weaponLevelRef;
+    private int currentWeaponLevel;
 
     private void Start()
     {
+        // Look for a Weapon Level Component
         weaponLevelRef = GetComponent<WeaponLevel>();
+        // If the component was found...
+        if (weaponLevelRef != null)
+        {
+            // Update Current Weapon Level
+            currentWeaponLevel = weaponLevelRef.Level;
+        }
+        // If no level component was found...
+        else
+        {
+            // Set Weapon Level to 0
+            currentWeaponLevel = 0;
+        }
+        UpdateLevelDamage();
     }
-
     public void Shoot()
     {
         // If enough time has passed since the last round was fired
@@ -51,7 +70,7 @@ public class MegaphonScript : MonoBehaviour, IWeapon
         }
     }
 
-    void SpawnProjectile() 
+    void SpawnProjectile()
     {
         // Check that the prefab is valid
         if (projectilePrefab != null)
@@ -78,5 +97,18 @@ public class MegaphonScript : MonoBehaviour, IWeapon
             */
         }
     }
+
+    #region Damage & Level Code
+    // Update the Level Damage for the weapon
+    public void UpdateLevelDamage()
+    {
+        cumulativeDamage = baseDamage + (levelDamage * (currentWeaponLevel - 1));
+    }
+
+    public float GetWeaponDamage()
+    {
+        return cumulativeDamage;
+    }
+    #endregion
 }
 
