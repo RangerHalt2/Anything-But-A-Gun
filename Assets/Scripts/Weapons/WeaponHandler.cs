@@ -189,5 +189,7 @@ public class WeaponHandler : MonoBehaviour
                                                                           //it's collected function and make it uncollectible. This won't be an issue if we change to
                                                                           //interactive pick-ups.
 
+        dropWeapon.layer = LayerMask.NameToLayer("Interactable");
+
     }
 }

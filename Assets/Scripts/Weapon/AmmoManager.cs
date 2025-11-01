@@ -57,12 +57,34 @@ public class AmmoManager : MonoBehaviour
     {
         return currentAmmo;
     }
-
+    public void SetCurrentAmmo(int newCurrentAmmo)
+    {
+        currentAmmo = newCurrentAmmo;
+    }
+    public int GetAmmoCapacity()
+    {
+        return ammoCapacity;
+    }
+    public void SetAmmoCapacity(int newAmmoCapacity)
+    {
+        currentAmmo = newAmmoCapacity;
+    }
     public int GetReserveAmmo()
     {
         return reserveAmmo;
     }
-
+    public void SetReserveAmmo(int newReserveAmmo)
+    {
+        reserveAmmo = newReserveAmmo;
+    }
+    public float GetReloadTime()
+    {
+        return reloadTime;
+    }
+    public void SetReloadTime(float newReloadTime)
+    {
+        reloadTime = newReloadTime;
+    }
     public bool IsReloading()
     {
         return reloading;

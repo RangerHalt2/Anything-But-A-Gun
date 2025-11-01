@@ -19,7 +19,7 @@ public class WeaponLevel : MonoBehaviour
     {
         bool ret = true;
         //If the weapon level would be greater than the player's level
-        if (Level+1 > playerLvl.Level)
+        if (Level + 1 > playerLvl.Level)
         {
             ret = false;
             return ret;
@@ -27,6 +27,11 @@ public class WeaponLevel : MonoBehaviour
         Level += 1;
 
         return ret;
+    }
+    
+    public void SetLevel(int newLevel)
+    {
+        Level = newLevel;
     }
 
     private void Start()
