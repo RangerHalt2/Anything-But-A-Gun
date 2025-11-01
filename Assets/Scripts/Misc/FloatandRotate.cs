@@ -1,5 +1,6 @@
 // Created By: Anthony Mota
 using UnityEngine;
+using System.Collections;
 
 public class FloatAndRotate : MonoBehaviour
 {
@@ -9,19 +10,67 @@ public class FloatAndRotate : MonoBehaviour
 
     [Header("Rotation Settings")]
     public float rotationSpeed = 50f;
-    
-    private Vector3 startPos;
+    public RotationAxis rotationAxis = RotationAxis.Y;
+
+    private Vector3 startLocalPos;
+    private Quaternion startLocalRot;
+
+    private WeaponCollectScript weaponCollectScript;
+    private Coroutine floatRoutine;
+
+    public enum RotationAxis { X, Y, Z }
 
     void Start()
     {
-        startPos = transform.position;
+        startLocalPos = transform.localPosition;
+        startLocalRot = transform.localRotation;
+
+        weaponCollectScript = GetComponentInParent<WeaponCollectScript>();
+        StartFloatAndRotate();
     }
 
-    void Update()
+    public void StartFloatAndRotate()
     {
-        float newY = startPos.y + Mathf.Sin(Time.time * frequency) * amplitude;
-        transform.position = new Vector3(startPos.x, newY, startPos.z);
+        floatRoutine = StartCoroutine(FloatAndRotateRoutine());
+    }
 
-        transform.Rotate(Vector3.up * rotationSpeed * Time.deltaTime);
+    IEnumerator FloatAndRotateRoutine()
+    {
+        while (true)
+        {
+            // Wait until weapon is not collected
+            while (weaponCollectScript != null && !weaponCollectScript.collected)
+            {
+                // Floating motion
+                float newY = startLocalPos.y + Mathf.Sin(Time.time * frequency) * amplitude;
+                transform.localPosition = new Vector3(startLocalPos.x, newY, startLocalPos.z);
+
+                // Rotation motion
+                Vector3 axis = rotationAxis switch
+                {
+                    RotationAxis.X => Vector3.right,
+                    RotationAxis.Y => Vector3.up,
+                    RotationAxis.Z => Vector3.forward,
+                    _ => Vector3.up
+                };
+
+                transform.Rotate(axis * rotationSpeed * Time.deltaTime, Space.Self);
+
+                yield return null;
+            }
+
+            // When collected, reset position & rotation
+            transform.localPosition = startLocalPos;
+            transform.localRotation = startLocalRot;
+
+            // Wait until weapon is no longer collected before resuming
+            yield return new WaitUntil(() => weaponCollectScript != null && !weaponCollectScript.collected);
+        }
+    }
+
+    void OnDisable()
+    {
+        if (floatRoutine != null)
+            StopCoroutine(floatRoutine);
     }
 }
