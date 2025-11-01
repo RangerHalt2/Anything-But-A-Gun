@@ -50,6 +50,12 @@ public class PlayerController : MonoBehaviour
     private bool canDash = true;
 
     private Vector3 momentum;
+
+    [Header("Interaction Settings")]
+    [SerializeField] private float interactRange = 3f;
+    [SerializeField] private LayerMask interactableMask;
+    [SerializeField] private float interactCooldown = 0.5f;
+    private bool canInteract = true;
     #endregion
 
     #region Getters/Setters
@@ -208,6 +214,10 @@ public class PlayerController : MonoBehaviour
             Dashes++; //This one says if you have enough charge for a new dash, store the new dash
         }
 
+        if (inputs.InteractInput)
+        {
+            Interact();
+        }
 
         TimerDecrement();
     }
@@ -242,6 +252,42 @@ public class PlayerController : MonoBehaviour
     //LB: Any and all future timers for the player will be managed in this area
     private void TimerDecrement()
     {
-        
+
+    }
+    
+    // RL: This code shoots a raycast to allow the player to interact with objects using the IInteractable interace
+    private void Interact()
+    {
+        if (!canInteract) return;
+
+        canInteract = false;
+
+        // Use the player's camera as the ray origin/direction
+        Camera cam = Camera.main;
+        if (cam == null)
+        {
+            Debug.LogWarning("No main camera found for interaction!");
+            return;
+        }
+
+        Ray ray = new Ray(cam.transform.position, cam.transform.forward);
+
+        // Raycast to check if we hit something interactable
+        if (Physics.Raycast(ray, out RaycastHit hit, interactRange, interactableMask))
+        {
+            IInteractable interactable = hit.collider.GetComponent<IInteractable>();
+
+            if (interactable != null)
+            {
+                interactable.Interact();
+            }
+        }
+        StartCoroutine(InteractionCooldown());
+    }
+
+    private IEnumerator InteractionCooldown()
+    {
+        yield return new WaitForSeconds(interactCooldown);
+        canInteract = true;
     }
 }

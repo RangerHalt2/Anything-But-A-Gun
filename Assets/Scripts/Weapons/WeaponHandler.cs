@@ -62,6 +62,25 @@ public class WeaponHandler : MonoBehaviour
         {
             scrollValue = inputManager.scrollAction.ReadValue<float>();
         }
+        else
+        {
+            Debug.LogWarning("InputManager is not assigned.");
+            return;
+        }
+
+        if (currentWeapon == null)
+        {
+            Debug.LogError("CurrentWeapon is null — likely no starter weapon assigned.");
+            return;
+        }
+
+        AmmoManager ammo = currentWeapon.GetComponent<AmmoManager>();
+        if (ammo == null)
+        {
+            Debug.LogError($"Weapon {currentWeapon.name} has no AmmoManager component.");
+            return;
+        }
+
         // If enough time has passed since the last round was fired
 
         if ((Time.timeSinceLevelLoad - lastSwitch) > weaponSwitchRate)
