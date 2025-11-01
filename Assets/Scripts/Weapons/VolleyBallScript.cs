@@ -15,6 +15,7 @@ public class VolleyBallScript : MonoBehaviour, IWeapon
     [SerializeField] private Transform projectileSpawnPoint;
     [SerializeField] private GameObject gunShot;
 
+    private PlayerController playerController;
     private WeaponLevel weaponLevelRef;
 
     private float timer = 0;
@@ -24,6 +25,7 @@ public class VolleyBallScript : MonoBehaviour, IWeapon
         ammoManager = GetComponent<AmmoManager>();
         characterController = GameObject.FindAnyObjectByType<CharacterController>(); //There should only be one Character Controller but if there are more than that this will need to change
         weaponLevelRef = GetComponent<WeaponLevel>();
+        playerController = GameObject.FindAnyObjectByType<PlayerController>();
     }
 
     //If the player is not reloading and this function is called it should check if the character controller is grounded and spawn the correct projectile
@@ -36,6 +38,7 @@ public class VolleyBallScript : MonoBehaviour, IWeapon
                 if (!ammoManager.IsReloading())
                 {
                     ammoManager.Fire();
+                    playerController.JitterDown();
                     SpawnProjectile((characterController.isGrounded ? groundProjectilePrefab : airProjectilePrefab)); //Inline Bool check, ground if grounded and air if not grounded 
                     timer = fireRate;
                 }

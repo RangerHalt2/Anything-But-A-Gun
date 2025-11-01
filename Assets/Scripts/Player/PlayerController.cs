@@ -49,6 +49,11 @@ public class PlayerController : MonoBehaviour
 
     #region Getters/Setters
     public CharacterController GetCharacterController() { return characterController; }
+    //Jitters the player down miniscually to confirm their grounded state.
+    public void JitterDown()
+    {
+        characterController.Move(new Vector3(0f, -0.05f, 0f));
+    }
     #endregion
 
     void Awake() 
@@ -93,7 +98,7 @@ public class PlayerController : MonoBehaviour
         move.y = verticalForce * Time.deltaTime;
 
         characterController.Move(move);
-        if (characterController.isGrounded) verticalForce = 0f;
+        if (characterController.isGrounded) verticalForce = -0.01f; //Vertical Force must always be slightly negative?
 
         //Debug.Log("Vertical Force: " + verticalForce);
     }
@@ -151,8 +156,8 @@ public class PlayerController : MonoBehaviour
             verticalForce = jumpForce; //The Jump itself is handled in the Move() method handling gravity, making use of CharacterController instead of RigidBody
         }
 
-        Move(inputs.MoveInput);
         Rotate(inputs.LookInput);
+        Move(inputs.MoveInput);
 
         if (inputs.FireInput)
         {

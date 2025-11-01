@@ -31,6 +31,10 @@ public class Projectile : MonoBehaviour, IWeaponLevel
     [SerializeField] private bool piercing;
     [Tooltip("Determines whether the projectile will impact with or ricochet off of walls.")]
     public WallBehavior wallBehavior;
+    [Tooltip("Determines if it's AOE or not")]
+    [SerializeField] private bool IsAoe;
+    [Tooltip("AOE Range that it can hit people in")]
+    [SerializeField] private float aoeRange;
     [Tooltip("Determines the maximum amount of bounces. Only utilized if the projectile has the Ricochet wall behavior. Must be a value greater than 0.")]
     [SerializeField] private int maxBounces = 0;
     // How many times the projectile has bounced
@@ -129,28 +133,17 @@ public class Projectile : MonoBehaviour, IWeaponLevel
 
     private void HandleCollision(Collider collider, Vector3 hitPoint, Vector3 hitNormal)
     {
+        if (IsAoe) {
+            ApplyAOE(this.transform);
+            return;
+        }
         // Access hit object's health script
         Health health = collider.gameObject.GetComponentInParent<Health>();
 
         // If health script is found...
         if (health != null)
         {
-            // If team ID is different...
-            if (health.teamID != teamID)
-            {
-                if (currentWeaponLevel != null)
-                {
-                    UpdateLevelDamage();
-                }
-                // Deal damage
-                health.TakeDamage(cummulativeDamage);
-                // If projectile is not piercing...
-                if (!piercing)
-                {
-                    // Destroy the projectile
-                    Destroy(gameObject);
-                }
-            }
+            DoDamage(health);
         }
 
         // Only destroy on impact if wall behavior is Impact 
@@ -160,10 +153,30 @@ public class Projectile : MonoBehaviour, IWeaponLevel
         }
     }
 
+    private void DoDamage(Health health)
+    {
+        // If team ID is different...
+        if (health.teamID != teamID)
+        {
+            if (currentWeaponLevel != null)
+            {
+                UpdateLevelDamage();
+            }
+            // Deal damage
+            health.TakeDamage(cummulativeDamage);
+            // If projectile is not piercing...
+            if (!piercing)
+            {
+                // Destroy the projectile
+                Destroy(gameObject);
+            }
+        }
+    }
+
     //LB: Updates the weapon's damage for what damage it should do.
     public void UpdateLevelDamage()
     {
-        cummulativeDamage = baseDamage * Mathf.Pow(growthRate, currentWeaponLevel.Level);
+        cummulativeDamage = baseDamage * Mathf.Pow(growthRate, currentWeaponLevel.Level-1);
     }
 
     #region Special Properties
@@ -209,6 +222,17 @@ public class Projectile : MonoBehaviour, IWeaponLevel
         currentBounces++;
         // Reset the bounce timer
         bounceTimer = bounceCooldown;
+    }
+
+    private void ApplyAOE(Transform center)
+    {
+        Collider[] cols = Physics.OverlapSphere(center.position, aoeRange);
+        foreach (Collider col in cols)
+        {
+            Health enemyHealth = col.GetComponent<Health>();
+            if (enemyHealth == null) continue;
+            DoDamage(enemyHealth);
+        }
     }
     #endregion
 }
