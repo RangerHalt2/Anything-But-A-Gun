@@ -293,10 +293,10 @@ public class WeaponSpawner : MonoBehaviour, IInteractable
                         return;
                     }
                 }
-                // As a failsafe set weapon levels to 0 (should never hapepn)
+                // As a failsafe set weapon levels to 1 (should never hapepn)
                 //weapon.level = 0;
-                weaponLevel.SetLevel(0);
-                spawnedWeaponLevel = 0;
+                weaponLevel.SetLevel(1);
+                spawnedWeaponLevel = 1;
                 break;
         }
     }
