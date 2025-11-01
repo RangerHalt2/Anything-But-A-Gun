@@ -18,7 +18,7 @@ public class WeaponHandler : MonoBehaviour
 
     [SerializeField] private InputManager inputManager;
     private float scrollValue;
-    [SerializeField] private float weaponSwitchRate = 0.1f;
+    [SerializeField] private float weaponSwitchRate = 0.3f;
     private float lastSwitch = Mathf.NegativeInfinity;
 
     [SerializeField] private Transform gunHolder;
@@ -42,7 +42,6 @@ public class WeaponHandler : MonoBehaviour
         {
             currentWeapon.transform.position = weaponLocation.position;
         }
-
         SwitchGun();
     }
 
@@ -66,18 +65,18 @@ public class WeaponHandler : MonoBehaviour
 
         if ((Time.timeSinceLevelLoad - lastSwitch) > weaponSwitchRate)
         {
-            if (weapons.Count > 1 && scrollValue != 0 && !currentWeapon.GetComponent<AmmoManager>().IsReloading())
+            if (weapons.Count > 1 && (scrollValue != 0 || inputManager.NextInput != 0) && !currentWeapon.GetComponent<AmmoManager>().IsReloading())
             {
-            currentWeapon.SetActive(false); //Deactivate (not destroy) current weapon
+                currentWeapon.SetActive(false); //Deactivate (not destroy) current weapon
             }
             else
             {
-            return;
+                return;
             }
 
 
             //If player scrolls
-            if (scrollValue > 0 && !currentWeapon.GetComponent<AmmoManager>().IsReloading()) //Scroll up
+            if ((scrollValue > 0 || inputManager.NextInput > 0f) && !currentWeapon.GetComponent<AmmoManager>().IsReloading()) //Scroll up
             {
                 weaponSlot++;
 
@@ -95,7 +94,7 @@ public class WeaponHandler : MonoBehaviour
 
                 //Play equip animation and activate new current weapon
             }
-            else if (scrollValue < 0 && !currentWeapon.GetComponent<AmmoManager>().IsReloading()) //Scroll down
+            else if ((scrollValue < 0 || inputManager.NextInput < 0f) && !currentWeapon.GetComponent<AmmoManager>().IsReloading()) //Scroll down
             {
                 weaponSlot--;
                 if (weaponSlot < 0) //Actually check if it's a gun. If not, change to base
