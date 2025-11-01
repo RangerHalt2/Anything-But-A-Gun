@@ -43,6 +43,7 @@ public class WeaponCollectScript : MonoBehaviour
         if (distance <= handler.maxDistance) PickUp();
     }
 
+    /* On Collision Pick Up
     void OnTriggerEnter(Collider _other) 
     {
         if (_other.CompareTag("Player") && !collected)
@@ -50,4 +51,5 @@ public class WeaponCollectScript : MonoBehaviour
             PickUp();
         }
     }
+    */
 }

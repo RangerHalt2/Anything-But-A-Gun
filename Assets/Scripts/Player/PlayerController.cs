@@ -18,6 +18,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float gravity = -30f;
     [SerializeField] private float terminalVelocity = -60f;
 
+    private float momentumDecay = 0.0001f;
+    private float maxMomentum = 0.03f;
+
     private WeaponHandler weaponHandler;
     private InputManager inputs;
 
@@ -45,6 +48,8 @@ public class PlayerController : MonoBehaviour
     public delegate void OnDashChangedDelegate();
     [HideInInspector] public OnDashChangedDelegate onDashChangedCallback;
     private bool canDash = true;
+
+    private Vector3 momentum;
     #endregion
 
     #region Getters/Setters
@@ -92,14 +97,35 @@ public class PlayerController : MonoBehaviour
         Vector3 move = transform.forward * MovementVector.y + transform.right * MovementVector.x;
         move = movementSpeed /** (inputs.SprintInput? sprintMultiplier : 1)*/ * Time.deltaTime * move;
 
+        Debug.Log("Move: " + move);
+
+        //LB: If the player stopped moving manually move them incrementally less for a little
+        if (!characterController.isGrounded)
+        {
+            if (move.x == 0f) move.x = momentum.x;
+            if (move.z == 0f) move.z = momentum.z;
+        }
+
         verticalForce = verticalForce + gravity * Time.deltaTime;
         verticalForce = Mathf.Clamp(verticalForce, terminalVelocity, -terminalVelocity);
     
         move.y = verticalForce * Time.deltaTime;
 
         characterController.Move(move);
-        if (characterController.isGrounded) verticalForce = -0.01f; //Vertical Force must always be slightly negative?
+        if (characterController.isGrounded){ 
+            verticalForce = -0.01f; //Vertical Force must always be slightly negative?
+            momentum = Vector3.zero;                                  
+        }
+        if (!characterController.isGrounded) {
+            Debug.Log("Math check - x:" + (Mathf.Abs(move.x) - 0.005f) + " z: " + (Mathf.Abs(move.z) - 0.005f));
+            momentum = new Vector3(( Mathf.Abs(move.x) - momentumDecay < 0f) ? 0f : move.x - (move.x < 0f ? -momentumDecay : momentumDecay),
+                0,
+                (Mathf.Abs(move.z) - momentumDecay < 0f) ? 0f : move.z - (move.z < 0f ? -momentumDecay : momentumDecay));
+            if(momentum.x > maxMomentum) momentum.x = maxMomentum;
+            if(momentum.z > maxMomentum) momentum.z = maxMomentum;
+        }
 
+        Debug.Log("Momentum: " + momentum);
         //Debug.Log("Vertical Force: " + verticalForce);
     }
 
