@@ -49,14 +49,20 @@ public class BrushScript : MonoBehaviour, IWeapon
                         {
                             slashAngle = slashAngleRight;
                             leftSlash = false;
-                            Instantiate(gunShot, transform.position, transform.rotation, null);
+                            if (gunShot !=null)
+                            {
+                                Instantiate(gunShot, transform.position, transform.rotation, null);
+                            }
 
                         }
                         else
                         {
                             slashAngle = slashAngleLeft;
                             leftSlash = true;
-                            Instantiate(gunShot2, transform.position, transform.rotation, null);
+                            if (gunShot !=null)
+                            {
+                                Instantiate(gunShot2, transform.position, transform.rotation, null);
+                            }
 
                         }
 

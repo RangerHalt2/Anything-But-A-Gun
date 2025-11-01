@@ -1,11 +1,18 @@
 // Created By: Ryan Lupoli
 // This weapon allows for the randomized spawning of weapons within a given level.
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
-public class WeaponSpawner : MonoBehaviour
+public class WeaponSpawner : MonoBehaviour, IInteractable
 {
     #region Variables
+    // Tracks whether or not a weapon has already been spawned
+    private bool weaponSpawned = false;
+    private GameObject selectedWeapon;
+    private GameObject spawnedWeapon;
+    [SerializeField] private bool spawnWeaponOnStart;
+
     [Header("Probability Settings")]
     [Tooltip("The weighted chance of a spawned weapon being taken from the common weapons pool.")]
     [SerializeField] private int commonWeaponWeight = 60;
@@ -34,6 +41,18 @@ public class WeaponSpawner : MonoBehaviour
     // Highest possible weapon level
     int maxWeaponLevel;
 
+    [Header("Shop Settings")]
+    [Tooltip("Determines if the weapon spawner is part of a shop. If true, then weapons cannot be collected unless the player has enough PTO.")]
+    [SerializeField] private bool isShop;
+    [Tooltip("Determines the cost of the weapon.")]
+    [SerializeField] private int weaponPrice;
+    [Tooltip("Reference to the canvas for the weapon spawner's price display.")]
+    [SerializeField] private GameObject weaponShopCanvas;
+    [Tooltip("Reference to the TMPro object which displays the weapons price.")]
+    [SerializeField] private TextMeshProUGUI weaponPriceTextbox;
+    // Reference to the Economy Manager
+    private EconomyManager economyManager;
+
     [Header("Spawn Location Settings")]
     [Tooltip("Reference to an empty gameobject which functions as a waypoint to define where the generated weapon will be spawned.")]
     [SerializeField] private Transform weaponSpawnWaypoint;
@@ -59,51 +78,100 @@ public class WeaponSpawner : MonoBehaviour
             Debug.LogWarning("Weapon Spawner: Player_Level not found.");
         }
 
+        economyManager = FindFirstObjectByType<EconomyManager>();
+        if (playerLevel == null)
+        {
+            Debug.LogWarning("Weapon Spawner: Economy Manager not found.");
+        }
+
         if (playerLevelOverride == -1)
         {
             maxWeaponLevel = playerLevel.Level;
         }
         else
         {
+            //Debug.Log("Weapon Spawner: Player Level Overrided. Simulating Level: " + playerLevelOverride);
             maxWeaponLevel = playerLevelOverride;
+        }
+        // Enable and setup the price display when the spawner is a shop
+        if (isShop)
+        {
+            SetPriceDisplay();
         }
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        SpawnWeapon();
+        // Select a Weapon to Spawn
+        selectedWeapon = GetRandomWeapon();
+
+        // If spawner is set to spawn aweapon on start
+        if(spawnWeaponOnStart)
+        {
+            // Spawn a weapon
+            SpawnWeapon();
+            // If spawner is a shop
+            if(isShop)
+            {
+                // Make weapon un-interactable
+                spawnedWeapon.layer = LayerMask.NameToLayer("Default");
+            }
+        }
+    }
+
+    public void Interact()
+    {
+        if (isShop)
+        {
+            // Try to spend the player's money to purchase a weapon
+            if (economyManager.SpendPTO(weaponPrice))
+            {
+                // Disable the WeaponShopCanvas
+                weaponShopCanvas.SetActive(false);
+                // If the weapon was spawned on start
+                if (spawnWeaponOnStart)
+                {
+                    // Make it interactable
+                    spawnedWeapon.layer = LayerMask.NameToLayer("Interactable");
+                }
+                else
+                {
+                    // If weapon was not already spawned, spawn it
+                    SpawnWeapon();
+                }
+            }
+            return;
+        }
+        // If a weapon has not spawned, and it is not a shop
+        if (!weaponSpawned)
+        {
+            // Spawn a weapon
+            SpawnWeapon();
+        }
     }
 
     private void SpawnWeapon()
     {
         if (weaponSpawnWaypoint != null)
         {
-            // Generate a random weapon
-            GameObject weaponPrefab = GetRandomWeapon();
-            // Check if the weapon was seleceted properly
-            if (weaponPrefab != null)
-            {
-                // Spawn the weapon
-                GameObject spawnedWeapon = Instantiate(weaponPrefab, weaponSpawnWaypoint.position, weaponSpawnWaypoint.rotation);
+            // Spawn the weapon
+            spawnedWeapon = Instantiate(selectedWeapon, weaponSpawnWaypoint.position, weaponSpawnWaypoint.rotation);
 
-                // Find the weapon's script
-                IWeapon weaponComponent = spawnedWeapon.GetComponent<IWeapon>();
-                // Ensure weapon script was found
-                if (weaponComponent != null)
-                {
-                    // Assign the weapon a level
-                    AssignWeaponLevel(weaponComponent);
-                    Debug.Log("WeaponSpawner: Spawned a level " + spawnedWeaponLevel + " " + spawnedWeapon.name + ".");
-                }
-                else
-                {
-                    Debug.LogWarning("WeaponSpawner: Selected weapon is not part of the IWeapon interface!");
-                }
+            // Find the weapon's script
+            IWeapon weaponComponent = spawnedWeapon.GetComponent<IWeapon>();
+            // Ensure weapon script was found
+            if (weaponComponent != null)
+            {
+                // Assign the weapon a level
+                AssignWeaponLevel(weaponComponent);
+                weaponSpawned = true;
+                Debug.Log("WeaponSpawner: Spawned a level " + spawnedWeaponLevel + " " + spawnedWeapon.name + ".");
+                if(!isShop) gameObject.layer = LayerMask.NameToLayer("Default");
             }
             else
             {
-                Debug.LogWarning("WeaponSpawner: Failed to properly spawn weapon!");
+                Debug.LogWarning("WeaponSpawner: Selected weapon is not part of the IWeapon interface!");
             }
         }
         else
@@ -158,6 +226,12 @@ public class WeaponSpawner : MonoBehaviour
     // Assigns a weapon a random level from within a range
     private void AssignWeaponLevel(IWeapon weapon)
     {
+        WeaponLevel weaponLevel = spawnedWeapon.GetComponent<WeaponLevel>();
+        if (weaponLevel == null)
+        {
+            Debug.LogWarning("Weapon Spawner: Weapon Level Component not found!");
+        }
+
         // Assign the maximum possible weapon level, which is the same as the player's level
         if (maxWeaponLevel < minLevel)
         {
@@ -169,7 +243,7 @@ public class WeaponSpawner : MonoBehaviour
             // FixedPL: Spawns a weapon at the player's current level. Intended mostly for testing purposes
             case SpawnMode.FixedPL:
                 // Set the weapon's level to the player's level
-                weapon.level = maxWeaponLevel;
+                weaponLevel.SetLevel(maxWeaponLevel);
                 spawnedWeaponLevel = maxWeaponLevel;
                 break;
             // Random: Spawns a weapon at a random level between the set floor and the player's current level. If resulting level would be less than 1, weapon level is set to 1
@@ -202,7 +276,7 @@ public class WeaponSpawner : MonoBehaviour
 
                 // Find which level corresponds to the selected weight
                 float cumulative = 0f;
-                for (int curLevel = 0; curLevel  < weights.Count; curLevel++)
+                for (int curLevel = 0; curLevel < weights.Count; curLevel++)
                 {
                     // Add the weight of curLevel to cumulative
                     cumulative += weights[curLevel];
@@ -212,16 +286,30 @@ public class WeaponSpawner : MonoBehaviour
                         // Set the selected level to the current level in the loop
                         selectedLevel = levels[curLevel];
                         // Set the weapon's level to the selected level
-                        weapon.level = selectedLevel;
+                        // weapon.level = selectedLevel;
+                        weaponLevel.SetLevel(selectedLevel);
                         spawnedWeaponLevel = selectedLevel;
                         // Break out of the loop
                         return;
                     }
                 }
                 // As a failsafe set weapon levels to 0 (should never hapepn)
-                weapon.level = 0;
+                //weapon.level = 0;
+                weaponLevel.SetLevel(0);
                 spawnedWeaponLevel = 0;
                 break;
+        }
+    }
+    
+    // Sets the price display for the weapon spawner. Intended to be used when the spawner is a shop
+    private void SetPriceDisplay()
+    {
+        if (weaponPriceTextbox != null)
+        {
+            // Enable the canvas
+            weaponShopCanvas.SetActive(true);
+            // Update the price to textbox to reflect the price
+            weaponPriceTextbox.text = string.Format("Price: " + weaponPrice + " PTO");
         }
     }
 }

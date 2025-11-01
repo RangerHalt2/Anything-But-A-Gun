@@ -62,6 +62,25 @@ public class WeaponHandler : MonoBehaviour
         {
             scrollValue = inputManager.scrollAction.ReadValue<float>();
         }
+        else
+        {
+            Debug.LogWarning("InputManager is not assigned.");
+            return;
+        }
+
+        if (currentWeapon == null)
+        {
+            Debug.LogError("CurrentWeapon is null — likely no starter weapon assigned.");
+            return;
+        }
+
+        AmmoManager ammo = currentWeapon.GetComponent<AmmoManager>();
+        if (ammo == null)
+        {
+            Debug.LogError($"Weapon {currentWeapon.name} has no AmmoManager component.");
+            return;
+        }
+
         // If enough time has passed since the last round was fired
 
         if ((Time.timeSinceLevelLoad - lastSwitch) > weaponSwitchRate)
@@ -188,6 +207,8 @@ public class WeaponHandler : MonoBehaviour
         dropWeapon.GetComponent<WeaponCollectScript>().collected = false; //Currently, if you drop the weapon and pick it up too fast, there's a chance to scramble
                                                                           //it's collected function and make it uncollectible. This won't be an issue if we change to
                                                                           //interactive pick-ups.
+
+        dropWeapon.layer = LayerMask.NameToLayer("Interactable");
 
     }
 }

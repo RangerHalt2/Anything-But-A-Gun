@@ -34,7 +34,10 @@ public class MegaphonScript : MonoBehaviour, IWeapon
                     if (projectilePrefab != null)
                     {
                         SpawnProjectile();
-                        Instantiate(gunShot, transform.position, transform.rotation, null);
+                        if (gunShot !=null)
+                        {
+                            Instantiate(gunShot, transform.position, transform.rotation, null);
+                        }
                     }
                     // Update lastFired
                     lastFired = Time.timeSinceLevelLoad;
