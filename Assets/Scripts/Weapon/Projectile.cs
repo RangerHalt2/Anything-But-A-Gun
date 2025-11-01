@@ -162,6 +162,8 @@ public class Projectile : MonoBehaviour, IWeaponLevel
             {
                 UpdateLevelDamage();
             }
+            else
+                cummulativeDamage = baseDamage;
             // Deal damage
             health.TakeDamage(cummulativeDamage);
             // If projectile is not piercing...
