@@ -92,6 +92,8 @@ public class PlayerController : MonoBehaviour
         weaponHandler = GetComponent<WeaponHandler>();
         winEvent = GameObject.FindAnyObjectByType<WinEvent>();
 
+        if(dashEffect != null) dashEffect.Stop();
+
         Dashes = maxDashLimit;
 
         if (terminalVelocity > 0) terminalVelocity = -terminalVelocity; //Just makes it negative
