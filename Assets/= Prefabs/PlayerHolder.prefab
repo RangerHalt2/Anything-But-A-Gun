@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 5808801276267967896}
   - component: {fileID: 3398571290749484056}
   - component: {fileID: 1791530072234445037}
+  - component: {fileID: 9141169956821783407}
   - component: {fileID: 1432233756446685906}
-  - component: {fileID: 796835866957253673}
   - component: {fileID: 7877837669330236168}
   - component: {fileID: 1840295424487795494}
   m_Layer: 3
@@ -59,6 +59,7 @@ MonoBehaviour:
   jumpForce: 9
   gravity: -15
   terminalVelocity: -60
+  dashEffect: {fileID: 0}
   dashForce: 4
   dashTime: 0.25
   maxDashLimit: 3
@@ -146,6 +147,19 @@ MonoBehaviour:
   inputManager: {fileID: 0}
   weaponSwitchRate: 0.1
   gunHolder: {fileID: 5256620709295122454}
+--- !u!114 &9141169956821783407
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2651782160796664015}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31f81b053a4ea834a83d9f8d13b3ec32, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EconomyManager
+  PTOAmount: 5
 --- !u!114 &1432233756446685906
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -161,32 +175,6 @@ MonoBehaviour:
   maxLevel: 10
   floor: 1039
   levelGrowth: 1.475
---- !u!114 &796835866957253673
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2651782160796664015}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7aaedb4a5edcc3643988ac4f00966e8e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Health
-  teamID: 0
-  maxHealth: 1
-  currentHealth: 1
-  healthBarActiveOnStartup: 0
-  healthBar: {fileID: 0}
-  healthDisplayText: {fileID: 0}
-  hitEffect: {fileID: 0}
-  deathEffect: {fileID: 0}
-  isPlayer: 0
-  EXPDrop: 0
-  gameOverCanvas: {fileID: 0}
-  inGameCanvas: {fileID: 0}
-  isDead: 0
-  damageNoise: {fileID: 0}
 --- !u!143 &7877837669330236168
 CharacterController:
   m_ObjectHideFlags: 0
@@ -225,8 +213,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Health
   teamID: 0
-  maxHealth: 10
-  currentHealth: 10
+  maxHealth: 100
+  currentHealth: 100
   healthBarActiveOnStartup: 1
   healthBar: {fileID: 0}
   healthDisplayText: {fileID: 0}
