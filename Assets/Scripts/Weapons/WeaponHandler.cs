@@ -178,13 +178,27 @@ public class WeaponHandler : MonoBehaviour
                 weapons.Add(addWeapon); //Adds the weapon to the list of weapons available.
                 weaponSlot = weapons.Count - 1;
                 currentWeapon = weapons[weaponSlot]; //Make the current weapon the new weapon we just added
-                
-                Vector3 scale = currentWeapon.transform.localScale;
 
-                currentWeapon.transform.SetParent(weaponLocation, true); //"True" refers to the world position of the object remaining true (look up worldPositionStays) making sure it's not scaled weird
-                currentWeapon.transform.position = gunHolder.transform.position;
-                currentWeapon.transform.rotation = gunHolder.transform.rotation;
-                currentWeapon.transform.localScale = scale;
+                // RL: Check if there is a Weapon Transform Manager
+                WeaponTransformManager wtm = currentWeapon.GetComponentInChildren<WeaponTransformManager>();
+                // If so use it to update the Weapon's scale
+                if (wtm != null)
+                {
+                    currentWeapon.transform.SetParent(weaponLocation, false);
+                    currentWeapon.transform.localPosition = Vector3.zero;
+                    currentWeapon.transform.localRotation = Quaternion.identity;
+                    wtm.SetEquipped();
+                }
+                // If not, use the old system
+                else
+                {
+                    Vector3 scale = currentWeapon.transform.localScale;
+                    currentWeapon.transform.SetParent(weaponLocation, true); //"True" refers to the world position of the object remaining true (look up worldPositionStays) making sure it's not scaled weird
+                    currentWeapon.transform.position = gunHolder.transform.position;
+                    currentWeapon.transform.rotation = gunHolder.transform.rotation;
+                    currentWeapon.transform.localScale = scale;
+                }
+                
                 currentWeapon.GetComponent<WeaponCollectScript>().enabled = false;
                 currentWeapon.SetActive(true);
                 currentWeapon.GetComponent<AmmoManager>().updateDisplay();
@@ -199,16 +213,34 @@ public class WeaponHandler : MonoBehaviour
         Vector3 spawnPoint = transform.position + transform.forward * 2;
         Vector3 scale = dropWeapon.transform.localScale;
         //Spawn the collectible in front of the player
-        dropWeapon.transform.SetParent(null);
+        dropWeapon.transform.SetParent(null, true);
         dropWeapon.transform.localScale = scale;
         dropWeapon.transform.position = spawnPoint;
         dropWeapon.SetActive(true);
+
+
         dropWeapon.GetComponent<WeaponCollectScript>().enabled = true;
         dropWeapon.GetComponent<WeaponCollectScript>().collected = false; //Currently, if you drop the weapon and pick it up too fast, there's a chance to scramble
                                                                           //it's collected function and make it uncollectible. This won't be an issue if we change to
                                                                           //interactive pick-ups.
+                                                                          // Check if there is a Weapon Transform Manager
+        WeaponTransformManager wtm = dropWeapon.GetComponentInChildren<WeaponTransformManager>();
+        // If so use it to update the weapon's scale
+        if (wtm != null)
+        {
+            dropWeapon.transform.localRotation = Quaternion.identity;
+            wtm.SetGrounded();
+        }
+        // If not use the old system
+        else
+        {
+            dropWeapon.transform.rotation = Quaternion.identity;
+        }
+
 
         dropWeapon.layer = LayerMask.NameToLayer("Interactable");
+
+        dropWeapon.GetComponentInChildren<FloatAndRotate>().StartFloatAndRotate();
 
     }
 }
