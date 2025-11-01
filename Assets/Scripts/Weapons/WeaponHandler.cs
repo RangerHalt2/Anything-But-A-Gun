@@ -15,6 +15,7 @@ public class WeaponHandler : MonoBehaviour
     private int weaponSlot; //Which weapon in slot we're holding
     public GameObject newWeapon; //For if a player picks up a new gun.
     [SerializeField] private Transform weaponLocation; //Where the weapon is in the player's POV
+    [SerializeField] public float maxDistance = 5;
 
     [SerializeField] private InputManager inputManager;
     private float scrollValue;
