@@ -231,7 +231,9 @@ public class Projectile : MonoBehaviour, IWeaponLevel
         Collider[] cols = Physics.OverlapSphere(center.position, aoeRange);
         foreach (Collider col in cols)
         {
-            Health enemyHealth = col.GetComponent<Health>();
+            Health enemyHealth = col.GetComponentInParent<Health>();
+            if(enemyHealth == null) enemyHealth = col.GetComponent<Health>();
+            if(enemyHealth == null) enemyHealth = col.GetComponentInChildren<Health>();
             if (enemyHealth == null) continue;
             DoDamage(enemyHealth);
         }
