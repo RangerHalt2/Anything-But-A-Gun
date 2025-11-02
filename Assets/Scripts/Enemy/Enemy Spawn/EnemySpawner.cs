@@ -24,6 +24,10 @@ public class EnemySpawner : MonoBehaviour
     private bool spawnedEnemies = false;
     #endregion
 
+    private void Start()
+    {
+        if (maxEnemyCount == 0) maxEnemyCount = -1; //Fail Safe
+    }
 
     public void SpawnEnemies()
     {
