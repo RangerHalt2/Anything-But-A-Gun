@@ -44,7 +44,7 @@ public class EnemySpawner : MonoBehaviour
             int commonChoice = Random.Range(0, commonEnemies.Length);
             int eliteChoice = Random.Range(0, eliteEnemies.Length);
 
-            if((maxEnemyCount - index) == (numReqEliteSpawns - eliteCount) || (spawnPoints.Length - index) == (numReqEliteSpawns - eliteCount)) //Case to force spawn the elite enemies
+            if(eliteEnemies.Length > 0 && ((maxEnemyCount - index) == (numReqEliteSpawns - eliteCount) || (spawnPoints.Length - index) == (numReqEliteSpawns - eliteCount))) //Case to force spawn the elite enemies
             {
                 SpawnElite(spawnPoint, eliteChoice);
                 eliteCount++;
@@ -59,7 +59,8 @@ public class EnemySpawner : MonoBehaviour
             }
             else //Spawn a regular enemy
             {
-                SpawnRegular(spawnPoint, commonChoice);
+                if(commonEnemies.Length > 0) 
+                    SpawnRegular(spawnPoint, commonChoice);
             }
             index++;
         }
