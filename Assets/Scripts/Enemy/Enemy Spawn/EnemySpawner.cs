@@ -41,10 +41,10 @@ public class EnemySpawner : MonoBehaviour
 
             //Random variables to spawn enemies
             float chance = Random.Range(1f, 100f);
-            int commonChoice = Random.Range(0, commonEnemies.Length + 1);
-            int eliteChoice = Random.Range(0, eliteEnemies.Length + 1);
+            int commonChoice = Random.Range(0, commonEnemies.Length);
+            int eliteChoice = Random.Range(0, eliteEnemies.Length);
 
-            if((maxEnemyCount - index) == (numReqEliteSpawns - eliteCount)) //Case to force spawn the elite enemies
+            if((maxEnemyCount - index) == (numReqEliteSpawns - eliteCount) || (spawnPoints.Length - index) == (numReqEliteSpawns - eliteCount)) //Case to force spawn the elite enemies
             {
                 SpawnElite(spawnPoint, eliteChoice);
                 eliteCount++;
@@ -52,7 +52,7 @@ public class EnemySpawner : MonoBehaviour
                 continue;
             }
 
-            if(chance >= commonEnemyChance) //Spawn an elite if the chance is greater than the common enemy chance
+            if(chance >= commonEnemyChance && eliteEnemies.Length > 0) //Spawn an elite if the chance is greater than the common enemy chance
             {
                 SpawnElite(spawnPoint, eliteChoice);
                 eliteCount++;
@@ -71,12 +71,12 @@ public class EnemySpawner : MonoBehaviour
     //Separated for readability
     private void SpawnElite(Transform spawnPoint, int eliteChoice)
     {
-        Instantiate(eliteEnemies[eliteChoice], spawnPoint);
+        Instantiate(eliteEnemies[eliteChoice], spawnPoint.position, spawnPoint.rotation);
     }
 
     private void SpawnRegular(Transform spawnPoint, int commonChoice)
     {
-        Instantiate(eliteEnemies[commonChoice], spawnPoint);
+        Instantiate(commonEnemies[commonChoice], spawnPoint.position, spawnPoint.rotation);
     }
 
 }
