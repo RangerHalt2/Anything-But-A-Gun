@@ -6,7 +6,6 @@ public class BeanPoleAI : MonoBehaviour
     [Header("References")]
     [SerializeField] private NavMeshAgent agent;
     [SerializeField] private Transform player;
-    [SerializeField] private LayerMask whatIsGround;
     [SerializeField] private LayerMask whatIsPlayer;
 
     [Header("Attack Settings")]

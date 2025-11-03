@@ -34,14 +34,30 @@ public class RombaAI : MonoBehaviour
     [SerializeField] private float detectionDisplayTime = 1f;
     private bool hasShownDetectionSprite = false;
 
+    [Header("Sound and Visual Effects")]
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip beepSound;
+    [SerializeField] private GameObject explosionPrefab;
+    private bool soundPlayed = false;
+    private bool explosionPlayed = false;
+
+    private MeshRenderer meshRenderer;
+    private Collider col;
+
     private void Awake()
     {
         player = GameObject.FindWithTag("Player").transform;
         agent = GetComponent<NavMeshAgent>();
         agent.autoTraverseOffMeshLink = true;
 
+        meshRenderer = GetComponent<MeshRenderer>();
+        col = GetComponent<Collider>();
+
         if (detectionSprite != null)
             detectionSprite.SetActive(false);
+
+        if (audioSource == null)
+            audioSource = GetComponent<AudioSource>();
     }
 
     private void Start()
@@ -151,9 +167,22 @@ public class RombaAI : MonoBehaviour
         agent.SetDestination(transform.position);
         agent.isStopped = true;
 
-        if (HasLineOfSight())
+        if (HasLineOfSight() && !soundPlayed)
         {
-            // TODO: Explosion
+            PlaySoundEffect();
+        }
+
+        if (soundPlayed && !explosionPlayed)
+        {
+            Playexplosion();
+        }
+
+        if (explosionPlayed)
+        {
+            if (!explosionPrefab.GetComponent<ParticleSystem>().isPlaying)
+            {
+                Destroy(gameObject);
+            }
         }
     }
 
@@ -207,6 +236,28 @@ public class RombaAI : MonoBehaviour
     {
         if (detectionSprite != null)
             detectionSprite.SetActive(false);
+    }
+
+    private void PlaySoundEffect()
+    {
+        if (beepSound != null && audioSource != null)
+        {
+            audioSource.PlayOneShot(beepSound);
+            soundPlayed = true;
+            Invoke(nameof(Playexplosion), beepSound.length);
+        }
+    }
+
+    private void Playexplosion()
+    {
+        if (explosionPrefab != null)
+        {
+            if (meshRenderer != null) meshRenderer.enabled = false;
+            if (col != null) col.enabled = false;
+
+            Instantiate(explosionPrefab, transform.position, Quaternion.identity);
+            explosionPlayed = true;
+        }
     }
 
     private void OnDrawGizmosSelected()

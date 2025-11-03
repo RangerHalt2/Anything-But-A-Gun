@@ -6,7 +6,6 @@ public class BrickAI : MonoBehaviour
     [Header("Target Layers and Player")]
     [SerializeField] private NavMeshAgent agent;
     [SerializeField] private Transform player;
-    [SerializeField] private LayerMask whatIsGround;
     [SerializeField] private LayerMask whatIsPlayer;
 
     [Header("Patrol Settings")]
