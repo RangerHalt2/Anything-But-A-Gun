@@ -29,6 +29,8 @@ public class Projectile : MonoBehaviour, IWeaponLevel
     [Header("Special Properties")]
     [Tooltip("Determines whether the projectile is able to pierce through, and deal damage, to multiple objects.")]
     [SerializeField] private bool piercing;
+    [Tooltip("a unique weapon that should not destroy the projectile on impact")]
+    [SerializeField] private bool unique;
     [Tooltip("Determines whether the projectile will impact with or ricochet off of walls.")]
     public WallBehavior wallBehavior;
     [Tooltip("Determines if it's AOE or not")]
@@ -52,6 +54,26 @@ public class Projectile : MonoBehaviour, IWeaponLevel
     public void SetWeaponLevelReference(WeaponLevel weaponLevel)
     {
         currentWeaponLevel = weaponLevel;
+    }
+
+    public float GetTeamID()
+    {
+        return teamID;
+    }
+    
+    public float GetBaseDamage()
+    {
+        return baseDamage;
+    }
+
+    public float GetGrowthRate()
+    {
+        return growthRate;
+    }
+
+    public WeaponLevel GetCurrentWeaponLevel()
+    {
+        return currentWeaponLevel;
     }
 
     // Referenece to the Projectile's's Rigidbody
@@ -167,9 +189,10 @@ public class Projectile : MonoBehaviour, IWeaponLevel
             // Deal damage
             health.TakeDamage(cummulativeDamage);
             // If projectile is not piercing...
-            if (!piercing)
+            if (!piercing && !unique)
             {
                 // Destroy the projectile
+                Debug.Log("Found the culprit");
                 Destroy(gameObject);
             }
         }
