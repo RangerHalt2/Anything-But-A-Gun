@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.AI;
 
-public class EnemyAI : MonoBehaviour
+public class BrickAI : MonoBehaviour
 {
     [Header("Target Layers and Player")]
     [SerializeField] private NavMeshAgent agent;
