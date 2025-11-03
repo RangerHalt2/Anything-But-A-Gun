@@ -319,8 +319,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b03c51e0304388448e0f713a19de859, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SectionGenerator
-  spawnRoomPrefab: {fileID: 3890225092730717373, guid: 838c5fbf67ef75a44b077460afad7849, type: 3}
-  bossRoomPrefab: {fileID: 8763390532078716711, guid: d48091f5f3dfbc14da391d07274cc66a, type: 3}
+  spawnRoomPrefabs: []
+  bossRoomPrefabs: []
   roomSections:
   - {fileID: 2362544075785383720, guid: 5060f34b3cf850246a3a37755066560a, type: 3}
   - {fileID: 2362544075785383720, guid: a6e9d346355e210448b3f2ffb5c54713, type: 3}
@@ -330,8 +330,10 @@ MonoBehaviour:
   - {fileID: 8724441875870556482, guid: ffe968b4cddcadd489f34032f16436fa, type: 3}
   - {fileID: 8724441875870556482, guid: 4c6f61ba1142de141a7ee08cedd11c98, type: 3}
   - {fileID: 3373898963129723866, guid: c2cf3f437eae7ce4e99261d0ef042ae6, type: 3}
+  specialRooms: []
   minRooms: 9
   maxRooms: 15
+  specialRoomCount: 2
 --- !u!4 &299931546
 Transform:
   m_ObjectHideFlags: 0
@@ -2329,7 +2331,8 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 5006960836044405115, guid: 6e79526cb5b40544c91f9ac79610f37c, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6e79526cb5b40544c91f9ac79610f37c, type: 3}
