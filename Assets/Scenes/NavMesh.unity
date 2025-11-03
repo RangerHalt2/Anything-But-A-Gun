@@ -163,16 +163,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b03c51e0304388448e0f713a19de859, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SectionGenerator
-  spawnRoomPrefab: {fileID: 3890225092730717373, guid: 838c5fbf67ef75a44b077460afad7849, type: 3}
-  bossRoomPrefab: {fileID: 8763390532078716711, guid: d48091f5f3dfbc14da391d07274cc66a, type: 3}
+  spawnRoomPrefabs:
+  - {fileID: 3890225092730717373, guid: 838c5fbf67ef75a44b077460afad7849, type: 3}
+  bossRoomPrefabs:
+  - {fileID: 8763390532078716711, guid: d48091f5f3dfbc14da391d07274cc66a, type: 3}
   roomSections:
   - {fileID: 561228803638993782, guid: 3f473424c87e72b408e8b8b230564fa5, type: 3}
   - {fileID: 4994971228344133115, guid: 5d53d622dfeef204fa6f33ca3380888d, type: 3}
   - {fileID: 2324935156471135954, guid: d6eae0571ff97594da2f40748677c74d, type: 3}
   - {fileID: 6075375440184983770, guid: fe6a56639b58ae7449273d9b1599845e, type: 3}
   - {fileID: 1414856392922863844, guid: 32aabcc81ef5deb489b5329364b580ef, type: 3}
+  specialRooms:
+  - {fileID: 8763390532078716711, guid: eab7750cf85b10e4384c1b2c39388b59, type: 3}
+  - {fileID: 8763390532078716711, guid: 26e29dd44566acc46a62eb89db2c6d6a, type: 3}
   minRooms: 9
   maxRooms: 15
+  specialRoomCount: 2
 --- !u!1 &1592971503
 GameObject:
   m_ObjectHideFlags: 0
