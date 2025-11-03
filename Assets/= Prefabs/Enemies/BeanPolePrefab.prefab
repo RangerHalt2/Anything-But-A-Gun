@@ -151,6 +151,7 @@ GameObject:
   - component: {fileID: 1052873763899505579}
   - component: {fileID: 5561038860284266260}
   - component: {fileID: 1858845626273565094}
+  - component: {fileID: 8718023588053921820}
   m_Layer: 11
   m_Name: BeanPolePrefab
   m_TagString: Enemy
@@ -242,7 +243,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4925705786666085929}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e3aa495c3c1d0364d933a58964504ad0, type: 3}
   m_Name: 
@@ -329,6 +330,34 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   enemyManager: {fileID: 0}
+--- !u!114 &8718023588053921820
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4925705786666085929}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98a90d25b74354d41b3a87ca95d231e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BeanPoleAI
+  agent: {fileID: 0}
+  player: {fileID: 0}
+  whatIsGround:
+    serializedVersion: 2
+    m_Bits: 1
+  whatIsPlayer:
+    serializedVersion: 2
+    m_Bits: 8
+  attackRange: 20
+  timeBetweenAttacks: 1
+  alreadyAttacked: 0
+  enemyBulletPrefab: {fileID: 5762768201822907473, guid: dc2ab7264a1b5c7458fbef3a2fa00268, type: 3}
+  firePoint: {fileID: 3685410459568754834}
+  bulletForce: 10
+  detectionSprite: {fileID: 0}
+  detectionDisplayTime: 1
 --- !u!1 &5683218652002669994
 GameObject:
   m_ObjectHideFlags: 0
@@ -358,15 +387,15 @@ RectTransform:
   m_GameObject: {fileID: 5683218652002669994}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.01, y: 0.01, z: 0.01}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.015, y: 0.015, z: 0.015}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 6149662476984180244}
   m_Father: {fileID: 7633860298624178408}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 5.53}
+  m_AnchoredPosition: {x: 0, y: 6.37}
   m_SizeDelta: {x: 300, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &1030315253820376146
@@ -587,7 +616,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 52, y: 9}
+  m_SizeDelta: {x: 52, y: 14.22}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &3703757189924230743
 MonoBehaviour:
