@@ -52,6 +52,7 @@ public class BrushScript : MonoBehaviour, IWeapon
                             if (gunShot !=null)
                             {
                                 Instantiate(gunShot, transform.position, transform.rotation, null);
+                                Instantiate(leftSlashEffect, transform.position, transform.rotation, null);
                             }
 
                         }
@@ -62,6 +63,7 @@ public class BrushScript : MonoBehaviour, IWeapon
                             if (gunShot !=null)
                             {
                                 Instantiate(gunShot2, transform.position, transform.rotation, null);
+                                Instantiate(rightSlashEffect, transform.position, transform.rotation, null);
                             }
 
                         }
