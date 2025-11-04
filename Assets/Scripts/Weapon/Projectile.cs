@@ -51,6 +51,9 @@ public class Projectile : MonoBehaviour, IWeaponLevel
     [Tooltip("Multiplier for gravity when bullet drop is enabled.")]
     [SerializeField] private float gravityMultiplier = 1.0f;
 
+    [SerializeField] private GameObject spikedExplosionVFX;
+
+
     public void SetWeaponLevelReference(WeaponLevel weaponLevel)
     {
         currentWeaponLevel = weaponLevel;
@@ -157,6 +160,11 @@ public class Projectile : MonoBehaviour, IWeaponLevel
     {
         if (IsAoe) {
             ApplyAOE(this.transform);
+            if (spikedExplosionVFX != null)
+                {
+                Instantiate(spikedExplosionVFX, transform.position, transform.rotation, null);
+                }
+                
             return;
         }
         // Access hit object's health script
@@ -254,6 +262,7 @@ public class Projectile : MonoBehaviour, IWeaponLevel
         Collider[] cols = Physics.OverlapSphere(center.position, aoeRange);
         foreach (Collider col in cols)
         {
+            if (col.gameObject.CompareTag("Head")) continue;
             Health enemyHealth = col.GetComponentInParent<Health>();
             if(enemyHealth == null) enemyHealth = col.GetComponent<Health>();
             if(enemyHealth == null) enemyHealth = col.GetComponentInChildren<Health>();
