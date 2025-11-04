@@ -104,6 +104,7 @@ MonoBehaviour:
   maxBounces: 0
   bulletDrop: 1
   gravityMultiplier: 1
+  spikedExplosionVFX: {fileID: 0}
 --- !u!54 &5258742335422185819
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -146,9 +147,9 @@ MonoBehaviour:
   gooseMulti: 3
   range: 10
   maxBounce: 5
-  height: 2
-  duration: 1
-  chanceToGoose: -1
+  height: 1
+  duration: 0.65
+  chanceToGoose: 30
   whatIsEnemy:
     serializedVersion: 2
     m_Bits: 2048

@@ -31,7 +31,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.31571, y: 0.55, z: -0.51649}
-  m_LocalScale: {x: 3.8061428, y: 0.36909795, z: 3.717892}
+  m_LocalScale: {x: 1.8, y: 0.23, z: 1.7582644}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 982111691810110846}
@@ -130,7 +130,7 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 0
+  m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 122
@@ -174,27 +174,47 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6549330978410922286, guid: faa6167a401f1f9468dbd38a080f4b50, type: 3}
       propertyPath: ShapeModule.radius.value
-      value: 0.6
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 6549330978410922286, guid: faa6167a401f1f9468dbd38a080f4b50, type: 3}
       propertyPath: ShapeModule.radiusThickness
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6549330978410922286, guid: faa6167a401f1f9468dbd38a080f4b50, type: 3}
+      propertyPath: InitialModule.startSize.scalar
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6549330978410922286, guid: faa6167a401f1f9468dbd38a080f4b50, type: 3}
+      propertyPath: InitialModule.startSpeed.scalar
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6549330978410922286, guid: faa6167a401f1f9468dbd38a080f4b50, type: 3}
+      propertyPath: InitialModule.startSize.minScalar
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6549330978410922286, guid: faa6167a401f1f9468dbd38a080f4b50, type: 3}
       propertyPath: EmissionModule.rateOverTime.scalar
-      value: 5
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6549330978410922286, guid: faa6167a401f1f9468dbd38a080f4b50, type: 3}
+      propertyPath: InitialModule.startLifetime.scalar
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6549330978410922286, guid: faa6167a401f1f9468dbd38a080f4b50, type: 3}
+      propertyPath: InitialModule.startLifetime.minScalar
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7171511279006916420, guid: faa6167a401f1f9468dbd38a080f4b50, type: 3}
       propertyPath: m_LocalScale.x
-      value: 1.51
+      value: 1.1
       objectReference: {fileID: 0}
     - target: {fileID: 7171511279006916420, guid: faa6167a401f1f9468dbd38a080f4b50, type: 3}
       propertyPath: m_LocalScale.y
-      value: 1.4968696
+      value: 1.1
       objectReference: {fileID: 0}
     - target: {fileID: 7171511279006916420, guid: faa6167a401f1f9468dbd38a080f4b50, type: 3}
       propertyPath: m_LocalScale.z
-      value: 1.7787199
+      value: 1.1
       objectReference: {fileID: 0}
     - target: {fileID: 7171511279006916420, guid: faa6167a401f1f9468dbd38a080f4b50, type: 3}
       propertyPath: m_LocalPosition.x
@@ -238,7 +258,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7171511279006916420, guid: faa6167a401f1f9468dbd38a080f4b50, type: 3}
       propertyPath: m_ConstrainProportionsScale
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7468744225540532214, guid: faa6167a401f1f9468dbd38a080f4b50, type: 3}
       propertyPath: m_Name
