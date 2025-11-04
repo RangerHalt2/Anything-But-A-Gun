@@ -9,6 +9,8 @@ public class CameraWeaponScript : MonoBehaviour, IWeapon
     [SerializeField] private AmmoManager ammoManager;
     private float lastFired = Mathf.NegativeInfinity;
 
+    [SerializeField] private GameObject flashVFX;
+
     [SerializeField] private GameObject enemyCopy; //The copy for the enemy
 
     private List<GameObject> enemiesInRange = new List<GameObject>();
@@ -28,6 +30,7 @@ public class CameraWeaponScript : MonoBehaviour, IWeapon
                 if (!ammoManager.IsReloading())
                 {
                         SnapCamera();
+                        Instantiate(flashVFX, transform.position, transform.rotation, null);
                     // Update lastFired
                     lastFired = Time.timeSinceLevelLoad;
                 }
