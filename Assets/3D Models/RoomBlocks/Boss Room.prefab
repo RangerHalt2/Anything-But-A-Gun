@@ -1382,10 +1382,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3358182796844140664}
-  - component: {fileID: 2357903262832575831}
   - component: {fileID: 4854560890473283905}
+  - component: {fileID: 2116059556070134951}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: Win Trigger Box
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1406,21 +1406,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 3973919631195298911}
   m_LocalEulerAnglesHint: {x: 0, y: -27.498, z: 0}
---- !u!114 &2357903262832575831
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7741666667511060452}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 21fe1fa4274795e42b8c3269124c1391, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::WinEvent
-  winScreen: {fileID: 0}
-  inGameUI: {fileID: 0}
-  hasWon: 0
 --- !u!65 &4854560890473283905
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1442,6 +1427,23 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &2116059556070134951
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7741666667511060452}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5275161905ee3b42a74d8fb0bcf4919, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WinEvent
+  isFinalLevel: 1
+  winPageIndex: 2
+  nextSceneName: 
+  nextScenePos: {x: 0, y: 0, z: 0}
+  hasWon: 0
 --- !u!1 &8162113207371077901
 GameObject:
   m_ObjectHideFlags: 0

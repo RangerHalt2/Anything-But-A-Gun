@@ -173,10 +173,12 @@ public class PlayerController : MonoBehaviour
         canDash = true;
     }
 
-    // Update is called once per frame
+    // Update is called once per frame     UPDATED BY JAIME AND RYAN 11/3/25
     void Update()
     {
-        if (playerHealth.isDead || winEvent.hasWon) return;
+        if (playerHealth.isDead) return;
+
+        if (winEvent != null  && winEvent.hasWon) return;
 
         if (UIManager.instance != null && UIManager.instance.IsPaused) return;
 

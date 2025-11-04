@@ -44,14 +44,16 @@ public class WinEvent : MonoBehaviour
             // If the UI Manager exists
             if (uiManager != null)
             {
+                uiManager.TogglePause();
                 // Pull up the winPage
                 uiManager.GoToPage(winPageIndex);
                 // Set timeScale to 0 (to stop enemies form killing the player)
                 Time.timeScale = 0f;
                 // Unlock Cursor
                 Cursor.lockState = CursorLockMode.None;
+
                 // Set hasWon to true. This is referenced by other scripts and I didn't want to risk messing up other code by removing it entirely - Ryan
-                hasWon = true;
+                //hasWon = true;
             }
             else
             {
