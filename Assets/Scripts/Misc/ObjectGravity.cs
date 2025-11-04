@@ -16,4 +16,21 @@ public class ObjectGravity : MonoBehaviour
         rb = GetComponent<Rigidbody>();
     }
 
+    private void DoGravity()
+    {
+
+    }
+
+    private bool IsGrounded()
+    {
+        bool ret = false;
+
+        if(Physics.Raycast(groundPoint.position, Vector3.down, groundDistance, whatIsGround))
+        {
+            ret = true;
+        }
+
+        return ret;
+    }
+
 }
