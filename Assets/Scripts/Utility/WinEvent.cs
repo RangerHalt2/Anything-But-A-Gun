@@ -66,7 +66,9 @@ public class WinEvent : MonoBehaviour
             if (sceneController != null)
             {
                 // Move player to the specified position in the next scene
-                other.transform.position = nextScenePos;
+                GameObject player = other.transform.parent != null ? other.transform.parent.gameObject : other.gameObject;
+                player.transform.position = nextScenePos;
+                Debug.Log(other.transform.position);
 
                 // Go to the next scene
                 sceneController.GoToScene(nextSceneName);
