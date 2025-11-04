@@ -314,7 +314,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 299931544}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6b03c51e0304388448e0f713a19de859, type: 3}
   m_Name: 
@@ -490,75 +490,12 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1461595476481832391, guid: db96ae0bd1f6a0844aa72ea910db323b, type: 3}
   m_PrefabInstance: {fileID: 1515023986}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1515023987}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 06ad0a8717e40fa4ba9b4a1cefd70b74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InputManager
---- !u!1 &642858578 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2858006895754640660, guid: caa24201197b26b479e66c072d7d3e13, type: 3}
-  m_PrefabInstance: {fileID: 4269252208770340167}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &642858579
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 642858578}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.EventSystems.EventTrigger
-  m_Delegates:
-  - eventID: 0
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 642858580}
-          m_TargetAssemblyTypeName: biggerButton, Assembly-CSharp
-          m_MethodName: OnPointerEnter
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  - eventID: 1
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 642858580}
-          m_TargetAssemblyTypeName: biggerButton, Assembly-CSharp
-          m_MethodName: OnPointerExit
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
---- !u!114 &642858580
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 642858578}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 296d235d10723c64c812ec69df927d6f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::biggerButton
-  scaleFactor: 1.2
 --- !u!1 &712293033 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3916895867372277912, guid: 6853ce2a5b29f3645a183e767c7a42fa, type: 3}
@@ -804,6 +741,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 851965759}
     m_Modifications:
+    - target: {fileID: 820788872936465999, guid: 6853ce2a5b29f3645a183e767c7a42fa, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1261051669983158098, guid: 6853ce2a5b29f3645a183e767c7a42fa, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 34.399902
@@ -840,9 +781,21 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -65
       objectReference: {fileID: 0}
+    - target: {fileID: 2146871836419143559, guid: 6853ce2a5b29f3645a183e767c7a42fa, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149851017800458217, guid: 6853ce2a5b29f3645a183e767c7a42fa, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2177423655424108862, guid: 6853ce2a5b29f3645a183e767c7a42fa, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 3.9001465
+      objectReference: {fileID: 0}
+    - target: {fileID: 2252269642217984087, guid: 6853ce2a5b29f3645a183e767c7a42fa, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2719808075384068931, guid: 6853ce2a5b29f3645a183e767c7a42fa, type: 3}
       propertyPath: m_Pivot.x
@@ -955,11 +908,11 @@ PrefabInstance:
     - target: {fileID: 2956134648254071005, guid: 6853ce2a5b29f3645a183e767c7a42fa, type: 3}
       propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[2].m_Target
       value: 
-      objectReference: {fileID: 1476202283}
+      objectReference: {fileID: 0}
     - target: {fileID: 2956134648254071005, guid: 6853ce2a5b29f3645a183e767c7a42fa, type: 3}
       propertyPath: m_Delegates.Array.data[1].callback.m_PersistentCalls.m_Calls.Array.data[2].m_Target
       value: 
-      objectReference: {fileID: 1476202283}
+      objectReference: {fileID: 0}
     - target: {fileID: 2956134648254071005, guid: 6853ce2a5b29f3645a183e767c7a42fa, type: 3}
       propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
       value: 2
@@ -1008,9 +961,25 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.x
       value: -68.1001
       objectReference: {fileID: 0}
+    - target: {fileID: 4988347243457264778, guid: 6853ce2a5b29f3645a183e767c7a42fa, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5296072205998298494, guid: 6853ce2a5b29f3645a183e767c7a42fa, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5568359239548298665, guid: 6853ce2a5b29f3645a183e767c7a42fa, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -3.5998535
+      objectReference: {fileID: 0}
+    - target: {fileID: 6315043778798133145, guid: 6853ce2a5b29f3645a183e767c7a42fa, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6524937410653526819, guid: 6853ce2a5b29f3645a183e767c7a42fa, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6957215539838744497, guid: 6853ce2a5b29f3645a183e767c7a42fa, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -1039,6 +1008,10 @@ PrefabInstance:
     - target: {fileID: 9020993345125991894, guid: 6853ce2a5b29f3645a183e767c7a42fa, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: -68.1001
+      objectReference: {fileID: 0}
+    - target: {fileID: 9175334708859105676, guid: 6853ce2a5b29f3645a183e767c7a42fa, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 2956134648254071005, guid: 6853ce2a5b29f3645a183e767c7a42fa, type: 3}
@@ -1373,8 +1346,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21fe1fa4274795e42b8c3269124c1391, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WinEvent
-  winScreen: {fileID: 0}
-  inGameUI: {fileID: 0}
+  isFinalLevel: 0
+  winPageIndex: 0
+  nextSceneName: 
+  nextScenePos: {x: 0, y: 0, z: 0}
   hasWon: 0
 --- !u!4 &1219696626 stripped
 Transform:
@@ -1561,9 +1536,6 @@ GameObject:
   - component: {fileID: 1476202286}
   - component: {fileID: 1476202285}
   - component: {fileID: 1476202284}
-  - component: {fileID: 1476202283}
-  - component: {fileID: 1476202282}
-  - component: {fileID: 1476202287}
   m_Layer: 5
   m_Name: Main Menu
   m_TagString: Untagged
@@ -1591,31 +1563,6 @@ RectTransform:
   m_AnchoredPosition: {x: 108, y: 121}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1476202282
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1476202280}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aba0f2df1ad9577429f0c315d73d741a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::goToTitle
---- !u!114 &1476202283
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1476202280}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 296d235d10723c64c812ec69df927d6f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::biggerButton
-  scaleFactor: 1.2
 --- !u!114 &1476202284
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1660,16 +1607,16 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1476202282}
-        m_TargetAssemblyTypeName: goToTitle, Assembly-CSharp
-        m_MethodName: OnButtonClick
-        m_Mode: 1
+      - m_Target: {fileID: 1515023988}
+        m_TargetAssemblyTypeName: SceneController, Assembly-CSharp
+        m_MethodName: GoToScene
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: Title Screen
           m_BoolArgument: 1
         m_CallState: 2
 --- !u!114 &1476202285
@@ -1710,51 +1657,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1476202280}
   m_CullTransparentMesh: 1
---- !u!114 &1476202287
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1476202280}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.EventSystems.EventTrigger
-  m_Delegates:
-  - eventID: 0
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1476202283}
-          m_TargetAssemblyTypeName: biggerButton, Assembly-CSharp
-          m_MethodName: OnPointerEnter
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  - eventID: 1
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1476202283}
-          m_TargetAssemblyTypeName: biggerButton, Assembly-CSharp
-          m_MethodName: OnPointerExit
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
 --- !u!1 &1503564352 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8440151756213131526, guid: 6853ce2a5b29f3645a183e767c7a42fa, type: 3}
@@ -1879,8 +1781,29 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4819697221681922954, guid: db96ae0bd1f6a0844aa72ea910db323b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1515023988}
   m_SourcePrefab: {fileID: 100100000, guid: db96ae0bd1f6a0844aa72ea910db323b, type: 3}
+--- !u!1 &1515023987 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4819697221681922954, guid: db96ae0bd1f6a0844aa72ea910db323b, type: 3}
+  m_PrefabInstance: {fileID: 1515023986}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1515023988
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1515023987}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02ed5e81a7868da48abd6556de9eb859, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SceneController
+  MainMenu: 
 --- !u!1 &1521114847
 GameObject:
   m_ObjectHideFlags: 0
@@ -2292,7 +2215,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2118403805752224804, guid: 6e79526cb5b40544c91f9ac79610f37c, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -12.17
       objectReference: {fileID: 0}
     - target: {fileID: 2118403805752224804, guid: 6e79526cb5b40544c91f9ac79610f37c, type: 3}
       propertyPath: m_LocalRotation.w
@@ -2592,6 +2515,10 @@ PrefabInstance:
       value: 512
       objectReference: {fileID: 0}
     - target: {fileID: 3418618212774699008, guid: caa24201197b26b479e66c072d7d3e13, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3691284016060425880, guid: caa24201197b26b479e66c072d7d3e13, type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
@@ -2909,121 +2836,16 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 395747133}
     m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 4626257494119394054, guid: caa24201197b26b479e66c072d7d3e13, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 4269252208770340169}
     - targetCorrespondingSourceObject: {fileID: 6120725345040969484, guid: caa24201197b26b479e66c072d7d3e13, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2110629967}
     - targetCorrespondingSourceObject: {fileID: 4622185018303109548, guid: caa24201197b26b479e66c072d7d3e13, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1525519767}
-    - targetCorrespondingSourceObject: {fileID: 2858006895754640660, guid: caa24201197b26b479e66c072d7d3e13, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 642858580}
-    - targetCorrespondingSourceObject: {fileID: 2858006895754640660, guid: caa24201197b26b479e66c072d7d3e13, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 642858579}
-    - targetCorrespondingSourceObject: {fileID: 5678579548450937882, guid: caa24201197b26b479e66c072d7d3e13, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 4269252208770340172}
-    - targetCorrespondingSourceObject: {fileID: 5678579548450937882, guid: caa24201197b26b479e66c072d7d3e13, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 4269252208770340171}
     - targetCorrespondingSourceObject: {fileID: 2065099937050849998, guid: caa24201197b26b479e66c072d7d3e13, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1676435576}
   m_SourcePrefab: {fileID: 100100000, guid: caa24201197b26b479e66c072d7d3e13, type: 3}
---- !u!1 &4269252208770340168 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4626257494119394054, guid: caa24201197b26b479e66c072d7d3e13, type: 3}
-  m_PrefabInstance: {fileID: 4269252208770340167}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &4269252208770340169
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4269252208770340168}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e08c23fa2f0855347b6a792eaee1c7bc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::UIManager
-  pages:
-  - {fileID: 2110629967}
-  - {fileID: 1636036660}
-  - {fileID: 1676435576}
-  - {fileID: 1525519767}
-  currentPage: 0
-  defaultPage: 0
-  UIControls: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
-  pausePageIndex: 1
-  allowPause: 1
---- !u!1 &4269252208770340170 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5678579548450937882, guid: caa24201197b26b479e66c072d7d3e13, type: 3}
-  m_PrefabInstance: {fileID: 4269252208770340167}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &4269252208770340171
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4269252208770340170}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.EventSystems.EventTrigger
-  m_Delegates:
-  - eventID: 0
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 4269252208770340172}
-          m_TargetAssemblyTypeName: biggerButton, Assembly-CSharp
-          m_MethodName: OnPointerEnter
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  - eventID: 1
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 4269252208770340172}
-          m_TargetAssemblyTypeName: biggerButton, Assembly-CSharp
-          m_MethodName: OnPointerExit
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
---- !u!114 &4269252208770340172
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4269252208770340170}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 296d235d10723c64c812ec69df927d6f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::biggerButton
-  scaleFactor: 1.2
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

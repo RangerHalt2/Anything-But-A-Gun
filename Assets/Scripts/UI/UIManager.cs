@@ -41,7 +41,7 @@ public class UIManager : MonoBehaviour
         }
         else
         {
-            Destroy(this);
+            //Destroy(this);
         }
 
         // Get the pause action from the UI Action Map in InputActions
