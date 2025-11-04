@@ -172,6 +172,7 @@ Transform:
   - {fileID: 2341579381627065503}
   - {fileID: 6654303829938227947}
   - {fileID: 1859650284404588676}
+  - {fileID: 3812552338003670470}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3496429978101742945
@@ -206,11 +207,10 @@ MonoBehaviour:
   fireRate: 0.6
   ammoManager: {fileID: 1802305520914099029}
   projectilePrefab: {fileID: 2858475928119156006, guid: f165c6422bea5914d8f9f24875c41104, type: 3}
-  leftSlashEffect: {fileID: 653573502046088657, guid: 53d9a2124a2f1854d9a42f0be8da8c25, type: 3}
-  rightSlashEffect: {fileID: 653573502046088657, guid: 8ebac850058c8c14684c305f9b61eea5, type: 3}
   projectileSpawnPoint: {fileID: 2341579381627065503}
-  gunShot: {fileID: 0}
-  gunShot2: {fileID: 0}
+  gunShot: {fileID: 653573502046088657, guid: 8ebac850058c8c14684c305f9b61eea5, type: 3}
+  gunShot2: {fileID: 653573502046088657, guid: 53d9a2124a2f1854d9a42f0be8da8c25, type: 3}
+  gunShotTrans: {fileID: 3812552338003670470}
 --- !u!114 &1802305520914099029
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -295,12 +295,43 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WeaponTransformManager
   modelTransform: {fileID: 1859650284404588676}
-  equippedLocalPosition: {x: 0, y: 0, z: 1}
+  equippedLocalPosition: {x: 0, y: 0, z: 0.8}
   equippedLocalRotation: {x: 30.051, y: 180, z: 0}
   groundLocalPosition: {x: 0, y: 0, z: 0}
   groundLocalRotation: {x: 47.55, y: 180, z: 0}
   smoothTransition: 1
   transitionSpeed: 10
+--- !u!1 &5306707161042492476
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3812552338003670470}
+  m_Layer: 14
+  m_Name: gunShotLocation
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3812552338003670470
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5306707161042492476}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.34399998, z: 4}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8538374235286036410}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2180999415880132463
 PrefabInstance:
   m_ObjectHideFlags: 0

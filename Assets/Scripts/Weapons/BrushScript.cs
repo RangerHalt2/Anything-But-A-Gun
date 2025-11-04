@@ -7,8 +7,7 @@ public class BrushScript : MonoBehaviour, IWeapon
     [SerializeField] private float fireRate = 0.25f;
     [SerializeField] private AmmoManager ammoManager;
     [SerializeField] private GameObject projectilePrefab;
-    [SerializeField] private GameObject leftSlashEffect; //Slash VFX Spot 1
-    [SerializeField] private GameObject rightSlashEffect;//Slash VFX Spot 2
+
     [SerializeField] private Transform projectileSpawnPoint;
     private float lastFired = Mathf.NegativeInfinity;
 
@@ -22,6 +21,7 @@ public class BrushScript : MonoBehaviour, IWeapon
     private float slashAngleRight = 21f;
     [SerializeField] private GameObject gunShot;
     [SerializeField] private GameObject gunShot2;
+    [SerializeField] private Transform gunShotTrans;
 
     private void Start()
     {
@@ -51,8 +51,7 @@ public class BrushScript : MonoBehaviour, IWeapon
                             leftSlash = false;
                             if (gunShot !=null)
                             {
-                                Instantiate(gunShot, transform.position, transform.rotation, null);
-                                Instantiate(leftSlashEffect, transform.position, transform.rotation, null);
+                                Instantiate(gunShot, gunShotTrans.position, transform.rotation, null);
                             }
 
                         }
@@ -62,8 +61,7 @@ public class BrushScript : MonoBehaviour, IWeapon
                             leftSlash = true;
                             if (gunShot !=null)
                             {
-                                Instantiate(gunShot2, transform.position, transform.rotation, null);
-                                Instantiate(rightSlashEffect, transform.position, transform.rotation, null);
+                                Instantiate(gunShot2, gunShotTrans.position, transform.rotation, null);
                             }
 
                         }
