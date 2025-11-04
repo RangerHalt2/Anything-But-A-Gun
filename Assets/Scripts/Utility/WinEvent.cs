@@ -38,44 +38,48 @@ public class WinEvent : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        // If it is the final level
-        if (isFinalLevel)
+        // Ensure that the game object entering the trigger is the player
+        if (other.gameObject.CompareTag("Player"))
         {
-            // If the UI Manager exists
-            if (uiManager != null)
+            // If it is the final level
+            if (isFinalLevel)
             {
-                uiManager.TogglePause();
-                // Pull up the winPage
-                uiManager.GoToPage(winPageIndex);
-                // Set timeScale to 0 (to stop enemies form killing the player)
-                Time.timeScale = 0f;
-                // Unlock Cursor
-                Cursor.lockState = CursorLockMode.None;
+                // If the UI Manager exists
+                if (uiManager != null)
+                {
+                    uiManager.TogglePause();
+                    // Pull up the winPage
+                    uiManager.GoToPage(winPageIndex);
+                    // Set timeScale to 0 (to stop enemies form killing the player)
+                    Time.timeScale = 0f;
+                    // Unlock Cursor
+                    Cursor.lockState = CursorLockMode.None;
 
-                // Set hasWon to true. This is referenced by other scripts and I didn't want to risk messing up other code by removing it entirely - Ryan
-                //hasWon = true;
+                    // Set hasWon to true. This is referenced by other scripts and I didn't want to risk messing up other code by removing it entirely - Ryan
+                    //hasWon = true;
+                }
+                else
+                {
+                    Debug.LogWarning("Win Event: UI Manager could not be found in current scene! Cannot open winPage!");
+                }
             }
+            // If it is not the final level
             else
             {
-                Debug.LogWarning("Win Event: UI Manager could not be found in current scene! Cannot open winPage!");
-            }
-        }
-        // If it is not the final level
-        else
-        {
-            if (sceneController != null)
-            {
-                // Move player to the specified position in the next scene
-                GameObject player = other.transform.parent != null ? other.transform.parent.gameObject : other.gameObject;
-                player.transform.position = nextScenePos;
-                Debug.Log(other.transform.position);
+                if (sceneController != null)
+                {
+                    // Move player to the specified position in the next scene
+                    GameObject player = other.transform.parent != null ? other.transform.parent.gameObject : other.gameObject;
+                    player.transform.position = nextScenePos;
+                    Debug.Log(other.transform.position);
 
-                // Go to the next scene
-                sceneController.GoToScene(nextSceneName);
-            }
-            else
-            {
-                Debug.LogWarning("Win Event: Scene Controller could not be found in current scene! Cannot load next scene!");
+                    // Go to the next scene
+                    sceneController.GoToScene(nextSceneName);
+                }
+                else
+                {
+                    Debug.LogWarning("Win Event: Scene Controller could not be found in current scene! Cannot load next scene!");
+                }
             }
         }
     }
