@@ -143,6 +143,9 @@ MonoBehaviour:
   teamID: 0
   baseDamage: 10
   growthRate: 1.15
+  ignoreThese:
+    serializedVersion: 2
+    m_Bits: 512
   bulletSpawnPoint: {fileID: 519912207177028976}
   addBulletSpread: 0
   bulletSpreadVariance: {x: 0.1, y: 0.1, z: 0.1}
@@ -175,6 +178,8 @@ MonoBehaviour:
   ammoDisplayText: {fileID: 0}
   reloadEffect: {fileID: 6985806122707607359, guid: 95346eec370133543a2372ec2afd4783, type: 3}
   bottomlessMagazines: 0
+  reloadVFX: {fileID: 0}
+  weaponObject: {fileID: 0}
 --- !u!65 &4591394418674582347
 BoxCollider:
   m_ObjectHideFlags: 0

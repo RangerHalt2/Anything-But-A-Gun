@@ -18,6 +18,7 @@ public class Hitscan : MonoBehaviour, IWeaponLevel
     private float cummulativeDamage;
     private WeaponLevel currentWeaponLevel;
 
+    [SerializeField] private LayerMask ignoreThese;
 
     [Header("Spread & Range Settings")]
     [Tooltip("Determines where the raycast will be shot from")]
@@ -52,6 +53,7 @@ public class Hitscan : MonoBehaviour, IWeaponLevel
         bulletSpawnPoint = GameObject.FindAnyObjectByType<Camera>().transform;
         currentWeaponLevel = GetComponent<WeaponLevel>();
         UpdateLevelDamage(); //set the initial damage at the level the weapon spawns at.
+        ignoreThese = ~ignoreThese;
     }
 
     // Update is called once per frame
@@ -82,7 +84,7 @@ public class Hitscan : MonoBehaviour, IWeaponLevel
             Ray ray = new Ray(bulletSpawnPoint.position, direction);
             RaycastHit hit;
 
-            if (Physics.Raycast(ray, out hit, remainingDistance))
+            if (Physics.Raycast(ray, out hit, remainingDistance, ignoreThese))
             {
                 float distanceTraveled = Vector3.Distance(origin, hit.point);
                 remainingDistance -= distanceTraveled;
