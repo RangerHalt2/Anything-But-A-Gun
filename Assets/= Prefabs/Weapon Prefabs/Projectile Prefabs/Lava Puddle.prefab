@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 303486928912853629}
   - component: {fileID: 4232643695635613475}
   - component: {fileID: 3906270925264488652}
-  - component: {fileID: 19888710444574425}
   - component: {fileID: -5714003004423866338}
   - component: {fileID: -7209149386486838399}
+  - component: {fileID: 4229450359148209345}
   m_Layer: 9
   m_Name: Lava Puddle
   m_TagString: Untagged
@@ -93,27 +93,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &19888710444574425
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5413838311375678403}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.72502863, y: 1.0000001, z: 0.6741464}
-  m_Center: {x: -0.010827657, y: 0, z: 0.016916348}
 --- !u!114 &-5714003004423866338
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -127,8 +106,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LavaPuddleScript
   puddleTimer: 3
-  baseDamage: 0.1
-  levelDamage: 0
+  baseDamage: 0.5
+  growthRate: 1.15
 --- !u!54 &-7209149386486838399
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -137,7 +116,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5413838311375678403}
   serializedVersion: 5
-  m_Mass: 1
+  m_Mass: 10.17
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -154,8 +133,29 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 122
   m_CollisionDetection: 0
+--- !u!65 &4229450359148209345
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5413838311375678403}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 0.6648423, z: 1}
+  m_Center: {x: 0, y: 0.12330402, z: 0}
 --- !u!1001 &7937447980820554298
 PrefabInstance:
   m_ObjectHideFlags: 0

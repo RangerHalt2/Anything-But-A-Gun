@@ -11,7 +11,7 @@ public class NuggieSpawner : MonoBehaviour
         weaponLevelRef = weaponLevel;
     }
 
-    void OnDestroy()
+    void OnCollisionEnter(Collision other)
     {
             GameObject nuggieGameObject = Instantiate(nuggiePrefab, transform.position, transform.rotation, null);
             NuggieBehaviorScript nbs = nuggieGameObject.GetComponent<NuggieBehaviorScript>();

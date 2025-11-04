@@ -9,6 +9,12 @@ public class TitlePage : MonoBehaviour
 
     public void PlayGame ()
     {
+        PlayerController controller = GameObject.FindAnyObjectByType<PlayerController>();
+        if(controller != null)
+        {
+            Destroy(controller.gameObject);
+        }
+
         SceneManager.LoadScene("Level Gen 2");
     }
     public void QuitGame()
