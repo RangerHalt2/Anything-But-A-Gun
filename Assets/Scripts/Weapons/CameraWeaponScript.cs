@@ -9,9 +9,12 @@ public class CameraWeaponScript : WeaponClass
     //[SerializeField] private AmmoManager ammoManager;
     private float lastFired = Mathf.NegativeInfinity;
 
+    [SerializeField] private GameObject flashVFX;
+
     [SerializeField] private GameObject enemyCopy; //The copy for the enemy
 
     private List<GameObject> enemiesInRange = new List<GameObject>();
+    [SerializeField] private GameObject gunShot;
 
     public override void Shoot() //Haha, because camera?
     {
@@ -27,6 +30,7 @@ public class CameraWeaponScript : WeaponClass
                 if (!ammoManager.IsReloading())
                 {
                         SnapCamera();
+                        Instantiate(flashVFX, transform.position, transform.rotation, null);
                     // Update lastFired
                     lastFired = Time.timeSinceLevelLoad;
                 }
@@ -36,10 +40,8 @@ public class CameraWeaponScript : WeaponClass
 
     /*public void Reload()
     {
-        // If the shooter has at least one round of reserve ammo or is set to have infinite ammo
-        if (ammoManager.GetReserveAmmo() > 0 || ammoManager.GetReserveAmmo() == -1)
+        if (ammoManager.GetReserveAmmo() > 0 || ammoManager.GetReserveAmmo() == -1) 
         {
-            // Reload the shooter
             ammoManager.ReloadWeapon();
         }
     }*/

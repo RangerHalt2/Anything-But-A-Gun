@@ -53,12 +53,10 @@ public class StaplerScript : WeaponClass
         }
     }
 
-    /*public override void Reload() 
+    /*public void Reload()
     {
-        // If the shooter has at least one round of reserve ammo or is set to have infinite ammo
-        if (ammoManager.GetReserveAmmo() > 0 || ammoManager.GetReserveAmmo() == -1)
+        if (ammoManager.GetReserveAmmo() > 0 || ammoManager.GetReserveAmmo() == -1) 
         {
-            // Reload the shooter
             ammoManager.ReloadWeapon();
         }
     }*/

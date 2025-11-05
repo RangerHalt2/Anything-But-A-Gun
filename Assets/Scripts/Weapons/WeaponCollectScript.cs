@@ -43,6 +43,6 @@ public class WeaponCollectScript : MonoBehaviour, IInteractable
         handler.newWeapon = gameObject;
         collected = true;
 
-        gameObject.layer = LayerMask.NameToLayer("Default");
+        gameObject.layer = LayerMask.NameToLayer("Gun");
     }
 }

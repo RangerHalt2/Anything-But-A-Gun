@@ -5,7 +5,7 @@ public class VolleyBallScript : WeaponClass
     //[SerializeField] public int level {get; set;}
     
     //[SerializeField] private float fireRate = 0.75f;
-    //[SerializeField] private AmmoManager ammoManager;
+    //private AmmoManager ammoManager;
     private CharacterController characterController;
     [Tooltip("This will be the projectile that is fired when on the ground, the not 'spiked' prefab")]
     [SerializeField] private GameObject groundProjectilePrefab;
@@ -13,7 +13,9 @@ public class VolleyBallScript : WeaponClass
     [SerializeField] private GameObject airProjectilePrefab;
     [Tooltip("Where the projectile should spawn from")]
     [SerializeField] private Transform projectileSpawnPoint;
+    [SerializeField] private GameObject gunShot;
 
+    private PlayerController playerController;
     private WeaponLevel weaponLevelRef;
 
     private float timer = 0;
@@ -23,6 +25,7 @@ public class VolleyBallScript : WeaponClass
         ammoManager = GetComponent<AmmoManager>();
         characterController = GameObject.FindAnyObjectByType<CharacterController>(); //There should only be one Character Controller but if there are more than that this will need to change
         weaponLevelRef = GetComponent<WeaponLevel>();
+        playerController = GameObject.FindAnyObjectByType<PlayerController>();
     }
 
     //If the player is not reloading and this function is called it should check if the character controller is grounded and spawn the correct projectile
@@ -35,6 +38,7 @@ public class VolleyBallScript : WeaponClass
                 if (!ammoManager.IsReloading())
                 {
                     ammoManager.Fire();
+                    playerController.JitterDown();
                     SpawnProjectile((characterController.isGrounded ? groundProjectilePrefab : airProjectilePrefab)); //Inline Bool check, ground if grounded and air if not grounded 
                     timer = fireRate;
                 }
@@ -43,12 +47,10 @@ public class VolleyBallScript : WeaponClass
     }
 
     //Check the reserve ammo of the ammo manager and reload the weapon
-    /*public override void Reload() 
+    /*public void Reload()
     {
-        // If the shooter has at least one round of reserve ammo or is set to have infinite ammo
-        if (ammoManager.GetReserveAmmo() > 0 || ammoManager.GetReserveAmmo() == -1)
+        if (ammoManager.GetReserveAmmo() > 0 || ammoManager.GetReserveAmmo() == -1) 
         {
-            // Reload the shooter
             ammoManager.ReloadWeapon();
         }
     }*/
@@ -63,6 +65,7 @@ public class VolleyBallScript : WeaponClass
         }
 
         GameObject projectile = Instantiate(bullet, projectileSpawnPoint.position, projectileSpawnPoint.rotation, null);
+        Instantiate(gunShot, transform.position, transform.rotation, null);
 
         Vector3 rotationEulerAngles = projectile.transform.rotation.eulerAngles;
         projectile.transform.rotation = Quaternion.Euler(rotationEulerAngles);

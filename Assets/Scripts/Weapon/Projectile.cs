@@ -7,7 +7,6 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour, IWeaponLevel
 {
-    private bool canDealDamage =true;
     #region Variables
     [Header("Speed Settings")]
     [Tooltip("The speed at which the projectile will travel.")]
@@ -23,15 +22,21 @@ public class Projectile : MonoBehaviour, IWeaponLevel
     [Tooltip("The amount of damage dealt to a target")]
     [SerializeField] public float baseDamage;
     [Tooltip("Damage to be added per level to the projectile")]
-    [SerializeField] private float levelDamage;
+    [SerializeField] private float growthRate = 1.15f;
     private float cummulativeDamage;
     private WeaponLevel currentWeaponLevel;
-
+        
     [Header("Special Properties")]
     [Tooltip("Determines whether the projectile is able to pierce through, and deal damage, to multiple objects.")]
     [SerializeField] private bool piercing;
+    [Tooltip("a unique weapon that should not destroy the projectile on impact")]
+    [SerializeField] private bool unique;
     [Tooltip("Determines whether the projectile will impact with or ricochet off of walls.")]
     public WallBehavior wallBehavior;
+    [Tooltip("Determines if it's AOE or not")]
+    [SerializeField] private bool IsAoe;
+    [Tooltip("AOE Range that it can hit people in")]
+    [SerializeField] private float aoeRange;
     [Tooltip("Determines the maximum amount of bounces. Only utilized if the projectile has the Ricochet wall behavior. Must be a value greater than 0.")]
     [SerializeField] private int maxBounces = 0;
     // How many times the projectile has bounced
@@ -46,9 +51,32 @@ public class Projectile : MonoBehaviour, IWeaponLevel
     [Tooltip("Multiplier for gravity when bullet drop is enabled.")]
     [SerializeField] private float gravityMultiplier = 1.0f;
 
+    [SerializeField] private GameObject spikedExplosionVFX;
+
+
     public void SetWeaponLevelReference(WeaponLevel weaponLevel)
     {
         currentWeaponLevel = weaponLevel;
+    }
+
+    public float GetTeamID()
+    {
+        return teamID;
+    }
+    
+    public float GetBaseDamage()
+    {
+        return baseDamage;
+    }
+
+    public float GetGrowthRate()
+    {
+        return growthRate;
+    }
+
+    public WeaponLevel GetCurrentWeaponLevel()
+    {
+        return currentWeaponLevel;
     }
 
     // Referenece to the Projectile's's Rigidbody
@@ -130,42 +158,22 @@ public class Projectile : MonoBehaviour, IWeaponLevel
 
     private void HandleCollision(Collider collider, Vector3 hitPoint, Vector3 hitNormal)
     {
+        if (IsAoe) {
+            ApplyAOE(this.transform);
+            if (spikedExplosionVFX != null)
+                {
+                Instantiate(spikedExplosionVFX, transform.position, transform.rotation, null);
+                }
+                
+            return;
+        }
         // Access hit object's health script
         Health health = collider.gameObject.GetComponentInParent<Health>();
 
         // If health script is found...
         if (health != null)
         {
-            // If team ID is different...
-            if (health.teamID != teamID)
-            {
-                if (canDealDamage)
-                {
-                    canDealDamage = false;
-
-                    if (currentWeaponLevel != null)
-                    {
-                        UpdateLevelDamage();
-                        health.TakeDamage(cummulativeDamage);
-                    }
-                    else
-                    {
-                        // Deal damage
-                        health.TakeDamage(baseDamage);
-                    }
-                    
-                    // If projectile is not piercing...
-                    if (!piercing)
-                    {
-                        // Destroy the projectile
-                        Destroy(gameObject);
-                    }
-                    else
-                    {
-                        canDealDamage = true;
-                    }
-                }
-            }
+            DoDamage(health);
         }
 
         // Only destroy on impact if wall behavior is Impact 
@@ -175,20 +183,37 @@ public class Projectile : MonoBehaviour, IWeaponLevel
         }
     }
 
+    private void DoDamage(Health health)
+    {
+        // If team ID is different...
+        if (health.teamID != teamID)
+        {
+            if (currentWeaponLevel != null)
+            {
+                UpdateLevelDamage();
+            }
+            else
+                cummulativeDamage = baseDamage;
+            // Deal damage
+            health.TakeDamage(cummulativeDamage);
+            // If projectile is not piercing...
+            if (!piercing && !unique)
+            {
+                // Destroy the projectile
+                Debug.Log("Found the culprit");
+                Destroy(gameObject);
+            }
+        }
+    }
+
     //LB: Updates the weapon's damage for what damage it should do.
     public void UpdateLevelDamage()
     {
-        cummulativeDamage = baseDamage + (levelDamage*(currentWeaponLevel.Level-1));
-    }
-
-    // Returns the weapon's current damage with level scaling
-    public float CalculateLevelDamage()
-    {
-        return baseDamage + (levelDamage * (currentWeaponLevel.Level - 1));
+        cummulativeDamage = baseDamage * Mathf.Pow(growthRate, currentWeaponLevel.Level-1);
     }
 
     #region Special Properties
-    private void SimulateRicochet(Collision collision)
+   private void SimulateRicochet(Collision collision)
     {
         if (bounceTimer > 0) return;
 
@@ -230,6 +255,20 @@ public class Projectile : MonoBehaviour, IWeaponLevel
         currentBounces++;
         // Reset the bounce timer
         bounceTimer = bounceCooldown;
+    }
+
+    private void ApplyAOE(Transform center)
+    {
+        Collider[] cols = Physics.OverlapSphere(center.position, aoeRange);
+        foreach (Collider col in cols)
+        {
+            if (col.gameObject.CompareTag("Head")) continue;
+            Health enemyHealth = col.GetComponentInParent<Health>();
+            if(enemyHealth == null) enemyHealth = col.GetComponent<Health>();
+            if(enemyHealth == null) enemyHealth = col.GetComponentInChildren<Health>();
+            if (enemyHealth == null) continue;
+            DoDamage(enemyHealth);
+        }
     }
     #endregion
 }

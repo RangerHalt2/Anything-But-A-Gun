@@ -1,7 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using UnityEditor.Build.Content;
 using System;
 
 public class WeaponInfoUI : MonoBehaviour

@@ -11,7 +11,7 @@ public class WeaponLevel : MonoBehaviour
     private Player_Level playerLvl;
 
     [HideInInspector]
-    public int Level { get; private set; }
+    public int Level { get; private set; } = 1;
 
     //This function attempts to level up the weapon, it enforces the level cannot be higher than the player's level
     //If the level for some reason cannot be increased, it returns false. If the function returns true the level increased.

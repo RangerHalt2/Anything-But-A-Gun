@@ -17,12 +17,17 @@ public class AirFrierScript : WeaponClass
     private float cookSpeed = 1f; //Temperature of the oven, ha ha
     [SerializeField] private float coolSpeed = 0.1f; //Speed that the nuggies cool off
 
+    private PlayerController playerRef;
+    [SerializeField] private GameObject gunShot;
+
+
     //NEEDS UI FOR CHARGE TIME
 
     private void Awake()
     {
         cookTime = 0f;
         weaponLevelRef = GetComponent<WeaponLevel>();
+        playerRef = GameObject.FindAnyObjectByType<PlayerController>();
     }
 
     private void Update() 
@@ -58,6 +63,8 @@ public class AirFrierScript : WeaponClass
                         {
                             SpawnProjectile();
                             cookTime = 0f;
+                            Instantiate(gunShot, transform.position, transform.rotation, null);
+
                         }
                         // Update lastFired
                         lastFired = Time.timeSinceLevelLoad;
@@ -73,16 +80,13 @@ public class AirFrierScript : WeaponClass
         
     }
 
-    public override void Reload()
+    /*public void Reload()
     {
-        // If the shooter has at least one round of reserve ammo or is set to have infinite ammo
-        if (ammoManager.GetReserveAmmo() > 0 || ammoManager.GetReserveAmmo() == -1)
+        if (ammoManager.GetReserveAmmo() > 0 || ammoManager.GetReserveAmmo() == -1) 
         {
-            // Reload the shooter
             ammoManager.ReloadWeapon();
-            cookTime = 0f;
         }
-    }
+    }*/
 
     void SpawnProjectile()
     {

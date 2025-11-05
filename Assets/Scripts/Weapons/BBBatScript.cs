@@ -7,12 +7,12 @@ public class BBBatScript : WeaponClass
 
     [SerializeField] private int health = 10; //Health of the melee weapon
     [SerializeField] private int teamID;
-    [SerializeField] private float baseDamage = 15;
-    [SerializeField] private float levelDamage;
+    [SerializeField] private float baseDamage = 15f;
+    [SerializeField] private float growthRate = 1.15f;
     private float cummulativeDamage;
     private bool striking = false;
     private Health enemyHealth;
-    //[SerializeField] private AmmoManager ammoManager;
+    //private AmmoManager ammoManager;
     private WeaponLevel currentWeaponLevel;
     [SerializeField] private GameObject whackEffect;
 
@@ -72,13 +72,17 @@ public class BBBatScript : WeaponClass
         striking = false;
     }
 
-    public override void Reload()
+    /*public void Reload()
     {
-    }
+        if (ammoManager.GetReserveAmmo() > 0 || ammoManager.GetReserveAmmo() == -1) 
+        {
+            ammoManager.ReloadWeapon();
+        }
+    }*/
 
     public void UpdateLevelDamage()
     {
-        cummulativeDamage = baseDamage + (levelDamage * (currentWeaponLevel.Level - 1));
+        cummulativeDamage = baseDamage * Mathf.Pow(growthRate, currentWeaponLevel.Level);
     }
 
 }

@@ -10,32 +10,14 @@ public class MegaphonScript : WeaponClass
     [SerializeField] private Transform projectileSpawnPoint;
     private float lastFired = Mathf.NegativeInfinity;
 
-    // Damage Settings
-    [SerializeField] public float baseDamage { get; set; }
-    [SerializeField] public float levelDamage { get; set; }
-    [HideInInspector] public float cumulativeDamage { get;  set; }
-
     private WeaponLevel weaponLevelRef;
-    private int currentWeaponLevel;
+    [SerializeField] private GameObject gunShot;
 
     private void Start()
     {
-        // Look for a Weapon Level Component
         weaponLevelRef = GetComponent<WeaponLevel>();
-        // If the component was found...
-        if (weaponLevelRef != null)
-        {
-            // Update Current Weapon Level
-            currentWeaponLevel = weaponLevelRef.Level;
-        }
-        // If no level component was found...
-        else
-        {
-            // Set Weapon Level to 0
-            currentWeaponLevel = 0;
-        }
-        UpdateLevelDamage();
     }
+
     public override void Shoot()
     {
         // If enough time has passed since the last round was fired
@@ -52,6 +34,10 @@ public class MegaphonScript : WeaponClass
                     if (projectilePrefab != null)
                     {
                         SpawnProjectile();
+                        if (gunShot !=null)
+                        {
+                            Instantiate(gunShot, transform.position, transform.rotation, null);
+                        }
                     }
                     // Update lastFired
                     lastFired = Time.timeSinceLevelLoad;
@@ -60,17 +46,15 @@ public class MegaphonScript : WeaponClass
         }
     }
 
-    /*public override void Reload() 
+    /*public void Reload()
     {
-        // If the shooter has at least one round of reserve ammo or is set to have infinite ammo
-        if (ammoManager.GetReserveAmmo() > 0 || ammoManager.GetReserveAmmo() == -1)
+        if (ammoManager.GetReserveAmmo() > 0 || ammoManager.GetReserveAmmo() == -1) 
         {
-            // Reload the shooter
             ammoManager.ReloadWeapon();
         }
     }*/
 
-    void SpawnProjectile()
+    void SpawnProjectile() 
     {
         // Check that the prefab is valid
         if (projectilePrefab != null)
@@ -97,18 +81,5 @@ public class MegaphonScript : WeaponClass
             */
         }
     }
-
-    #region Damage & Level Code
-    // Update the Level Damage for the weapon
-    public void UpdateLevelDamage()
-    {
-        cumulativeDamage = baseDamage + (levelDamage * (currentWeaponLevel - 1));
-    }
-
-    public float GetWeaponDamage()
-    {
-        return cumulativeDamage;
-    }
-    #endregion
 }
 

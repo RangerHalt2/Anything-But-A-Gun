@@ -17,7 +17,7 @@ public class EconomyManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
-
+    
     // RL: Method which will try to spend the player's PTO. Returns False if the player lacks the necessary funds
     public bool SpendPTO(int spentPTO)
     {

@@ -14,10 +14,11 @@ public class Hitscan : MonoBehaviour, IWeaponLevel
     [Tooltip("The amount of damage that the weapon begins with")]
     [SerializeField] private float baseDamage;
     [Tooltip("How much damage is added per level")]
-    [SerializeField] private float levelDamage;
+    [SerializeField] private float growthRate = 1.15f;
     private float cummulativeDamage;
     private WeaponLevel currentWeaponLevel;
 
+    [SerializeField] private LayerMask ignoreThese;
 
     [Header("Spread & Range Settings")]
     [Tooltip("Determines where the raycast will be shot from")]
@@ -52,6 +53,7 @@ public class Hitscan : MonoBehaviour, IWeaponLevel
         bulletSpawnPoint = GameObject.FindAnyObjectByType<Camera>().transform;
         currentWeaponLevel = GetComponent<WeaponLevel>();
         UpdateLevelDamage(); //set the initial damage at the level the weapon spawns at.
+        ignoreThese = ~ignoreThese;
     }
 
     // Update is called once per frame
@@ -82,7 +84,7 @@ public class Hitscan : MonoBehaviour, IWeaponLevel
             Ray ray = new Ray(bulletSpawnPoint.position, direction);
             RaycastHit hit;
 
-            if (Physics.Raycast(ray, out hit, remainingDistance))
+            if (Physics.Raycast(ray, out hit, remainingDistance, ignoreThese))
             {
                 float distanceTraveled = Vector3.Distance(origin, hit.point);
                 remainingDistance -= distanceTraveled;
@@ -184,9 +186,9 @@ public class Hitscan : MonoBehaviour, IWeaponLevel
     //Simple floor + (lvl * weaponLvlDamage)
     public void UpdateLevelDamage()
     {
-        cummulativeDamage = baseDamage + (levelDamage * (currentWeaponLevel.Level-1));
+        cummulativeDamage = baseDamage * Mathf.Pow(growthRate, currentWeaponLevel.Level);
     }
-    
+
     //Attempts to level the weapon up, if the weapon levels up the damage needs to be recalculated.
     //This function should be called by the shops or anything that upgrades the weapons level.
     //Similarly, this function also returns the true or false if it was able to upgrade.

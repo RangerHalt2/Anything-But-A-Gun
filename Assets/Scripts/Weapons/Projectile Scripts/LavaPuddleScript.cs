@@ -4,7 +4,7 @@ public class LavaPuddleScript : MonoBehaviour, IWeaponLevel
 {
     [SerializeField] private float puddleTimer;
     [SerializeField] private float baseDamage;
-    [SerializeField] private float levelDamage;
+    [SerializeField] private float growthRate = 1.15f;
     private float cummulativeDamage;
 
     private WeaponLevel currentWeaponLevel;
@@ -26,7 +26,7 @@ public class LavaPuddleScript : MonoBehaviour, IWeaponLevel
         }
     }
 
-    void OnTriggerStay(Collider _other)
+    void OnCollisionStay(Collision _other)
     {
         // Attempt to reference the health script on the collided object
         Health health = _other.gameObject.GetComponentInParent<Health>();
@@ -42,6 +42,6 @@ public class LavaPuddleScript : MonoBehaviour, IWeaponLevel
     //LB: Updates the weapon's damage for what damage it should do.
     public void UpdateLevelDamage()
     {
-        cummulativeDamage = baseDamage + (levelDamage * (currentWeaponLevel.Level - 1));
+        cummulativeDamage = baseDamage * Mathf.Pow(growthRate, currentWeaponLevel.Level);
     }
 }

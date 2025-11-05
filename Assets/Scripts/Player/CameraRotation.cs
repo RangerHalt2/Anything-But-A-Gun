@@ -33,7 +33,9 @@ public class CameraRotation : MonoBehaviour
 
     private void Update()
     {
-        if (playerHealth.isDead || winEvent.hasWon) return;
+        if (playerHealth.isDead) return;
+
+        if (winEvent != null  && winEvent.hasWon) return;
 
         if (UIManager.instance != null && UIManager.instance.IsPaused) return;
         

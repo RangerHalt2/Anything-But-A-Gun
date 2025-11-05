@@ -61,15 +61,6 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Interact",
-                    "type": "Button",
-                    "id": "23238557-7f77-4837-8116-8adc0db80ba7",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "Sprint",
                     "type": "Button",
                     "id": "f3c798ca-a32c-49d3-8b5c-974f24fe06c1",
@@ -82,6 +73,24 @@
                     "name": "Reload",
                     "type": "Button",
                     "id": "aa42a522-e946-47c8-8262-304176e5ee57",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "NextWeapon",
+                    "type": "Value",
+                    "id": "210222fb-703a-424c-b1f6-12d9a50748f7",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Interact",
+                    "type": "Button",
+                    "id": "6ff03236-ca4b-44d5-b23e-34e8e16df338",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -310,8 +319,74 @@
                     "isPartOfComposite": false
                 },
                 {
+                    "name": "Left/Right",
+                    "id": "6b5d36ad-6e5e-418f-8b3d-2311369d7512",
+                    "path": "1DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "NextWeapon",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "37508af4-b167-4087-b217-45e0518e35bd",
+                    "path": "<Keyboard>/leftArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "NextWeapon",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "cc345a26-2f11-411e-9b60-9fada23cca47",
+                    "path": "<Keyboard>/rightArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "NextWeapon",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "Up/Down",
+                    "id": "0bd5135c-5445-4247-aa86-01981f36c0ca",
+                    "path": "1DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "NextWeapon",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "d7353209-2a0b-4f25-8dc2-aafbef67a9fe",
+                    "path": "<Keyboard>/downArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "NextWeapon",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "f4532f3d-ae7f-47aa-a3a3-b9638e076c13",
+                    "path": "<Keyboard>/upArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "NextWeapon",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
                     "name": "",
-                    "id": "ada27e91-f155-411f-b6e7-fe307acb4f19",
+                    "id": "e4070dfb-956a-4444-8b72-d46e8ff034ff",
                     "path": "<Keyboard>/e",
                     "interactions": "",
                     "processors": "",

@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: -3932295107658604157}
   - component: {fileID: 973126755458432689}
   - component: {fileID: -6749029174857571121}
-  m_Layer: 12
+  m_Layer: 14
   m_Name: Baseball Bat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -92,8 +92,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BBBatScript
   health: 25
   teamID: 0
-  baseDamage: 15
-  levelDamage: 5
+  baseDamage: 30
+  growthRate: 1.15
   whackEffect: {fileID: 6015612841358465451, guid: 1d0c6d75c570bbd49bf4edd36fe51c93, type: 3}
   attackCooldownBuffer: 0.8
 --- !u!114 &9216862354450597352
@@ -119,6 +119,8 @@ MonoBehaviour:
   ammoDisplayText: {fileID: 0}
   reloadEffect: {fileID: 0}
   bottomlessMagazines: 0
+  reloadVFX: {fileID: 0}
+  weaponObject: {fileID: 0}
 --- !u!114 &-3932295107658604157
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -341,16 +343,44 @@ PrefabInstance:
       propertyPath: m_Name
       value: Bob's_Bat
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1661ab4f6e3331143803ba6e510f94a0, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 1661ab4f6e3331143803ba6e510f94a0, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 201481740160463188}
   m_SourcePrefab: {fileID: 100100000, guid: 1661ab4f6e3331143803ba6e510f94a0, type: 3}
 --- !u!4 &4653297688541789586 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 1661ab4f6e3331143803ba6e510f94a0, type: 3}
   m_PrefabInstance: {fileID: 5123245805822581369}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &5465123900740183848 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 1661ab4f6e3331143803ba6e510f94a0, type: 3}
+  m_PrefabInstance: {fileID: 5123245805822581369}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &201481740160463188
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5465123900740183848}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36aeb7eb22422024a909a8c979ead610, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FloatAndRotate
+  amplitude: 0.1
+  frequency: 1
+  rotationSpeed: 50
+  rotationAxis: 1
 --- !u!1001 &7495447282614908794
 PrefabInstance:
   m_ObjectHideFlags: 0

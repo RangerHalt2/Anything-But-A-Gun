@@ -6,6 +6,9 @@ public class PlayerController : MonoBehaviour
     #region Variables
     private CharacterController characterController;
 
+    [SerializeField] private Transform headPoint;
+
+    [Header("Base Movement Fields")]
     [SerializeField] private float movementSpeed = 10f;
     [SerializeField] private float sprintMultiplier = 2f;
 
@@ -14,6 +17,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float jumpForce = 5f;
     [SerializeField] private float gravity = -30f;
     [SerializeField] private float terminalVelocity = -60f;
+
+    private float momentumDecay = 0.0001f;
+    private float maxMomentum = 0.03f;
 
     private WeaponHandler weaponHandler;
     private InputManager inputs;
@@ -31,6 +37,7 @@ public class PlayerController : MonoBehaviour
 
     [Space(5)]
     [Header("Dash Variables")]
+    [SerializeField] private ParticleSystem dashEffect;
     [SerializeField] private float dashForce; //How strong the dash is
     [SerializeField] private float dashTime; //The time the player spends dashing
     [SerializeField] public int maxDashLimit = 3; //The number of times that the player can dash
@@ -42,6 +49,8 @@ public class PlayerController : MonoBehaviour
     [HideInInspector] public OnDashChangedDelegate onDashChangedCallback;
     private bool canDash = true;
 
+    private Vector3 momentum;
+
     [Header("Interaction Settings")]
     [SerializeField] private float interactRange = 3f;
     [SerializeField] private LayerMask interactableMask;
@@ -51,9 +60,14 @@ public class PlayerController : MonoBehaviour
 
     #region Getters/Setters
     public CharacterController GetCharacterController() { return characterController; }
+    //Jitters the player down miniscually to confirm their grounded state.
+    public void JitterDown()
+    {
+        characterController.Move(new Vector3(0f, -0.05f, 0f));
+    }
     #endregion
 
-    void Awake()
+    void Awake() 
     {
         if (Instance != null && Instance != this)
         {
@@ -78,6 +92,8 @@ public class PlayerController : MonoBehaviour
         weaponHandler = GetComponent<WeaponHandler>();
         winEvent = GameObject.FindAnyObjectByType<WinEvent>();
 
+        if(dashEffect != null) dashEffect.Stop();
+
         Dashes = maxDashLimit;
 
         if (terminalVelocity > 0) terminalVelocity = -terminalVelocity; //Just makes it negative
@@ -88,16 +104,36 @@ public class PlayerController : MonoBehaviour
         //Default Base Case
         Vector3 move = transform.forward * MovementVector.y + transform.right * MovementVector.x;
         move = movementSpeed /** (inputs.SprintInput? sprintMultiplier : 1)*/ * Time.deltaTime * move;
-        characterController.Move(move);
+
+        //Debug.Log("Move: " + move);
+
+        //LB: If the player stopped moving manually move them incrementally less for a little
+        if (!characterController.isGrounded)
+        {
+            if (move.x == 0f) move.x = momentum.x;
+            if (move.z == 0f) move.z = momentum.z;
+        }
 
         verticalForce = verticalForce + gravity * Time.deltaTime;
         verticalForce = Mathf.Clamp(verticalForce, terminalVelocity, -terminalVelocity);
+    
+        move.y = verticalForce * Time.deltaTime;
 
-        if (characterController.isGrounded) verticalForce = 0f;
+        characterController.Move(move);
+        if (characterController.isGrounded){ 
+            verticalForce = -0.01f; //Vertical Force must always be slightly negative?
+            momentum = Vector3.zero;                                  
+        }
+        if (!characterController.isGrounded) {
+            momentum = new Vector3(( Mathf.Abs(move.x) - momentumDecay < 0f) ? 0f : move.x - (move.x < 0f ? -momentumDecay : momentumDecay),
+                0,
+                (Mathf.Abs(move.z) - momentumDecay < 0f) ? 0f : move.z - (move.z < 0f ? -momentumDecay : momentumDecay));
+            if(momentum.x > maxMomentum) momentum.x = maxMomentum;
+            if(momentum.z > maxMomentum) momentum.z = maxMomentum;
+        }
 
-        //Debug.Log("Vertical Force: " +  verticalForce);
-
-        characterController.Move(new Vector3(0, verticalForce, 0) * Time.deltaTime);
+        //Debug.Log("Momentum: " + momentum);
+        //Debug.Log("Vertical Force: " + verticalForce);
     }
 
     private void Rotate(Vector2 RotationVector)
@@ -110,10 +146,11 @@ public class PlayerController : MonoBehaviour
     {
         if (canDash && dashes > 0)
         {
+            if(dashEffect != null) dashEffect.Play();
             StartCoroutine(Dash());
         }
     }
-
+    
 
     private IEnumerator Dash()
     {
@@ -131,32 +168,38 @@ public class PlayerController : MonoBehaviour
             characterController.Move(dashDirection * movementSpeed * dashForce * Time.deltaTime);
             yield return null;
         }
+        if (dashEffect != null) dashEffect.Stop();
         yield return new WaitForSeconds(dashCd);
         canDash = true;
     }
 
-    // Update is called once per frame
+    // Update is called once per frame     UPDATED BY JAIME AND RYAN 11/3/25
     void Update()
     {
-        if (playerHealth.isDead || winEvent.hasWon) return;
+        if (playerHealth.isDead) return;
+
+        if (winEvent != null  && winEvent.hasWon) return;
 
         if (UIManager.instance != null && UIManager.instance.IsPaused) return;
 
-
-        Move(inputs.MoveInput);
-        Rotate(inputs.LookInput);
+        CheckHeadBump();
+        
 
         if (inputs.JumpInput == true && characterController.isGrounded)
         {
+            //Debug.Log("Attempting Jump");
             verticalForce = jumpForce; //The Jump itself is handled in the Move() method handling gravity, making use of CharacterController instead of RigidBody
         }
+
+        Rotate(inputs.LookInput);
+        Move(inputs.MoveInput);
 
         if (inputs.FireInput)
         {
             weaponHandler.FireWeapon();
         }
-        if (inputs.ReloadInput)
-        {
+        if (inputs.ReloadInput) 
+        { 
             weaponHandler.ReloadWeapon();
         }
         if (inputs.SprintInput)
@@ -170,7 +213,7 @@ public class PlayerController : MonoBehaviour
             dashCharge += Time.deltaTime; //This one says if you don't have the max dash charges, build up to a new one
         }
         if (dashCharge >= dashChargeTime)
-        {
+        { 
             dashCharge = 0;
             Dashes++; //This one says if you have enough charge for a new dash, store the new dash
         }
@@ -180,11 +223,20 @@ public class PlayerController : MonoBehaviour
             Interact();
         }
 
-
         TimerDecrement();
     }
 
-    public int Dashes
+    private void CheckHeadBump()
+    {
+        if (Physics.Raycast(headPoint.position, headPoint.up, 0.1f))
+        {
+            //Debug.Log("Did HIT");
+            if (verticalForce > 0)
+                verticalForce = 0;
+        }
+    }
+
+    public int Dashes 
     {
         get { return dashes; }
         set
@@ -206,7 +258,7 @@ public class PlayerController : MonoBehaviour
     {
 
     }
-
+    
     // RL: This code shoots a raycast to allow the player to interact with objects using the IInteractable interace
     private void Interact()
     {

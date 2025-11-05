@@ -11,17 +11,14 @@ public class LavaProjectileScript : MonoBehaviour
         weaponLevelRef = weaponLevel;
     }
 
-    void OnTriggerEnter(Collider _other)
+    void OnCollisionEnter(Collision _other)
     {
-            Vector3 collisionPoint = transform.position;
-            RaycastHit hit;
-            if (Physics.Raycast(collisionPoint, Vector3.down, out hit))
-            {
-                GameObject puddleGameObject = Instantiate(puddlePrefab, hit.point, Quaternion.identity, null);
-                LavaPuddleScript lavaPuddleScript = puddleGameObject.GetComponent<LavaPuddleScript>();
-                lavaPuddleScript.SetWeaponLevelReference(weaponLevelRef);
-                Destroy(gameObject);
-            }
-        
+        Vector3 collisionPoint = transform.position;
+        ContactPoint contactPoint = _other.GetContact(0);
+        GameObject puddleGameObject = Instantiate(puddlePrefab, contactPoint.point + new Vector3(0f, 1f, 0f), Quaternion.identity, null);
+        LavaPuddleScript lavaPuddleScript = puddleGameObject.GetComponent<LavaPuddleScript>();
+        lavaPuddleScript.SetWeaponLevelReference(weaponLevelRef);
+        Destroy(gameObject);
+
     }
 }

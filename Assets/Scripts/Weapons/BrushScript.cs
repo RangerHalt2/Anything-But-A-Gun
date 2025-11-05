@@ -7,21 +7,26 @@ public class BrushScript : WeaponClass
     //[SerializeField] private float fireRate = 0.25f;
     //[SerializeField] private AmmoManager ammoManager;
     [SerializeField] private GameObject projectilePrefab;
-    [SerializeField] private GameObject leftSlashEffect; //Slash VFX Spot 1
-    [SerializeField] private GameObject rightSlashEffect;//Slash VFX Spot 2
+
     [SerializeField] private Transform projectileSpawnPoint;
     private float lastFired = Mathf.NegativeInfinity;
+
+    private PlayerController playerRef;
 
     private WeaponLevel weaponLevelRef;
 
     private bool leftSlash = true; //Which direction the slash is bending.
     private float slashAngle = 0f; //Just the angle that the slash bends to
-    private float slashAngleLeft = 75f;
-    private float slashAngleRight = 105f;
+    private float slashAngleLeft = -26f;
+    private float slashAngleRight = 21f;
+    [SerializeField] private GameObject gunShot;
+    [SerializeField] private GameObject gunShot2;
+    [SerializeField] private Transform gunShotTrans;
 
     private void Start()
     {
         weaponLevelRef = GetComponent<WeaponLevel>();
+        playerRef = GameObject.FindAnyObjectByType<PlayerController>();
     }
 
     public override void Shoot()
@@ -29,6 +34,7 @@ public class BrushScript : WeaponClass
         // If enough time has passed since the last round was fired
         if ((Time.timeSinceLevelLoad - lastFired) > fireRate)
         {
+            Debug.Log("Shooting weapon");
             // If there is an assigned ammo manager, and that ammo manager has at least one round of ammo loaded
             if (ammoManager != null && ammoManager.GetCurrentAmmo() > 0)
             {
@@ -43,11 +49,21 @@ public class BrushScript : WeaponClass
                         {
                             slashAngle = slashAngleRight;
                             leftSlash = false;
+                            if (gunShot !=null)
+                            {
+                                Instantiate(gunShot, gunShotTrans.position, transform.rotation, null);
+                            }
+
                         }
                         else
                         {
                             slashAngle = slashAngleLeft;
                             leftSlash = true;
+                            if (gunShot !=null)
+                            {
+                                Instantiate(gunShot2, gunShotTrans.position, transform.rotation, null);
+                            }
+
                         }
 
                         SpawnProjectile();
@@ -59,12 +75,10 @@ public class BrushScript : WeaponClass
         }
     }
 
-    /*public override void Reload() 
+    /*public void Reload()
     {
-        // If the shooter has at least one round of reserve ammo or is set to have infinite ammo
-        if (ammoManager.GetReserveAmmo() > 0 || ammoManager.GetReserveAmmo() == -1)
+        if (ammoManager.GetReserveAmmo() > 0 || ammoManager.GetReserveAmmo() == -1) 
         {
-            // Reload the shooter
             ammoManager.ReloadWeapon();
         }
     }*/
@@ -88,8 +102,12 @@ public class BrushScript : WeaponClass
                 projectileSpawnPoint = GameObject.Find("ProjectileSpawnPoint").transform;
 
             }
-            Projectile proj = projectileGameObject.GetComponent<Projectile>();
-            proj.SetWeaponLevelReference(weaponLevelRef);
+            Projectile [] projs = projectileGameObject.GetComponentsInChildren<Projectile>();
+            foreach (Projectile proj in projs)
+            {
+                proj.SetWeaponLevelReference(weaponLevelRef);
+                Physics.IgnoreCollision(proj.GetComponent<CapsuleCollider>(), playerRef.GetComponent<CharacterController>(), true);
+            }
         }
     }
 }

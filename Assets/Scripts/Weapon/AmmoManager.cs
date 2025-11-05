@@ -50,6 +50,10 @@ public class AmmoManager : MonoBehaviour
     [Header("Debug Settings")]
     [Tooltip("Prevents ammuntion from being deducted from the magazine when enabled. Allows for infinite ammo without needing to reload.")]
     [SerializeField] private bool bottomlessMagazines;
+
+    [Header("Reload Animations Stuff")]
+    [SerializeField] private ParticleSystem reloadVFX;
+    [SerializeField] private MeshRenderer weaponObject;
     #endregion
 
     #region Getters and Setters
@@ -162,6 +166,10 @@ public class AmmoManager : MonoBehaviour
 
     private IEnumerator Reload()
     {
+        if (reloadVFX != null)
+            reloadVFX.Play();
+        if (weaponObject != null)
+            weaponObject.enabled = false;
         // Disable the player's crosshair for the duration of the reloading process
         if (crosshair != null)
         {
@@ -180,7 +188,7 @@ public class AmmoManager : MonoBehaviour
                 case ReloadMode.Magazine:
                     // Set the reloading bool to true
                     reloading = true;
-
+                    
                     updateDisplay();
 
                     yield return new WaitForSeconds(reloadTime);
@@ -213,6 +221,10 @@ public class AmmoManager : MonoBehaviour
                     }
                     // Set reloading to false
                     reloading = false;
+                    if(reloadVFX != null)
+                        reloadVFX.Stop();
+                    if(weaponObject != null)
+                        weaponObject.enabled = true;
                     updateDisplay();
                     break;
                 // Reload method for weapons that reload each round individually

@@ -11,7 +11,7 @@ public class PootCloudScript : MonoBehaviour, IWeaponLevel
     [SerializeField] private float cloudTimer;
     [SerializeField] private float baseDamage;
     [SerializeField] private float maxDamage;
-    [SerializeField] private float levelDamage;
+    [SerializeField] private float growthRate;
     private float cummulativeDamage;
 
     private WeaponLevel currentWeaponLevel;
@@ -75,6 +75,6 @@ public class PootCloudScript : MonoBehaviour, IWeaponLevel
     //LB: Updates the weapon's damage for what damage it should do.
     public void UpdateLevelDamage()
     {
-        cummulativeDamage = baseDamage + (levelDamage * (currentWeaponLevel.Level - 1));
+        cummulativeDamage = baseDamage * Mathf.Pow(growthRate, currentWeaponLevel.Level);
     }
 }
