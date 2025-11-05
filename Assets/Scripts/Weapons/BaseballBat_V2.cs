@@ -2,10 +2,10 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class BaseballBat_V2 : MonoBehaviour, IWeapon
+public class BaseballBat_V2 : WeaponClass
 {
     [Header("Weapon Settings")]
-    public int level { get; set; } = 1;
+    //public int level { get; set; } = 1;
     [Tooltip("The base amount of damage the weapon deals before accounting for levels.")]
     [SerializeField] private float baseDamage = 15;
     [Tooltip("The amount of extra damage added for every level on the weapon.")]
@@ -21,7 +21,7 @@ public class BaseballBat_V2 : MonoBehaviour, IWeapon
     private bool canSwing = true;
     private bool firstHit = true;
 
-    private AmmoManager ammoManager;
+    //private AmmoManager ammoManager;
 
     [Header("References")]
     [Tooltip("Reference to the bat's hitbox. Should be a child of the weapon.")]
@@ -42,7 +42,7 @@ public class BaseballBat_V2 : MonoBehaviour, IWeapon
         ammoManager = GetComponent<AmmoManager>();
     }
 
-    public void Shoot()
+    public override void Shoot()
     {
         // If player can swing...
         if (canSwing)
@@ -80,9 +80,13 @@ public class BaseballBat_V2 : MonoBehaviour, IWeapon
         firstHit = true;
     }
 
-    public void Reload()
+    /*public void Reload()
     {
-    }
+        if (ammoManager.GetReserveAmmo() > 0 || ammoManager.GetReserveAmmo() == -1) 
+        {
+            ammoManager.ReloadWeapon();
+        }
+    }*/
 
     public void RegisterHit()
     {

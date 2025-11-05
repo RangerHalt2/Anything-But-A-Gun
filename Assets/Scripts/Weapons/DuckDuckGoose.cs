@@ -1,12 +1,12 @@
 using UnityEngine;
 
-public class DuckDuckGoose : MonoBehaviour, IWeapon
+public class DuckDuckGoose : WeaponClass
 {
 
-    [SerializeField] public int level { get; set; }
+    //[SerializeField] public int level { get; set; }
 
-    [SerializeField] private float fireRate = 0.75f;
-    private AmmoManager ammoManager;
+    //[SerializeField] private float fireRate = 0.75f;
+    //private AmmoManager ammoManager;
     [Tooltip("This will be the projectile that is fired when on the ground, the not 'spiked' prefab")]
     [SerializeField] private GameObject ProjectilePrefab;
     [Tooltip("Where the projectile should spawn from")]
@@ -23,7 +23,7 @@ public class DuckDuckGoose : MonoBehaviour, IWeapon
         weaponLevelRef = GetComponent<WeaponLevel>();
     }
 
-    public void Shoot()
+    public override void Shoot()
     {
         if (timer < 0)
         {
@@ -57,13 +57,13 @@ public class DuckDuckGoose : MonoBehaviour, IWeapon
         proj2.SetWeaponLevelReference(weaponLevelRef);
     }
 
-    public void Reload()
+    /*public void Reload()
     {
-        if (ammoManager.GetReserveAmmo() > 0 || ammoManager.GetReserveAmmo() == -1)
+        if (ammoManager.GetReserveAmmo() > 0 || ammoManager.GetReserveAmmo() == -1) 
         {
             ammoManager.ReloadWeapon();
         }
-    }
+    }*/
 
     //Update Timers 
     private void Update()

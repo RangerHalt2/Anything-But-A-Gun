@@ -48,12 +48,12 @@ public class WeaponHandler : MonoBehaviour
 
     public void FireWeapon()
     {
-        currentWeapon.GetComponent<IWeapon>().Shoot();
+        currentWeapon.GetComponent<WeaponClass>().Shoot();
     }
 
     public void ReloadWeapon() 
     { 
-        currentWeapon.GetComponent<IWeapon>().Reload();
+        currentWeapon.GetComponent<WeaponClass>().Reload();
     }
 
     void SwitchGun() //When the player want's to rotate to a different weapon in their wheel
@@ -150,7 +150,7 @@ public class WeaponHandler : MonoBehaviour
         {
             //Check if the weapon we're trying to pick up is of a type we already have
 
-            IWeapon newWeaponType = addWeapon.GetComponent<IWeapon>();
+            WeaponClass newWeaponType = addWeapon.GetComponent<WeaponClass>();
 
             System.Type newScriptName = newWeaponType.GetType();
             string nameOfNewScript = newScriptName.Name;
@@ -161,7 +161,7 @@ public class WeaponHandler : MonoBehaviour
             {
                 foreach (GameObject heldWeapon in weapons)
                 {
-                    IWeapon currentWeaponType = heldWeapon.GetComponent<IWeapon>();
+                    WeaponClass currentWeaponType = heldWeapon.GetComponent<WeaponClass>();
 
                     System.Type heldScriptName = currentWeaponType.GetType();
                     string nameOfHeldScript = heldScriptName.Name;

@@ -159,7 +159,7 @@ public class WeaponSpawner : MonoBehaviour, IInteractable
             spawnedWeapon = Instantiate(selectedWeapon, weaponSpawnWaypoint.position, weaponSpawnWaypoint.rotation);
 
             // Find the weapon's script
-            IWeapon weaponComponent = spawnedWeapon.GetComponent<IWeapon>();
+            WeaponClass weaponComponent = spawnedWeapon.GetComponent<WeaponClass>();
             // Ensure weapon script was found
             if (weaponComponent != null)
             {
@@ -171,7 +171,7 @@ public class WeaponSpawner : MonoBehaviour, IInteractable
             }
             else
             {
-                Debug.LogWarning("WeaponSpawner: Selected weapon is not part of the IWeapon interface!");
+                Debug.LogWarning("WeaponSpawner: Selected weapon is not part of the WeaponClass base class!");
             }
         }
         else
@@ -224,7 +224,7 @@ public class WeaponSpawner : MonoBehaviour, IInteractable
     }
 
     // Assigns a weapon a random level from within a range
-    private void AssignWeaponLevel(IWeapon weapon)
+    private void AssignWeaponLevel(WeaponClass weapon)
     {
         WeaponLevel weaponLevel = spawnedWeapon.GetComponent<WeaponLevel>();
         if (weaponLevel == null)

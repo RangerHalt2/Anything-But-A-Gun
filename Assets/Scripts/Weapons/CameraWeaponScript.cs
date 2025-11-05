@@ -1,12 +1,12 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-public class CameraWeaponScript : MonoBehaviour, IWeapon
+public class CameraWeaponScript : WeaponClass
 {
-    [SerializeField] public int level {get; set;}
+    //[SerializeField] public int level {get; set;}
 
-    [SerializeField] private float fireRate = 0.25f;
-    [SerializeField] private AmmoManager ammoManager;
+    //[SerializeField] private float fireRate = 0.25f;
+    //[SerializeField] private AmmoManager ammoManager;
     private float lastFired = Mathf.NegativeInfinity;
 
     [SerializeField] private GameObject flashVFX;
@@ -16,7 +16,7 @@ public class CameraWeaponScript : MonoBehaviour, IWeapon
     private List<GameObject> enemiesInRange = new List<GameObject>();
     [SerializeField] private GameObject gunShot;
 
-    public void Shoot() //Haha, because camera?
+    public override void Shoot() //Haha, because camera?
     {
         // If enough time has passed since the last round was fired
         if ((Time.timeSinceLevelLoad - lastFired) > fireRate)
@@ -38,15 +38,13 @@ public class CameraWeaponScript : MonoBehaviour, IWeapon
         }
     }
 
-    public void Reload()
+    /*public void Reload()
     {
-        // If the shooter has at least one round of reserve ammo or is set to have infinite ammo
-        if (ammoManager.GetReserveAmmo() > 0 || ammoManager.GetReserveAmmo() == -1)
+        if (ammoManager.GetReserveAmmo() > 0 || ammoManager.GetReserveAmmo() == -1) 
         {
-            // Reload the shooter
             ammoManager.ReloadWeapon();
         }
-    }
+    }*/
 
     //These next 2 just keep track of the enemy's presence in the trigger range
 

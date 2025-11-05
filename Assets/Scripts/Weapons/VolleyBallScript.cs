@@ -1,11 +1,11 @@
 using UnityEngine;
 
-public class VolleyBallScript : MonoBehaviour, IWeapon
+public class VolleyBallScript : WeaponClass
 {
-    [SerializeField] public int level {get; set;}
+    //[SerializeField] public int level {get; set;}
     
-    [SerializeField] private float fireRate = 0.75f;
-    private AmmoManager ammoManager;
+    //[SerializeField] private float fireRate = 0.75f;
+    //private AmmoManager ammoManager;
     private CharacterController characterController;
     [Tooltip("This will be the projectile that is fired when on the ground, the not 'spiked' prefab")]
     [SerializeField] private GameObject groundProjectilePrefab;
@@ -29,7 +29,7 @@ public class VolleyBallScript : MonoBehaviour, IWeapon
     }
 
     //If the player is not reloading and this function is called it should check if the character controller is grounded and spawn the correct projectile
-    public void Shoot()
+    public override void Shoot()
     {
         if (timer < 0)
         {
@@ -47,13 +47,13 @@ public class VolleyBallScript : MonoBehaviour, IWeapon
     }
 
     //Check the reserve ammo of the ammo manager and reload the weapon
-    public void Reload()
+    /*public void Reload()
     {
         if (ammoManager.GetReserveAmmo() > 0 || ammoManager.GetReserveAmmo() == -1) 
         {
             ammoManager.ReloadWeapon();
         }
-    }
+    }*/
 
     //This code handles the actual spawning of the projectile dependent on the bullet passed in the Shoot() function
     private void SpawnProjectile(GameObject bullet)
