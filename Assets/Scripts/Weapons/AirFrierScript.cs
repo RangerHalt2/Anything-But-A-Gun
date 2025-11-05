@@ -1,11 +1,11 @@
 using UnityEngine;
 
-public class AirFrierScript : MonoBehaviour, IWeapon
+public class AirFrierScript : WeaponClass
 {
-    [SerializeField] public int level {get; set;}
+    //[SerializeField] public int level {get; set;}
 
-    [SerializeField] private float fireRate = 0.25f;
-    [SerializeField] private AmmoManager ammoManager;
+    //[SerializeField] private float fireRate = 0.25f;
+    //[SerializeField] private AmmoManager ammoManager;
     [SerializeField] private GameObject projectilePrefab;
     [SerializeField] private Transform projectileSpawnPoint;
     private float lastFired = Mathf.NegativeInfinity;
@@ -37,7 +37,7 @@ public class AirFrierScript : MonoBehaviour, IWeapon
         }
     }
     
-    public void Shoot()
+    public override void Shoot()
     {
             // If enough time has passed since the last round was fired
         if ((Time.timeSinceLevelLoad - lastFired) > fireRate)
@@ -73,7 +73,7 @@ public class AirFrierScript : MonoBehaviour, IWeapon
         
     }
 
-    public void Reload()
+    public override void Reload()
     {
         // If the shooter has at least one round of reserve ammo or is set to have infinite ammo
         if (ammoManager.GetReserveAmmo() > 0 || ammoManager.GetReserveAmmo() == -1)

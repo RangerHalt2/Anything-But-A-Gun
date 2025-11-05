@@ -8,7 +8,7 @@ public class Weapon : MonoBehaviour
     public WeaponData GetWeaponData() => weaponData;
 
     [Header("Key Weapon Components")]
-    [SerializeField] private IWeapon weaponInterface;
+    [SerializeField] private WeaponClass weaponInterface;
     [SerializeField] private AmmoManager weaponAmmoManager;
     [SerializeField] private GameObject weaponInfoPanel;
     [SerializeField] private WeaponLevel weaponLevel;

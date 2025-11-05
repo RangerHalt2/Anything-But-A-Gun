@@ -1,12 +1,12 @@
 using System.Threading;
 using UnityEngine;
 
-public class LaserScript : MonoBehaviour, IWeapon
+public class LaserScript : WeaponClass
 {
-    [SerializeField] public int level {get; set;}
+    //[SerializeField] public int level {get; set;}
 
-    [SerializeField] private float fireRate = 0.25f;
-    [SerializeField] private AmmoManager ammoManager;
+    //[SerializeField] private float fireRate = 0.25f;
+    //[SerializeField] private AmmoManager ammoManager;
     [SerializeField] private Hitscan hitscan;
     
     private float putAway;
@@ -25,7 +25,7 @@ public class LaserScript : MonoBehaviour, IWeapon
     [SerializeField] private GameObject clickEffect;
     [SerializeField] private GameObject gunShot;
 
-    public void Shoot()
+    public override void Shoot()
     {
         if (!overheated)
         {
@@ -66,7 +66,7 @@ public class LaserScript : MonoBehaviour, IWeapon
         }
     }
 
-    public void Reload() 
+    /*public override void Reload() 
     {
         // If the shooter has at least one round of reserve ammo or is set to have infinite ammo
         if (ammoManager.GetReserveAmmo() > 0 || ammoManager.GetReserveAmmo() == -1)
@@ -74,7 +74,7 @@ public class LaserScript : MonoBehaviour, IWeapon
             // Reload the shooter
             ammoManager.ReloadWeapon();
         }
-    }
+    }*/
 
     private void Update()
     {

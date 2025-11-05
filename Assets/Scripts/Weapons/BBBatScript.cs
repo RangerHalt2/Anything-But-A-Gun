@@ -1,9 +1,9 @@
 using UnityEngine;
 using System.Collections;
 
-public class BBBatScript : MonoBehaviour, IWeapon, IWeaponLevel
+public class BBBatScript : WeaponClass
 {
-    [SerializeField] public int level {get; set;}
+    //[SerializeField] public int level {get; set;}
 
     [SerializeField] private int health = 10; //Health of the melee weapon
     [SerializeField] private int teamID;
@@ -12,7 +12,7 @@ public class BBBatScript : MonoBehaviour, IWeapon, IWeaponLevel
     private float cummulativeDamage;
     private bool striking = false;
     private Health enemyHealth;
-    private AmmoManager ammoManager;
+    //[SerializeField] private AmmoManager ammoManager;
     private WeaponLevel currentWeaponLevel;
     [SerializeField] private GameObject whackEffect;
 
@@ -56,7 +56,7 @@ public class BBBatScript : MonoBehaviour, IWeapon, IWeaponLevel
         }
     }
 
-    public void Shoot() //Required method for interface IWeapon
+    public override void Shoot() //Required method for interface IWeapon
     {
         if (!striking)
         {
@@ -72,7 +72,7 @@ public class BBBatScript : MonoBehaviour, IWeapon, IWeaponLevel
         striking = false;
     }
 
-    public void Reload()
+    public override void Reload()
     {
     }
 
