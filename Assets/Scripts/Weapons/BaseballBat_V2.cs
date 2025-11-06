@@ -26,7 +26,7 @@ public class BaseballBat_V2 : WeaponClass
     [Header("References")]
     [Tooltip("Reference to the bat's hitbox. Should be a child of the weapon.")]
     [SerializeField] private GameObject hitbox;
-    [SerializeField] private GameObject hitEffect;
+    //[SerializeField] private GameObject hitEffect;
     
 
     void Start()
@@ -98,9 +98,9 @@ public class BaseballBat_V2 : WeaponClass
             ammoManager.Fire();
 
             // Play hit effect, if assigned
-            if (hitEffect != null)
+            if (gunShot != null)
             {
-                Instantiate(hitEffect, transform.position, transform.rotation, null);
+                Instantiate(gunShot, transform.position, transform.rotation, null);
             }
         }
     }

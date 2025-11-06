@@ -6,9 +6,9 @@ public class AirFrierScript : WeaponClass
 
     //[SerializeField] private float fireRate = 0.25f;
     //[SerializeField] private AmmoManager ammoManager;
-    [SerializeField] private GameObject projectilePrefab;
+    //[SerializeField] private GameObject projectilePrefab;
     [SerializeField] private Transform projectileSpawnPoint;
-    private float lastFired = Mathf.NegativeInfinity;
+    //private float lastFired = Mathf.NegativeInfinity;
 
     private WeaponLevel weaponLevelRef;
 
@@ -18,7 +18,7 @@ public class AirFrierScript : WeaponClass
     [SerializeField] private float coolSpeed = 0.1f; //Speed that the nuggies cool off
 
     private PlayerController playerRef;
-    [SerializeField] private GameObject gunShot;
+    //[SerializeField] private GameObject gunShot;
 
 
     //NEEDS UI FOR CHARGE TIME
@@ -88,7 +88,7 @@ public class AirFrierScript : WeaponClass
         }
     }*/
 
-    void SpawnProjectile()
+    public override void SpawnProjectile()
     {
         // Check that the prefab is valid
         if (projectilePrefab != null)

@@ -14,7 +14,7 @@ public class BBBatScript : WeaponClass
     private Health enemyHealth;
     //private AmmoManager ammoManager;
     private WeaponLevel currentWeaponLevel;
-    [SerializeField] private GameObject whackEffect;
+    //[SerializeField] private GameObject whackEffect;
 
     [Tooltip("This is a sort of back-end buffer time to how frequently the player can hit the enemy with the baseball bat")]
     [SerializeField] private float attackCooldownBuffer = 0.5f;
@@ -48,9 +48,9 @@ public class BBBatScript : WeaponClass
             enemyHealth.TakeDamage(cummulativeDamage);
             health--;
             ammoManager.Fire();
-            if(whackEffect != null)
+            if(gunShot != null)
             {
-                Instantiate(whackEffect, transform.position, transform.rotation, null);
+                Instantiate(gunShot, transform.position, transform.rotation, null);
             }
             attackTimer = attackCooldownBuffer;
         }

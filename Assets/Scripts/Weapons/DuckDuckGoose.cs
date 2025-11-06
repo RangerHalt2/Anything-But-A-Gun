@@ -7,11 +7,11 @@ public class DuckDuckGoose : WeaponClass
 
     //[SerializeField] private float fireRate = 0.75f;
     //private AmmoManager ammoManager;
-    [Tooltip("This will be the projectile that is fired when on the ground, the not 'spiked' prefab")]
-    [SerializeField] private GameObject ProjectilePrefab;
+    //[Tooltip("This will be the projectile that is fired when on the ground, the not 'spiked' prefab")]
+    //[SerializeField] private GameObject ProjectilePrefab;
     [Tooltip("Where the projectile should spawn from")]
     [SerializeField] private Transform projectileSpawnPoint;
-    [SerializeField] private GameObject gunShot;
+    //[SerializeField] private GameObject gunShot;
 
     private WeaponLevel weaponLevelRef;
 
@@ -36,15 +36,15 @@ public class DuckDuckGoose : WeaponClass
         }
     }
 
-    private void SpawnProjectile()
+    public override void SpawnProjectile()
     {
-        if (ProjectilePrefab == null)
+        if (projectilePrefab == null)
         {
             Debug.LogError("The Bullet for the VolleyBall was null, a tech likely forgot to assemble the weapon properly!");
             return;
         }
 
-        GameObject projectile = Instantiate(ProjectilePrefab, projectileSpawnPoint.position, projectileSpawnPoint.rotation, null);
+        GameObject projectile = Instantiate(projectilePrefab, projectileSpawnPoint.position, projectileSpawnPoint.rotation, null);
         if(gunShot != null)
             Instantiate(gunShot, transform.position, transform.rotation, null);
 

@@ -6,12 +6,12 @@ public class MegaphonScript : WeaponClass
 
     //[SerializeField] private float fireRate = 0.25f;
     //[SerializeField] private AmmoManager ammoManager;
-    [SerializeField] private GameObject projectilePrefab;
+    //[SerializeField] private GameObject projectilePrefab;
     [SerializeField] private Transform projectileSpawnPoint;
-    private float lastFired = Mathf.NegativeInfinity;
+    //private float lastFired = Mathf.NegativeInfinity;
 
     private WeaponLevel weaponLevelRef;
-    [SerializeField] private GameObject gunShot;
+    //[SerializeField] private GameObject gunShot;
 
     private void Start()
     {
@@ -54,7 +54,7 @@ public class MegaphonScript : WeaponClass
         }
     }*/
 
-    void SpawnProjectile() 
+    public override void SpawnProjectile() 
     {
         // Check that the prefab is valid
         if (projectilePrefab != null)
