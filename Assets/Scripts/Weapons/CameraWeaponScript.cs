@@ -7,14 +7,14 @@ public class CameraWeaponScript : WeaponClass
 
     //[SerializeField] private float fireRate = 0.25f;
     //[SerializeField] private AmmoManager ammoManager;
-    private float lastFired = Mathf.NegativeInfinity;
+    //private float lastFired = Mathf.NegativeInfinity;
 
     [SerializeField] private GameObject flashVFX;
 
     [SerializeField] private GameObject enemyCopy; //The copy for the enemy
 
     private List<GameObject> enemiesInRange = new List<GameObject>();
-    [SerializeField] private GameObject gunShot;
+    //[SerializeField] private GameObject gunShot;
 
     public override void Shoot() //Haha, because camera?
     {

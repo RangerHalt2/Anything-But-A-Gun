@@ -6,10 +6,10 @@ public class LavaLampScript : WeaponClass
 
     //[SerializeField] private float fireRate = 0.25f;
     //[SerializeField] private AmmoManager ammoManager;
-    [SerializeField] private GameObject projectilePrefab;
+    //[SerializeField] private GameObject projectilePrefab;
     [SerializeField] private Transform projectileSpawnPoint;
-    private float lastFired = Mathf.NegativeInfinity;
-    [SerializeField] private GameObject gunShot;
+    //private float lastFired = Mathf.NegativeInfinity;
+    //[SerializeField] private GameObject gunShot;
 
 
     private WeaponLevel weaponLevelRef;
@@ -59,7 +59,7 @@ public class LavaLampScript : WeaponClass
         }
     }*/
 
-    void SpawnProjectile()
+    public override void SpawnProjectile()
     {
         // Check that the prefab is valid
         if (projectilePrefab != null)

@@ -6,10 +6,10 @@ public class BrushScript : WeaponClass
     
     //[SerializeField] private float fireRate = 0.25f;
     //[SerializeField] private AmmoManager ammoManager;
-    [SerializeField] private GameObject projectilePrefab;
+    //[SerializeField] private GameObject projectilePrefab;
 
     [SerializeField] private Transform projectileSpawnPoint;
-    private float lastFired = Mathf.NegativeInfinity;
+    //private float lastFired = Mathf.NegativeInfinity;
 
     private PlayerController playerRef;
 
@@ -19,7 +19,7 @@ public class BrushScript : WeaponClass
     private float slashAngle = 0f; //Just the angle that the slash bends to
     private float slashAngleLeft = -26f;
     private float slashAngleRight = 21f;
-    [SerializeField] private GameObject gunShot;
+    //[SerializeField] private GameObject gunShot;
     [SerializeField] private GameObject gunShot2;
     [SerializeField] private Transform gunShotTrans;
 
@@ -45,26 +45,7 @@ public class BrushScript : WeaponClass
                 {
                     if (projectilePrefab != null)
                     {
-                        if (leftSlash)
-                        {
-                            slashAngle = slashAngleRight;
-                            leftSlash = false;
-                            if (gunShot !=null)
-                            {
-                                Instantiate(gunShot, gunShotTrans.position, transform.rotation, null);
-                            }
-
-                        }
-                        else
-                        {
-                            slashAngle = slashAngleLeft;
-                            leftSlash = true;
-                            if (gunShot !=null)
-                            {
-                                Instantiate(gunShot2, gunShotTrans.position, transform.rotation, null);
-                            }
-
-                        }
+                        
 
                         SpawnProjectile();
                     }
@@ -83,8 +64,29 @@ public class BrushScript : WeaponClass
         }
     }*/
 
-    void SpawnProjectile()
+    public override void SpawnProjectile()
     {
+
+        if (leftSlash)
+        {
+            slashAngle = slashAngleRight;
+            leftSlash = false;
+            if (gunShot != null)
+            {
+                Instantiate(gunShot, gunShotTrans.position, transform.rotation, null);
+            }
+
+        }
+        else
+        {
+            slashAngle = slashAngleLeft;
+            leftSlash = true;
+            if (gunShot != null)
+            {
+                Instantiate(gunShot2, gunShotTrans.position, transform.rotation, null);
+            }
+
+        }
 
         // Check that the prefab is valid
         if (projectilePrefab != null)

@@ -10,7 +10,7 @@ public class LaserScript : WeaponClass
     [SerializeField] private Hitscan hitscan;
     
     private float putAway;
-    private float lastFired = Mathf.NegativeInfinity;
+    //private float lastFired = Mathf.NegativeInfinity;
 
     [SerializeField] private float currentHeat;
     private float overheatAmount = 10f;
@@ -23,7 +23,7 @@ public class LaserScript : WeaponClass
     private float clickCooldown = 0.5f;
     private float clickTimer = 0;
     [SerializeField] private GameObject clickEffect;
-    [SerializeField] private GameObject gunShot;
+    //[SerializeField] private GameObject gunShot;
 
     public override void Shoot()
     {
