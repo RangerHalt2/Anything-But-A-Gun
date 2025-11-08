@@ -224,7 +224,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3439145669492906562, guid: caa24201197b26b479e66c072d7d3e13, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3691284016060425880, guid: caa24201197b26b479e66c072d7d3e13, type: 3}
       propertyPath: m_IsActive
@@ -341,7 +341,10 @@ PrefabInstance:
     - {fileID: 3526931732096582073, guid: caa24201197b26b479e66c072d7d3e13, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4622185018303109548, guid: caa24201197b26b479e66c072d7d3e13, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 570048124}
   m_SourcePrefab: {fileID: 100100000, guid: caa24201197b26b479e66c072d7d3e13, type: 3}
 --- !u!1 &299931544
 GameObject:
@@ -423,6 +426,19 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 4622185018303109548, guid: caa24201197b26b479e66c072d7d3e13, type: 3}
   m_PrefabInstance: {fileID: 266335554}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &570048124
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 570048119}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 101beab4ce8cd514687f869d1423e259, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::unlockmouse
+  GameOverScreen: {fileID: 570048119}
 --- !u!1 &692929153
 GameObject:
   m_ObjectHideFlags: 0
