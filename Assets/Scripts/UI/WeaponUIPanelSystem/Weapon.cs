@@ -4,8 +4,8 @@ using UnityEngine;
 public class Weapon : MonoBehaviour
 {
     [Header("Scriptable Object")]
-    [SerializeField] private WeaponData weaponData;
-    public WeaponData GetWeaponData() => weaponData;
+    [SerializeField] private WeaponClass weaponData;
+    public WeaponClass GetWeaponData() => weaponData;
 
     [Header("Key Weapon Components")]
     [SerializeField] private WeaponClass weaponInterface;

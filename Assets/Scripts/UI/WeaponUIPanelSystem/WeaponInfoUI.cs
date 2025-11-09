@@ -8,7 +8,7 @@ public class WeaponInfoUI : MonoBehaviour
     [Header("Weapon Component References")]
     [SerializeField] private AmmoManager ammoManager;
     [SerializeField] private WeaponLevel weaponLevel;
-    [SerializeField] private Weapon weapon;
+    [SerializeField] private WeaponClass weaponData;
 
     [Header("TMPro \"Flavor\" References")]
     [Tooltip("Reference to the TMPro object which displays the weapon's name.")]
@@ -56,17 +56,17 @@ public class WeaponInfoUI : MonoBehaviour
     
     void Awake()
     {
-        if (weapon == null)
-        weapon = GetComponentInParent<Weapon>();
+        if (weaponData == null)
+            //weapon = GetComponentInParent<Weapon>();
+            weaponData = GetComponentInParent<WeaponClass>();
 
-        if (weapon != null)
+        if (weaponData != null)
         {
-            WeaponData weaponData = weapon.GetWeaponData();
             ConfigureStatTypes(weaponData);
         }
     }
 
-    public void SetInfo(WeaponData data)
+    public void SetInfo(WeaponClass data)
     {
         nameText.text = data.GetWeaponName();
 
@@ -76,10 +76,10 @@ public class WeaponInfoUI : MonoBehaviour
 
 
         // StatsVal
-        if (weapon != null)
+        if (weaponData != null)
         {
-            weapon.CalculateLevelDamage();
-            damageTextVal.text = weapon.cumulativeDamage.ToString();
+            weaponData.CalculateLevelDamage();
+            damageTextVal.text = weaponData.cumulativeDamage.ToString();
         }
 
         // Currently there is no way to actually get the fire rate off of the weapon components. Scriptable Object data may be innacurate
@@ -100,7 +100,7 @@ public class WeaponInfoUI : MonoBehaviour
         taglineText.text = data.GetWeaponTagline();
     }
 
-    private void ConfigureStatTypes(WeaponData data)
+    private void ConfigureStatTypes(WeaponClass data)
     {
         // If the weapon is a Melee Weapon
         if(String.Compare(data.GetWeaponTypeAsString(), "Melee") == 0)

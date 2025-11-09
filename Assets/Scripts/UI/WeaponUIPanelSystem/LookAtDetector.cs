@@ -9,7 +9,7 @@ public class LookAtDetector : MonoBehaviour
     [Tooltip("The layer used by objects which can be interacted with.")]
     [SerializeField] private LayerMask interactableLayer;
 
-    private Weapon currentWeapon;
+    private WeaponClass currentWeapon;
 
     // Update is called once per frame
     void Update()
@@ -19,7 +19,7 @@ public class LookAtDetector : MonoBehaviour
         if (Physics.Raycast(ray, out RaycastHit hit, maxLookDistance, interactableLayer))
         {
             // Check if the player is looking at a weapon
-            Weapon weapon = hit.collider.GetComponent<Weapon>();
+            WeaponClass weapon = hit.collider.GetComponent<WeaponClass>();
             WeaponCollectScript collectScript = hit.collider.GetComponent<WeaponCollectScript>();
             if (weapon != null)
             {

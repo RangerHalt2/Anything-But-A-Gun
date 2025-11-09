@@ -47,12 +47,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2262196305256265501}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ad264803d747bfe49bbac5f1b8c42ddd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Weapon
-  weaponData: {fileID: 11400000, guid: 4e2f09b6072886e4c9d23c069ccffaf1, type: 2}
+  weaponData: {fileID: 0}
+  weaponInterface: {fileID: 0}
   weaponAmmoManager: {fileID: 9216862354450597352}
   weaponInfoPanel: {fileID: 4827719046357509872}
   weaponLevel: {fileID: -6749029174857571121}
@@ -90,11 +91,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79bc79292e645104ead53b9c7fcf293f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BBBatScript
+  ammoManager: {fileID: 9216862354450597352}
+  gunShot: {fileID: 0}
+  projectilePrefab: {fileID: 0}
+  lastFired: -Infinity
+  weaponInterface: {fileID: 0}
+  weaponAmmoManager: {fileID: 9216862354450597352}
+  weaponInfoPanel: {fileID: 4827719046357509872}
+  weaponLevel: {fileID: -6749029174857571121}
+  cumulativeDamage: 0
+  weaponName: Baseball Bat
+  tagline: Swing for the Stars
+  weaponType: 5
+  level: 0
+  baseDamage: 15
+  levelDamage: 5
+  fireRate: 1
+  reloadTime: 0
+  AmmoCapacity: 50
+  reserveAmmo: 0
   health: 25
   teamID: 0
-  baseDamage: 30
   growthRate: 1.15
-  whackEffect: {fileID: 6015612841358465451, guid: 1d0c6d75c570bbd49bf4edd36fe51c93, type: 3}
   attackCooldownBuffer: 0.8
 --- !u!114 &9216862354450597352
 MonoBehaviour:

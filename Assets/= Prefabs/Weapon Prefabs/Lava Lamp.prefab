@@ -41,7 +41,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8538374235286036410}
   - component: {fileID: 5318346251965327607}
-  - component: {fileID: 5427835732184372725}
   - component: {fileID: 1802305520914099029}
   - component: {fileID: 1285534625640415471}
   - component: {fileID: -5931017466666987082}
@@ -93,23 +92,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.5, y: 0.5, z: 0.5}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &5427835732184372725
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3634324867199572480}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad264803d747bfe49bbac5f1b8c42ddd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Weapon
-  weaponData: {fileID: 11400000, guid: 968df6d4464181748811abf4947bbb33, type: 2}
-  weaponAmmoManager: {fileID: 1802305520914099029}
-  weaponInfoPanel: {fileID: 176603103189726759}
-  weaponLevel: {fileID: 5358080070095141081}
-  cumulativeDamage: 0
 --- !u!114 &1802305520914099029
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -147,11 +129,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96e2a10ef9c123947b7171af7af6f5a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LavaLampScript
-  fireRate: 0.25
   ammoManager: {fileID: 1802305520914099029}
-  projectilePrefab: {fileID: 1506664740527934108, guid: 736e25b32e28ad64abbd7d6b3117cf27, type: 3}
-  projectileSpawnPoint: {fileID: 2341579381627065503}
   gunShot: {fileID: 0}
+  projectilePrefab: {fileID: 1506664740527934108, guid: 736e25b32e28ad64abbd7d6b3117cf27, type: 3}
+  lastFired: -Infinity
+  weaponInterface: {fileID: 0}
+  weaponAmmoManager: {fileID: 1802305520914099029}
+  weaponInfoPanel: {fileID: 176603103189726759}
+  weaponLevel: {fileID: 5358080070095141081}
+  cumulativeDamage: 0
+  weaponName: Lava Lamp
+  tagline: Tubular
+  weaponType: 1
+  level: 0
+  baseDamage: 15
+  levelDamage: 5
+  fireRate: 0.25
+  reloadTime: 1
+  AmmoCapacity: 10
+  reserveAmmo: 60
+  projectileSpawnPoint: {fileID: 2341579381627065503}
 --- !u!114 &-5931017466666987082
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -704,10 +701,6 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6309036767483702213, guid: 59e0f25de0e691344889fcd773f95b30, type: 3}
-      propertyPath: weapon
-      value: 
-      objectReference: {fileID: 5427835732184372725}
     - target: {fileID: 6309036767483702213, guid: 59e0f25de0e691344889fcd773f95b30, type: 3}
       propertyPath: ammoManager
       value: 

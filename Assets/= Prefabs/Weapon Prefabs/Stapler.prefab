@@ -109,11 +109,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d700ed9304bd1344bfd56bce16ad237, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NailgunScript
-  fireRate: 0.5
   ammoManager: {fileID: 785455090434947426}
+  gunShot: {fileID: 5383701307693267320, guid: 5dcf3c15003edf94f8dcf5208f138c04, type: 3}
+  projectilePrefab: {fileID: 0}
+  lastFired: -Infinity
+  weaponInterface: {fileID: 0}
+  weaponAmmoManager: {fileID: 785455090434947426}
+  weaponInfoPanel: {fileID: 0}
+  weaponLevel: {fileID: 6903462851852635843}
+  cumulativeDamage: 0
+  weaponName: Stapler
+  tagline: 
+  weaponType: 0
+  level: 0
+  baseDamage: 30
+  levelDamage: 0
+  fireRate: 0.5
+  reloadTime: 1
+  AmmoCapacity: 10
+  reserveAmmo: -1
   hitscan: {fileID: 3161134012043242097}
   clickEffect: {fileID: 9061005177392946849, guid: 3a22977f8fecec540ac19600cc354706, type: 3}
-  gunShot: {fileID: 5383701307693267320, guid: 5dcf3c15003edf94f8dcf5208f138c04, type: 3}
 --- !u!114 &785455090434947426
 MonoBehaviour:
   m_ObjectHideFlags: 0

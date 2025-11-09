@@ -54,7 +54,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad264803d747bfe49bbac5f1b8c42ddd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Weapon
-  weaponData: {fileID: 11400000, guid: 4e2f09b6072886e4c9d23c069ccffaf1, type: 2}
+  weaponData: {fileID: 0}
+  weaponInterface: {fileID: 0}
   weaponAmmoManager: {fileID: 4927559103351617638}
   weaponInfoPanel: {fileID: 2992286619930202379}
   weaponLevel: {fileID: 336220408030285666}
@@ -71,13 +72,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2259744152b24945aa2110b5715706a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BaseballBat_V2
+  ammoManager: {fileID: 4927559103351617638}
+  gunShot: {fileID: 0}
+  projectilePrefab: {fileID: 0}
+  lastFired: -Infinity
+  weaponInterface: {fileID: 0}
+  weaponAmmoManager: {fileID: 4927559103351617638}
+  weaponInfoPanel: {fileID: 2992286619930202379}
+  weaponLevel: {fileID: 336220408030285666}
+  cumulativeDamage: 0
+  weaponName: Baseball Bat
+  tagline: 
+  weaponType: 0
+  level: 0
   baseDamage: 25
   levelDamage: 5
-  cumulativeDamage: 0
+  fireRate: 0
+  reloadTime: 0
+  AmmoCapacity: 0
+  reserveAmmo: 0
   swingCooldown: 1
   swingDuration: 0.3
   hitbox: {fileID: 1934610709197539373}
-  hitEffect: {fileID: 6015612841358465451, guid: 1d0c6d75c570bbd49bf4edd36fe51c93, type: 3}
 --- !u!114 &4927559103351617638
 MonoBehaviour:
   m_ObjectHideFlags: 0

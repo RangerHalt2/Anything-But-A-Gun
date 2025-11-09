@@ -149,7 +149,6 @@ GameObject:
   - component: {fileID: -213408061627447092}
   - component: {fileID: 373497531155728522}
   - component: {fileID: 8983280343220030557}
-  - component: {fileID: 672205154730102315}
   m_Layer: 14
   m_Name: Air Frier
   m_TagString: Untagged
@@ -216,13 +215,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f682b6a85855f14bb06a87fb65ffa6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AirFrierScript
-  fireRate: 0.7
   ammoManager: {fileID: 1009154439553706555}
+  gunShot: {fileID: 5383701307693267320, guid: 60f0d5dae855b21428134d218df4e947, type: 3}
   projectilePrefab: {fileID: 1506664740527934108, guid: b9920a38b48b53f4982de42a69d7ea85, type: 3}
+  lastFired: -Infinity
+  weaponInterface: {fileID: 0}
+  weaponAmmoManager: {fileID: 1009154439553706555}
+  weaponInfoPanel: {fileID: 2485898863901816458}
+  weaponLevel: {fileID: 8983280343220030557}
+  cumulativeDamage: 0
+  weaponName: Air Frier
+  tagline: Bring dinos back from extinction
+  weaponType: 2
+  level: 0
+  baseDamage: 35
+  levelDamage: 3
+  fireRate: 0.7
+  reloadTime: 1
+  AmmoCapacity: 4
+  reserveAmmo: 60
   projectileSpawnPoint: {fileID: 1039416749780904258}
   timeOnBox: 15
   coolSpeed: 0.1
-  gunShot: {fileID: 5383701307693267320, guid: 60f0d5dae855b21428134d218df4e947, type: 3}
 --- !u!114 &1009154439553706555
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -300,23 +314,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4892176ad31b13847abf3f92f0005b5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WeaponLevel
---- !u!114 &672205154730102315
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9077750917603778609}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad264803d747bfe49bbac5f1b8c42ddd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Weapon
-  weaponData: {fileID: 11400000, guid: 2f2004ba50a9b104197baaf515ae6422, type: 2}
-  weaponAmmoManager: {fileID: 1009154439553706555}
-  weaponInfoPanel: {fileID: 2485898863901816458}
-  weaponLevel: {fileID: 8983280343220030557}
-  cumulativeDamage: 0
 --- !u!1001 &613899858524333824
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -697,10 +694,6 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6309036767483702213, guid: 59e0f25de0e691344889fcd773f95b30, type: 3}
-      propertyPath: weapon
-      value: 
-      objectReference: {fileID: 672205154730102315}
     - target: {fileID: 6309036767483702213, guid: 59e0f25de0e691344889fcd773f95b30, type: 3}
       propertyPath: ammoManager
       value: 

@@ -175,7 +175,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad264803d747bfe49bbac5f1b8c42ddd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Weapon
-  weaponData: {fileID: 11400000, guid: cba6d643dce012449ae370e9d96c63dc, type: 2}
+  weaponData: {fileID: 0}
+  weaponInterface: {fileID: 0}
   weaponAmmoManager: {fileID: -5568385785312581024}
   weaponInfoPanel: {fileID: 7783745938310803083}
   weaponLevel: {fileID: 1192011955155942802}
@@ -217,11 +218,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 597593d58cc7a4f4599710c9a2126183, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::VolleyBallScript
+  ammoManager: {fileID: 0}
+  gunShot: {fileID: 5383701307693267320, guid: 7b08204f7913a0b4ebb93d095e315a1b, type: 3}
+  projectilePrefab: {fileID: 0}
+  lastFired: -Infinity
+  weaponInterface: {fileID: 0}
+  weaponAmmoManager: {fileID: -5568385785312581024}
+  weaponInfoPanel: {fileID: 7783745938310803083}
+  weaponLevel: {fileID: 1192011955155942802}
+  cumulativeDamage: 0
+  weaponName: Volleyball
+  tagline: Explosive Spikes
+  weaponType: 6
+  level: 0
+  baseDamage: 15
+  levelDamage: 5
   fireRate: 0.75
+  reloadTime: 1
+  AmmoCapacity: 10
+  reserveAmmo: -1
   groundProjectilePrefab: {fileID: 1506664740527934108, guid: dcc65ea0e716e0244bf94b949210a3f5, type: 3}
   airProjectilePrefab: {fileID: 1506664740527934108, guid: bc79bd379cbb6ec48872275929a73281, type: 3}
   projectileSpawnPoint: {fileID: 6412275487915790314}
-  gunShot: {fileID: 5383701307693267320, guid: 7b08204f7913a0b4ebb93d095e315a1b, type: 3}
 --- !u!114 &7794552217210630194
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -7,13 +7,13 @@ public class BBBatScript : WeaponClass
 
     [SerializeField] private int health = 10; //Health of the melee weapon
     [SerializeField] private int teamID;
-    [SerializeField] private float baseDamage = 15f;
+    //[SerializeField] private float baseDamage = 15f;
     [SerializeField] private float growthRate = 1.15f;
-    private float cummulativeDamage;
+    //private float cummulativeDamage;
     private bool striking = false;
     private Health enemyHealth;
     //private AmmoManager ammoManager;
-    private WeaponLevel currentWeaponLevel;
+    //private WeaponLevel currentWeaponLevel;
     //[SerializeField] private GameObject whackEffect;
 
     [Tooltip("This is a sort of back-end buffer time to how frequently the player can hit the enemy with the baseball bat")]
@@ -23,8 +23,8 @@ public class BBBatScript : WeaponClass
     private void Start()
     {
         ammoManager = GetComponent<AmmoManager>();
-        currentWeaponLevel = GetComponent<WeaponLevel>();
-        if(currentWeaponLevel != null)
+        weaponLevel = GetComponent<WeaponLevel>();
+        if(weaponLevel != null)
             UpdateLevelDamage();
     }
 
@@ -45,7 +45,7 @@ public class BBBatScript : WeaponClass
         {
             //_other.gameObject.GetComponent<EnemyController>().LoseLife(); Make enemy/damageable lose life
             UpdateLevelDamage(); //Confirm the level damage before DOING damage.
-            enemyHealth.TakeDamage(cummulativeDamage);
+            enemyHealth.TakeDamage(levelDamage);
             health--;
             ammoManager.Fire();
             if(gunShot != null)
@@ -82,7 +82,7 @@ public class BBBatScript : WeaponClass
 
     public void UpdateLevelDamage()
     {
-        cummulativeDamage = baseDamage * Mathf.Pow(growthRate, currentWeaponLevel.Level);
+        levelDamage = baseDamage * Mathf.Pow(growthRate, weaponLevel.Level);
     }
 
 }

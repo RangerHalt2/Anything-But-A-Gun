@@ -6,12 +6,12 @@ public class BaseballBat_V2 : WeaponClass
 {
     [Header("Weapon Settings")]
     //public int level { get; set; } = 1;
-    [Tooltip("The base amount of damage the weapon deals before accounting for levels.")]
-    [SerializeField] private float baseDamage = 15;
-    [Tooltip("The amount of extra damage added for every level on the weapon.")]
-    [SerializeField] private float levelDamage = 5f;
-    public float cumulativeDamage;
-    private WeaponLevel weaponLevel;
+    //[Tooltip("The base amount of damage the weapon deals before accounting for levels.")]
+    //[SerializeField] private float baseDamage = 15;
+    //[Tooltip("The amount of extra damage added for every level on the weapon.")]
+    //[SerializeField] private float levelDamage = 5f;
+    //public float cumulativeDamage;
+    //private WeaponLevel weaponLevel;
 
     [Header("Swing Settings")]
     [Tooltip("The amount of time (in Seconds) between swings.")]
@@ -105,11 +105,11 @@ public class BaseballBat_V2 : WeaponClass
         }
     }
 
-    public void CalculateLevelDamage()
+    /*public void CalculateLevelDamage()
     {
         cumulativeDamage = baseDamage + levelDamage * (weaponLevel.Level - 1);
         //Debug.Log("Weapon: Cumulative Damage " + cumulativeDamage);
-    }
+    }*/
 
     public float GetCumulativeDamage()
     {

@@ -189,10 +189,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9cfc12632667aa3428d202f1e3399872, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DuckDuckGoose
-  fireRate: 0.75
-  ProjectilePrefab: {fileID: 1506664740527934108, guid: 5e13d917bdad019499d7e121eb537a60, type: 3}
-  projectileSpawnPoint: {fileID: 4536804946799570582}
+  ammoManager: {fileID: 7556800813267705354}
   gunShot: {fileID: 0}
+  projectilePrefab: {fileID: 0}
+  lastFired: -Infinity
+  weaponInterface: {fileID: 0}
+  weaponAmmoManager: {fileID: 7556800813267705354}
+  weaponInfoPanel: {fileID: 8059958465699067675}
+  weaponLevel: {fileID: 1441169586980562079}
+  cumulativeDamage: 0
+  weaponName: Duck Duck Goose!
+  tagline: Annnnnddd GOOOOOSE!
+  weaponType: 0
+  level: 1
+  baseDamage: 10
+  levelDamage: 0
+  fireRate: 0.5
+  reloadTime: 1
+  AmmoCapacity: 10
+  reserveAmmo: 40
+  projectileSpawnPoint: {fileID: 4536804946799570582}
 --- !u!114 &1441169586980562079
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -242,7 +258,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad264803d747bfe49bbac5f1b8c42ddd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Weapon
-  weaponData: {fileID: 11400000, guid: 1054dcb34d75a1141935a3059cb44f0a, type: 2}
+  weaponData: {fileID: 0}
+  weaponInterface: {fileID: 0}
   weaponAmmoManager: {fileID: 7556800813267705354}
   weaponInfoPanel: {fileID: 8059958465699067675}
   weaponLevel: {fileID: 1441169586980562079}
