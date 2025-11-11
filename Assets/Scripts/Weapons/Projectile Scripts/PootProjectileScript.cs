@@ -18,7 +18,5 @@ public class PootProjectileScript : MonoBehaviour
                 PootCloudScript pootPuddleScript = pootGameObject.GetComponent<PootCloudScript>();
                 pootPuddleScript.SetWeaponLevelReference(weaponLevelRef);
                 Destroy(gameObject);
-            
-        
     }
 }

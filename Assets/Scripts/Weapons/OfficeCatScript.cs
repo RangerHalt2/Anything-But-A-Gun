@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PootDispenserScript : WeaponClass
+public class OfficeCatScript : WeaponClass
 {
     //[SerializeField] public int level {get; set;}
 
@@ -74,8 +74,8 @@ public class PootDispenserScript : WeaponClass
             Projectile proj = projectileGameObject.GetComponent<Projectile>();
             proj.SetWeaponLevelReference(weaponLevelRef);
 
-            PootProjectileScript pootProj = projectileGameObject.GetComponent<PootProjectileScript>();
-            pootProj.SetWeaponLevelReference(weaponLevelRef);
+            OfficeCatProjectileScript catProj = projectileGameObject.GetComponent<OfficeCatProjectileScript>();
+            catProj.SetWeaponLevelReference(weaponLevelRef);
         }
     }
 }
