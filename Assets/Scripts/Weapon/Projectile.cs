@@ -37,6 +37,7 @@ public class Projectile : MonoBehaviour, IWeaponLevel
     [SerializeField] private bool IsAoe;
     [Tooltip("AOE Range that it can hit people in")]
     [SerializeField] private float aoeRange;
+    [SerializeField] private AudioClip ricochetSFX;
     [Tooltip("Determines the maximum amount of bounces. Only utilized if the projectile has the Ricochet wall behavior. Must be a value greater than 0.")]
     [SerializeField] private int maxBounces = 0;
     // How many times the projectile has bounced
@@ -249,6 +250,11 @@ public class Projectile : MonoBehaviour, IWeaponLevel
         if (reflectedVelocity != Vector3.zero)
         {
             transform.forward = reflectedVelocity.normalized;
+        }
+
+        if(ricochetSFX != null)
+        {
+            SoundEffectsManager.instance.PlaySoundEffectClip(ricochetSFX, transform, 1f);
         }
 
         // Increment current bounces
