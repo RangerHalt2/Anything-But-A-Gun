@@ -176,6 +176,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Weapon
   weaponData: {fileID: 11400000, guid: cba6d643dce012449ae370e9d96c63dc, type: 2}
+  weaponInterface: {fileID: 0}
   weaponAmmoManager: {fileID: -5568385785312581024}
   weaponInfoPanel: {fileID: 7783745938310803083}
   weaponLevel: {fileID: 1192011955155942802}
@@ -217,11 +218,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 597593d58cc7a4f4599710c9a2126183, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::VolleyBallScript
+  level: 0
+  ammoManager: {fileID: 0}
   fireRate: 0.75
   groundProjectilePrefab: {fileID: 1506664740527934108, guid: dcc65ea0e716e0244bf94b949210a3f5, type: 3}
   airProjectilePrefab: {fileID: 1506664740527934108, guid: bc79bd379cbb6ec48872275929a73281, type: 3}
   projectileSpawnPoint: {fileID: 6412275487915790314}
-  gunShot: {fileID: 5383701307693267320, guid: 7b08204f7913a0b4ebb93d095e315a1b, type: 3}
+  volleyballSFXgrounded: {fileID: 8300000, guid: 6711e43fc0d18d24ca58f7eb5385f467, type: 3}
+  volleyballSFXmidair: {fileID: 8300000, guid: fbfe3a5cc149a714986550d0ad7e8e5e, type: 3}
 --- !u!114 &7794552217210630194
 MonoBehaviour:
   m_ObjectHideFlags: 0

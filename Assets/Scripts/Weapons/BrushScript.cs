@@ -22,6 +22,7 @@ public class BrushScript : WeaponClass
     [SerializeField] private GameObject gunShot;
     [SerializeField] private GameObject gunShot2;
     [SerializeField] private Transform gunShotTrans;
+    [SerializeField] private AudioClip brushSFX;
 
     private void Start()
     {
@@ -65,6 +66,9 @@ public class BrushScript : WeaponClass
                             }
 
                         }
+
+                        // Play sound effect (added by Aaron)
+                        SoundEffectsManager.instance.PlaySoundEffectClip(brushSFX, transform, 1f);
 
                         SpawnProjectile();
                     }

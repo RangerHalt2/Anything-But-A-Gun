@@ -15,7 +15,7 @@ public class StaplerScript : WeaponClass
     private float clickCooldown = 0.5f;
     private float clickTimer = 0;
     [SerializeField] private GameObject clickEffect;
-    [SerializeField] private GameObject gunShot;
+    [SerializeField] private AudioClip gunShot;
 
     public override void Shoot()
     {
@@ -33,10 +33,13 @@ public class StaplerScript : WeaponClass
                         if (hitscan != null)
                         {
                             hitscan.Shoot();
-                            if(gunShot != null)
-                        {
-                            Instantiate(gunShot, transform.position, transform.rotation, null);
-                        }
+                            // Play sound effect (added by Aaron)
+                            SoundEffectsManager.instance.PlaySoundEffectClip(gunShot, transform, 1f);
+                            // Old sound effect player (commented out by Aaron)
+                            /*if(gunShot != null)
+                            {
+                                Instantiate(gunShot, transform.position, transform.rotation, null);
+                            }*/
                         }
                     // Update lastFired
                     lastFired = Time.timeSinceLevelLoad;

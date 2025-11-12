@@ -188,6 +188,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Weapon
   weaponData: {fileID: 11400000, guid: b430643b2110b3a45b2ef493f3f7f567, type: 2}
+  weaponInterface: {fileID: 0}
   weaponAmmoManager: {fileID: 1802305520914099029}
   weaponInfoPanel: {fileID: 5579720370375392161}
   weaponLevel: {fileID: -6769214916585257692}
@@ -204,13 +205,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8021b9b15a65694289f13f641d42872, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  fireRate: 0.5
+  level: 0
   ammoManager: {fileID: 1802305520914099029}
+  fireRate: 0.5
   projectilePrefab: {fileID: 2858475928119156006, guid: f165c6422bea5914d8f9f24875c41104, type: 3}
   projectileSpawnPoint: {fileID: 2341579381627065503}
   gunShot: {fileID: 653573502046088657, guid: 8ebac850058c8c14684c305f9b61eea5, type: 3}
   gunShot2: {fileID: 653573502046088657, guid: 53d9a2124a2f1854d9a42f0be8da8c25, type: 3}
   gunShotTrans: {fileID: 3812552338003670470}
+  brushSFX: {fileID: 8300000, guid: 4825a16399b0e334ca410993f0031912, type: 3}
 --- !u!114 &1802305520914099029
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -48,6 +48,7 @@ public class PlayerController : MonoBehaviour
     public delegate void OnDashChangedDelegate();
     [HideInInspector] public OnDashChangedDelegate onDashChangedCallback;
     private bool canDash = true;
+    [SerializeField] private AudioClip dashSFX;
 
     private Vector3 momentum;
 
@@ -162,6 +163,9 @@ public class PlayerController : MonoBehaviour
         {
             dashDirection = transform.forward;
         }
+
+        // Play sound effect (added by Aaron)
+        SoundEffectsManager.instance.PlaySoundEffectClip(dashSFX, transform, 1f);
 
         while (Time.time < startTime + dashTime)
         {
