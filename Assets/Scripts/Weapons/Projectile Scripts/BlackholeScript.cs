@@ -66,6 +66,23 @@ public class BlackholeScript : MonoBehaviour, IWeaponLevel
 
     }
 
+    void OnTriggerEnter(Collider _other) 
+    {
+        Rigidbody rb = _other.gameObject.GetComponentInParent<Rigidbody>();
+        if (rb != null)
+        {
+            rb.isKinematic = false;
+        }
+    }
+    void OnTriggerExit(Collider _other) 
+    {
+        Rigidbody rb = _other.gameObject.GetComponentInParent<Rigidbody>();
+        if (rb != null)
+        {
+            rb.isKinematic = true;
+        }
+    }
+
     void OnTriggerStay(Collider _other)
     {
         // Attempt to reference the health script on the collided object
@@ -78,20 +95,29 @@ public class BlackholeScript : MonoBehaviour, IWeaponLevel
 
             if (_other.GetComponentInParent<NavMeshAgent>() != null)
             {
-                NavMeshAgent agent = _other.GetComponentInParent<NavMeshAgent>();
+                //_other.GetComponentInParent<NavMeshAgent>().enabled = false;
                 Vector3 direction = (_other.gameObject.transform.position - (Vector3)transform.position).normalized;
                 float distance = Vector3.Distance(transform.position, _other.gameObject.transform.position);
                 float forceMultiplier = 1f - (distance / blackholeRadius); // Force decreases with distance
                 health.TakeDamage(cummulativeDamage * (distance / blackholeRadius));
-                StartCoroutine(Pull(agent));
+
+                Rigidbody rb = _other.gameObject.GetComponentInParent<Rigidbody>();
+                rb.AddForce(-direction * blackholeForce * (distance / blackholeRadius), ForceMode.Impulse);
             }
         }
     }
 
-    private IEnumerator Pull(NavMeshAgent agent) 
+    void OnDestroy()
     {
-        agent.gameObject.transform.position = transform.position;
-        yield return new WaitForSeconds(0.25f);
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, blackholeRadius);
+        foreach (Collider hitCollider in hitColliders)
+        {
+            if (hitCollider.GetComponentInParent<Rigidbody>() != null)
+            {
+                Rigidbody rb = hitCollider.GetComponentInParent<Rigidbody>();
+                rb.isKinematic = true;
+            }
+        }
     }
 
     //LB: Updates the weapon's damage for what damage it should do.
