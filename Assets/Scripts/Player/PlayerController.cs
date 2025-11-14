@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Transform headPoint;
 
     [Header("Base Movement Fields")]
-    [SerializeField] private float movementSpeed = 10f;
+    public float movementSpeed = 10f;
     [SerializeField] private float sprintMultiplier = 2f;
 
     [SerializeField] private float sensitivity = 10f;
