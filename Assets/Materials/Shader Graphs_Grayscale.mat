@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: OutlineMat
-  m_Shader: {fileID: -6465566751694194690, guid: 8c81cf1b73d67924596b670113004f5b, type: 3}
+  m_Name: Shader Graphs_Grayscale
+  m_Shader: {fileID: -6465566751694194690, guid: fd6da3ee265e0df468506fd800e73dd5, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -37,8 +37,10 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Thickness: 0.234
+    - _Alpha: 0.945
+    - _Color_Threshold: 0.822
+    - _Normal_Threshold: 0.75
     m_Colors:
-    - _Color: {r: 0.088158034, g: 0.085973635, b: 0.11320752, a: 1}
+    - _Outline_Color: {r: 0, g: 0, b: 0, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
