@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2341579381627065503}
   m_Layer: 14
-  m_Name: Office Cat Projectile Spawn Point
+  m_Name: Toll Box Projectile Spawn Point
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -47,9 +47,9 @@ GameObject:
   - component: {fileID: -5931017466666987082}
   - component: {fileID: 3856324083559678794}
   - component: {fileID: 5358080070095141081}
-  - component: {fileID: 4048813419196752856}
+  - component: {fileID: 7463364724439591224}
   m_Layer: 14
-  m_Name: Office Cat
+  m_Name: Toll Box
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -166,7 +166,7 @@ MonoBehaviour:
   ammoConsumption: 1
   reloadTime: 1
   canCancelReload: 0
-  reloadMode: 1
+  reloadMode: 0
   crosshair: {fileID: 0}
   ammoDisplayText: {fileID: 0}
   reloadEffect: {fileID: 0}
@@ -225,7 +225,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4892176ad31b13847abf3f92f0005b5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WeaponLevel
---- !u!114 &4048813419196752856
+--- !u!114 &7463364724439591224
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -234,26 +234,26 @@ MonoBehaviour:
   m_GameObject: {fileID: 3634324867199572480}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 99e564ec4d9b92640b05628c5e3c0253, type: 3}
+  m_Script: {fileID: 11500000, guid: 52e68555c060da249bd52643f2473618, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::TollScript
+  m_EditorClassIdentifier: '::'
   ammoManager: {fileID: 1802305520914099029}
   gunShot: {fileID: 0}
-  projectilePrefab: {fileID: 1506664740527934108, guid: ce98c51c2c35f3f4d86904441164b5ea, type: 3}
+  projectilePrefab: {fileID: 1506664740527934108, guid: 1ef3bc01cea36184eb93d7774379b36a, type: 3}
   lastFired: -Infinity
   weaponInterface: {fileID: 0}
   weaponAmmoManager: {fileID: 1802305520914099029}
   weaponInfoPanel: {fileID: 0}
   weaponLevel: {fileID: 5358080070095141081}
   cumulativeDamage: 0
-  weaponName: Office Cat
-  tagline: 
+  weaponName: Toll Box
+  tagline: Nothing's certain but death and taxes
   weaponType: 0
   level: 0
   baseDamage: 0
   levelDamage: 0
-  fireRate: 1
-  reloadTime: 0
-  AmmoCapacity: 1
+  fireRate: 0.25
+  reloadTime: 0.5
+  AmmoCapacity: 0
   reserveAmmo: 0
   projectileSpawnPoint: {fileID: 2341579381627065503}

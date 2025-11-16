@@ -39,7 +39,7 @@ public class CentralEnemyManager : MonoBehaviour
             Vector3 directionToEnemy = enemy.transform.position - pointOfOrigin;
             float distanceSqr = directionToEnemy.sqrMagnitude;
 
-            if (distanceSqr < closestDistanceSqr)
+            if (distanceSqr < closestDistanceSqr && distanceSqr > 0.5)
             {
                 closestDistanceSqr = distanceSqr;
                 closestEnemy = enemy;

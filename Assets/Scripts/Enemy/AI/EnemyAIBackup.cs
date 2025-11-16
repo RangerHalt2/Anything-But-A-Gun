@@ -1,13 +1,14 @@
+//EW: Idk, everyone's tagging their stuff. This isn't a used script, it's just a backup of the EnemyAI before I edit it
 using UnityEngine;
 using UnityEngine.AI;
 
-public class EnemyAI : MonoBehaviour
+public class EnemyAIBackup : MonoBehaviour
 {
     [Header("Target Layers and Player")]
     [SerializeField] private NavMeshAgent agent;
-    public Transform player;
+    [SerializeField] private Transform player;
     [SerializeField] private LayerMask whatIsGround;
-    public LayerMask whatIsPlayer;
+    [SerializeField] private LayerMask whatIsPlayer;
 
     [Header("Patrol Settings")]
     [SerializeField] private float patrolRange = 10f;
@@ -169,7 +170,7 @@ public class EnemyAI : MonoBehaviour
 
         if (Physics.Raycast(firePoint.position, direction, out RaycastHit hit, distance))
         {
-            return hit.transform.CompareTag(player.tag);
+            return hit.transform.CompareTag("Player");
         }
 
         return false;
