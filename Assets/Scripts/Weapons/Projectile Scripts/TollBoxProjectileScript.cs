@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class TollBoxProjectileScript : MonoBehaviour
 {
+    public float timer = 1f;
     private Health targetHealth;
     private Projectile proj;
     private WeaponLevel weaponLevelRef;
@@ -18,13 +19,13 @@ public class TollBoxProjectileScript : MonoBehaviour
 
     void OnTriggerEnter(Collider _other) 
     { 
-        targetHealth = _other.gameObject.GetComponent<Health>();
+        targetHealth = _other.gameObject.GetComponentInParent<Health>();
         if (targetHealth != null)
         {
-            if (proj.baseDamage > targetHealth.currentHealth)
+            if (proj.baseDamage >= targetHealth.currentHealth && targetHealth.gameObject.AddComponent<PossessedEffect>() == null)
             {
-                targetHealth.ReceiveHealing(targetHealth.maxHealth - targetHealth.currentHealth);
-                targetHealth.gameObject.AddComponent<PossessedEffect>();
+                PossessedEffect pe = targetHealth.gameObject.AddComponent<PossessedEffect>();
+                pe.timer = timer;
             }
         }
     }

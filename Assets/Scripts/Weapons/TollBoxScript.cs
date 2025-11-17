@@ -4,6 +4,7 @@ public class TollBoxScript : WeaponClass
 {
     [SerializeField] private Transform projectileSpawnPoint;
     private WeaponLevel weaponLevelRef;
+    [SerializeField] private float possessionTimer;
 
     public override void SpawnProjectile()
     {
@@ -28,6 +29,7 @@ public class TollBoxScript : WeaponClass
 
             TollBoxProjectileScript tollProj = projectileGameObject.GetComponent<TollBoxProjectileScript>();
             tollProj.SetWeaponLevelReference(weaponLevelRef);
+            tollProj.timer = possessionTimer;
         }
     }
 }

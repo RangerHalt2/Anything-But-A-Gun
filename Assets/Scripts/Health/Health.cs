@@ -16,6 +16,10 @@ public class Health : MonoBehaviour
     [Tooltip("The amount of health the object currently has. If the current health is 0, the object is dead.")]
     [SerializeField] public float currentHealth = 1f;
 
+    //EW: For nonlethal damage
+    [Tooltip("Whether or not the enemy died from nonlethal damage. Public so other methods can call it.")]
+    public bool nonlethalDefeat = false;
+
     [Header("Display Settings")]
     [Tooltip("Determines if the Health Bar is active before taking damage")]
     [SerializeField] private bool healthBarActiveOnStartup;
@@ -110,9 +114,37 @@ public class Health : MonoBehaviour
             }
         }
     }
+    public void TakeNonLethalDamage(float damageAmount) //EW: Nonlethal damage added for possession gun, but might be useful elsewhere.
+    {
+        // Subtract the damage amount from the health of the object
+        currentHealth -= damageAmount;
+        if (damageNoise != null && damageTimer <= 0)
+        {
+            damageTimer = damageCooldown;
+            Instantiate(damageNoise, transform.position, transform.rotation, null);
+        }
+        Debug.Log(gameObject.name + " took " + damageAmount + " nonlethal damage. Current Health: " + currentHealth + "/" + maxHealth + ".");
+        updateDisplay();
 
-    // Applies a certain amount of healing to an object
-    public void ReceiveHealing(float healingAmount)
+        // If the object has 0 or less current health
+        if (currentHealth <= 0)
+        {
+            currentHealth = 1;
+            nonlethalDefeat = true;
+        }
+        else
+        {
+            // If a hit effect has been assigned
+            if (hitEffect != null)
+            {
+                // Play the hit effect for the object
+                Instantiate(hitEffect, transform.position, transform.rotation, null);
+            }
+        }
+    }
+
+        // Applies a certain amount of healing to an object
+        public void ReceiveHealing(float healingAmount)
     {
         // Add the healing amount to the object's current health
         currentHealth += healingAmount;

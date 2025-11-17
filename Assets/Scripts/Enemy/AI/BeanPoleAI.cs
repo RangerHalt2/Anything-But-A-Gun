@@ -90,7 +90,8 @@ public class BeanPoleAI : MonoBehaviour
 
         if (Physics.Raycast(firePoint.position, direction, out RaycastHit hit, distance))
         {
-            return hit.transform.CompareTag("Player");
+            //EW: "Player" -> player.tag so it can be overwritten
+            return hit.transform.CompareTag(player.tag);
         }
 
         return false;

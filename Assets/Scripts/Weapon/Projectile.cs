@@ -25,7 +25,10 @@ public class Projectile : MonoBehaviour, IWeaponLevel
     [SerializeField] private float growthRate = 1.15f;
     private float cummulativeDamage;
     private WeaponLevel currentWeaponLevel;
-        
+    //EW: Nonlethal add
+    [Tooltip("Determines whether the projectile can kill the enemy or not.")]
+    [SerializeField] private bool nonlethal;
+
     [Header("Special Properties")]
     [Tooltip("Determines whether the projectile is able to pierce through, and deal damage, to multiple objects.")]
     [SerializeField] private bool piercing;
@@ -194,8 +197,16 @@ public class Projectile : MonoBehaviour, IWeaponLevel
             }
             else
                 cummulativeDamage = baseDamage;
-            // Deal damage
-            health.TakeDamage(cummulativeDamage);
+            // EW: Deal nonlethal damage
+            if (nonlethal)
+            {
+                health.TakeNonLethalDamage(cummulativeDamage);
+            }
+            else 
+            {
+                //Take damage
+                health.TakeDamage(cummulativeDamage);
+            }
             // If projectile is not piercing...
             if (!piercing && !unique)
             {
