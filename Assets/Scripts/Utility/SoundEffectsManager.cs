@@ -1,5 +1,6 @@
 using UnityEngine;
 
+
 public class SoundEffectsManager : MonoBehaviour
 {
     public static SoundEffectsManager instance;
