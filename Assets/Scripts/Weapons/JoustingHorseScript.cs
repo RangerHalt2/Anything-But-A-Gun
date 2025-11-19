@@ -52,6 +52,7 @@ public class JoustingHorseScript : WeaponClass
     private void OnDisable()
     {
         StopCoroutine(JOUST());
+        pc.movementSpeed = pcBaseSpeed;
         joustingCollider.enabled = false;
         JOUSTING = false;
     }
