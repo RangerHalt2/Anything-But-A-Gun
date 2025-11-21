@@ -178,8 +178,8 @@ public class Health : MonoBehaviour
         else if (isPlayer)
         {
             isDead = true;
-            gameOverCanvas.SetActive(true);
-            inGameCanvas.SetActive(false);
+            //gameOverCanvas.SetActive(true);
+            //inGameCanvas.SetActive(false);
             Cursor.lockState = CursorLockMode.None;
         }
     }
