@@ -14,6 +14,20 @@ public class LineMapGenerator : MonoBehaviour
     [SerializeField] private int maxRooms = 15;
     [SerializeField] private int specialRoomCount = 2;
 
+    [Header("Special Room Timing")]
+    [Tooltip("Earliest possible index for the first special room.")]
+    [SerializeField] private int firstSpecialMin = 0;
+
+    [Tooltip("Latest possible index for the first special room (inclusive).")]
+    [SerializeField] private int firstSpecialMax = 5;
+
+    [Tooltip("How many rooms cannot contain a special room after placing one.")]
+    [SerializeField] private int delayBetweenSpecials = 4;
+
+    [Tooltip("After the delay, how many rooms long the window is where the next special MUST spawn.")]
+    [SerializeField] private int windowAfterDelay = 5;
+
+
     private void Start()
     {
         GenerateRooms();
@@ -25,6 +39,7 @@ public class LineMapGenerator : MonoBehaviour
 
         GameObject spawnRoomPrefab = spawnRoomPrefabs[Random.Range(0, spawnRoomPrefabs.Length)];
         GameObject spawnRoom = Instantiate(spawnRoomPrefab, Vector3.zero, spawnRoomPrefab.transform.rotation);
+
         Transform currentEndPoint = spawnRoom.transform.Find("EndPoint");
         if (currentEndPoint == null)
         {
@@ -48,17 +63,30 @@ public class LineMapGenerator : MonoBehaviour
         }
 
         int numSpecialRooms = Mathf.Min(specialRoomCount, specialRooms.Length);
+
         List<GameObject> chosenSpecials = new List<GameObject>(specialRooms);
         ShuffleList(chosenSpecials);
         chosenSpecials = chosenSpecials.GetRange(0, numSpecialRooms);
 
         List<int> insertIndices = new List<int>();
-        while (insertIndices.Count < numSpecialRooms)
+
+        int minIndex = firstSpecialMin;
+        int maxIndex = firstSpecialMax;
+
+        for (int i = 0; i < numSpecialRooms; i++)
         {
-            int insertIndex = Random.Range(0, middleRooms.Count + 1);
-            if (!insertIndices.Contains(insertIndex))
-                insertIndices.Add(insertIndex);
+            maxIndex = Mathf.Min(maxIndex, middleRooms.Count - 1);
+
+            if (minIndex > maxIndex)
+                minIndex = maxIndex;
+
+            int chosenIndex = Random.Range(minIndex, maxIndex + 1);
+            insertIndices.Add(chosenIndex);
+
+            minIndex = chosenIndex + delayBetweenSpecials;
+            maxIndex = minIndex + windowAfterDelay;
         }
+
         insertIndices.Sort();
 
         int offset = 0;
@@ -76,6 +104,7 @@ public class LineMapGenerator : MonoBehaviour
 
         GameObject bossRoomPrefab = bossRoomPrefabs[Random.Range(0, bossRoomPrefabs.Length)];
         GameObject bossRoom = Instantiate(bossRoomPrefab);
+
         Transform bossStart = bossRoom.transform.Find("StartPoint");
         if (bossStart == null)
         {
@@ -86,7 +115,7 @@ public class LineMapGenerator : MonoBehaviour
         Vector3 offsetPos = currentEndPoint.position - bossStart.position;
         bossRoom.transform.position += offsetPos;
 
-        Debug.Log($"Generated {middleRooms.Count} rooms total ({specialRoomCount} special rooms inserted).");
+        Debug.Log($"Generated {middleRooms.Count} rooms total with {numSpecialRooms} special rooms.");
     }
 
     private Transform SpawnMiddleRoom(GameObject sectionPrefab, Transform currentEnd)

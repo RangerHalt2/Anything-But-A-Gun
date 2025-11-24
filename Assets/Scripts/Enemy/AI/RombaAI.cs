@@ -8,7 +8,7 @@ public class RombaAI : MonoBehaviour
     [SerializeField] private Transform player;
     [SerializeField] private LayerMask whatIsPlayer;
 
-    [Header("Patrol Settings")]
+    [Header("NavMesh Patrol Settings")]
     [SerializeField] private float patrolDistance = 10f;
     [SerializeField] private float patrolSpeed = 3f;
     [SerializeField] private float patrolWaitTime = 1.5f;
