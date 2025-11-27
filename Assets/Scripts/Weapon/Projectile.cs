@@ -10,7 +10,8 @@ public class Projectile : MonoBehaviour, IWeaponLevel
     #region Variables
     [Header("Speed Settings")]
     [Tooltip("The speed at which the projectile will travel.")]
-    [SerializeField] private float speed;
+    public float speed; //EW: I made this public instead of private so it can be modified/referenced outside of this script.
+
 
     [Header("Lifetime Settings")]
     [Tooltip("The amount of time (in seconds) a projectile will exist for.")]
