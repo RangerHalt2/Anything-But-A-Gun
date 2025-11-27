@@ -13,7 +13,7 @@ public class VolleyBallScript : WeaponClass
     [SerializeField] private GameObject airProjectilePrefab;
     [Tooltip("Where the projectile should spawn from")]
     [SerializeField] private Transform projectileSpawnPoint;
-    //[SerializeField] private GameObject gunShot;
+    [SerializeField] private GameObject gunShot;
     [SerializeField] private AudioClip volleyballSFXgrounded;
     [SerializeField] private AudioClip volleyballSFXmidair;
 
@@ -41,7 +41,7 @@ public class VolleyBallScript : WeaponClass
                 {
                     ammoManager.Fire();
                     // Play sound effect (added by Aaron)
-                    SoundEffectsManager.instance.PlaySoundEffectClip(characterController.isGrounded ? volleyballSFXgrounded : volleyballSFXmidair, transform, 1f);
+                    Instantiate(gunShot, transform.position, transform.rotation, null);
                     playerController.JitterDown();
                     SpawnProjectile((characterController.isGrounded ? groundProjectilePrefab : airProjectilePrefab)); //Inline Bool check, ground if grounded and air if not grounded 
                     timer = fireRate;

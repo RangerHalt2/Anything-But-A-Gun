@@ -67,7 +67,7 @@ public class PlayerController : MonoBehaviour
         characterController.Move(new Vector3(0f, -0.05f, 0f));
     }
     #endregion
-
+    [SerializeField] private GameObject dashSound;
     void Awake() 
     {
         if (Instance != null && Instance != this)
@@ -165,7 +165,7 @@ public class PlayerController : MonoBehaviour
         }
 
         // Play sound effect (added by Aaron)
-        SoundEffectsManager.instance.PlaySoundEffectClip(dashSFX, transform, 1f);
+        Instantiate(dashSound, transform.position, transform.rotation, null);
 
         while (Time.time < startTime + dashTime)
         {
