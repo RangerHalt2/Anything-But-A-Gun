@@ -36,7 +36,7 @@ public class StaplerScript : WeaponClass
                             hitscan.Shoot();
                         // Play sound effect (added by Aaron)
                         if (gunShot != null)
-                            Instantiate(gunShot, transform.position, transform.rotation, null);
+                           Instantiate(gunShot, transform.position, transform.rotation, null);
 
                             // Old sound effect player (commented out by Aaron)
                             /*if(gunShot != null)
