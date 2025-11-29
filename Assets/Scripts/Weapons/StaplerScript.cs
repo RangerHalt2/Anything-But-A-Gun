@@ -15,7 +15,6 @@ public class StaplerScript : WeaponClass
     private float clickCooldown = 0.5f;
     private float clickTimer = 0;
     [SerializeField] private GameObject clickEffect;
-    
     [SerializeField] private GameObject gunshotShot;
 
     public override void Shoot()
