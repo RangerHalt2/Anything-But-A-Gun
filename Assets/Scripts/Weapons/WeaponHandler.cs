@@ -24,14 +24,18 @@ public class WeaponHandler : MonoBehaviour
 
     [SerializeField] private Transform gunHolder;
 
+    [Header("Cheat Settings")]
+    public bool cheatsEnabled = false;
+
     //LB: Added this as a getter
-    public GameObject GetCurrentWeapon() { return currentWeapon;}
+    public GameObject GetCurrentWeapon() { return currentWeapon; }
 
     void Start()
     {
         weapons.Add(Instantiate(starterWeapon, gunHolder));
         currentWeapon = weapons[0];
         weaponSlot = 0;
+        starterWeapon = currentWeapon;
     }
 
     void Update()
@@ -51,8 +55,8 @@ public class WeaponHandler : MonoBehaviour
         currentWeapon.GetComponent<WeaponClass>().Shoot();
     }
 
-    public void ReloadWeapon() 
-    { 
+    public void ReloadWeapon()
+    {
         currentWeapon.GetComponent<WeaponClass>().Reload();
     }
 
@@ -132,7 +136,7 @@ public class WeaponHandler : MonoBehaviour
                 //Play equip animation and activate new current weapon
 
             }
-            
+
             lastSwitch = Time.timeSinceLevelLoad;
         }
 
@@ -142,6 +146,11 @@ public class WeaponHandler : MonoBehaviour
             Debug.Log(currentWeapon);
         }
 
+        if (cheatsEnabled)
+        {
+            currentWeapon.GetComponent<AmmoManager>().reserveAmmo = -1;
+            currentWeapon.GetComponent<AmmoManager>().updateDisplay();
+        }
     }
 
     void AddWeapon(GameObject addWeapon)
@@ -167,7 +176,7 @@ public class WeaponHandler : MonoBehaviour
                     string nameOfHeldScript = heldScriptName.Name;
 
                     if (nameOfHeldScript == nameOfNewScript) //If we already have this weapon, drop the current weapon and replace it with the new one.
-                    { 
+                    {
                         weapons.Remove(heldWeapon);
                         DropWeapon(heldWeapon);
                         break;
@@ -198,13 +207,19 @@ public class WeaponHandler : MonoBehaviour
                     currentWeapon.transform.rotation = gunHolder.transform.rotation;
                     currentWeapon.transform.localScale = scale;
                 }
-                
+
                 currentWeapon.GetComponent<WeaponCollectScript>().enabled = false;
                 currentWeapon.SetActive(true);
                 currentWeapon.GetComponent<AmmoManager>().updateDisplay();
                 //currentWeapon.GetComponent<AmmoManager>().updateDisplay();
                 newWeapon = null; //So that it doesn't endlessly add the same weapon.
             }
+        }
+
+        if (cheatsEnabled)
+        {
+            currentWeapon.GetComponent<AmmoManager>().reserveAmmo = -1;
+            currentWeapon.GetComponent<AmmoManager>().updateDisplay();
         }
     }
 
@@ -242,5 +257,32 @@ public class WeaponHandler : MonoBehaviour
 
         dropWeapon.GetComponentInChildren<FloatAndRotate>().StartFloatAndRotate();
 
+        if (cheatsEnabled)
+        {
+            currentWeapon.GetComponent<AmmoManager>().reserveAmmo = -1;
+            currentWeapon.GetComponent<AmmoManager>().updateDisplay();
+        }
+    }
+
+    public void ToggleCheats() //Enables/Disables unlimited ammo
+    {
+        if (!cheatsEnabled)
+        {
+            cheatsEnabled = true;
+            currentWeapon.GetComponent<AmmoManager>().reserveAmmo = -1;
+            currentWeapon.GetComponent<AmmoManager>().updateDisplay();
+        }
+        else 
+        {
+            cheatsEnabled = false;
+            foreach (var weapon in weapons)
+            {
+                if (weapon.GetComponent<AmmoManager>().reserveAmmo == -1 && weapon.name != starterWeapon.name)
+                {
+                    weapon.GetComponent<AmmoManager>().reserveAmmo = 20;
+                }
+            }
+            currentWeapon.GetComponent<AmmoManager>().updateDisplay();
+        }
     }
 }
