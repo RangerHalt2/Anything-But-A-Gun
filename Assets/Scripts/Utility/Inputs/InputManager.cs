@@ -23,6 +23,7 @@ public class InputManager : MonoBehaviour
     [SerializeField] private string reload = "Reload";
     [SerializeField] private string next = "NextWeapon";
     [SerializeField] private string interact = "Interact";
+    [SerializeField] private string cheats = "Cheats";
 
     //LB: This is an action input, each one needs one assigned
     private InputAction moveAction;
@@ -35,6 +36,7 @@ public class InputManager : MonoBehaviour
     public InputAction reloadAction;
     private InputAction nextAction;
     private InputAction interactAction;
+    private InputAction cheatsAction;
 
     //LB: This is the getters and setters for the inputs, this will be used to manage their values overall
     public Vector2 MoveInput { get; private set; }
@@ -47,6 +49,7 @@ public class InputManager : MonoBehaviour
     public bool ReloadInput { get; private set; }
     public float NextInput { get; private set; }
     public bool InteractInput { get; private set; }
+    public bool CheatsInput { get; private set; }
 
     //LB: Instance Handler
     public static InputManager Instance { get; private set; }
@@ -75,6 +78,7 @@ public class InputManager : MonoBehaviour
         reloadAction = playerControls.FindActionMap(actionMapName).FindAction(reload);
         nextAction = playerControls.FindActionMap(actionMapName).FindAction(next);
         interactAction = playerControls.FindActionMap(actionMapName).FindAction(interact);
+        cheatsAction = playerControls.FindActionMap(actionMapName).FindAction(cheats);
         RegisterInputActions();
     }
 
@@ -110,6 +114,9 @@ public class InputManager : MonoBehaviour
 
         interactAction.performed += context => InteractInput = true;
         interactAction.canceled += context => InteractInput = false;
+
+        cheatsAction.performed += context => CheatsInput = true;
+        cheatsAction.canceled += context => CheatsInput = false;
     }
 
     //LB: Enable and Disable the actions
@@ -125,6 +132,7 @@ public class InputManager : MonoBehaviour
         reloadAction.Enable();
         nextAction.Enable();
         interactAction.Enable();
+        cheatsAction.Enable();
     }
 
     private void OnDisable()
@@ -139,6 +147,7 @@ public class InputManager : MonoBehaviour
         reloadAction.Disable();
         nextAction.Disable();
         interactAction.Disable();
+        cheatsAction.Disable();
     }
 
 }

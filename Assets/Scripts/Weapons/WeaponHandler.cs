@@ -11,7 +11,7 @@ public class WeaponHandler : MonoBehaviour
 
     //Exactly what weapons we have
     private List<GameObject> weapons = new List<GameObject>(); //List instead of an array for constant updating
-    private GameObject currentWeapon; //The weapon currently in the player's hands
+    public GameObject currentWeapon; //The weapon currently in the player's hands
     private int weaponSlot; //Which weapon in slot we're holding
     public GameObject newWeapon; //For if a player picks up a new gun.
     [SerializeField] private Transform weaponLocation; //Where the weapon is in the player's POV

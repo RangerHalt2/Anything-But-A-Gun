@@ -9,7 +9,7 @@ public class AmmoManager : MonoBehaviour
     #region Variables
     [Header("Ammo Settings")]
     [Tooltip("The amount of ammo the player has in reserve. Set to -1 for infinite reserve ammo")]
-    [SerializeField] private int reserveAmmo = 20;
+    public int reserveAmmo = 20; //EW: Made public to enable cheats
     [Tooltip("The maximum amount of ammo the weapon can have loaded at once.")]
     [SerializeField] private int ammoCapacity = 10;
     [Tooltip("The current amount of ammo the weapon can has loaded.")]

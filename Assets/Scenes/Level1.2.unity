@@ -14001,6 +14001,18 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3398571290749484056, guid: 6e79526cb5b40544c91f9ac79610f37c, type: 3}
+      propertyPath: m_ActionEvents.Array.size
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 3398571290749484056, guid: 6e79526cb5b40544c91f9ac79610f37c, type: 3}
+      propertyPath: m_ActionEvents.Array.data[10].m_ActionId
+      value: 812a143f-7b51-4f24-9733-0a6b5076c531
+      objectReference: {fileID: 0}
+    - target: {fileID: 3398571290749484056, guid: 6e79526cb5b40544c91f9ac79610f37c, type: 3}
+      propertyPath: m_ActionEvents.Array.data[10].m_ActionName
+      value: 'Player/Cheats[/Keyboard/tab,/XInputControllerWindows/rightShoulder]'
+      objectReference: {fileID: 0}
     - target: {fileID: 3697654237576190790, guid: 6e79526cb5b40544c91f9ac79610f37c, type: 3}
       propertyPath: m_Layer
       value: 3
@@ -14055,6 +14067,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2651782160796664015, guid: 6e79526cb5b40544c91f9ac79610f37c, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1943554080}
+    - targetCorrespondingSourceObject: {fileID: 2651782160796664015, guid: 6e79526cb5b40544c91f9ac79610f37c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1943554081}
   m_SourcePrefab: {fileID: 100100000, guid: 6e79526cb5b40544c91f9ac79610f37c, type: 3}
 --- !u!1 &1943554079 stripped
 GameObject:
@@ -14073,6 +14088,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84725c1583f2550418a4616fa16e4f03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::pauseSystem
+--- !u!114 &1943554081
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1943554079}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 222fc89752594464a9b51d04a93ea1c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  health: {fileID: 0}
+  inputs: {fileID: 0}
+  weapons: {fileID: 0}
+  cheatsEnabled: 0
 --- !u!1 &1954145259
 GameObject:
   m_ObjectHideFlags: 0
