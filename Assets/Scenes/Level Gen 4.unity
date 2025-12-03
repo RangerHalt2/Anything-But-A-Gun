@@ -365,12 +365,25 @@ MonoBehaviour:
   - {fileID: 3458314875783097201, guid: cd1ba0de30f70634281aa82e076214dc, type: 3}
   - {fileID: 8724441875870556482, guid: ffe968b4cddcadd489f34032f16436fa, type: 3}
   - {fileID: 8724441875870556482, guid: 4c6f61ba1142de141a7ee08cedd11c98, type: 3}
+  - {fileID: 3373898963129723866, guid: ceb159cb65c822641a88118aa9758c9d, type: 3}
+  - {fileID: 1283115065026293127, guid: 30f9b9aee1d3f4441aff3c327ff75dfe, type: 3}
+  - {fileID: 8724441875870556482, guid: 10c1da174c6ac5d4384a1ad0e2c91ae2, type: 3}
+  - {fileID: 8724441875870556482, guid: 0a338e8f7a4531242b80564603411a53, type: 3}
+  - {fileID: 2362544075785383720, guid: b9864f11314cef348a0cffce096ca55f, type: 3}
+  - {fileID: 2362544075785383720, guid: 14d1625ae94ea9347a0d76e450c6e978, type: 3}
+  - {fileID: 1283115065026293127, guid: a0f284dc04dc673428fdadb6defc981e, type: 3}
   specialRooms:
   - {fileID: 3373898963129723866, guid: c2cf3f437eae7ce4e99261d0ef042ae6, type: 3}
   - {fileID: 3461508500947951413, guid: 6911884a8659bfe4dbf4a1ea4c91559e, type: 3}
-  minRooms: 4
-  maxRooms: 5
-  specialRoomCount: 2
+  - {fileID: 3461508500947951413, guid: a5bb6d799c41f674dadf3b63b64e59e5, type: 3}
+  - {fileID: 3373898963129723866, guid: ceb159cb65c822641a88118aa9758c9d, type: 3}
+  minRooms: 15
+  maxRooms: 15
+  specialRoomCount: 3
+  firstSpecialMin: 2
+  firstSpecialMax: 4
+  delayBetweenSpecials: 4
+  windowAfterDelay: 2
 --- !u!4 &299931546
 Transform:
   m_ObjectHideFlags: 0
@@ -961,7 +974,7 @@ PrefabInstance:
       objectReference: {fileID: 1557514428}
     - target: {fileID: 2118403805752224804, guid: 6e79526cb5b40544c91f9ac79610f37c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2118403805752224804, guid: 6e79526cb5b40544c91f9ac79610f37c, type: 3}
       propertyPath: m_LocalPosition.y
@@ -969,7 +982,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2118403805752224804, guid: 6e79526cb5b40544c91f9ac79610f37c, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 162
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2118403805752224804, guid: 6e79526cb5b40544c91f9ac79610f37c, type: 3}
       propertyPath: m_LocalRotation.w
