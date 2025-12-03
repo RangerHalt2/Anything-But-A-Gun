@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8228312919251592689}
   m_Layer: 11
   m_Name: Head
-  m_TagString: Head
+  m_TagString: WeakPoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -147,12 +147,12 @@ GameObject:
   m_Component:
   - component: {fileID: 7633860298624178408}
   - component: {fileID: 8992063556814054335}
-  - component: {fileID: 6622127010177802786}
   - component: {fileID: 1052873763899505579}
   - component: {fileID: 5561038860284266260}
   - component: {fileID: 1858845626273565094}
   - component: {fileID: 8718023588053921820}
   - component: {fileID: 6419318689120893974}
+  - component: {fileID: 4646116291724292716}
   m_Layer: 11
   m_Name: BeanPolePrefab
   m_TagString: Enemy
@@ -237,39 +237,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &6622127010177802786
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4925705786666085929}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e3aa495c3c1d0364d933a58964504ad0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::EnemyAI
-  agent: {fileID: 0}
-  player: {fileID: 0}
-  whatIsGround:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  whatIsPlayer:
-    serializedVersion: 2
-    m_Bits: 8
-  patrolRange: 10
-  patrolWaitTime: 2
-  timeBetweenAttacks: 1
-  alreadyAttacked: 0
-  enemyBulletPrefab: {fileID: 5762768201822907473, guid: dc2ab7264a1b5c7458fbef3a2fa00268, type: 3}
-  firePoint: {fileID: 3685410459568754834}
-  bulletForce: 10
-  sightRange: 20
-  attackRange: 20
-  playerInSightRange: 0
-  playerInAttackRange: 0
-  detectionSprite: {fileID: 0}
-  detectionDisplayTime: 1
 --- !u!195 &1052873763899505579
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -307,6 +274,7 @@ MonoBehaviour:
   teamID: 1
   maxHealth: 100
   currentHealth: 100
+  nonlethalDefeat: 0
   healthBarActiveOnStartup: 0
   healthBar: {fileID: 5809989467138609651}
   healthDisplayText: {fileID: 0}
@@ -343,19 +311,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98a90d25b74354d41b3a87ca95d231e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BeanPoleAI
-  agent: {fileID: 0}
+  agent: {fileID: 1052873763899505579}
   player: {fileID: 0}
   whatIsPlayer:
     serializedVersion: 2
     m_Bits: 8
-  attackRange: 20
-  timeBetweenAttacks: 1
-  alreadyAttacked: 0
   enemyBulletPrefab: {fileID: 5762768201822907473, guid: dc2ab7264a1b5c7458fbef3a2fa00268, type: 3}
   firePoint: {fileID: 3685410459568754834}
   bulletForce: 10
+  patrolRange: 10
+  patrolWaitTime: 2
+  patrolTimer: 0
+  sightRange: 10
+  attackRange: 20
+  timeBetweenAttacks: 1
+  alreadyAttacked: 0
+  playerInSightRange: 0
+  playerInAttackRange: 0
   detectionSprite: {fileID: 0}
   detectionDisplayTime: 1
+  hasShownDetectionSprite: 0
 --- !u!54 &6419318689120893974
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -383,6 +358,38 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &4646116291724292716
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4925705786666085929}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0bd3fd68f3e366e41ac0663b0c9bfed9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyClass
+  agent: {fileID: 0}
+  player: {fileID: 0}
+  whatIsPlayer:
+    serializedVersion: 2
+    m_Bits: 0
+  enemyBulletPrefab: {fileID: 0}
+  firePoint: {fileID: 0}
+  bulletForce: 10
+  patrolRange: 10
+  patrolWaitTime: 2
+  patrolTimer: 0
+  sightRange: 10
+  attackRange: 10
+  timeBetweenAttacks: 2.5
+  alreadyAttacked: 0
+  playerInSightRange: 0
+  playerInAttackRange: 0
+  detectionSprite: {fileID: 0}
+  detectionDisplayTime: 1
+  hasShownDetectionSprite: 0
 --- !u!1 &5683218652002669994
 GameObject:
   m_ObjectHideFlags: 0

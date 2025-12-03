@@ -10,7 +10,8 @@ public class Projectile : MonoBehaviour, IWeaponLevel
     #region Variables
     [Header("Speed Settings")]
     [Tooltip("The speed at which the projectile will travel.")]
-    [SerializeField] private float speed;
+    public float speed; //EW: I made this public instead of private so it can be modified/referenced outside of this script.
+
 
     [Header("Lifetime Settings")]
     [Tooltip("The amount of time (in seconds) a projectile will exist for.")]
@@ -23,6 +24,15 @@ public class Projectile : MonoBehaviour, IWeaponLevel
     [SerializeField] public float baseDamage;
     [Tooltip("Damage to be added per level to the projectile")]
     [SerializeField] private float growthRate = 1.15f;
+
+    [Space]
+    [Tooltip("Determines whether or not the projectile can deal bonus damage for hitting an enemy's weakpoint.")]
+    [SerializeField] private bool canCrit;
+    [Tooltip("A multiplier added to a weapon's damage when hitting a weakpoint.")]
+    [SerializeField] private float critMult = 2f;
+    // Tracks whether or not the projectile was a critical hit
+    private bool criticalHit;
+    [Space]
     private float cummulativeDamage;
     private WeaponLevel currentWeaponLevel;
     //EW: Nonlethal add
@@ -32,29 +42,33 @@ public class Projectile : MonoBehaviour, IWeaponLevel
     [Header("Special Properties")]
     [Tooltip("Determines whether the projectile is able to pierce through, and deal damage, to multiple objects.")]
     [SerializeField] private bool piercing;
+    [Space]
     [Tooltip("a unique weapon that should not destroy the projectile on impact")]
     [SerializeField] private bool unique;
     [Tooltip("Determines whether the projectile will impact with or ricochet off of walls.")]
     public WallBehavior wallBehavior;
+    [Space]
+    [Tooltip("Determines the maximum amount of bounces. Only utilized if the projectile has the Ricochet wall behavior. Must be a value greater than 0.")]
+    [SerializeField] private int maxBounces = 0;
+    // How many times the projectile has bounced
+    private int currentBounces = 0;
+    //LB: Adding a cooldown on how often the ball can bounce, just by a fraction of a second
+    private float bounceCooldown = 0.2f;
+    private float bounceTimer = 0;
+    [Space]
+    [Tooltip("Determines whether the projectile will be effected by gravity.")]
+    [SerializeField] private bool bulletDrop;
+    [Tooltip("Multiplier for gravity when bullet drop is enabled.")]
+    [SerializeField] private float gravityMultiplier = 1.0f;
+    [Space]
     [Tooltip("Determines if it's AOE or not")]
     [SerializeField] private bool IsAoe;
     [Tooltip("AOE Range that it can hit people in")]
     [SerializeField] private float aoeRange;
     [SerializeField] private AudioClip[] ricochetSFX;
-    [Tooltip("Determines the maximum amount of bounces. Only utilized if the projectile has the Ricochet wall behavior. Must be a value greater than 0.")]
-    [SerializeField] private int maxBounces = 0;
-    // How many times the projectile has bounced
-    private int currentBounces = 0;
-
-    //LB: Adding a cooldown on how often the ball can bounce, just by a fraction of a second
-    private float bounceCooldown = 0.2f;
-    private float bounceTimer = 0;
-    
-    [Tooltip("Determines whether the projectile will be effected by gravity.")]
-    [SerializeField] private bool bulletDrop;
-    [Tooltip("Multiplier for gravity when bullet drop is enabled.")]
-    [SerializeField] private float gravityMultiplier = 1.0f;
-
+    private float ricochetTimer;
+    private float ricochetCooldown = 0.2f;
+    [Space]
     [SerializeField] private GameObject spikedExplosionVFX;
 
 
@@ -121,6 +135,7 @@ public class Projectile : MonoBehaviour, IWeaponLevel
     {
         if (bounceTimer > 0)
             bounceTimer -= Time.deltaTime;
+        ricochetTimer -= Time.deltaTime;
     }
 
     void FixedUpdate()
@@ -164,10 +179,11 @@ public class Projectile : MonoBehaviour, IWeaponLevel
     {
         if (IsAoe) {
             ApplyAOE(this.transform);
-            if (spikedExplosionVFX != null)
-                {
+            if (spikedExplosionVFX != null && ricochetTimer < 0)
+            {
                 Instantiate(spikedExplosionVFX, transform.position, transform.rotation, null);
-                }
+                ricochetTimer = ricochetCooldown;
+            }
                 
             return;
         }
@@ -177,6 +193,10 @@ public class Projectile : MonoBehaviour, IWeaponLevel
         // If health script is found...
         if (health != null)
         {
+            if(collider.gameObject.CompareTag("WeakPoint"))
+            {
+                criticalHit = true;
+            }
             DoDamage(health);
         }
 
@@ -197,7 +217,15 @@ public class Projectile : MonoBehaviour, IWeaponLevel
                 UpdateLevelDamage();
             }
             else
+            {
                 cummulativeDamage = baseDamage;
+            }
+            // If the projectile hit a weak point...
+            if (criticalHit)
+            {
+                // Multiply cumulative damage by the critMult
+                cummulativeDamage *= critMult;
+            }
             // EW: Deal nonlethal damage
             if (nonlethal)
             {
@@ -263,7 +291,7 @@ public class Projectile : MonoBehaviour, IWeaponLevel
             transform.forward = reflectedVelocity.normalized;
         }
 
-        if(ricochetSFX != null)
+        if(ricochetSFX.Length > 0)
         {
             Debug.Log("attempt to play SFX");
             SoundEffectsManager.instance.PlayRandomSoundEffectClip(ricochetSFX, transform, 1f);
@@ -280,7 +308,7 @@ public class Projectile : MonoBehaviour, IWeaponLevel
         Collider[] cols = Physics.OverlapSphere(center.position, aoeRange);
         foreach (Collider col in cols)
         {
-            if (col.gameObject.CompareTag("Head")) continue;
+            if (col.gameObject.CompareTag("WeakPoint")) continue;
             Health enemyHealth = col.GetComponentInParent<Health>();
             if(enemyHealth == null) enemyHealth = col.GetComponent<Health>();
             if(enemyHealth == null) enemyHealth = col.GetComponentInChildren<Health>();

@@ -13,7 +13,6 @@ public class VolleyBallScript : WeaponClass
     [SerializeField] private GameObject airProjectilePrefab;
     [Tooltip("Where the projectile should spawn from")]
     [SerializeField] private Transform projectileSpawnPoint;
-    [SerializeField] private GameObject gunShot;
     [SerializeField] private AudioClip volleyballSFXgrounded;
     [SerializeField] private AudioClip volleyballSFXmidair;
 

@@ -18,6 +18,13 @@ public class Hitscan : MonoBehaviour, IWeaponLevel
     private float cummulativeDamage;
     private WeaponLevel currentWeaponLevel;
 
+    [Space]
+    [Tooltip("Determines whether or not the projectile can deal bonus damage for hitting an enemy's weakpoint.")]
+    [SerializeField] private bool canCrit;
+    [Tooltip("A multiplier added to a weapon's damage when hitting a weakpoint.")]
+    [SerializeField] private float critMult;
+    [Space]
+
     [SerializeField] private LayerMask ignoreThese;
 
     [Header("Spread & Range Settings")]
@@ -113,13 +120,13 @@ public class Hitscan : MonoBehaviour, IWeaponLevel
                     float appliedDamage = cummulativeDamage;
 
                     // MG - Compares collider with Tag Head to deal double dmg
-                    if (hit.collider.CompareTag("Head"))
+                    if (hit.collider.CompareTag("WeakPoint"))
                     {
-                        appliedDamage *= 2f;
+                        appliedDamage *= critMult;
                         Debug.Log("Hitscan: Headshot");
                     }
                     // MG - Compares collider with Tag Body to deal normal dmg
-                    if (hit.collider.CompareTag("Body"))
+                    else if (hit.collider.CompareTag("Body"))
                     {
                         appliedDamage = cummulativeDamage;
                         Debug.Log("Hitscan: Body shot.");

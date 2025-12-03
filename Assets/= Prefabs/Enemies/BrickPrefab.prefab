@@ -187,11 +187,11 @@ GameObject:
   - component: {fileID: 4248109835255531634}
   - component: {fileID: 496349098809343737}
   - component: {fileID: 4635183105795041334}
-  - component: {fileID: 7252943354794029462}
   - component: {fileID: 8456658997244272520}
   - component: {fileID: -6795824228135107553}
   - component: {fileID: 1751570449815843157}
   - component: {fileID: 8140062244997518222}
+  - component: {fileID: 4526440904185643024}
   m_Layer: 11
   m_Name: BrickPrefab
   m_TagString: Enemy
@@ -337,39 +337,6 @@ NavMeshAgent:
   m_BaseOffset: 4.3599997
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &7252943354794029462
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3695943591121391829}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e3aa495c3c1d0364d933a58964504ad0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::EnemyAI
-  agent: {fileID: 0}
-  player: {fileID: 7827221150270876552}
-  whatIsGround:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  whatIsPlayer:
-    serializedVersion: 2
-    m_Bits: 8
-  patrolRange: 10
-  patrolWaitTime: 2
-  timeBetweenAttacks: 1
-  alreadyAttacked: 0
-  enemyBulletPrefab: {fileID: 5762768201822907473, guid: dc2ab7264a1b5c7458fbef3a2fa00268, type: 3}
-  firePoint: {fileID: 7827221150270876552}
-  bulletForce: 10
-  sightRange: 20
-  attackRange: 2
-  playerInSightRange: 0
-  playerInAttackRange: 0
-  detectionSprite: {fileID: 0}
-  detectionDisplayTime: 1
 --- !u!114 &8456658997244272520
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -385,6 +352,7 @@ MonoBehaviour:
   teamID: 1
   maxHealth: 100
   currentHealth: 100
+  nonlethalDefeat: 0
   healthBarActiveOnStartup: 0
   healthBar: {fileID: 8487157334695095963}
   healthDisplayText: {fileID: 0}
@@ -421,24 +389,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c4a2dba700655842b6a3b2c6993af54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BrickAI
-  agent: {fileID: 0}
+  agent: {fileID: 4635183105795041334}
   player: {fileID: 0}
   whatIsPlayer:
     serializedVersion: 2
     m_Bits: 8
-  patrolRange: 10
-  patrolWaitTime: 2
-  timeBetweenAttacks: 0.85
-  alreadyAttacked: 0
   enemyBulletPrefab: {fileID: 5762768201822907473, guid: dc2ab7264a1b5c7458fbef3a2fa00268, type: 3}
   firePoint: {fileID: 7827221150270876552}
   bulletForce: 15
+  patrolRange: 10
+  patrolWaitTime: 2
+  patrolTimer: 0
   sightRange: 24
   attackRange: 3
+  timeBetweenAttacks: 0.85
+  alreadyAttacked: 0
   playerInSightRange: 0
   playerInAttackRange: 0
   detectionSprite: {fileID: 0}
   detectionDisplayTime: 1
+  hasShownDetectionSprite: 0
 --- !u!54 &8140062244997518222
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -466,6 +436,38 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &4526440904185643024
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3695943591121391829}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0bd3fd68f3e366e41ac0663b0c9bfed9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyClass
+  agent: {fileID: 0}
+  player: {fileID: 0}
+  whatIsPlayer:
+    serializedVersion: 2
+    m_Bits: 0
+  enemyBulletPrefab: {fileID: 0}
+  firePoint: {fileID: 0}
+  bulletForce: 10
+  patrolRange: 10
+  patrolWaitTime: 2
+  patrolTimer: 0
+  sightRange: 10
+  attackRange: 10
+  timeBetweenAttacks: 2.5
+  alreadyAttacked: 0
+  playerInSightRange: 0
+  playerInAttackRange: 0
+  detectionSprite: {fileID: 0}
+  detectionDisplayTime: 1
+  hasShownDetectionSprite: 0
 --- !u!1 &6065764785548395232
 GameObject:
   m_ObjectHideFlags: 0
@@ -478,7 +480,7 @@ GameObject:
   - component: {fileID: 321247990441670222}
   m_Layer: 11
   m_Name: Head
-  m_TagString: Head
+  m_TagString: WeakPoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -18,8 +18,6 @@ public class AirFrierScript : WeaponClass
     [SerializeField] private float coolSpeed = 0.1f; //Speed that the nuggies cool off
 
     private PlayerController playerRef;
-    [SerializeField] private GameObject gunShot;
-
 
     //NEEDS UI FOR CHARGE TIME
 

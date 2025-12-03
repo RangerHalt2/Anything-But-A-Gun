@@ -826,6 +826,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Slider
+--- !u!1 &266335559 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6120725345040969484, guid: caa24201197b26b479e66c072d7d3e13, type: 3}
+  m_PrefabInstance: {fileID: 266335554}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &299931544
 GameObject:
   m_ObjectHideFlags: 0
@@ -879,6 +884,10 @@ MonoBehaviour:
   minRooms: 20
   maxRooms: 20
   specialRoomCount: 0
+  firstSpecialMin: 0
+  firstSpecialMax: 5
+  delayBetweenSpecials: 4
+  windowAfterDelay: 5
 --- !u!4 &299931546
 Transform:
   m_ObjectHideFlags: 0
@@ -1502,7 +1511,7 @@ PrefabInstance:
     - target: {fileID: 1840295424487795494, guid: 6e79526cb5b40544c91f9ac79610f37c, type: 3}
       propertyPath: inGameCanvas
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 266335559}
     - target: {fileID: 1840295424487795494, guid: 6e79526cb5b40544c91f9ac79610f37c, type: 3}
       propertyPath: gameOverCanvas
       value: 

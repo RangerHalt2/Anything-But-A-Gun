@@ -11,7 +11,6 @@ public class MegaphonScript : WeaponClass
     //private float lastFired = Mathf.NegativeInfinity;
 
     private WeaponLevel weaponLevelRef;
-    [SerializeField] private GameObject gunShot;
 
     private void Start()
     {
