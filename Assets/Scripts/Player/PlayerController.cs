@@ -164,8 +164,12 @@ public class PlayerController : MonoBehaviour
             dashDirection = transform.forward;
         }
 
-        // Play sound effect (added by Aaron)
-        Instantiate(dashSound, transform.position, transform.rotation, null);
+        //EW: Need a null check to make sure the dash doesn't fail
+        if (dashSound != null)
+        {
+            // Play sound effect (added by Aaron)
+            Instantiate(dashSound, transform.position, transform.rotation, null);
+        }
 
         while (Time.time < startTime + dashTime)
         {

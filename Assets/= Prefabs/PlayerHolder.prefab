@@ -5040,6 +5040,7 @@ GameObject:
   - component: {fileID: 1432233756446685906}
   - component: {fileID: 7877837669330236168}
   - component: {fileID: 1840295424487795494}
+  - component: {fileID: 692855440486963092}
   m_Layer: 3
   m_Name: PlayerHolder
   m_TagString: Player
@@ -5183,12 +5184,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WeaponHandler
   starterWeapon: {fileID: 2719607922738401809, guid: bf4560e93c0aa904dbd752275a0b37f5, type: 3}
+  currentWeapon: {fileID: 0}
   newWeapon: {fileID: 0}
   weaponLocation: {fileID: 455567464696260592}
   maxDistance: 5
   inputManager: {fileID: 0}
   weaponSwitchRate: 0.1
   gunHolder: {fileID: 5256620709295122454}
+  cheatsEnabled: 0
 --- !u!114 &9141169956821783407
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5269,6 +5272,20 @@ MonoBehaviour:
   inGameCanvas: {fileID: 0}
   isDead: 0
   damageNoise: {fileID: 0}
+--- !u!114 &692855440486963092
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2651782160796664015}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 222fc89752594464a9b51d04a93ea1c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  health: {fileID: 0}
+  cheatsEnabled: 0
 --- !u!1 &2996655205196840286
 GameObject:
   m_ObjectHideFlags: 0

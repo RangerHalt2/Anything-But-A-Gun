@@ -46,10 +46,12 @@ public class BrushScript : WeaponClass
                 {
                     if (projectilePrefab != null)
                     {
-                        
-
-                        // Play sound effect (added by Aaron)
-                        SoundEffectsManager.instance.PlaySoundEffectClip(brushSFX, transform, 1f);
+                        // Need a null check here if you wanna add in something that might be null. This is why it wasn't firing
+                        if (brushSFX != null)
+                        {
+                            // Play sound effect (added by Aaron)
+                            SoundEffectsManager.instance.PlaySoundEffectClip(brushSFX, transform, 1f);
+                        }
 
                         SpawnProjectile();
                     }
