@@ -48,6 +48,9 @@ public class UIManager : MonoBehaviour
         // Get the pause action from the UI Action Map in InputActions
         var uiMap = UIControls.FindActionMap("UI", true);
         pauseAction = uiMap.FindAction("Pause", true);
+
+        //EW: Added to fix the kill screen. See Die() in Health for more information
+        allowPause = true;
     }
 
     private void OnEnable()

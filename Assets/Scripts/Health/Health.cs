@@ -177,10 +177,15 @@ public class Health : MonoBehaviour
         }
         else if (isPlayer)
         {
+            UIManager.instance.allowPause = false; //EW: Set this way to keep the player from pausing and unpausing after death because unpausing makes the main game UI show up.
+            //EW: Put this on the front, and made it check to see if it's paused first so that it won't pause an unpaused game.
+            if (UIManager.instance.IsPaused)
+            {
+                UIManager.instance.TogglePause();
+            }
             isDead = true;
             gameOverCanvas.SetActive(true);
             inGameCanvas.SetActive(false);
-            UIManager.instance.TogglePause();
             Cursor.lockState = CursorLockMode.None;
         }
     }
