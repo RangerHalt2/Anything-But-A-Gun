@@ -180,6 +180,7 @@ public class Health : MonoBehaviour
             isDead = true;
             gameOverCanvas.SetActive(true);
             inGameCanvas.SetActive(false);
+            UIManager.instance.TogglePause();
             Cursor.lockState = CursorLockMode.None;
         }
     }

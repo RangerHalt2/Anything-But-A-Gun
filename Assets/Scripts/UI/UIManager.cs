@@ -34,6 +34,7 @@ public class UIManager : MonoBehaviour
 
     void Awake()
     {
+        Time.timeScale = 1f;
         // Ensure there is only one instance of the UI Manager
         if (instance == null)
         {
