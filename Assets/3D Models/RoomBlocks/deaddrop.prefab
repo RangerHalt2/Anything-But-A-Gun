@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 7056524742960329629}
   - component: {fileID: 7676897123993586895}
   - component: {fileID: 2441716153312757743}
-  - component: {fileID: 4187870097514134686}
   m_Layer: 0
   m_Name: Plane
   m_TagString: Untagged
@@ -135,20 +134,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 10, y: 2.0208523, z: 10}
   m_Center: {x: 0, y: 0.11856367, z: -0.000030441455}
---- !u!114 &4187870097514134686
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 71152667365904584}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: af288ff7a95549b4a85cc193a2c83e8a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DamageTrigger
-  damage: 100
-  targetTeamIDs: 00000000
 --- !u!1 &182347375969079418
 GameObject:
   m_ObjectHideFlags: 0
@@ -709,7 +694,6 @@ Transform:
   - {fileID: 9179539159731506631}
   - {fileID: 6393267848586503695}
   - {fileID: 5222382773753548769}
-  - {fileID: 5282776677256555230}
   - {fileID: 6327832348456378321}
   - {fileID: 5895140797523551637}
   - {fileID: 5946719445814816012}
@@ -1516,70 +1500,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!1 &3586983823577727026
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 5282776677256555230}
-  - component: {fileID: 496623716474614173}
-  m_Layer: 0
-  m_Name: NavMesh Surface
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &5282776677256555230
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3586983823577727026}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -59.49722, y: -0.50000066, z: -21.499313}
-  m_LocalScale: {x: 0.047618818, y: 7.5528693, z: 0.03999872}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 3622070753969726481}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &496623716474614173
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3586983823577727026}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7a5ac11cc976e418e8d13136b07e1f52, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Unity.AI.Navigation::Unity.AI.Navigation.NavMeshSurface
-  m_SerializedVersion: 0
-  m_AgentTypeID: 0
-  m_CollectObjects: 0
-  m_Size: {x: 10, y: 10, z: 10}
-  m_Center: {x: 0, y: 2, z: 0}
-  m_LayerMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_UseGeometry: 0
-  m_DefaultArea: 0
-  m_GenerateLinks: 0
-  m_IgnoreNavMeshAgent: 1
-  m_IgnoreNavMeshObstacle: 1
-  m_OverrideTileSize: 0
-  m_TileSize: 256
-  m_OverrideVoxelSize: 0
-  m_VoxelSize: 0.16666667
-  m_MinRegionArea: 2
-  m_NavMeshData: {fileID: 23800000, guid: 9aca8f50fbd0398439114f024c64bdef, type: 2}
-  m_BuildHeightMesh: 0
 --- !u!1 &3609338540805674307
 GameObject:
   m_ObjectHideFlags: 0
