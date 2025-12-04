@@ -226,6 +226,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 108525092138708398, guid: caa24201197b26b479e66c072d7d3e13, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -1.9998779
+      objectReference: {fileID: 0}
     - target: {fileID: 436718926502639204, guid: caa24201197b26b479e66c072d7d3e13, type: 3}
       propertyPath: m_fontAsset
       value: 
@@ -236,7 +240,7 @@ PrefabInstance:
       objectReference: {fileID: 2302697313645794927, guid: 97594eefdda176047a8dfe323866b9ca, type: 2}
     - target: {fileID: 579397576798918672, guid: caa24201197b26b479e66c072d7d3e13, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -10.649841
+      value: -10.64978
       objectReference: {fileID: 0}
     - target: {fileID: 1050586433242187836, guid: caa24201197b26b479e66c072d7d3e13, type: 3}
       propertyPath: m_fontAsset
@@ -845,6 +849,7 @@ GameObject:
   m_Component:
   - component: {fileID: 299931546}
   - component: {fileID: 299931545}
+  - component: {fileID: 299931547}
   m_Layer: 0
   m_Name: MapGenerator
   m_TagString: Untagged
@@ -892,6 +897,7 @@ MonoBehaviour:
   firstSpecialMax: 4
   delayBetweenSpecials: 4
   windowAfterDelay: 2
+  navMeshSurface: {fileID: 299931547}
 --- !u!4 &299931546
 Transform:
   m_ObjectHideFlags: 0
@@ -907,6 +913,38 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &299931547
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 299931544}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a5ac11cc976e418e8d13136b07e1f52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.AI.Navigation::Unity.AI.Navigation.NavMeshSurface
+  m_SerializedVersion: 0
+  m_AgentTypeID: 0
+  m_CollectObjects: 0
+  m_Size: {x: 10, y: 10, z: 10}
+  m_Center: {x: 0, y: 2, z: 0}
+  m_LayerMask:
+    serializedVersion: 2
+    m_Bits: 24543
+  m_UseGeometry: 0
+  m_DefaultArea: 0
+  m_GenerateLinks: 0
+  m_IgnoreNavMeshAgent: 1
+  m_IgnoreNavMeshObstacle: 1
+  m_OverrideTileSize: 0
+  m_TileSize: 256
+  m_OverrideVoxelSize: 0
+  m_VoxelSize: 0.16666667
+  m_MinRegionArea: 2
+  m_NavMeshData: {fileID: 0}
+  m_BuildHeightMesh: 0
 --- !u!1 &343350542 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5315707066631095733, guid: caa24201197b26b479e66c072d7d3e13, type: 3}

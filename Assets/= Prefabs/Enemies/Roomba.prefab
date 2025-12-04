@@ -98,8 +98,8 @@ GameObject:
   - component: {fileID: 4635183105795041334}
   - component: {fileID: 8456658997244272520}
   - component: {fileID: -6795824228135107553}
-  - component: {fileID: 1751570449815843157}
-  - component: {fileID: 5637816391884931748}
+  - component: {fileID: 7998753799558321746}
+  - component: {fileID: 5316091083430951825}
   m_Layer: 11
   m_Name: Roomba
   m_TagString: Enemy
@@ -237,6 +237,7 @@ MonoBehaviour:
   teamID: 1
   maxHealth: 100
   currentHealth: 100
+  nonlethalDefeat: 0
   healthBarActiveOnStartup: 0
   healthBar: {fileID: 8487157334695095963}
   healthDisplayText: {fileID: 0}
@@ -261,37 +262,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyManagerCooperation
   enemyManager: {fileID: 0}
---- !u!114 &1751570449815843157
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3695943591121391829}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4c4a2dba700655842b6a3b2c6993af54, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::BrickAI
-  agent: {fileID: 0}
-  player: {fileID: 0}
-  whatIsPlayer:
-    serializedVersion: 2
-    m_Bits: 8
-  patrolRange: 10
-  patrolWaitTime: 2
-  timeBetweenAttacks: 0.85
-  alreadyAttacked: 0
-  enemyBulletPrefab: {fileID: 5762768201822907473, guid: dc2ab7264a1b5c7458fbef3a2fa00268, type: 3}
-  firePoint: {fileID: 7827221150270876552}
-  bulletForce: 15
-  sightRange: 24
-  attackRange: 3
-  playerInSightRange: 0
-  playerInAttackRange: 0
-  detectionSprite: {fileID: 0}
-  detectionDisplayTime: 1
---- !u!114 &5637816391884931748
+--- !u!114 &7998753799558321746
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -300,9 +271,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 3695943591121391829}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 03d86de830ba39a4d96a0b74becf0a6d, type: 3}
+  m_Script: {fileID: 11500000, guid: 4383b31074f276e4bbfbb5b18e0bfdf2, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::RombaAI
+  m_EditorClassIdentifier: Assembly-CSharp::RoombaAI
   agent: {fileID: 0}
   player: {fileID: 0}
   whatIsPlayer:
@@ -312,15 +283,115 @@ MonoBehaviour:
   patrolSpeed: 3
   patrolWaitTime: 1.5
   navEdgeCheckDistance: 2
-  sightRange: 20
+  sightRange: 10
   attackRange: 2
   playerInSightRange: 0
   playerInAttackRange: 0
   detectionSprite: {fileID: 0}
   detectionDisplayTime: 1
-  audioSource: {fileID: 0}
-  beepSound: {fileID: 0}
+  audioSource: {fileID: 5316091083430951825}
   explosionPrefab: {fileID: 8428204072777953739, guid: b3e9719e5c491ad4f83a2e0b696463bb, type: 3}
+  explosionRadius: 5
+  explosionDamage: 50
+  explosionDelay: 2
+  teamID: 0
+--- !u!82 &5316091083430951825
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3695943591121391829}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &6065764785548395232
 GameObject:
   m_ObjectHideFlags: 0

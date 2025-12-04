@@ -1,4 +1,5 @@
 using UnityEngine;
+using Unity.AI.Navigation;
 using System.Collections.Generic;
 
 public class LineMapGenerator : MonoBehaviour
@@ -16,16 +17,20 @@ public class LineMapGenerator : MonoBehaviour
 
     [Header("Special Room Timing")]
     [Tooltip("Earliest possible index for the first special room.")]
-    [SerializeField] private int firstSpecialMin = 0;
+    [SerializeField] private int firstSpecialMin = 2;
 
     [Tooltip("Latest possible index for the first special room (inclusive).")]
-    [SerializeField] private int firstSpecialMax = 5;
+    [SerializeField] private int firstSpecialMax = 4;
 
     [Tooltip("How many rooms cannot contain a special room after placing one.")]
     [SerializeField] private int delayBetweenSpecials = 4;
 
     [Tooltip("After the delay, how many rooms long the window is where the next special MUST spawn.")]
-    [SerializeField] private int windowAfterDelay = 5;
+    [SerializeField] private int windowAfterDelay = 2;
+
+    
+    [Header("NavMesh")]
+    [SerializeField] private NavMeshSurface navMeshSurface;
 
 
     private void Start()
@@ -116,6 +121,15 @@ public class LineMapGenerator : MonoBehaviour
         bossRoom.transform.position += offsetPos;
 
         Debug.Log($"Generated {middleRooms.Count} rooms total with {numSpecialRooms} special rooms.");
+
+        if (navMeshSurface != null)
+        {
+            navMeshSurface.BuildNavMesh();
+        }
+        else
+        {
+            Debug.LogWarning("NavMeshSurface reference is missing!");
+        }
     }
 
     private Transform SpawnMiddleRoom(GameObject sectionPrefab, Transform currentEnd)
