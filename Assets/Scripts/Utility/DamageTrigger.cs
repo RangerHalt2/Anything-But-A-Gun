@@ -25,7 +25,7 @@ public class DamageTrigger : MonoBehaviour
             int otherTeamID = health.teamID;
 
             // Check if the list contains the object's teamID
-            if(targetTeamIDs.Contains(otherTeamID))
+            if (targetTeamIDs.Contains(otherTeamID))
             {
                 // Apply damage
                 health.TakeDamage(damage);

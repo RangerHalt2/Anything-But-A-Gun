@@ -674,8 +674,8 @@ GameObject:
   - component: {fileID: 8790823311640911087}
   - component: {fileID: 2846406024242811336}
   - component: {fileID: 4234244904453627869}
-  - component: {fileID: 5989034582466162003}
   - component: {fileID: 8353734692132402944}
+  - component: {fileID: 1438347400532275159}
   m_Layer: 0
   m_Name: Plane
   m_TagString: Untagged
@@ -776,20 +776,6 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &5989034582466162003
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3071603448143131402}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: af288ff7a95549b4a85cc193a2c83e8a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DamageTrigger
-  damage: 100
-  targetTeamIDs: 00000000
 --- !u!65 &8353734692132402944
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -805,12 +791,26 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 10, y: 0.86922747, z: 10}
   m_Center: {x: 0, y: -0.19089884, z: 0}
+--- !u!114 &1438347400532275159
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3071603448143131402}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4209ad4f388cb9f41b777d62df002e1e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DamageTrigger
+  damage: 100
+  targetTeamIDs: 0000000001000000
 --- !u!1 &3278721634693429209
 GameObject:
   m_ObjectHideFlags: 0
