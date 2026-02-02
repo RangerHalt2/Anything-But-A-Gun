@@ -80,4 +80,10 @@ public class EnemySpawner : MonoBehaviour
         Instantiate(commonEnemies[commonChoice], spawnPoint.position, spawnPoint.rotation);
     }
 
+    //Reset Spawner: MG
+    public void ResetSpawner()
+    {
+        spawnedEnemies = false;
+    }
+
 }
