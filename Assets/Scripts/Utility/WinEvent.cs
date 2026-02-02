@@ -16,6 +16,7 @@ public class WinEvent : MonoBehaviour
     [SerializeField] private string nextSceneName;
     [Tooltip("The position of the player in the next level.")]
     [SerializeField] private Vector3 nextScenePos;
+    public WaveManager doorOpen;
 
     public bool hasWon = false;
 
@@ -38,6 +39,9 @@ public class WinEvent : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+      
+
+
         // Ensure that the game object entering the trigger is the player
         if (other.gameObject.CompareTag("Player"))
          {
