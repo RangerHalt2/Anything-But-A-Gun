@@ -57,6 +57,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private LayerMask interactableMask;
     [SerializeField] private float interactCooldown = 0.5f;
     private bool canInteract = true;
+
+    public bool isSpawned = false;
     #endregion
 
     #region Getters/Setters
@@ -67,6 +69,7 @@ public class PlayerController : MonoBehaviour
         characterController.Move(new Vector3(0f, -0.05f, 0f));
     }
     #endregion
+
     [SerializeField] private GameObject dashSound;
     void Awake() 
     {
@@ -86,6 +89,7 @@ public class PlayerController : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        isSpawned = true;
         Cursor.lockState = CursorLockMode.Locked; //This might better belong on a different script? Unsure
         playerHealth = GetComponent<Health>();
         characterController = GetComponent<CharacterController>();
@@ -184,7 +188,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame     UPDATED BY JAIME AND RYAN 11/3/25
     void Update()
     {
-        if (playerHealth.isDead) return;
+        if (playerHealth.isDead || !isSpawned) return;
 
         if (winEvent != null  && winEvent.hasWon) return;
 

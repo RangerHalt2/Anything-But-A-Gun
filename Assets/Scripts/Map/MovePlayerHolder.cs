@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class MovePlayerHolder : MonoBehaviour
@@ -6,11 +7,33 @@ public class MovePlayerHolder : MonoBehaviour
 
     void Start()
     {
-        GameObject holder = GameObject.Find("PlayerHolder");
-        if (holder != null)
+        Debug.LogWarning("Code Started; Attempting to Find Player Holder");
+        PlayerController controller = GameObject.FindAnyObjectByType<PlayerController>();
+        if (controller != null)
         {
-            playerHolder = holder.transform;
-            playerHolder.position = transform.position;
+            Debug.LogWarning("Player Holder FOUND");
+            StartCoroutine(LateStart(controller));
         }
+        else
+        {
+            Debug.LogWarning("Player Holder NOT FOUND");
+        }
+    }
+
+    private IEnumerator LateStart(PlayerController controller)
+    {
+        playerHolder = controller.transform;
+
+        CharacterController cc = controller.GetComponent<CharacterController>();
+        if (cc == null)
+        {
+            Debug.LogWarning("The character controller could not be found");
+            yield return null;
+        }
+        cc.enabled = false;
+        playerHolder.position = transform.position;
+        cc.enabled = true;
+        controller.isSpawned = true;
+        yield return new WaitForSeconds(0.2f);
     }
 }

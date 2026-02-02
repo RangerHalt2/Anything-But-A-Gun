@@ -68,6 +68,8 @@ public class WeaponHandler : MonoBehaviour
         }
         else
         {
+            //Attempt to find the scene's inputManager.
+            inputManager = GameObject.FindAnyObjectByType<InputManager>();
             Debug.LogWarning("InputManager is not assigned.");
             return;
         }

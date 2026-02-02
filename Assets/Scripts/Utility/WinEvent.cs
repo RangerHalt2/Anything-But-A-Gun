@@ -40,7 +40,7 @@ public class WinEvent : MonoBehaviour
     {
         // Ensure that the game object entering the trigger is the player
         if (other.gameObject.CompareTag("Player"))
-        {
+         {
             // If it is the final level
             if (isFinalLevel)
             {
@@ -70,6 +70,8 @@ public class WinEvent : MonoBehaviour
                 {
                     // Move player to the specified position in the next scene
                     GameObject player = other.transform.parent != null ? other.transform.parent.gameObject : other.gameObject;
+                    PlayerController controller = GameObject.FindAnyObjectByType<PlayerController>();
+                    controller.isSpawned = false;
                     player.transform.position = nextScenePos;
                     Debug.Log(other.transform.position);
 
