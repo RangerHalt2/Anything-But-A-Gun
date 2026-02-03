@@ -51,11 +51,14 @@ public class Health : MonoBehaviour
     private float damageTimer = 0f;
     private float damageCooldown = 0.5f;
 
+    [SerializeField] private StyleGaugeController style;
+
     #endregion
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        style = (StyleGaugeController)FindFirstObjectByType(typeof(StyleGaugeController));
         playerLevel = GameObject.FindAnyObjectByType<Player_Level>();
         isDead = false;
         // Automatically kill object if it has 0 or less health
@@ -98,6 +101,11 @@ public class Health : MonoBehaviour
         }
         Debug.Log(gameObject.name + " took " + damageAmount + " damage. Current Health: " + currentHealth + "/" + maxHealth + ".");
         updateDisplay();
+
+        if (isPlayer) //EW: Added to make the player lose score after taking damage.
+        {
+            style.DecreaseScore();
+        }
 
         // If the object has 0 or less current health
         if (currentHealth <= 0)
@@ -172,6 +180,7 @@ public class Health : MonoBehaviour
         Debug.Log(gameObject.name + " has died.");
         if (!isPlayer)
         {
+            style.IncreaseScore(true, false); //EW: Added for the style gauge.
             playerLevel.AddEXP(EXPDrop);
             Destroy(gameObject);
         }
@@ -184,8 +193,8 @@ public class Health : MonoBehaviour
                 UIManager.instance.TogglePause();
             }
             isDead = true;
-            gameOverCanvas.SetActive(true);
-            inGameCanvas.SetActive(false);
+            //gameOverCanvas.SetActive(true);
+            //inGameCanvas.SetActive(false);
             Cursor.lockState = CursorLockMode.None;
         }
     }

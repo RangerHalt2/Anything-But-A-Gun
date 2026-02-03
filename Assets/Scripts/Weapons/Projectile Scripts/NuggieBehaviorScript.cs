@@ -20,7 +20,7 @@ public class NuggieBehaviorScript : MonoBehaviour, IWeaponLevel
 
     [Header("Attack Cooldown")]
     [SerializeField] private float timeBetweenAttacks = 2.5f;
-    private bool alreadyAttacked;
+    [SerializeField] private bool alreadyAttacked;
 
     [Header("Attack Seetings")]
     [SerializeField] private Transform attackPoint;
@@ -59,7 +59,6 @@ public class NuggieBehaviorScript : MonoBehaviour, IWeaponLevel
         {
             target = null;
         }
-        Debug.Log(target);
         nuggieTimer -= 1 * Time.deltaTime; //Lifetime of the nuggie
 
         if (nuggieTimer < 0)
@@ -167,10 +166,10 @@ public class NuggieBehaviorScript : MonoBehaviour, IWeaponLevel
     {
         Vector3 direction = (target.position - attackPoint.position).normalized;
         float distance = Vector3.Distance(attackPoint.position, target.position);
-
+        
         if (Physics.Raycast(attackPoint.position, direction, out RaycastHit hit, distance))
         {
-            return hit.transform.CompareTag("Body");
+            return hit.transform.CompareTag("Enemy");
         }
         return false;
     }

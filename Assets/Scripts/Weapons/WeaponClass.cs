@@ -133,6 +133,7 @@ public class WeaponClass : MonoBehaviour
 
     private void InitializeWeapon()
     {
+        weaponLevel = GetComponent<WeaponLevel>();
         //if (weaponData == null) return;
 
         CalculateLevelDamage();

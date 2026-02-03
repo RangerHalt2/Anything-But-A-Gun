@@ -61,10 +61,17 @@ public class JoustingHorseScript : WeaponClass
     {
         JOUSTING = true;
         joustingCollider.enabled = true;
-        pc.movementSpeed = pcBaseSpeed * joustSpeedMultiplier;
         yield return new WaitForSeconds(joustTime);
         pc.movementSpeed = pcBaseSpeed;
         joustingCollider.enabled = false;
         JOUSTING = false;
+    }
+
+    void Update() 
+    {
+        if (JOUSTING) 
+        {
+            pc.movementSpeed += pcBaseSpeed * joustSpeedMultiplier * Time.deltaTime * 0.1f;
+        }
     }
 }

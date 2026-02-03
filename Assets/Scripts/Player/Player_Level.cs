@@ -26,7 +26,7 @@ public class Player_Level : MonoBehaviour
     [HideInInspector]
     public float EXP { get; private set; } = 0;
     [HideInInspector]
-    public int Level { get; private set; } = 0;
+    public int Level { get; private set; } = 1;
 
     //LB: A public function to be called on the enemies death, adds exp to the player.
     //Rounds solely to prevent fractions of exp. 

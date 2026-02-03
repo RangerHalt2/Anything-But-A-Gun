@@ -11,11 +11,14 @@ public class AirFrierScript : WeaponClass
     //private float lastFired = Mathf.NegativeInfinity;
 
     private WeaponLevel weaponLevelRef;
-
-    [SerializeField] private float timeOnBox = 5f; //Time to cook the nuggets
-    private float cookTime = 0f; //Current time the nugget has been cooking
-    private float cookSpeed = 1f; //Temperature of the oven, ha ha
+    
+    [SerializeField] private float cookLimit1 = 150f; //If cookTime reaches this, and the player fires, only one nugget will spawn
+    [SerializeField] private float cookLimit2 = 225f; //If cookTime reaches this, and the player fires, only two nuggets will spawn
+    [SerializeField] private float maxCookTime = 300f; //Maximum time before the nuggets are forced to fire. If the player reaches this, three nuggets will spawn
+    [SerializeField] private float cookTime = 0f; //Current time the nugget has been cooking
+    private float cookSpeed = 0.5f; //Temperature of the oven, ha ha
     [SerializeField] private float coolSpeed = 0.1f; //Speed that the nuggies cool off
+    [SerializeField] private InputManager IM;
 
     private PlayerController playerRef;
 
@@ -26,6 +29,7 @@ public class AirFrierScript : WeaponClass
         cookTime = 0f;
         weaponLevelRef = GetComponent<WeaponLevel>();
         playerRef = GameObject.FindAnyObjectByType<PlayerController>();
+        IM = GameObject.FindFirstObjectByType<InputManager>();
     }
 
     private void Update() 
@@ -38,44 +42,35 @@ public class AirFrierScript : WeaponClass
         {
             cookTime = 0;
         }
+
+        if (!IM.FireInput && cookTime > cookLimit1)
+        {
+            // If there is an assigned ammo manager, and that ammo manager has at least one round of ammo loaded
+            if (ammoManager != null && ammoManager.GetCurrentAmmo() > 0)
+            {
+                // Attempt to fire the weapon
+                ammoManager.Fire();
+                // If the weapon is not reloading
+                if (!ammoManager.IsReloading())
+                {
+                    if (projectilePrefab != null)
+                    {
+                        SpawnProjectile();
+                        cookTime = 0f;
+                        Instantiate(gunShot, transform.position, transform.rotation, null);
+                    }
+                    // Update lastFired
+                    lastFired = Time.timeSinceLevelLoad;
+                }
+
+            }
+        }
+
     }
     
     public override void Shoot()
     {
-            // If enough time has passed since the last round was fired
-        if ((Time.timeSinceLevelLoad - lastFired) > fireRate)
-        {
-
-            if (cookTime > timeOnBox)
-            {
-                // If there is an assigned ammo manager, and that ammo manager has at least one round of ammo loaded
-                if (ammoManager != null && ammoManager.GetCurrentAmmo() > 0)
-                {
-                    // Attempt to fire the weapon
-                    ammoManager.Fire();
-                    // If the weapon is not reloading
-                    if (!ammoManager.IsReloading())
-                    {
-
-                        if (projectilePrefab != null)
-                        {
-                            SpawnProjectile();
-                            cookTime = 0f;
-                            Instantiate(gunShot, transform.position, transform.rotation, null);
-
-                        }
-                        // Update lastFired
-                        lastFired = Time.timeSinceLevelLoad;
-
-                    }
-                }
-            }
-            else
-            {
-                cookTime += cookSpeed;
-            }
-        }
-        
+       cookTime += cookSpeed;
     }
 
     /*public void Reload()
@@ -88,28 +83,38 @@ public class AirFrierScript : WeaponClass
 
     public override void SpawnProjectile()
     {
-        // Check that the prefab is valid
-        if (projectilePrefab != null)
+        int nuggies = 0; //number of nuggies that spawn
+        if (cookTime >= maxCookTime) { nuggies = 3; }
+        else if (cookTime >= cookLimit2) { nuggies = 2; }
+        else if (cookTime >= cookLimit1) { nuggies = 1; }
+        Debug.Log(nuggies);
+
+        while (nuggies > 0)
         {
-            // Create the projectile
-            GameObject projectileGameObject = Instantiate(projectilePrefab, projectileSpawnPoint.transform.position, transform.rotation, null);
-
-            // Account for spread
-            Vector3 rotationEulerAngles = projectileGameObject.transform.rotation.eulerAngles;
-            projectileGameObject.transform.rotation = Quaternion.Euler(rotationEulerAngles);
-
-            // Keep the heirarchy organized
-            if (projectileSpawnPoint == null && GameObject.Find("ProjectileSpawnPoint") != null)
+            nuggies--;
+            // Check that the prefab is valid
+            if (projectilePrefab != null)
             {
-                projectileSpawnPoint = GameObject.Find("ProjectileSpawnPoint").transform;
+                // Create the projectile
+                GameObject projectileGameObject = Instantiate(projectilePrefab, projectileSpawnPoint.transform.position, transform.rotation, null);
 
+                // Account for spread
+                Vector3 rotationEulerAngles = projectileGameObject.transform.rotation.eulerAngles;
+                projectileGameObject.transform.rotation = Quaternion.Euler(rotationEulerAngles);
+
+                // Keep the heirarchy organized
+                if (projectileSpawnPoint == null && GameObject.Find("ProjectileSpawnPoint") != null)
+                {
+                    projectileSpawnPoint = GameObject.Find("ProjectileSpawnPoint").transform;
+
+                }
+
+                Projectile proj = projectileGameObject.GetComponent<Projectile>();
+                proj.SetWeaponLevelReference(weaponLevelRef);
+
+                NuggieSpawner ns = projectileGameObject.GetComponent<NuggieSpawner>();
+                ns.SetWeaponLevelReference(weaponLevelRef);
             }
-
-            Projectile proj = projectileGameObject.GetComponent<Projectile>();
-            proj.SetWeaponLevelReference(weaponLevelRef);
-
-            NuggieSpawner ns = projectileGameObject.GetComponent<NuggieSpawner>();
-            ns.SetWeaponLevelReference(weaponLevelRef);
         }
     }
 }
