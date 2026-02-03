@@ -2,13 +2,13 @@ using UnityEngine;
 
 public class PootDispenserScript : WeaponClass
 {
-    [SerializeField] public int level {get; set;}
+    //[SerializeField] public int level {get; set;}
 
-    [SerializeField] private float fireRate = 0.25f;
-    [SerializeField] private AmmoManager ammoManager;
-    [SerializeField] private GameObject projectilePrefab;
+    //[SerializeField] private float fireRate = 0.25f;
+    //[SerializeField] private AmmoManager ammoManager;
+    //[SerializeField] private GameObject projectilePrefab;
     [SerializeField] private Transform projectileSpawnPoint;
-    private float lastFired = Mathf.NegativeInfinity;
+    //private float lastFired = Mathf.NegativeInfinity;
 
     private WeaponLevel weaponLevelRef;
 

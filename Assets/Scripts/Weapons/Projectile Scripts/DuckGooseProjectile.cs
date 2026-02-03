@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class DuckGooseProjectile : MonoBehaviour
+public class DuckGooseProjectile : WeaponClass
 {
     [Header("Duck Duck Goose Projectile Settings")]
     [SerializeField] private float gooseMulti = 3f;
@@ -21,7 +21,6 @@ public class DuckGooseProjectile : MonoBehaviour
 
     private Projectile projectileRef;
     private float teamID;
-    private float baseDamage;
     private float growthRate;
     private float cummulativeDamage;
     private WeaponLevel currentWeaponLevel;
