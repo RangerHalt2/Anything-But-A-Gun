@@ -104,7 +104,8 @@ public class Health : MonoBehaviour
 
         if (isPlayer) //EW: Added to make the player lose score after taking damage.
         {
-            style.DecreaseScore();
+            if(style != null)
+                style.DecreaseScore();
         }
 
         // If the object has 0 or less current health
@@ -180,7 +181,8 @@ public class Health : MonoBehaviour
         Debug.Log(gameObject.name + " has died.");
         if (!isPlayer)
         {
-            style.IncreaseScore(true, false); //EW: Added for the style gauge.
+            if(style != null)
+                style.IncreaseScore(true, false); //EW: Added for the style gauge.
             playerLevel.AddEXP(EXPDrop);
             Destroy(gameObject);
         }

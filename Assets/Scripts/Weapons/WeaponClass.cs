@@ -36,6 +36,9 @@ public class WeaponClass : MonoBehaviour
     [SerializeField] private int AmmoCapacity;
     [SerializeField] private int reserveAmmo;
 
+    [Header("Pack-A-Punch Related Stuff")]
+    [SerializeField] private bool hasPackAPunch = false;
+
     public enum WeaponType
     {
         SemiAutomatic,
