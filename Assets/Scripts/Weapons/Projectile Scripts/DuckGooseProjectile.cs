@@ -13,6 +13,7 @@ public class DuckGooseProjectile : MonoBehaviour
     [SerializeField] private float duration = 1f;
     [SerializeField] private float chanceToGoose = 15f;
     [SerializeField] private LayerMask whatIsEnemy;
+    [SerializeField] private GameObject gooseVFX;
 
     private List<Health> enemiesHit;
 
@@ -124,6 +125,7 @@ public class DuckGooseProjectile : MonoBehaviour
         if(random <= chanceToGoose || currentBounces == maxBounce) //Goose Case, random chance or last bounce
         {
             Debug.Log("Goosing");
+            Instantiate(gooseVFX,this.transform.position, this.transform.rotation);
             UpdateLevelDamage(); //Check the damage final time
             cummulativeDamage = cummulativeDamage * gooseMulti; //Set the damage to the GOOSE damage.
             enemyHealth.TakeDamage(cummulativeDamage); //Special take damage to cut earlier than usual with goose multi set
