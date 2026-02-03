@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PootDispenserScript : MonoBehaviour, IWeapon
+public class PootDispenserScript : WeaponClass
 {
     [SerializeField] public int level {get; set;}
 
@@ -17,6 +17,7 @@ public class PootDispenserScript : MonoBehaviour, IWeapon
         weaponLevelRef = GetComponent<WeaponLevel>();
     }
 
+    override
     public void Shoot()
     {
         // If enough time has passed since the last round was fired
@@ -45,6 +46,7 @@ public class PootDispenserScript : MonoBehaviour, IWeapon
 
     }
 
+    override
     public void Reload()
     {
         // If the shooter has at least one round of reserve ammo or is set to have infinite ammo
@@ -55,7 +57,8 @@ public class PootDispenserScript : MonoBehaviour, IWeapon
         }
     }
 
-    void SpawnProjectile()
+    override
+    public void SpawnProjectile()
     {
         // Check that the prefab is valid
         if (projectilePrefab != null)
