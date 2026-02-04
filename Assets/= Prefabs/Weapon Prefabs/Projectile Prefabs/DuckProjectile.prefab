@@ -31,7 +31,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 2.001, y: 0.33378005, z: -0.0020895004}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 5360336668081990944}
@@ -57,8 +57,8 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 0
   serializedVersion: 3
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Radius: 0.3
+  m_Center: {x: 0, y: 0.1, z: 0}
 --- !u!135 &8396010442405717374
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -78,8 +78,8 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.6354294
-  m_Center: {x: 0, y: 0.08542931, z: 0}
+  m_Radius: 0.3
+  m_Center: {x: 0, y: 0.1, z: 0}
 --- !u!114 &-6608494925588196765
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -99,6 +99,7 @@ MonoBehaviour:
   growthRate: 1.15
   canCrit: 0
   critMult: 2
+  externalDmgMod: 1
   nonlethal: 0
   piercing: 0
   unique: 1
@@ -107,9 +108,9 @@ MonoBehaviour:
   bulletDrop: 1
   gravityMultiplier: 1
   IsAoe: 0
-  aoeRange: 0
+  aoeRange: 5
   ricochetSFX: []
-  spikedExplosionVFX: {fileID: 0}
+  spikedExplosionVFX: {fileID: 8428204072777953739, guid: b3e9719e5c491ad4f83a2e0b696463bb, type: 3}
 --- !u!54 &5258742335422185819
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -159,6 +160,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 2048
   gooseVFX: {fileID: 615666183915522401, guid: 528fe706ca96a9745920fa19c320cce6, type: 3}
+  baseDamage: 0
 --- !u!1 &5057169472560065501
 GameObject:
   m_ObjectHideFlags: 0
@@ -324,15 +326,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4212626964492137445, guid: d55b9b8d4c70d3a40b8dae5c5dc46576, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.32499996
+      value: 0.24999999
       objectReference: {fileID: 0}
     - target: {fileID: 4212626964492137445, guid: d55b9b8d4c70d3a40b8dae5c5dc46576, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.4
+      value: 0.30769235
       objectReference: {fileID: 0}
     - target: {fileID: 4212626964492137445, guid: d55b9b8d4c70d3a40b8dae5c5dc46576, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.32499996
+      value: 0.24999999
       objectReference: {fileID: 0}
     - target: {fileID: 4212626964492137445, guid: d55b9b8d4c70d3a40b8dae5c5dc46576, type: 3}
       propertyPath: m_LocalPosition.x

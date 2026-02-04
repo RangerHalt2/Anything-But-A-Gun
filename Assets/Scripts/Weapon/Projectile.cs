@@ -34,6 +34,7 @@ public class Projectile : MonoBehaviour, IWeaponLevel
     private bool criticalHit;
     [Space]
     private float cummulativeDamage;
+    [HideInInspector] public float externalDmgMod = 1f;
     private WeaponLevel currentWeaponLevel;
     //EW: Nonlethal add
     [Tooltip("Determines whether the projectile can kill the enemy or not.")]
@@ -64,13 +65,17 @@ public class Projectile : MonoBehaviour, IWeaponLevel
     [Tooltip("Determines if it's AOE or not")]
     [SerializeField] private bool IsAoe;
     [Tooltip("AOE Range that it can hit people in")]
-    [SerializeField] private float aoeRange;
+    [SerializeField] public float aoeRange;
     [SerializeField] private AudioClip[] ricochetSFX;
     private float ricochetTimer;
     private float ricochetCooldown = 0.2f;
     [Space]
-    [SerializeField] private GameObject spikedExplosionVFX;
+    [SerializeField] public GameObject spikedExplosionVFX;
 
+    public void SetIsAoE(bool isAoe)
+    {
+        this.IsAoe = isAoe;
+    }
 
     public void SetWeaponLevelReference(WeaponLevel weaponLevel)
     {
@@ -177,7 +182,7 @@ public class Projectile : MonoBehaviour, IWeaponLevel
 
     private void HandleCollision(Collider collider, Vector3 hitPoint, Vector3 hitNormal)
     {
-        if (IsAoe) {
+        if (IsAoe && !collider.isTrigger) {
             ApplyAOE(this.transform);
             if (spikedExplosionVFX != null && ricochetTimer < 0)
             {
@@ -250,6 +255,7 @@ public class Projectile : MonoBehaviour, IWeaponLevel
     public void UpdateLevelDamage()
     {
         cummulativeDamage = baseDamage * Mathf.Pow(growthRate, currentWeaponLevel.Level-1);
+        cummulativeDamage *= externalDmgMod;
     }
 
     #region Special Properties

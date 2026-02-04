@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class DuckGooseProjectile : WeaponClass
+public class DuckGooseProjectile : MonoBehaviour
 {
     [Header("Duck Duck Goose Projectile Settings")]
     [SerializeField] private float gooseMulti = 3f;
@@ -14,6 +14,7 @@ public class DuckGooseProjectile : WeaponClass
     [SerializeField] private float chanceToGoose = 15f;
     [SerializeField] private LayerMask whatIsEnemy;
     [SerializeField] private GameObject gooseVFX;
+    public float baseDamage;
 
     private List<Health> enemiesHit;
 
@@ -24,6 +25,9 @@ public class DuckGooseProjectile : WeaponClass
     private float growthRate;
     private float cummulativeDamage;
     private WeaponLevel currentWeaponLevel;
+
+    private float ricochetCooldown = 0.2f;
+    private float ricochetTimer = 0;
 
     private void Start()
     {
@@ -115,6 +119,7 @@ public class DuckGooseProjectile : WeaponClass
         if (projectileRef.enabled){
             Debug.Log("Turning off projectile enabled and doing first hit");
             projectileRef.enabled = false;
+            ricochetTimer = ricochetCooldown;
             enemiesHit.Add(enemyHealth);
             StartCoroutine(DelayedBounce());
             return; //Don't do damage if the projectile script is still in control
@@ -134,7 +139,25 @@ public class DuckGooseProjectile : WeaponClass
         if (enemyHealth != null) {
             Debug.Log("Triggered the main bounce implementation code.");
             projectileRef.enabled = false;
-            DoDamage(enemyHealth);
+            P_Explosive pe = gameObject.GetComponent<P_Explosive>();
+            if (pe == null)
+            {
+                DoDamage(enemyHealth);
+            }
+            else
+            {
+                if (!projectileRef.enabled && !other.isTrigger)
+                {
+                    Debug.Log("Attempting Exploding!");
+                    if (projectileRef.spikedExplosionVFX != null && ricochetTimer < 0)
+                    {
+                        Debug.Log("Exploding!");
+                        ApplyAOE(this.transform);
+                        Instantiate(projectileRef.spikedExplosionVFX, transform.position, transform.rotation, null);
+                        ricochetTimer = ricochetCooldown;
+                    }
+                }
+            }
             enemiesHit.Add(enemyHealth);
             currentBounces++;
         }
@@ -143,6 +166,11 @@ public class DuckGooseProjectile : WeaponClass
             Debug.Log("Starting a new bounce!");
             StartCoroutine(DelayedBounce());
         }
+    }
+
+    private void Update()
+    {
+        ricochetTimer -= Time.deltaTime;
     }
 
     private void DoDamage(Health health)
@@ -169,5 +197,19 @@ public class DuckGooseProjectile : WeaponClass
     public void UpdateLevelDamage()
     {
         cummulativeDamage = baseDamage * Mathf.Pow(growthRate, currentWeaponLevel.Level - 1);
+    }
+
+    private void ApplyAOE(Transform center)
+    {
+        Collider[] cols = Physics.OverlapSphere(center.position, projectileRef.aoeRange);
+        foreach (Collider col in cols)
+        {
+            if (col.gameObject.CompareTag("WeakPoint")) continue;
+            Health enemyHealth = col.GetComponentInParent<Health>();
+            if (enemyHealth == null) enemyHealth = col.GetComponent<Health>();
+            if (enemyHealth == null) enemyHealth = col.GetComponentInChildren<Health>();
+            if (enemyHealth == null) continue;
+            DoDamage(enemyHealth);
+        }
     }
 }

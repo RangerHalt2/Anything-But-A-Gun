@@ -1,3 +1,5 @@
+using System;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class DuckDuckGoose : WeaponClass
@@ -53,6 +55,10 @@ public class DuckDuckGoose : WeaponClass
 
         Projectile proj = projectile.GetComponent<Projectile>();
         DuckGooseProjectile proj2 = projectile.GetComponent<DuckGooseProjectile>();
+        if (hasPackAPunch)
+        {
+            proj.gameObject.AddComponent(components[currPackAPunchIndex]);
+        }
         proj.SetWeaponLevelReference(weaponLevelRef);
         proj2.SetWeaponLevelReference(weaponLevelRef);
     }

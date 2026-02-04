@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
+using System;
+using UnityEditor;
 
 public class WeaponClass : MonoBehaviour
 {
@@ -37,8 +39,12 @@ public class WeaponClass : MonoBehaviour
     [SerializeField] private int reserveAmmo;
 
     [Header("Pack-A-Punch Related Stuff")]
-    [SerializeField] private bool hasPackAPunch = false;
-
+    [SerializeField] protected bool hasPackAPunch = false;
+    [SerializeField] private MonoScript[] acceptablePackAPunchComponents;
+    protected Type[] components;
+    protected int currPackAPunchIndex = -1;
+    protected Component currPackAPunchComponent;
+    //[HideInInspector] public bool isProjectile { get; set; }
     public enum WeaponType
     {
         SemiAutomatic,
@@ -118,6 +124,61 @@ public class WeaponClass : MonoBehaviour
     {
         return reserveAmmo;
     }
+
+    public int GetPackAPunchLength()
+    {
+        return acceptablePackAPunchComponents.Length;
+    }
+
+    public void SetPackAPunchIndex(int index)
+    {
+        currPackAPunchIndex = index;
+        return;
+    }
+
+    public int GetPackAPunchIndex()
+    {
+        return currPackAPunchIndex;
+    }
+
+    public void AddPackAPunch()
+    {
+        AddPackAPunch(currPackAPunchIndex);
+    }
+
+    public void AddPackAPunch(int index)
+    {
+        Debug.Log("Entered AddPackAPunch by index");
+        if (index == -1)
+        {
+            Debug.LogError("Pack-A-Punch was attempted without having an assigned index");
+            return;
+        }
+        if(currPackAPunchComponent != null)
+        {
+            Debug.Log("Weapon already has a pack-a-punch");
+            return;
+        }
+        if(components == null)
+            Debug.LogError("component is null");
+        Debug.Log("Adding Component " + components[index]);
+        currPackAPunchComponent = gameObject.AddComponent(components[index]);
+        hasPackAPunch = true;
+        return;
+    }
+
+    public void RemovePackAPunch()
+    {
+        if (currPackAPunchComponent == null)
+        {
+            Debug.Log("Cannot remove currPackAPunch");
+            return;
+        }
+        currPackAPunchIndex = -1;
+        currPackAPunchComponent = null;
+        hasPackAPunch = false;
+    }
+
     #endregion
 
     #region Weapon
@@ -131,6 +192,17 @@ public class WeaponClass : MonoBehaviour
             weaponInfoPanel.SetActive(false);
         }
 
+        Debug.LogError("Length " + acceptablePackAPunchComponents.Length);
+        components = new Type[acceptablePackAPunchComponents.Length];
+        for (int i = 0; i < acceptablePackAPunchComponents.Length; i++)
+        {
+            components[i] = acceptablePackAPunchComponents[i].GetClass();
+        }
+
+    }
+
+    private void Start()
+    {
         InitializeWeapon();
     }
 
@@ -148,6 +220,7 @@ public class WeaponClass : MonoBehaviour
         weaponAmmoManager.SetAmmoCapacity(GetAmmoCapacity());
         weaponAmmoManager.SetCurrentAmmo(GetAmmoCapacity());
         weaponAmmoManager.SetReserveAmmo(GetReserveAmmo());
+
     }
 
     public void ShowInfo()

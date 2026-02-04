@@ -60,6 +60,9 @@ public class WeaponSpawner : MonoBehaviour, IInteractable
     [Header("DEBUG SETTIGNS")]
     [Tooltip("Overrides the player's level with the specified integer. If value is -1, then the player's actual level will be read")]
     [Range (-1, 10)][SerializeField] private int playerLevelOverride = 5;
+
+    [Header("Pack A Punch Variables")]
+    [SerializeField] private float packAPunchChance = 5f;
     #endregion
 
     public enum SpawnMode
@@ -166,6 +169,7 @@ public class WeaponSpawner : MonoBehaviour, IInteractable
                 // Assign the weapon a level
                 AssignWeaponLevel(weaponComponent);
                 weaponSpawned = true;
+                PackAPunchSpawn();
                 Debug.Log("WeaponSpawner: Spawned a level " + spawnedWeaponLevel + " " + spawnedWeapon.name + ".");
                 if(!isShop) gameObject.layer = LayerMask.NameToLayer("Default");
             }
@@ -178,6 +182,26 @@ public class WeaponSpawner : MonoBehaviour, IInteractable
         {
             Debug.LogWarning("WeaponSpawner: Missing WeaponSpawnWaypoint!");
         }
+    }
+
+    //LB: For clean logic and minimal modifications, all considerations of spawning with the pack-a-punch will be done here.
+    private void PackAPunchSpawn()
+    {
+        //LB: Determine if the weapon spawns with pack-a-punch or not
+        float chance = Random.Range(0f, 100f);
+        if(chance < packAPunchChance)
+        {
+            WeaponClass wc = spawnedWeapon.GetComponent<WeaponClass>();
+            if (wc.GetPackAPunchLength() <= 0)
+            {
+                Debug.LogError("No Pack A Punches");
+                return;
+            }
+            int selectedPunch = Random.Range(0, wc.GetPackAPunchLength());
+            wc.SetPackAPunchIndex(selectedPunch);
+            wc.AddPackAPunch();
+        }
+        return;
     }
 
     // Gets a random weapon to be spawned from a random pool
