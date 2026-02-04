@@ -51,8 +51,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2.7568605, y: 1.6273661, z: 1}
-  m_Center: {x: 0.021569218, y: 4.543681, z: 0}
+  m_Size: {x: 4.6850214, y: 4.978998, z: 1}
+  m_Center: {x: 0.021569218, y: 1.8890206, z: 0}
 --- !u!1 &3303295000089808964
 GameObject:
   m_ObjectHideFlags: 0
@@ -135,8 +135,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 5.6051416, y: 9, z: 1}
-  m_Center: {x: 0, y: -0.85, z: 0}
+  m_Size: {x: 5.6051416, y: 4.5800543, z: 1}
+  m_Center: {x: 0, y: -3.0599718, z: 0}
 --- !u!1 &4925705786666085929
 GameObject:
   m_ObjectHideFlags: 0
@@ -151,7 +151,7 @@ GameObject:
   - component: {fileID: 6419318689120893974}
   - component: {fileID: 5390499902548178163}
   m_Layer: 11
-  m_Name: BeanPolePrefab 1
+  m_Name: WallCamTurret
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -166,7 +166,7 @@ Transform:
   m_GameObject: {fileID: 4925705786666085929}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.47958243, y: 1.292, z: 13.185342}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.14, y: 0.14, z: 0.14}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -223,7 +223,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -211762929, guid: b8980153f382b4e4c9b60d8c8db96eb7, type: 3}
+  m_Sprite: {fileID: -16795378, guid: b836749321c34b945b7dca72aa20fcae, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -247,8 +247,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Health
   teamID: 1
-  maxHealth: 100
-  currentHealth: 100
+  maxHealth: 150
+  currentHealth: 150
   nonlethalDefeat: 0
   healthBarActiveOnStartup: 0
   healthBar: {fileID: 5809989467138609651}
@@ -261,6 +261,7 @@ MonoBehaviour:
   inGameCanvas: {fileID: 0}
   isDead: 0
   damageNoise: {fileID: 1266429678925616217, guid: 953ea863af752194cb3d46a6d37a7782, type: 3}
+  style: {fileID: 0}
 --- !u!54 &6419318689120893974
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -305,9 +306,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   attackRange: 15
-  timeBetweenAttacks: 2.5
+  timeBetweenAttacks: 0.5
   alreadyAttacked: 0
-  enemyBulletPrefab: {fileID: 5762768201822907473, guid: dc2ab7264a1b5c7458fbef3a2fa00268, type: 3}
+  enemyBulletPrefab: {fileID: 5762768201822907473, guid: 879c503bafe044242821012beb138aff, type: 3}
   firePoint: {fileID: 3685410459568754834}
   bulletForce: 15
 --- !u!1 &5683218652002669994
