@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: -5490751856712557823}
   - component: {fileID: -3396919624257408888}
   - component: {fileID: 5016795491641157390}
+  - component: {fileID: 422205954363975773}
   m_Layer: 14
   m_Name: Camera Weapon
   m_TagString: Untagged
@@ -71,11 +72,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58829ef7af75a4241ae7601c8760a372, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CameraWeaponScript
-  fireRate: 0.8
   ammoManager: {fileID: 7210258505122409896}
+  gunShot: {fileID: 5383701307693267320, guid: 65ae85f0a1ba3444e9ae21aaa377013d, type: 3}
+  projectilePrefab: {fileID: 0}
+  lastFired: -Infinity
+  weaponInterface: {fileID: 0}
+  weaponAmmoManager: {fileID: 0}
+  weaponInfoPanel: {fileID: 0}
+  weaponLevel: {fileID: 0}
+  cumulativeDamage: 0
+  weaponName: Camera
+  tagline: 
+  weaponType: 0
+  level: 0
+  baseDamage: 25
+  levelDamage: 0
+  fireRate: 0.8
+  reloadTime: 0.5
+  AmmoCapacity: 10
+  reserveAmmo: 20
+  hasPackAPunch: 0
+  acceptablePackAPunchComponents: []
+  growthRate: 1.18
   flashVFX: {fileID: 4053857041292540916, guid: 36e100797971ef543b30e9597c88e6f2, type: 3}
   enemyCopy: {fileID: 6822570925221672548, guid: 2e0534c531fc2854daf01e3338eb6a40, type: 3}
-  gunShot: {fileID: 5383701307693267320, guid: 65ae85f0a1ba3444e9ae21aaa377013d, type: 3}
 --- !u!114 &7210258505122409896
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -160,6 +180,18 @@ MonoBehaviour:
   groundLocalRotation: {x: 0, y: 0, z: 0}
   smoothTransition: 1
   transitionSpeed: 10
+--- !u!114 &422205954363975773
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1234907296001360150}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4892176ad31b13847abf3f92f0005b5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WeaponLevel
 --- !u!1001 &6734185778656484159
 PrefabInstance:
   m_ObjectHideFlags: 0

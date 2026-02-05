@@ -21,6 +21,7 @@ public class StyleGaugeController : MonoBehaviour
     {
         bWBoxVolume = GameObject.Find("BW Box Volume").GetComponent<Volume>();
         maxLevel = letter.Length - 1;
+        bWBoxVolume.blendDistance = color[level];
     }
 
     // Update is called once per frame

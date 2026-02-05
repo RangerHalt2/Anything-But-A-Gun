@@ -9,6 +9,10 @@ public class CameraWeaponScript : WeaponClass
     //[SerializeField] private AmmoManager ammoManager;
     //private float lastFired = Mathf.NegativeInfinity;
 
+    private float cummulativeDamage;
+    private WeaponLevel currentWeaponLevel;
+    [SerializeField] private float growthRate;
+
     [SerializeField] private GameObject flashVFX;
 
     [SerializeField] private GameObject enemyCopy; //The copy for the enemy
@@ -70,10 +74,23 @@ public class CameraWeaponScript : WeaponClass
         foreach (GameObject enemy in enemiesInRange) //Create a snapshot of every enemy in range
         {
             GameObject target = enemy.transform.parent.gameObject;
+            target.GetComponent<Health>().TakeDamage(cumulativeDamage);
+            Debug.Log("This variable is " + baseDamage);
             GameObject snapshot = Instantiate(enemyCopy, target.transform.position, target.transform.rotation, null);
             snapshot.SetActive(false);
             snapshot.GetComponent<SnapshotBehaviorScript>().copyOf = target;
             snapshot.SetActive(true);
+            
         }
+    }
+
+    public void SetWeaponLevelReference(WeaponLevel weaponLevel)
+    {
+        currentWeaponLevel = weaponLevel;
+    }
+
+    public void UpdateLevelDamage()
+    {
+        cummulativeDamage = baseDamage * Mathf.Pow(growthRate, currentWeaponLevel.Level - 1);
     }
 }
