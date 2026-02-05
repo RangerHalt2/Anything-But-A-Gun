@@ -38,27 +38,55 @@ public class FloatAndRotate : MonoBehaviour
     {
         while (true)
         {
-            // Wait until weapon is not collected
-            while (weaponCollectScript != null && !weaponCollectScript.collected)
+            // If the object has a weapon collect script
+            if(weaponCollectScript != null)
             {
-                // Floating motion
-                float newY = startLocalPos.y + Mathf.Sin(Time.time * frequency) * amplitude;
-                transform.localPosition = new Vector3(startLocalPos.x, newY, startLocalPos.z);
-
-                // Rotation motion
-                Vector3 axis = rotationAxis switch
+                // Wait until weapon is not collected
+                while (!weaponCollectScript.collected)
                 {
-                    RotationAxis.X => Vector3.right,
-                    RotationAxis.Y => Vector3.up,
-                    RotationAxis.Z => Vector3.forward,
-                    _ => Vector3.up
-                };
+                    // Floating motion
+                    float newY = startLocalPos.y + Mathf.Sin(Time.time * frequency) * amplitude;
+                    transform.localPosition = new Vector3(startLocalPos.x, newY, startLocalPos.z);
 
-                transform.Rotate(axis * rotationSpeed * Time.deltaTime, Space.Self);
+                    // Rotation motion
+                    Vector3 axis = rotationAxis switch
+                    {
+                        RotationAxis.X => Vector3.right,
+                        RotationAxis.Y => Vector3.up,
+                        RotationAxis.Z => Vector3.forward,
+                        _ => Vector3.up
+                    };
 
-                yield return null;
+                    transform.Rotate(axis * rotationSpeed * Time.deltaTime, Space.Self);
+
+                    yield return null;
+                }
             }
+            // If there is no weapon collect script
+            else
+            {
+                // Spin eternally
+                while(true)
+                {
+                    // Floating motion
+                    float newY = startLocalPos.y + Mathf.Sin(Time.time * frequency) * amplitude;
+                    transform.localPosition = new Vector3(startLocalPos.x, newY, startLocalPos.z);
 
+                    // Rotation motion
+                    Vector3 axis = rotationAxis switch
+                    {
+                        RotationAxis.X => Vector3.right,
+                        RotationAxis.Y => Vector3.up,
+                        RotationAxis.Z => Vector3.forward,
+                        _ => Vector3.up
+                    };
+
+                    transform.Rotate(axis * rotationSpeed * Time.deltaTime, Space.Self);
+
+                    yield return null;
+                }
+            }
+            
             // When collected, reset position & rotation
             transform.localPosition = startLocalPos;
             transform.localRotation = startLocalRot;
