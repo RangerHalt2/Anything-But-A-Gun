@@ -40,7 +40,7 @@ public class WeaponClass : MonoBehaviour
 
     [Header("Pack-A-Punch Related Stuff")]
     [SerializeField] protected bool hasPackAPunch = false;
-    [SerializeField] private MonoScript[] acceptablePackAPunchComponents;
+    [SerializeField] private string[] acceptablePackAPunchComponents;
     protected Type[] components;
     protected int currPackAPunchIndex = -1;
     protected Component currPackAPunchComponent;
@@ -196,7 +196,7 @@ public class WeaponClass : MonoBehaviour
         components = new Type[acceptablePackAPunchComponents.Length];
         for (int i = 0; i < acceptablePackAPunchComponents.Length; i++)
         {
-            components[i] = acceptablePackAPunchComponents[i].GetClass();
+            components[i] = Type.GetType(acceptablePackAPunchComponents[i]);
         }
 
     }
