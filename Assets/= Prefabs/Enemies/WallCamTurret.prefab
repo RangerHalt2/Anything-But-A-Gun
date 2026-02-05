@@ -78,7 +78,7 @@ Transform:
   m_GameObject: {fileID: 3303295000089808964}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -1.33, z: -2}
+  m_LocalPosition: {x: 0, y: -1.33, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -254,7 +254,7 @@ MonoBehaviour:
   healthBar: {fileID: 5809989467138609651}
   healthDisplayText: {fileID: 0}
   hitEffect: {fileID: 1679044714977926775, guid: 227ededbef0066649ae73724748f7732, type: 3}
-  deathEffect: {fileID: 615666183915522401, guid: 9240d42a70497a842b241983850f223e, type: 3}
+  deathEffect: {fileID: 615666183915522401, guid: cb3ce548aff28f34e91e83c69c66e921, type: 3}
   isPlayer: 0
   EXPDrop: 0
   gameOverCanvas: {fileID: 0}
@@ -305,8 +305,11 @@ MonoBehaviour:
   whatIsPlayer:
     serializedVersion: 2
     m_Bits: 8
+  whatIsSelf:
+    serializedVersion: 2
+    m_Bits: 0
   attackRange: 20
-  timeBetweenAttacks: 0.25
+  timeBetweenAttacks: 0.35
   alreadyAttacked: 0
   enemyBulletPrefab: {fileID: 5762768201822907473, guid: 879c503bafe044242821012beb138aff, type: 3}
   firePoint: {fileID: 3685410459568754834}
