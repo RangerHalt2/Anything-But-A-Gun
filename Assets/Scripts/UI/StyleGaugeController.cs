@@ -1,8 +1,12 @@
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class StyleGaugeController : MonoBehaviour
 {
     public GameObject[] letter; //C, B, A, S, etc.
+    public float[] color; //How vibrant the scene is. Based on level.
+    private int maxLevel;
+    private Volume bWBoxVolume;
     [SerializeField] float score; //The score the player currently holds. Pretty self explanatory.
     private int level; //What letter should be active;
     [SerializeField] float difBetweenLevels; //The score difference required to get to the next level.
@@ -12,6 +16,12 @@ public class StyleGaugeController : MonoBehaviour
     [SerializeField] float enemyDeathScoreAdd; //Amount added if the player kills an enemy. (Later we can make this different for each enemy if we want)
     [SerializeField] float playerDamageScoreSubtract; //Amount subtracted when the player takes damage.
     private float stall; //This is the timer that will count up to the scoreStallTimer value.
+
+    void Start() 
+    {
+        bWBoxVolume = GameObject.Find("BW Box Volume").GetComponent<Volume>();
+        maxLevel = letter.Length - 1;
+    }
 
     // Update is called once per frame
     void Update()
@@ -28,21 +38,28 @@ public class StyleGaugeController : MonoBehaviour
         if (score <= 0 && level > 0) //Level down
         {
             score += difBetweenLevels;
-            letter[level].SetActive(false);
+            if (letter[level] != null) { letter[level].SetActive(false); }
             level--;
-            letter[level].SetActive(true);
+            Debug.Log("Level is now: " + level);
+            bWBoxVolume.blendDistance = color[level];
+            if (letter[level] != null) { letter[level].SetActive(true); }
         }
         else if (score <= 0 && level == 0) 
         {
             score = 0;
         }
 
-        if (score > difBetweenLevels) //Increase your level and change the letter (This will also be where filters are applied)
+        if (score > difBetweenLevels && level < maxLevel) //Increase your level and change the letter (This will also be where filters are applied)
         {
             score -= difBetweenLevels;
-            letter[level].SetActive(false);
+            if (letter[level] != null) { letter[level].SetActive(false); }
             level++;
-            letter[level].SetActive(true);
+            bWBoxVolume.blendDistance = color[level];
+            if (letter[level] != null) { letter[level].SetActive(true); }
+        }
+        else if (score > difBetweenLevels && level == maxLevel) 
+        { 
+            score = difBetweenLevels;
         }
     }
 
