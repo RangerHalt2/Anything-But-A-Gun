@@ -775,19 +775,31 @@ PrefabInstance:
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 9121515661158624816, guid: caa24201197b26b479e66c072d7d3e13, type: 3}
+      propertyPath: scoreStallTimer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 9121515661158624816, guid: caa24201197b26b479e66c072d7d3e13, type: 3}
       propertyPath: color.Array.size
       value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 9121515661158624816, guid: caa24201197b26b479e66c072d7d3e13, type: 3}
-      propertyPath: 'color.Array.data[0]'
+      propertyPath: difBetweenLevels
       value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 9121515661158624816, guid: caa24201197b26b479e66c072d7d3e13, type: 3}
+      propertyPath: 'color.Array.data[0]'
+      value: 1.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 9121515661158624816, guid: caa24201197b26b479e66c072d7d3e13, type: 3}
       propertyPath: 'color.Array.data[1]'
-      value: 3
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 9121515661158624816, guid: caa24201197b26b479e66c072d7d3e13, type: 3}
       propertyPath: 'color.Array.data[2]'
+      value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 9121515661158624816, guid: caa24201197b26b479e66c072d7d3e13, type: 3}
+      propertyPath: playerDamageScoreSubtract
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 9128362450977232900, guid: caa24201197b26b479e66c072d7d3e13, type: 3}
@@ -1185,7 +1197,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.85400003, y: 0.179}
   m_AnchorMax: {x: 0.9365209, y: 0.19737001}
-  m_AnchoredPosition: {x: -1.7786255, y: -1.1801758}
+  m_AnchoredPosition: {x: -1.7786865, y: -1.1801758}
   m_SizeDelta: {x: 3, y: -1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1058414070
@@ -1737,6 +1749,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 224396291386314728, guid: 6e79526cb5b40544c91f9ac79610f37c, type: 3}
+      propertyPath: blendDistance
+      value: 1.8
+      objectReference: {fileID: 0}
     - target: {fileID: 1491433681064732397, guid: 6e79526cb5b40544c91f9ac79610f37c, type: 3}
       propertyPath: InitialModule.startColor.maxColor.b
       value: 1
