@@ -3,7 +3,6 @@ using UnityEngine;
 public class P_Growing : MonoBehaviour
 {
 
-    private bool isProjectile = true;
     private float maxSize = 4f; //As a percentage, 1.5f allows for 50% bigger max
     private float maxDamageIncrease = 2f; //The max damage , the base obviously being 1x. This is also in percentage.
     private float timeToMax = 1.5f; //Time in seconds to hitting max damage.
