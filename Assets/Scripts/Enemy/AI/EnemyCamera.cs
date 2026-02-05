@@ -5,6 +5,7 @@ public class EnemyCamera : MonoBehaviour
     [Header("Player and Detection")]
     [SerializeField] private Transform player;
     [SerializeField] private LayerMask whatIsPlayer;
+    [SerializeField] private LayerMask whatIsSelf;
 
     [Header("Attack Settings")]
     [SerializeField] private float attackRange = 15f;
@@ -79,7 +80,7 @@ public class EnemyCamera : MonoBehaviour
         Vector3 direction = (player.position - firePoint.position).normalized;
         float distance = Vector3.Distance(firePoint.position, player.position);
 
-        if (Physics.Raycast(firePoint.position, direction, out RaycastHit hit, distance, whatIsPlayer))
+        if (Physics.Raycast(firePoint.position, direction, out RaycastHit hit, distance, ~whatIsSelf))
         {
             //Debug.Log("TURRET - bool: " + hit.transform.CompareTag("Player"));
             return hit.transform.CompareTag("Player");
