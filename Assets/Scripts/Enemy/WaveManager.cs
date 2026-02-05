@@ -13,7 +13,9 @@ public class WaveManager : MonoBehaviour
     [Header("Player Detection")]
     [SerializeField] private LayerMask playerLayer;
     [SerializeField] private float detectionInterval = 1f;
-    public int openDoor = 0;
+
+    [SerializeField] private GameObject objectToDestroy;
+    [SerializeField] private float destroyDelay = 1.5f;
 
     private int currentWave = 0;
     private bool active = false;
@@ -51,7 +53,8 @@ public class WaveManager : MonoBehaviour
         {
             Debug.Log("All waves completed");
             CancelInvoke(nameof(CheckEnemiesAlive));
-            openDoor = 1;
+
+            Destroy(objectToDestroy, destroyDelay);
             return;
         }
 
