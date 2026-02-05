@@ -49,7 +49,7 @@ public class EnemyCamera : MonoBehaviour
 
     private void Attacking()
     {
-        Debug.Log("TURRET - Attacking Function");
+        //Debug.Log("TURRET - Attacking Function");
         if (!alreadyAttacked && HasLineOfSight())
         {
             Shoot();
@@ -75,13 +75,13 @@ public class EnemyCamera : MonoBehaviour
 
     private bool HasLineOfSight()
     {
-        Debug.Log("TURRET - Entered Line of Sight");
+        //Debug.Log("TURRET - Entered Line of Sight");
         Vector3 direction = (player.position - firePoint.position).normalized;
         float distance = Vector3.Distance(firePoint.position, player.position);
 
-        if (Physics.Raycast(firePoint.position, direction, out RaycastHit hit, distance))
+        if (Physics.Raycast(firePoint.position, direction, out RaycastHit hit, distance, whatIsPlayer))
         {
-            Debug.Log("TURRET - bool: " + hit.transform.CompareTag("Player"));
+            //Debug.Log("TURRET - bool: " + hit.transform.CompareTag("Player"));
             return hit.transform.CompareTag("Player");
         }
 
