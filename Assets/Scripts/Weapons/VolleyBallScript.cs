@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class VolleyBallScript : WeaponClass
@@ -72,7 +73,16 @@ public class VolleyBallScript : WeaponClass
 
         Vector3 rotationEulerAngles = projectile.transform.rotation.eulerAngles;
         projectile.transform.rotation = Quaternion.Euler(rotationEulerAngles);
-
+        if (hasPackAPunch)
+        {
+            Component comp = projectile.gameObject.AddComponent(components[currPackAPunchIndex]);
+            Type addedType = comp.GetType();
+            if (addedType == typeof(P_Climactic))
+            {
+                P_Climactic climatic = comp.gameObject.GetComponent<P_Climactic>();
+                climatic.parentWeapon = gameObject.GetComponent<WeaponClass>();
+            }
+        }
         Projectile proj = projectile.GetComponent<Projectile>();
         proj.SetWeaponLevelReference(weaponLevelRef);
     }

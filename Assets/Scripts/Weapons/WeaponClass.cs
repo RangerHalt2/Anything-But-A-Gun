@@ -1,10 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.InputSystem;
-using System;
-using UnityEditor;
+using UnityEngine.UI;
 
 public class WeaponClass : MonoBehaviour
 {
@@ -40,7 +40,8 @@ public class WeaponClass : MonoBehaviour
 
     [Header("Pack-A-Punch Related Stuff")]
     [SerializeField] protected bool hasPackAPunch = false;
-    [SerializeField] private string[] acceptablePackAPunchComponents;
+    //[SerializeField] private string[] acceptablePackAPunchComponents; 
+    [SerializeField] private PAP_ScriptableObjects[] acceptablePackAPunchOptions;
     protected Type[] components;
     protected int currPackAPunchIndex = -1;
     protected Component currPackAPunchComponent;
@@ -127,7 +128,7 @@ public class WeaponClass : MonoBehaviour
 
     public int GetPackAPunchLength()
     {
-        return acceptablePackAPunchComponents.Length;
+        return acceptablePackAPunchOptions.Length;
     }
 
     public void SetPackAPunchIndex(int index)
@@ -192,12 +193,16 @@ public class WeaponClass : MonoBehaviour
             weaponInfoPanel.SetActive(false);
         }
 
-        Debug.LogError("Length " + acceptablePackAPunchComponents.Length);
+        /*
+        //Debug.LogError("Length " + acceptablePackAPunchComponents.Length);
         components = new Type[acceptablePackAPunchComponents.Length];
         for (int i = 0; i < acceptablePackAPunchComponents.Length; i++)
         {
             components[i] = Type.GetType(acceptablePackAPunchComponents[i]);
         }
+        */
+
+        components = acceptablePackAPunchOptions.Select(t => t.GetTypeSafe()).ToArray();
 
     }
 

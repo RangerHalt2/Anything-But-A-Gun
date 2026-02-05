@@ -102,6 +102,11 @@ public class Projectile : MonoBehaviour, IWeaponLevel
         return currentWeaponLevel;
     }
 
+    public void SetGravityScale(float gravity)
+    {
+        this.gravityMultiplier = gravity;
+    }
+
     // Referenece to the Projectile's's Rigidbody
     private Rigidbody rb;
     // Enum of potential Wall Interactions
