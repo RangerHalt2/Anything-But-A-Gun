@@ -210,8 +210,8 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 4.6399994
-  m_Speed: 8
-  m_Acceleration: 16
+  m_Speed: 10
+  m_Acceleration: 20
   avoidancePriority: 50
   m_AngularSpeed: 5
   m_StoppingDistance: 1.2
@@ -249,6 +249,7 @@ MonoBehaviour:
   inGameCanvas: {fileID: 0}
   isDead: 0
   damageNoise: {fileID: 1266429678925616217, guid: 953ea863af752194cb3d46a6d37a7782, type: 3}
+  style: {fileID: 0}
 --- !u!114 &-6795824228135107553
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -280,7 +281,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   patrolDistance: 10
-  patrolSpeed: 3
+  patrolSpeed: 10
   patrolWaitTime: 1.5
   navEdgeCheckDistance: 2
   sightRange: 10
@@ -292,8 +293,8 @@ MonoBehaviour:
   audioSource: {fileID: 5316091083430951825}
   explosionPrefab: {fileID: 8428204072777953739, guid: b3e9719e5c491ad4f83a2e0b696463bb, type: 3}
   explosionRadius: 5
-  explosionDamage: 50
-  explosionDelay: 2
+  explosionDamage: 10
+  explosionDelay: 0.2
   teamID: 0
 --- !u!82 &5316091083430951825
 AudioSource:
