@@ -14,6 +14,7 @@ public class WaveManager : MonoBehaviour
     [SerializeField] private LayerMask playerLayer;
     [SerializeField] private float detectionInterval = 1f;
 
+    [Header("Destroy Door")]
     [SerializeField] private GameObject objectToDestroy;
     [SerializeField] private float destroyDelay = 1.5f;
 
