@@ -53,6 +53,8 @@ public class Health : MonoBehaviour
 
     [SerializeField] private StyleGaugeController style;
 
+    [HideInInspector] public bool ShiningArmor = false;
+
     #endregion
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -92,6 +94,12 @@ public class Health : MonoBehaviour
     // Applies a certain amount of damage to an object
     public void TakeDamage(float damageAmount)
     {
+        if (ShiningArmor)
+        {
+            Debug.Log("HEALTH - SHINING ARMOR - damage intercepted");
+            ShiningArmor = false;
+            return;
+        }
         // Subtract the damage amount from the health of the object
         currentHealth -= damageAmount;
         if(damageNoise != null && damageTimer <= 0)

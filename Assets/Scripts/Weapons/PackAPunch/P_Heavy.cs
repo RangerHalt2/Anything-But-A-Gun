@@ -5,8 +5,8 @@ public class P_Heavy : MonoBehaviour
 {
 
     private Projectile projectile;
-    private float gravity = 2.5f;
-    private float extraDamage = 1.5f; //50% more damage;
+    private float gravity = 1.8f;
+    public float extraDamage = 1.5f; //50% more damage;
 
     private void Start()
     {

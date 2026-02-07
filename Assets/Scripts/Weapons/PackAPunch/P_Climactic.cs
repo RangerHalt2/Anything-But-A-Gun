@@ -1,6 +1,7 @@
 //LB: Note, the parentWeapon being a WeaponClass appears to be redundant, referencing the root gameObject would probably cut the middle man. Low Priority Change, return later.
 
 using UnityEngine;
+using UnityEngine.ProBuilder;
 
 public class P_Climactic : MonoBehaviour
 {
@@ -54,5 +55,33 @@ public class P_Climactic : MonoBehaviour
             }
         }//end of else
     }//end of Start
+
+    public float HitScanDMGCalculation(AmmoManager am)
+    {
+        if (am != null)
+        {
+            int currAmmo = am.GetCurrentAmmo();
+            int capAmmo = am.GetAmmoCapacity();
+            float currPercentage = (float)currAmmo / capAmmo;
+
+            float retMulti = 1.0f;
+
+            if (currPercentage > middlePercentage)
+            {
+                retMulti = baseDamageMulti;
+            }
+            if (currPercentage <= middlePercentage && currPercentage > lastPercentage)
+            {
+                retMulti = middleDamageMulti;
+            }
+            if (lastPercentage >= currPercentage)
+            {
+                retMulti = finalShotDamageMulti;
+            }
+
+            return retMulti;
+        }
+        else return 1f;
+    }
 
 }

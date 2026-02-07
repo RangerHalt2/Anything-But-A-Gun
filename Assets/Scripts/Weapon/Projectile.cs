@@ -164,6 +164,7 @@ public class Projectile : MonoBehaviour, IWeaponLevel
     private IEnumerator DestroyAfterDelay()
     {
         yield return new WaitForSeconds(lifeTime);
+        Debug.Log("PROJECTILE - Destroy after Delay");
         Destroy(gameObject);
     }
 
@@ -250,7 +251,7 @@ public class Projectile : MonoBehaviour, IWeaponLevel
             if (!piercing && !unique)
             {
                 // Destroy the projectile
-                Debug.Log("Found the culprit");
+                //Debug.Log("Found the culprit");
                 Destroy(gameObject);
             }
         }

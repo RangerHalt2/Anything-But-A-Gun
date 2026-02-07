@@ -40,6 +40,16 @@ public class JoustingHorseScript : WeaponClass
                 // If the weapon is not reloading
                 if (!ammoManager.IsReloading())
                 {
+
+                    if (hasPackAPunch)
+                    {
+                        if (components[currPackAPunchIndex] == typeof(P_ShiningArmor))
+                        {
+                            P_ShiningArmor self = gameObject.GetComponent<P_ShiningArmor>();
+                            self.ApplyArmor();
+                        }
+                    }
+
                     StartCoroutine(JOUST());
                     // Update lastFired
                     lastFired = Time.timeSinceLevelLoad;

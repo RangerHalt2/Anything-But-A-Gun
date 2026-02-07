@@ -74,6 +74,11 @@ public class PaperAirplaneWeaponScript : WeaponClass
             Projectile proj = projectileGameObject.GetComponent<Projectile>();
             proj.SetWeaponLevelReference(weaponLevelRef);
 
+            if (hasPackAPunch)
+            {
+                Component comp = projectileGameObject.AddComponent(components[currPackAPunchIndex]);
+            }
+
             AirplaneProjectileScript airProj = projectileGameObject.GetComponent<AirplaneProjectileScript>();
             airProj.SetWeaponLevelReference(weaponLevelRef);
         }

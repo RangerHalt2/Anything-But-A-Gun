@@ -9,6 +9,7 @@ public class KnightProjectileScript : MonoBehaviour
     [SerializeField] private float growthRate;
     [SerializeField] private float sightDistance = 100f; //Distance on either side that the knight can turn.
     [SerializeField] private bool turned = false; //So the knight doesn't turn more than once
+    [SerializeField] private LayerMask whatIsSelf;
     private float speed;
     private Rigidbody rb;
 
@@ -24,7 +25,7 @@ public class KnightProjectileScript : MonoBehaviour
         if (!turned)
         {
             RaycastHit hitLeft;
-            Physics.Raycast(transform.position, -transform.right, out hitLeft, sightDistance);
+            Physics.Raycast(transform.position, -transform.right, out hitLeft, sightDistance, ~whatIsSelf);
                 if (hitLeft.collider != null && (hitLeft.collider.gameObject.tag == "Body" || hitLeft.collider.gameObject.tag == "WeakPoint"))
                 {
                     rb.linearVelocity = Vector3.zero;
@@ -38,7 +39,7 @@ public class KnightProjectileScript : MonoBehaviour
         if (!turned) 
         { 
             RaycastHit hitRight;
-            Physics.Raycast(transform.position, transform.right, out hitRight, sightDistance);
+            Physics.Raycast(transform.position, transform.right, out hitRight, sightDistance, ~whatIsSelf);
             if (hitRight.collider != null && (hitRight.collider.gameObject.tag == "Body" || hitRight.collider.gameObject.tag == "WeakPoint"))
             {
                     rb.linearVelocity = Vector3.zero;

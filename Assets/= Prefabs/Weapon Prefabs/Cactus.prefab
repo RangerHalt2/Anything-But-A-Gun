@@ -143,6 +143,9 @@ MonoBehaviour:
   teamID: 0
   baseDamage: 10
   growthRate: 1.15
+  externalDmgMod: 1
+  canCrit: 0
+  critMult: 0
   ignoreThese:
     serializedVersion: 2
     m_Bits: 512
@@ -225,11 +228,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a43bbd448db48d43a66a1786f1a4847, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CactusScript
-  fireRate: 0.15
   ammoManager: {fileID: 785455090434947426}
+  gunShot: {fileID: 5383701307693267320, guid: 5dcf3c15003edf94f8dcf5208f138c04, type: 3}
+  projectilePrefab: {fileID: 0}
+  lastFired: -Infinity
+  weaponInterface: {fileID: 5281992545741624872}
+  weaponAmmoManager: {fileID: 785455090434947426}
+  weaponInfoPanel: {fileID: 0}
+  weaponLevel: {fileID: 6903462851852635843}
+  cumulativeDamage: 0
+  weaponName: Cactus
+  tagline: kinda prickly, but who hasn't been?
+  weaponType: 0
+  level: 0
+  baseDamage: 0
+  levelDamage: 0
+  fireRate: 0.15
+  reloadTime: 0
+  AmmoCapacity: 0
+  reserveAmmo: 0
+  hasPackAPunch: 0
+  acceptablePackAPunchOptions:
+  - {fileID: 11400000, guid: 400b49d056ae7e44fafc9f2feebd7aca, type: 2}
   hitscan: {fileID: 3161134012043242097}
   clickEffect: {fileID: 9061005177392946849, guid: 3a22977f8fecec540ac19600cc354706, type: 3}
-  gunShot: {fileID: 5383701307693267320, guid: 5dcf3c15003edf94f8dcf5208f138c04, type: 3}
 --- !u!114 &4032989489154535396
 MonoBehaviour:
   m_ObjectHideFlags: 0

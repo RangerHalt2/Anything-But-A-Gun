@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class KnightWeaponScript : WeaponClass
@@ -73,6 +74,20 @@ public class KnightWeaponScript : WeaponClass
             }
             Projectile proj = projectileGameObject.GetComponent<Projectile>();
             proj.SetWeaponLevelReference(weaponLevelRef);
+
+            if (hasPackAPunch)
+            {
+                Component comp = projectileGameObject.AddComponent(components[currPackAPunchIndex]);
+                if (comp != null)
+                {
+                    Type type = comp.GetType();
+                    if (type == typeof(P_ShiningArmor))
+                    {
+                        P_ShiningArmor self = gameObject.GetComponent<P_ShiningArmor>();
+                        self.ApplyArmor();
+                    }
+                }
+            }
 
             KnightProjectileScript kniProj = projectileGameObject.GetComponent<KnightProjectileScript>();
             kniProj.SetWeaponLevelReference(weaponLevelRef);

@@ -171,6 +171,8 @@ MonoBehaviour:
   ammoDisplayText: {fileID: 0}
   reloadEffect: {fileID: 0}
   bottomlessMagazines: 0
+  reloadVFX: {fileID: 0}
+  weaponObject: {fileID: 0}
 --- !u!114 &-5931017466666987082
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -235,7 +237,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbd57b15ba22d0d458cd3c6434f7ed2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PootDispenserScript
-  fireRate: 0.25
   ammoManager: {fileID: 1802305520914099029}
+  gunShot: {fileID: 0}
   projectilePrefab: {fileID: 1506664740527934108, guid: 1641b0dbb1ff43d4a9e3e351ebcda2fc, type: 3}
+  lastFired: -Infinity
+  weaponInterface: {fileID: 0}
+  weaponAmmoManager: {fileID: 0}
+  weaponInfoPanel: {fileID: 0}
+  weaponLevel: {fileID: 0}
+  cumulativeDamage: 0
+  weaponName: 
+  tagline: 
+  weaponType: 0
+  level: 0
+  baseDamage: 0
+  levelDamage: 0
+  fireRate: 0.25
+  reloadTime: 0
+  AmmoCapacity: 0
+  reserveAmmo: 0
+  hasPackAPunch: 0
+  acceptablePackAPunchOptions:
+  - {fileID: 11400000, guid: d6128960b90acfd4fa302b747dd2babc, type: 2}
   projectileSpawnPoint: {fileID: 2341579381627065503}

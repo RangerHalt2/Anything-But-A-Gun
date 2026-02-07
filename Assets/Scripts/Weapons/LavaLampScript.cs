@@ -81,6 +81,10 @@ public class LavaLampScript : WeaponClass
             proj.SetWeaponLevelReference(weaponLevelRef);
 
             LavaProjectileScript lavaProj = projectileGameObject.GetComponent<LavaProjectileScript>();
+            if (hasPackAPunch)
+            {
+                Component comp = proj.gameObject.AddComponent(components[currPackAPunchIndex]);
+            }
             lavaProj.SetWeaponLevelReference(weaponLevelRef);
         }
     }

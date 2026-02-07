@@ -144,6 +144,9 @@ MonoBehaviour:
   teamID: 0
   baseDamage: 10
   growthRate: 1.15
+  externalDmgMod: 1
+  canCrit: 0
+  critMult: 0
   ignoreThese:
     serializedVersion: 2
     m_Bits: 512
@@ -266,12 +269,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be7416ac4f93f7c4d92d4e86fd8961e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LaserScript
-  fireRate: 0.1
   ammoManager: {fileID: 785455090434947426}
+  gunShot: {fileID: 0}
+  projectilePrefab: {fileID: 0}
+  lastFired: -Infinity
+  weaponInterface: {fileID: 1632196752583124068}
+  weaponAmmoManager: {fileID: 785455090434947426}
+  weaponInfoPanel: {fileID: 0}
+  weaponLevel: {fileID: 6903462851852635843}
+  cumulativeDamage: 0
+  weaponName: Laser Pointer
+  tagline: aim for their eyes
+  weaponType: 0
+  level: 0
+  baseDamage: 0
+  levelDamage: 0
+  fireRate: 0.1
+  reloadTime: 0
+  AmmoCapacity: 0
+  reserveAmmo: 0
+  hasPackAPunch: 0
+  acceptablePackAPunchOptions:
+  - {fileID: 11400000, guid: 400b49d056ae7e44fafc9f2feebd7aca, type: 2}
   hitscan: {fileID: 3161134012043242097}
   currentHeat: 0
   clickEffect: {fileID: 0}
-  gunShot: {fileID: 0}
 --- !u!1001 &9133036584225846776
 PrefabInstance:
   m_ObjectHideFlags: 0
