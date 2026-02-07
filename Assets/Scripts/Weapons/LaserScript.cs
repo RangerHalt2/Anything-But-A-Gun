@@ -1,3 +1,4 @@
+using System;
 using System.Threading;
 using UnityEngine;
 
@@ -43,7 +44,16 @@ public class LaserScript : WeaponClass
                     {
                         if (hitscan != null)
                         {
-                            
+                            if (hasPackAPunch)
+                            {
+                                Type type = components[currPackAPunchIndex];
+                                if(type == typeof(P_Climactic))
+                                {
+                                    P_Climactic comp = gameObject.GetComponent<P_Climactic>();
+                                    float hitScanDmgMod = comp.HitScanDMGCalculation(ammoManager); //Going to connect this to a P_Climatic public function
+                                    hitscan.externalDmgMod = hitScanDmgMod;
+                                }
+                            }
                             hitscan.Shoot();
                             if (gunShot != null)
                             {

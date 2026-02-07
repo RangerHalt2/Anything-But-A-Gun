@@ -1,3 +1,5 @@
+using System;
+using System.Linq;
 using UnityEngine;
 
 public class AirFrierScript : WeaponClass
@@ -30,6 +32,8 @@ public class AirFrierScript : WeaponClass
         weaponLevelRef = GetComponent<WeaponLevel>();
         playerRef = GameObject.FindAnyObjectByType<PlayerController>();
         IM = GameObject.FindFirstObjectByType<InputManager>();
+
+        components = acceptablePackAPunchOptions.Select(t => t.GetTypeSafe()).ToArray();
     }
 
     private void Update() 
@@ -88,6 +92,13 @@ public class AirFrierScript : WeaponClass
         else if (cookTime >= cookLimit2) { nuggies = 2; }
         else if (cookTime >= cookLimit1) { nuggies = 1; }
         Debug.Log(nuggies);
+
+        if (hasPackAPunch)
+        {
+            Type type = components[currPackAPunchIndex];
+            if (type == typeof(P_FridayFunday))
+                nuggies *= 2; //2 times the amount of nuggies
+        }
 
         while (nuggies > 0)
         {

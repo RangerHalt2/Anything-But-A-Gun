@@ -1,4 +1,6 @@
+using System;
 using UnityEngine;
+using UnityEngine.ProBuilder;
 
 public class BrushScript : WeaponClass
 {
@@ -52,7 +54,13 @@ public class BrushScript : WeaponClass
                             // Play sound effect (added by Aaron)
                             SoundEffectsManager.instance.PlaySoundEffectClip(brushSFX, transform, 1f);
                         }
-
+                        if (hasPackAPunch)
+                        {
+                            if (components[currPackAPunchIndex] == typeof(P_FridayFunday)) //If it has the friday funday pack a punch then shoot twice.
+                            {
+                                SpawnProjectile();
+                            }
+                        }
                         SpawnProjectile();
                     }
                     // Update lastFired
@@ -115,6 +123,10 @@ public class BrushScript : WeaponClass
             {
                 proj.SetWeaponLevelReference(weaponLevelRef);
                 Physics.IgnoreCollision(proj.GetComponent<CapsuleCollider>(), playerRef.GetComponent<CharacterController>(), true);
+                if (hasPackAPunch)
+                {
+                    Component comp = proj.gameObject.AddComponent(components[currPackAPunchIndex]);
+                }
             }
         }
     }

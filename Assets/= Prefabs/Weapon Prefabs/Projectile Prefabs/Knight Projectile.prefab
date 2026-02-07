@@ -209,7 +209,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.55
+  m_Radius: 0.25
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &-6608494925588196765
 MonoBehaviour:
@@ -224,12 +224,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Projectile
   speed: 30
-  lifeTime: 3
+  lifeTime: 5
   teamID: 0
   baseDamage: 15
   growthRate: 1.15
   canCrit: 0
   critMult: 2
+  externalDmgMod: 1
   nonlethal: 0
   piercing: 0
   unique: 0
@@ -340,6 +341,9 @@ MonoBehaviour:
   growthRate: 0
   sightDistance: 100
   turned: 0
+  whatIsSelf:
+    serializedVersion: 2
+    m_Bits: 512
 --- !u!1001 &8101328397078294094
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -15,7 +15,7 @@ public class WeaponClass : MonoBehaviour
 
     [Header("Key Weapon Components")]
     [SerializeField] private WeaponClass weaponInterface;
-    [SerializeField] private AmmoManager weaponAmmoManager;
+    [SerializeField] protected AmmoManager weaponAmmoManager;
     [SerializeField] private GameObject weaponInfoPanel;
     public WeaponLevel weaponLevel;
 
@@ -41,7 +41,7 @@ public class WeaponClass : MonoBehaviour
     [Header("Pack-A-Punch Related Stuff")]
     [SerializeField] protected bool hasPackAPunch = false;
     //[SerializeField] private string[] acceptablePackAPunchComponents; 
-    [SerializeField] private PAP_ScriptableObjects[] acceptablePackAPunchOptions;
+    [SerializeField] protected PAP_ScriptableObjects[] acceptablePackAPunchOptions;
     protected Type[] components;
     protected int currPackAPunchIndex = -1;
     protected Component currPackAPunchComponent;
@@ -202,7 +202,15 @@ public class WeaponClass : MonoBehaviour
         }
         */
 
+
         components = acceptablePackAPunchOptions.Select(t => t.GetTypeSafe()).ToArray();
+
+
+        Debug.Log("WEAPON CLASS - PACK A PUNCH - Array Length: " + acceptablePackAPunchOptions.Length);
+        for (var i = 0; i < acceptablePackAPunchOptions.Length; i++)
+        {
+            Debug.Log("WEAPON CLASS - PACK A PUNCH - component: " + components[i]);
+        }
 
     }
 

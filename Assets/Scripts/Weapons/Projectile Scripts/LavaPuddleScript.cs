@@ -5,6 +5,7 @@ public class LavaPuddleScript : MonoBehaviour, IWeaponLevel
     [SerializeField] private float puddleTimer;
     [SerializeField] private float baseDamage;
     [SerializeField] private float growthRate = 1.15f;
+    [HideInInspector] public float externalDamageMod = 1f;
     private float cummulativeDamage;
 
     private WeaponLevel currentWeaponLevel;
@@ -43,5 +44,6 @@ public class LavaPuddleScript : MonoBehaviour, IWeaponLevel
     public void UpdateLevelDamage()
     {
         cummulativeDamage = baseDamage * Mathf.Pow(growthRate, currentWeaponLevel.Level);
+        cummulativeDamage *= externalDamageMod;
     }
 }

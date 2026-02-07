@@ -1,4 +1,6 @@
+using System;
 using UnityEngine;
+using UnityEngine.ProBuilder;
 
 public class MegaphonScript : WeaponClass
 {
@@ -63,6 +65,18 @@ public class MegaphonScript : WeaponClass
 
             Projectile proj = projectileGameObject.GetComponent<Projectile>();
             proj.SetWeaponLevelReference(weaponLevelRef);
+
+            if (hasPackAPunch)
+            {
+                Component comp = proj.gameObject.AddComponent(components[currPackAPunchIndex]);
+                Type addedType = comp.GetType();
+                if (addedType == typeof(P_Climactic))
+                {
+                    P_Climactic climatic = comp.gameObject.GetComponent<P_Climactic>();
+                    climatic.parentWeapon = gameObject.GetComponent<WeaponClass>();
+                }
+            }
+
 
             /*
             // Account for spread

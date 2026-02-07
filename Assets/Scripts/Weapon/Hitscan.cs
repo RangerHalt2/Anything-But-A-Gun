@@ -17,6 +17,7 @@ public class Hitscan : MonoBehaviour, IWeaponLevel
     [SerializeField] private float growthRate = 1.15f;
     private float cummulativeDamage;
     private WeaponLevel currentWeaponLevel;
+    [HideInInspector] public float externalDmgMod = 1f;
 
     [Space]
     [Tooltip("Determines whether or not the projectile can deal bonus damage for hitting an enemy's weakpoint.")]
@@ -117,6 +118,7 @@ public class Hitscan : MonoBehaviour, IWeaponLevel
                 // If the target object has a health component and the teamID is different than the one assigned to the weapon
                 if (targetHealth != null && targetHealth.teamID != this.teamID)
                 {
+                    UpdateLevelDamage();
                     float appliedDamage = cummulativeDamage;
 
                     // MG - Compares collider with Tag Head to deal double dmg
@@ -194,6 +196,7 @@ public class Hitscan : MonoBehaviour, IWeaponLevel
     public void UpdateLevelDamage()
     {
         cummulativeDamage = baseDamage * Mathf.Pow(growthRate, currentWeaponLevel.Level);
+        cummulativeDamage *= externalDmgMod;
     }
 
     //Attempts to level the weapon up, if the weapon levels up the damage needs to be recalculated.

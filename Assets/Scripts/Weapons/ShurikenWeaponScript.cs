@@ -72,6 +72,11 @@ public class ShurikenWeaponScript : WeaponClass
 
             }
 
+            if (hasPackAPunch)
+            {
+                Component comp = projectileGameObject.gameObject.AddComponent(components[currPackAPunchIndex]);
+            }
+
             Projectile shiProj = projectileGameObject.GetComponent<Projectile>();
             shiProj.SetWeaponLevelReference(weaponLevelRef);
         }
