@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2030678263194498925}
   - component: {fileID: 7554776507907729685}
   - component: {fileID: 6349544966760951119}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: CreativeSpark VFX (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4848,7 +4848,7 @@ GameObject:
   - component: {fileID: 3728063672447090170}
   - component: {fileID: 5734868888619536670}
   - component: {fileID: 417004399640251803}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: CreativeSpark VFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9740,6 +9740,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Promotion Machine
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d4612dcb863320d4bbf5580b593294ab, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -9749,10 +9753,55 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: d4612dcb863320d4bbf5580b593294ab, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2030678263194498925}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: d4612dcb863320d4bbf5580b593294ab, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2400169368285435296}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: d4612dcb863320d4bbf5580b593294ab, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5537616740428498161}
   m_SourcePrefab: {fileID: 100100000, guid: d4612dcb863320d4bbf5580b593294ab, type: 3}
 --- !u!4 &2636906555917068742 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: d4612dcb863320d4bbf5580b593294ab, type: 3}
   m_PrefabInstance: {fileID: 2527247232586518061}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &3446375380844655484 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: d4612dcb863320d4bbf5580b593294ab, type: 3}
+  m_PrefabInstance: {fileID: 2527247232586518061}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2400169368285435296
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3446375380844655484}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b029eaa445177446bc6474b47f73923, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PackAPunchMachine
+  numOfUses: 1
+--- !u!65 &5537616740428498161
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3446375380844655484}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.2052796, y: 0.7549257, z: 1.1731648}
+  m_Center: {x: -0.000000029802322, y: 0, z: 0}
