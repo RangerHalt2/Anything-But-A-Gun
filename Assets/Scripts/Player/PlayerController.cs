@@ -343,8 +343,11 @@ public class PlayerController : MonoBehaviour
         else
         {
             //Debug.Log("PLAYERCONTROLLER - Interactable false");
-            interactionText.enabled = false;
-            interactionText.gameObject.SetActive(false);
+            if (interactionText != null)
+            {
+                interactionText.enabled = false;
+                interactionText.gameObject.SetActive(false);
+            }
         }
     }
 }
