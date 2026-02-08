@@ -46,6 +46,7 @@ GameObject:
   - component: {fileID: -5931017466666987082}
   - component: {fileID: 3856324083559678794}
   - component: {fileID: 5358080070095141081}
+  - component: {fileID: 6047287469277294333}
   m_Layer: 14
   m_Name: Lava Lamp
   m_TagString: Untagged
@@ -141,6 +142,8 @@ MonoBehaviour:
   weaponName: Lava Lamp
   tagline: Tubular
   weaponType: 1
+  promotionName: No Promotion
+  promotionEffect: No Promotion
   level: 0
   baseDamage: 15
   levelDamage: 5
@@ -204,6 +207,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4892176ad31b13847abf3f92f0005b5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WeaponLevel
+--- !u!135 &6047287469277294333
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3634324867199572480}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 1.5
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &9209859099533368657
 GameObject:
   m_ObjectHideFlags: 0

@@ -47,4 +47,26 @@ public class WeaponCollectScript : MonoBehaviour, IInteractable
 
         gameObject.layer = LayerMask.NameToLayer("Gun");
     }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
+        {
+            PlayerController pc = other.gameObject.GetComponent<PlayerController>();
+
+            pc.CheckInteract();
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
+        {
+            PlayerController pc = other.gameObject.GetComponent<PlayerController>();
+
+            pc.CheckInteract();
+            pc.LeftInteract();
+        }
+    }
+
 }

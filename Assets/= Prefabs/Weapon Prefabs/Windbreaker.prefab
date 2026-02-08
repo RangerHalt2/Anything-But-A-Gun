@@ -48,6 +48,7 @@ GameObject:
   - component: {fileID: 3856324083559678794}
   - component: {fileID: 5358080070095141081}
   - component: {fileID: 6990597771002631278}
+  - component: {fileID: 904138841909744116}
   m_Layer: 14
   m_Name: Windbreaker
   m_TagString: Untagged
@@ -249,6 +250,8 @@ MonoBehaviour:
   weaponName: 
   tagline: 
   weaponType: 0
+  promotionName: No Promotion
+  promotionEffect: No Promotion
   level: 0
   baseDamage: 0
   levelDamage: 0
@@ -256,4 +259,27 @@ MonoBehaviour:
   reloadTime: 0
   AmmoCapacity: 0
   reserveAmmo: 0
+  hasPackAPunch: 0
+  acceptablePackAPunchOptions: []
   projectileSpawnPoint: {fileID: 2341579381627065503}
+--- !u!135 &904138841909744116
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3634324867199572480}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 1.5
+  m_Center: {x: 0, y: 0, z: 0}

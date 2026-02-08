@@ -156,6 +156,27 @@ public class WeaponSpawner : MonoBehaviour, IInteractable
         }
     }
 
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
+        {
+            PlayerController pc = other.gameObject.GetComponent<PlayerController>();
+
+            pc.CheckInteract();
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
+        {
+            PlayerController pc = other.gameObject.GetComponent<PlayerController>();
+
+            pc.CheckInteract();
+            pc.LeftInteract();
+        }
+    }
+
     private void SpawnWeapon()
     {
         if (weaponSpawnWaypoint != null)

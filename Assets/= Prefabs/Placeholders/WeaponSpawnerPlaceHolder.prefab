@@ -155,6 +155,7 @@ GameObject:
   - component: {fileID: 1707801316454031238}
   - component: {fileID: 7338413379423430543}
   - component: {fileID: 7325114854323147734}
+  - component: {fileID: 8787767989917518549}
   m_Layer: 14
   m_Name: WeaponSpawnerPlaceHolder
   m_TagString: Untagged
@@ -215,6 +216,7 @@ MonoBehaviour:
   weaponPriceTextbox: {fileID: 8820898668782312900}
   weaponSpawnWaypoint: {fileID: 8950346988761171299}
   playerLevelOverride: 4
+  packAPunchChance: 5
 --- !u!136 &7325114854323147734
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -237,6 +239,27 @@ CapsuleCollider:
   m_Radius: 0.5
   m_Height: 2
   m_Direction: 1
+  m_Center: {x: 0, y: 0.5, z: 0}
+--- !u!135 &8787767989917518549
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4304337293542274868}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 1.5
   m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!1 &4920355973567049042
 GameObject:

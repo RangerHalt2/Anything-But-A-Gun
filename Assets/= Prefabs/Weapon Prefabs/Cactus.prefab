@@ -49,6 +49,7 @@ GameObject:
   - component: {fileID: 5281992545741624872}
   - component: {fileID: 4032989489154535396}
   - component: {fileID: 6590022951441714457}
+  - component: {fileID: 2110627216461054993}
   m_Layer: 14
   m_Name: Cactus
   m_TagString: Untagged
@@ -240,6 +241,8 @@ MonoBehaviour:
   weaponName: Cactus
   tagline: kinda prickly, but who hasn't been?
   weaponType: 0
+  promotionName: No Promotion
+  promotionEffect: No Promotion
   level: 0
   baseDamage: 0
   levelDamage: 0
@@ -292,3 +295,24 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!135 &2110627216461054993
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2719607922738401809}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.3
+  m_Center: {x: 0, y: -0.00831281, z: 0.015006815}

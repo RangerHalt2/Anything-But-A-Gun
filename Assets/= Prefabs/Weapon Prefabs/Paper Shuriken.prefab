@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 695743438648772293}
   - component: {fileID: 2263409465948628682}
   - component: {fileID: 8698819055015237163}
+  - component: {fileID: 7072145863051646950}
   m_Layer: 14
   m_Name: Paper Shuriken
   m_TagString: Untagged
@@ -192,6 +193,8 @@ MonoBehaviour:
   weaponName: Paper Shuriken
   tagline: 
   weaponType: 0
+  promotionName: No Promotion
+  promotionEffect: No Promotion
   level: 0
   baseDamage: 40
   levelDamage: 0
@@ -230,6 +233,27 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!135 &7072145863051646950
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3821835578958745683}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 1.5
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &5574882247540241162
 GameObject:
   m_ObjectHideFlags: 0

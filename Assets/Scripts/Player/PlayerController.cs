@@ -147,7 +147,6 @@ public class PlayerController : MonoBehaviour
     {
         rotationY += RotationVector.x * sensitivity;
         transform.localRotation = Quaternion.Euler(0, rotationY, 0);
-        CheckInteract();
     }
 
     private void StartDash()
@@ -311,7 +310,7 @@ public class PlayerController : MonoBehaviour
     }
 
     //LB: This function will confirm if the interact text should be shown or not
-    private void CheckInteract()
+    public void CheckInteract()
     {
         //Debug.Log("PLAYERCONTROLLER - Interactable Check");
         Camera cam = Camera.main;
@@ -348,6 +347,16 @@ public class PlayerController : MonoBehaviour
                 interactionText.enabled = false;
                 interactionText.gameObject.SetActive(false);
             }
+        }
+    }
+
+    public void LeftInteract()
+    {
+        //Debug.Log("PLAYERCONTROLLER - Interactable false");
+        if (interactionText != null)
+        {
+            interactionText.enabled = false;
+            interactionText.gameObject.SetActive(false);
         }
     }
 }

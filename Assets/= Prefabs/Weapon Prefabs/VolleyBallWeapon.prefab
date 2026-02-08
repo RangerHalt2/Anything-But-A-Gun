@@ -149,6 +149,7 @@ GameObject:
   - component: {fileID: -3169336971884273044}
   - component: {fileID: 7794552217210630194}
   - component: {fileID: 1192011955155942802}
+  - component: {fileID: 5409258653492598572}
   m_Layer: 14
   m_Name: VolleyBallWeapon
   m_TagString: Untagged
@@ -263,6 +264,8 @@ MonoBehaviour:
   weaponName: Volleyball
   tagline: Explosive Spikes
   weaponType: 6
+  promotionName: No Promotion
+  promotionEffect: No Promotion
   level: 0
   baseDamage: 15
   levelDamage: 5
@@ -271,9 +274,6 @@ MonoBehaviour:
   AmmoCapacity: 10
   reserveAmmo: -1
   hasPackAPunch: 0
-  acceptablePackAPunchComponents:
-  - P_Heavy
-  - P_Climactic
   acceptablePackAPunchOptions:
   - {fileID: 11400000, guid: eca31965d964ef9468c904da4cdb57b8, type: 2}
   - {fileID: 11400000, guid: 400b49d056ae7e44fafc9f2feebd7aca, type: 2}
@@ -307,6 +307,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4892176ad31b13847abf3f92f0005b5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WeaponLevel
+--- !u!135 &5409258653492598572
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 863773264514965766}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 1.5
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &5441623943686300037
 GameObject:
   m_ObjectHideFlags: 0

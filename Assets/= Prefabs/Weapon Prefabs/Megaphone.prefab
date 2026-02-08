@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: -4384429325781775618}
   - component: {fileID: 5462082225701915407}
   - component: {fileID: -9007097184272561893}
+  - component: {fileID: 436870328171205861}
   m_Layer: 14
   m_Name: Megaphone
   m_TagString: Untagged
@@ -108,6 +109,8 @@ MonoBehaviour:
   weaponName: Megaphone
   tagline: Loud and Proud
   weaponType: 1
+  promotionName: No Promotion
+  promotionEffect: No Promotion
   level: 0
   baseDamage: 20
   levelDamage: 10
@@ -192,6 +195,27 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!135 &436870328171205861
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 151647689765970786}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 1.5
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &8210358178196041646
 GameObject:
   m_ObjectHideFlags: 0
