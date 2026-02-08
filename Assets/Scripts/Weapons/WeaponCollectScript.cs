@@ -7,6 +7,8 @@ public class WeaponCollectScript : MonoBehaviour, IInteractable
 
     public bool collected = false;
 
+    public bool canInteract { get; set; } = true;
+
     /*void OnTriggerEnter(Collider _other) 
     {
         if (_other.CompareTag("Player") && !collected)

@@ -63,6 +63,8 @@ public class WeaponSpawner : MonoBehaviour, IInteractable
 
     [Header("Pack A Punch Variables")]
     [SerializeField] private float packAPunchChance = 5f;
+
+    public bool canInteract { get; set; } = true;
     #endregion
 
     public enum SpawnMode

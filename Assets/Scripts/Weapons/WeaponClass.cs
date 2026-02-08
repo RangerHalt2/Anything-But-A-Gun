@@ -26,6 +26,8 @@ public class WeaponClass : MonoBehaviour
     [SerializeField] private string weaponName;
     [SerializeField] private string tagline;
     [SerializeField] private WeaponType weaponType;
+    [SerializeField] private string promotionName = "No Promotion";
+    [SerializeField] private string promotionEffect = "No Promotion";
     [Space]
     public int level;
     [Header("Damage Settings")]
@@ -164,6 +166,10 @@ public class WeaponClass : MonoBehaviour
             Debug.LogError("component is null");
         Debug.Log("Adding Component " + components[index]);
         currPackAPunchComponent = gameObject.AddComponent(components[index]);
+
+        promotionName = acceptablePackAPunchOptions[index].promotionName;
+        promotionEffect = acceptablePackAPunchOptions[index].promotionEffect;
+
         hasPackAPunch = true;
         return;
     }
@@ -176,6 +182,8 @@ public class WeaponClass : MonoBehaviour
             return;
         }
         currPackAPunchIndex = -1;
+        promotionName = "No Promotion";
+        promotionEffect = "No Promotion";
         currPackAPunchComponent = null;
         hasPackAPunch = false;
     }
@@ -205,13 +213,14 @@ public class WeaponClass : MonoBehaviour
 
         components = acceptablePackAPunchOptions.Select(t => t.GetTypeSafe()).ToArray();
 
+        promotionEffect = "No Promotion";
+        promotionName = "No Promotion";
 
         Debug.Log("WEAPON CLASS - PACK A PUNCH - Array Length: " + acceptablePackAPunchOptions.Length);
         for (var i = 0; i < acceptablePackAPunchOptions.Length; i++)
         {
             Debug.Log("WEAPON CLASS - PACK A PUNCH - component: " + components[i]);
         }
-
     }
 
     private void Start()
