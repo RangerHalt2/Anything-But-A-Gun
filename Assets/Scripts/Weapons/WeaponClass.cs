@@ -223,13 +223,6 @@ public class WeaponClass : MonoBehaviour
     #region Weapon
     private void Awake()
     {
-        if (weaponInfoPanel != null)
-        {
-            // Find the reference to the weaponInfoUI script
-            infoUI = weaponInfoPanel.GetComponent<WeaponInfoUI>();
-            // Disable the info panel on startup
-            weaponInfoPanel.SetActive(false);
-        }
 
         /*
         //Debug.LogError("Length " + acceptablePackAPunchComponents.Length);
@@ -255,6 +248,13 @@ public class WeaponClass : MonoBehaviour
 
     private void Start()
     {
+        if (weaponInfoPanel != null)
+        {
+            // Find the reference to the weaponInfoUI script
+            infoUI = weaponInfoPanel.GetComponent<WeaponInfoUI>();
+            // Disable the info panel on startup
+            weaponInfoPanel.SetActive(false);
+        }
         InitializeWeapon();
     }
 
@@ -277,8 +277,10 @@ public class WeaponClass : MonoBehaviour
 
     public void ShowInfo()
     {
+        Debug.Log("WEAPONCLASS - Showing Info");
         if (infoUI != null)
         {
+            Debug.Log("WEAPONCLASS - infoUI not null");
             // Update Weapon Info
             infoUI.SetInfo(GetComponent<WeaponClass>());
             // Activate the panel

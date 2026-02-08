@@ -73,6 +73,7 @@ public class WeaponInfoUI : MonoBehaviour
 
     public void SetInfo(WeaponClass data)
     {
+        Debug.Log("WEAPONINFOUI - entered Set Info");
         nameText.text = data.GetWeaponName();
 
         levelText.text = "Lvl. " + weaponLevel.Level.ToString();
