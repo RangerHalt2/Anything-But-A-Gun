@@ -5,8 +5,11 @@ public class PackAPunchMachine : MonoBehaviour, IInteractable
     public int numOfUses = 1; //Public because this is going to be changed later and fuck getters amirite or amirite
     private int counter = 0;
 
+
     private WeaponHandler wh;
     private WeaponClass wc;
+
+    public bool canInteract { get; set; } = true;
 
     public void Interact()
     {
@@ -21,6 +24,10 @@ public class PackAPunchMachine : MonoBehaviour, IInteractable
             wc.SetPackAPunchIndex(selectedPunch);
             wc.AddPackAPunch();
             counter++;
+            if (counter == numOfUses)
+            {
+                canInteract = false;
+            }
         }
     }
 }

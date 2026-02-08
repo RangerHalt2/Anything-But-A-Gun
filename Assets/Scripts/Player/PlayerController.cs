@@ -1,4 +1,5 @@
 using System.Collections;
+using TMPro;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -56,6 +57,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float interactRange = 3f;
     [SerializeField] private LayerMask interactableMask;
     [SerializeField] private float interactCooldown = 0.5f;
+    [SerializeField] private TextMeshProUGUI interactionText;
     private bool canInteract = true;
 
     public bool isSpawned = false;
@@ -145,6 +147,7 @@ public class PlayerController : MonoBehaviour
     {
         rotationY += RotationVector.x * sensitivity;
         transform.localRotation = Quaternion.Euler(0, rotationY, 0);
+        CheckInteract();
     }
 
     private void StartDash()
@@ -305,5 +308,43 @@ public class PlayerController : MonoBehaviour
     {
         yield return new WaitForSeconds(interactCooldown);
         canInteract = true;
+    }
+
+    //LB: This function will confirm if the interact text should be shown or not
+    private void CheckInteract()
+    {
+        Debug.Log("PLAYERCONTROLLER - Interactable Check");
+        Camera cam = Camera.main;
+        if (cam == null)
+        {
+            Debug.LogWarning("No main camera found for interaction!");
+            return;
+        }
+
+        Ray ray = new Ray(cam.transform.position, cam.transform.forward);
+
+        // Raycast to check if we hit something interactable
+        if (Physics.Raycast(ray, out RaycastHit hit, interactRange, interactableMask))
+        {
+            IInteractable interact = hit.collider.gameObject.GetComponent<IInteractable>();
+            if (interactionText != null && interact.canInteract)
+            {
+                Debug.Log("PLAYERCONTROLLER - Interactable true");
+                interactionText.enabled = true;
+                interactionText.gameObject.SetActive(true);
+            }
+            else
+            {
+                Debug.Log("PLAYERCONTROLLER - CanInteract False - Interactable false");
+                interactionText.enabled = false;
+                interactionText.gameObject.SetActive(false);
+            }
+        }
+        else
+        {
+            Debug.Log("PLAYERCONTROLLER - Interactable false");
+            interactionText.enabled = false;
+            interactionText.gameObject.SetActive(false);
+        }
     }
 }
