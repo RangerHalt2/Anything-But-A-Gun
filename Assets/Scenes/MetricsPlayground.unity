@@ -1750,6 +1750,7 @@ GameObject:
   m_Component:
   - component: {fileID: 468872134}
   - component: {fileID: 468872133}
+  - component: {fileID: 468872135}
   m_Layer: 0
   m_Name: AchievementManager
   m_TagString: Untagged
@@ -1786,6 +1787,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &468872135
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 468872132}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 302dfcd982dc9fb4aaa67e46dce27667, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::KillTracker
 --- !u!1 &479812095
 GameObject:
   m_ObjectHideFlags: 0
@@ -10154,8 +10167,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6061b0ea9981c4b49be0f44313fb878b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TestUnlocker
-  achievementId: beat_first_level
-  triggerOnce: 0
+  achievementId: kill_brick_1
+  triggerOnce: 1
 --- !u!65 &1526136604
 BoxCollider:
   m_ObjectHideFlags: 0

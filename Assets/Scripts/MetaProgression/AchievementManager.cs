@@ -31,7 +31,7 @@ public class AchievementManager : MonoBehaviour
         LoadAchievements();
 
         // Debug line used to find where the persistent copy of the achivements will be stored.
-        //Debug.Log(Application.persistentDataPath);
+        Debug.Log(Application.persistentDataPath);
     }
 
     void LoadAchievements()
@@ -115,7 +115,7 @@ public class AchievementManager : MonoBehaviour
         achievement.unlocked = true;
 
         //Apply metaprogression rewards
-        ApplyMetaReward(achievement);
+        ApplyMetaReward();
 
         // Save newly unlocked achivement
         SaveAchievements();
@@ -147,8 +147,13 @@ public class AchievementManager : MonoBehaviour
     }
 
     // Apply the metaprogression rewards for the given achivement
-    public void ApplyMetaReward(Achievement achievement)
-    {
-        return;
+    public void ApplyMetaReward()
+    {        
+        PlayerMetaStats playerMeta = FindFirstObjectByType<PlayerMetaStats>();
+
+        if (playerMeta != null)
+        {
+            playerMeta.OnMetaAchievementUnlocked();
+        }
     }
 }

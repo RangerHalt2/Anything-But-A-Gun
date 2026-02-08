@@ -26,6 +26,7 @@ public class TestUnlocker : MonoBehaviour
 
         // Unlock the achievement
         AchievementManager.Instance.UnlockAchievement(achievementId);
+        AchievementManager.Instance.ApplyMetaReward();
 
         hasTriggered = true;
     }
