@@ -10,7 +10,7 @@ public class WeaponHandler : MonoBehaviour
     public GameObject starterWeapon;
 
     //Exactly what weapons we have
-    private List<GameObject> weapons = new List<GameObject>(); //List instead of an array for constant updating
+    [HideInInspector] public List<GameObject> weapons = new List<GameObject>(); //List instead of an array for constant updating
     public GameObject currentWeapon; //The weapon currently in the player's hands
     private int weaponSlot; //Which weapon in slot we're holding
     public GameObject newWeapon; //For if a player picks up a new gun.
@@ -225,7 +225,7 @@ public class WeaponHandler : MonoBehaviour
         }
     }
 
-    void DropWeapon(GameObject dropWeapon) //Spawns a collectible that will allow you to recollect the weapon.
+    public void DropWeapon(GameObject dropWeapon) //Spawns a collectible that will allow you to recollect the weapon.
     {
         Vector3 spawnPoint = transform.position + transform.forward * 2;
         Vector3 scale = dropWeapon.transform.localScale;
@@ -287,4 +287,10 @@ public class WeaponHandler : MonoBehaviour
             currentWeapon.GetComponent<AmmoManager>().updateDisplay();
         }
     }
+
+    public void EmergencyChooseWeaponZero()
+    {
+        currentWeapon = weapons[0];
+    }
+
 }

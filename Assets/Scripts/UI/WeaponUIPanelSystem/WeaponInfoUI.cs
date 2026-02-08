@@ -29,6 +29,11 @@ public class WeaponInfoUI : MonoBehaviour
     [SerializeField] private TMP_Text magazineSizeText;
     [Tooltip("Reference to the TMPro object which displays the weapon's reserve ammo count.")]
     [SerializeField] private TMP_Text reserveAmmoText;
+    [Tooltip("States the name of the current promotion, says 'No Promotion' if none are available")]
+    [SerializeField] private TMP_Text promotionNameText;
+    [Tooltip("States the effect of the current promotion, says 'No Promotion' if none are available")]
+    [SerializeField] private TMP_Text promotionEffectText;
+
 
     [Header("TMPro StatVal References")]
     [Tooltip("Reference to the TMPro object which displays the weapon's damage.")]
@@ -74,6 +79,8 @@ public class WeaponInfoUI : MonoBehaviour
 
         typeText.text = data.GetWeaponTypeAsString();
 
+        promotionNameText.text = "Promotion: " + data.GetPromotionName();
+        promotionEffectText.text = "Effect: " + data.GetPromotionEffect();
 
         // StatsVal
         if (weaponData != null)

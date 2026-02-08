@@ -65,6 +65,16 @@ public class WeaponClass : MonoBehaviour
         return weaponName;
     }
 
+    public string GetPromotionName()
+    {
+        return promotionName;
+    }
+
+    public string GetPromotionEffect()
+    {
+        return promotionEffect;
+    }
+
     public string GetWeaponTagline()
     {
         return tagline;
@@ -144,26 +154,29 @@ public class WeaponClass : MonoBehaviour
         return currPackAPunchIndex;
     }
 
-    public void AddPackAPunch()
+    public bool AddPackAPunch()
     {
-        AddPackAPunch(currPackAPunchIndex);
+        return AddPackAPunch(currPackAPunchIndex);
     }
 
-    public void AddPackAPunch(int index)
+    public bool AddPackAPunch(int index)
     {
         Debug.Log("Entered AddPackAPunch by index");
         if (index == -1)
         {
             Debug.LogError("Pack-A-Punch was attempted without having an assigned index");
-            return;
+            return false;
         }
         if(currPackAPunchComponent != null)
         {
-            Debug.Log("Weapon already has a pack-a-punch");
-            return;
+            Debug.LogError("Weapon already has a pack-a-punch");
+            return false;
         }
-        if(components == null)
-            Debug.LogError("component is null");
+        if(components == null || acceptablePackAPunchOptions.Length == 0)
+        {
+            Debug.LogError("The weapon does not have a valid promotion right now");
+            return false;
+        }
         Debug.Log("Adding Component " + components[index]);
         currPackAPunchComponent = gameObject.AddComponent(components[index]);
 
@@ -171,7 +184,21 @@ public class WeaponClass : MonoBehaviour
         promotionEffect = acceptablePackAPunchOptions[index].promotionEffect;
 
         hasPackAPunch = true;
-        return;
+
+        infoUI.SetInfo(this);
+
+        WeaponHandler wh = GameObject.FindAnyObjectByType<WeaponHandler>();
+        if (wh != null)
+        {
+            if(wh.currentWeapon == this.gameObject)
+            {
+                wh.weapons.Remove(wh.currentWeapon);
+                wh.DropWeapon(wh.currentWeapon);
+                wh.EmergencyChooseWeaponZero();
+            }
+        }
+
+        return true;
     }
 
     public void RemovePackAPunch()

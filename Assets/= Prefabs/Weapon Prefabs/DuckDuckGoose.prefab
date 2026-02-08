@@ -202,6 +202,8 @@ MonoBehaviour:
   weaponName: Duck Duck Goose!
   tagline: Annnnnddd GOOOOOSE!
   weaponType: 0
+  promotionName: No Promotion
+  promotionEffect: No Promotion
   level: 1
   baseDamage: 10
   levelDamage: 0
@@ -210,9 +212,6 @@ MonoBehaviour:
   AmmoCapacity: 10
   reserveAmmo: 120
   hasPackAPunch: 0
-  acceptablePackAPunchComponents:
-  - P_Growing
-  - P_Explosive
   acceptablePackAPunchOptions:
   - {fileID: 11400000, guid: 0beab2e595168d248b3ac501d5391664, type: 2}
   - {fileID: 11400000, guid: d6128960b90acfd4fa302b747dd2babc, type: 2}
@@ -1550,6 +1549,10 @@ PrefabInstance:
       propertyPath: weaponLevel
       value: 
       objectReference: {fileID: 1441169586980562079}
+    - target: {fileID: 6309036767483702213, guid: 59e0f25de0e691344889fcd773f95b30, type: 3}
+      propertyPath: promotionNameText
+      value: 
+      objectReference: {fileID: 5543616710329335846}
     - target: {fileID: 6318699877904706489, guid: 59e0f25de0e691344889fcd773f95b30, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -1735,6 +1738,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 59e0f25de0e691344889fcd773f95b30, type: 3}
+--- !u!114 &5543616710329335846 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 706773702382446263, guid: 59e0f25de0e691344889fcd773f95b30, type: 3}
+  m_PrefabInstance: {fileID: 4981004238374987409}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
 --- !u!224 &6833865023247136735 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2015027676335755598, guid: 59e0f25de0e691344889fcd773f95b30, type: 3}
