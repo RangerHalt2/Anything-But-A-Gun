@@ -313,7 +313,7 @@ public class PlayerController : MonoBehaviour
     //LB: This function will confirm if the interact text should be shown or not
     private void CheckInteract()
     {
-        Debug.Log("PLAYERCONTROLLER - Interactable Check");
+        //Debug.Log("PLAYERCONTROLLER - Interactable Check");
         Camera cam = Camera.main;
         if (cam == null)
         {
@@ -329,20 +329,20 @@ public class PlayerController : MonoBehaviour
             IInteractable interact = hit.collider.gameObject.GetComponent<IInteractable>();
             if (interactionText != null && interact.canInteract)
             {
-                Debug.Log("PLAYERCONTROLLER - Interactable true");
+                //Debug.Log("PLAYERCONTROLLER - Interactable true");
                 interactionText.enabled = true;
                 interactionText.gameObject.SetActive(true);
             }
             else
             {
-                Debug.Log("PLAYERCONTROLLER - CanInteract False - Interactable false");
+                //Debug.Log("PLAYERCONTROLLER - CanInteract False - Interactable false");
                 interactionText.enabled = false;
                 interactionText.gameObject.SetActive(false);
             }
         }
         else
         {
-            Debug.Log("PLAYERCONTROLLER - Interactable false");
+            //Debug.Log("PLAYERCONTROLLER - Interactable false");
             interactionText.enabled = false;
             interactionText.gameObject.SetActive(false);
         }

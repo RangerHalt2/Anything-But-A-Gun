@@ -185,7 +185,10 @@ public class WeaponClass : MonoBehaviour
 
         hasPackAPunch = true;
 
-        infoUI.SetInfo(this);
+        if (infoUI != null)
+        {
+            infoUI.SetInfo(this);
+        }
 
         WeaponHandler wh = GameObject.FindAnyObjectByType<WeaponHandler>();
         if (wh != null)
