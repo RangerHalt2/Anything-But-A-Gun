@@ -289,6 +289,28 @@ public class WeaponHandler : MonoBehaviour
         }
     }
 
+    public void ToggleCheats() //Enables/Disables unlimited ammo
+    {
+        if (!cheatsEnabled)
+        {
+            cheatsEnabled = true;
+            currentWeapon.GetComponent<AmmoManager>().reserveAmmo = -1;
+            currentWeapon.GetComponent<AmmoManager>().updateDisplay();
+        }
+        else 
+        {
+            cheatsEnabled = false;
+            foreach (var weapon in weapons)
+            {
+                if (weapon.GetComponent<AmmoManager>().reserveAmmo == -1 && weapon.name != starterWeapon.name)
+                {
+                    weapon.GetComponent<AmmoManager>().reserveAmmo = 20;
+                }
+            }
+            currentWeapon.GetComponent<AmmoManager>().updateDisplay();
+        }
+    }
+
     public void EmergencyChooseWeaponZero()
     {
         currentWeapon = weapons[0];

@@ -2,6 +2,7 @@
 // This is a script meant to track a game object's health
 using UnityEngine;
 using TMPro;
+using System.IO;
 
 public class Health : MonoBehaviour
 {
@@ -189,6 +190,12 @@ public class Health : MonoBehaviour
         Debug.Log(gameObject.name + " has died.");
         if (!isPlayer)
         {
+            EnemyType enemy = GetComponent<EnemyType>();
+            if (enemy != null)
+            {
+                KillTracker.Instance.RegisterKill(enemy.enemyId);
+            }
+
             if(style != null)
                 style.IncreaseScore(true, false); //EW: Added for the style gauge.
             playerLevel.AddEXP(EXPDrop);
@@ -203,10 +210,40 @@ public class Health : MonoBehaviour
                 UIManager.instance.TogglePause();
             }
             isDead = true;
-            gameOverCanvas.SetActive(true);
-            inGameCanvas.SetActive(false);
+            //gameOverCanvas.SetActive(true);
+            //inGameCanvas.SetActive(false);
             Cursor.lockState = CursorLockMode.None;
         }
+    }
+
+    // Allows you to set a new maximum health for an object while either maintaining their relative health or fully healing them.
+    public void setMaxHealth(float newMaxHealth, bool healToNewMax)
+    {
+        if (newMaxHealth <= 0)
+        {
+            Debug.LogWarning("Health: setMaxHealth cannot be less than or equal to 0.");
+            return;
+        }
+
+        // Storing old values for ratio calculation
+        float oldMaxHealth = maxHealth;
+        float healthRatio = (oldMaxHealth > 0) ? currentHealth / oldMaxHealth : 1f;
+
+        maxHealth = newMaxHealth;
+
+        // See if object should be fully healed
+        if (healToNewMax)
+        {
+            currentHealth = maxHealth;
+        }
+        else
+        {
+            // Maintain relative health
+            currentHealth = healthRatio * maxHealth;
+            currentHealth = Mathf.Clamp(currentHealth, 0f, maxHealth);
+        }
+
+        updateDisplay();
     }
 
     public void updateDisplay()
