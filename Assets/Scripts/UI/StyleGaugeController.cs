@@ -18,10 +18,14 @@ public class StyleGaugeController : MonoBehaviour
     [SerializeField] float playerDamageScoreSubtract; //Amount subtracted when the player takes damage.
     private float stall; //This is the timer that will count up to the scoreStallTimer value.
     [SerializeField] private Image scoreFill; //The fill portion of the style UI
+    [SerializeField] private GameObject totalGauge; //The full gauge for turning off and on.
+    [SerializeField] private GameObject gaugeVFX; //Same thing as last ^^^
 
 
     void Start() 
     {
+        totalGauge.SetActive(false);
+        gaugeVFX.SetActive(false);
         bWBoxVolume = GameObject.Find("BW Box Volume").GetComponent<Volume>();
         maxLevel = letter.Length - 1;
         bWBoxVolume.blendDistance = color[level];
@@ -51,6 +55,8 @@ public class StyleGaugeController : MonoBehaviour
         else if (score <= 0 && level == 0) 
         {
             score = 0;
+            totalGauge.SetActive(false);
+            gaugeVFX.SetActive(false);
         }
 
         if (score > difBetweenLevels && level < maxLevel) //Increase your level and change the letter (This will also be where filters are applied)
@@ -73,6 +79,12 @@ public class StyleGaugeController : MonoBehaviour
 
     public void IncreaseScore(bool enemyDeath, bool critHit) //When the player kills an enemy, or crits.
     {
+        if (!totalGauge.activeSelf) 
+        {
+            totalGauge.SetActive(true);
+            gaugeVFX.SetActive(true);
+        }
+
         stall = scoreStallTimer;
 
         if (enemyDeath)
