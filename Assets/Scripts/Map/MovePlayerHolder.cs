@@ -22,6 +22,8 @@ public class MovePlayerHolder : MonoBehaviour
 
     private IEnumerator LateStart(PlayerController controller)
     {
+        yield return new WaitForSeconds(0.2f);
+
         playerHolder = controller.transform;
 
         CharacterController cc = controller.GetComponent<CharacterController>();
@@ -34,6 +36,5 @@ public class MovePlayerHolder : MonoBehaviour
         playerHolder.position = transform.position;
         cc.enabled = true;
         controller.isSpawned = true;
-        yield return new WaitForSeconds(0.2f);
     }
 }
