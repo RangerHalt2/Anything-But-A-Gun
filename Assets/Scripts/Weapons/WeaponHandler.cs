@@ -257,7 +257,8 @@ public class WeaponHandler : MonoBehaviour
 
         dropWeapon.layer = LayerMask.NameToLayer("Interactable");
 
-        dropWeapon.GetComponentInChildren<FloatAndRotate>().StartFloatAndRotate();
+        if(dropWeapon.GetComponent<FloatAndRotate>() != null)
+            dropWeapon.GetComponentInChildren<FloatAndRotate>().StartFloatAndRotate();
 
         if (cheatsEnabled)
         {

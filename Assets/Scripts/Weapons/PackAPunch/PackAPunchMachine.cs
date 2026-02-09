@@ -38,9 +38,14 @@ public class PackAPunchMachine : MonoBehaviour, IInteractable
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.layer == LayerMask.NameToLayer("Interactable"))
+        
+    }
+
+    private void OnCollisionStay(Collision collision)
+    {
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Interactable"))
         {
-            WeaponClass wc = other.gameObject.GetComponent<WeaponClass>();
+            WeaponClass wc = collision.gameObject.GetComponent<WeaponClass>();
             if (wc != null && placeWeaponLocation != null)
             {
                 wc.gameObject.transform.position = placeWeaponLocation.transform.position;
@@ -55,6 +60,15 @@ public class PackAPunchMachine : MonoBehaviour, IInteractable
             PlayerController pc = other.gameObject.GetComponent<PlayerController>();
 
             pc.CheckInteract();
+        }
+
+        if (other.gameObject.layer == LayerMask.NameToLayer("Interactable"))
+        {
+            WeaponClass wc = other.gameObject.GetComponent<WeaponClass>();
+            if (wc != null && placeWeaponLocation != null)
+            {
+                wc.gameObject.transform.position = placeWeaponLocation.transform.position;
+            }
         }
     }
 

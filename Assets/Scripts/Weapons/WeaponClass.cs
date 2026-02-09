@@ -224,6 +224,14 @@ public class WeaponClass : MonoBehaviour
     private void Awake()
     {
 
+        if (weaponInfoPanel != null)
+        {
+            // Find the reference to the weaponInfoUI script
+            infoUI = weaponInfoPanel.GetComponent<WeaponInfoUI>();
+            // Disable the info panel on startup
+            weaponInfoPanel.SetActive(false);
+        }
+
         /*
         //Debug.LogError("Length " + acceptablePackAPunchComponents.Length);
         components = new Type[acceptablePackAPunchComponents.Length];
