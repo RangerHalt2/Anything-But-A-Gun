@@ -40,7 +40,22 @@ public class PaperAirplaneWeaponScript : WeaponClass
 
                     }
                 }
-       
+            else if (ammoManager != null)
+            {
+                if (ammoManager.GetReserveAmmo() > 0 || ammoManager.GetReserveAmmo() == -1)
+                {
+                    ammoManager.ReloadWeapon();
+                }
+                else
+                {
+                    if (clickEffect != null && clickTimer <= 0)
+                    {
+                        clickTimer = clickCooldown;
+                        Instantiate(clickEffect, transform.position, transform.rotation, null);
+                    }
+                }
+            }
+
         }
 
     }

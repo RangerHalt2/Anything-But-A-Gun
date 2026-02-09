@@ -13,9 +13,8 @@ public class CactusScript : WeaponClass
 
     //Logan: This needs a prefab, ryan has a test one and I also made a test one, it allows us to spawn a noise basically and have it play
     //       Cooldown is there so it doesn't spam it per tick.
-    private float clickCooldown = 0.5f;
-    private float clickTimer = 0;
-    [SerializeField] private GameObject clickEffect;
+    //private float clickCooldown = 0.5f;
+    //private float clickTimer = 0;
     //[SerializeField] private GameObject gunShot;
 
     public override void Shoot()
@@ -52,13 +51,20 @@ public class CactusScript : WeaponClass
                     // Update lastFired
                     lastFired = Time.timeSinceLevelLoad;
                 }
-            }
-            else
-            {
-                if (clickEffect != null && clickTimer <= 0)
+                else if (ammoManager != null)
                 {
-                    clickTimer = clickCooldown;
-                    Instantiate(clickEffect, transform.position, transform.rotation, null);
+                    if (ammoManager.GetReserveAmmo() > 0 || ammoManager.GetReserveAmmo() == -1)
+                    {
+                        ammoManager.ReloadWeapon();
+                    }
+                    else
+                    {
+                        if (clickEffect != null && clickTimer <= 0)
+                        {
+                            clickTimer = clickCooldown;
+                            Instantiate(clickEffect, transform.position, transform.rotation, null);
+                        }
+                    }
                 }
             }
         }

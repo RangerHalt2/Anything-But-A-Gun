@@ -21,9 +21,8 @@ public class LaserScript : WeaponClass
 
     //Logan: This needs a prefab, ryan has a test one and I also made a test one, it allows us to spawn a noise basically and have it play
     //       Cooldown is there so it doesn't spam it per tick.
-    private float clickCooldown = 0.5f;
-    private float clickTimer = 0;
-    [SerializeField] private GameObject clickEffect;
+    //private float clickCooldown = 0.5f;
+    //private float clickTimer = 0;
     //[SerializeField] private GameObject gunShot;
 
     public override void Shoot()
@@ -64,12 +63,19 @@ public class LaserScript : WeaponClass
                         lastFired = Time.timeSinceLevelLoad;
                     }
                 }
-                else
+                else if (ammoManager != null)
                 {
-                    if (clickEffect != null && clickTimer <= 0)
+                    if (ammoManager.GetReserveAmmo() > 0 || ammoManager.GetReserveAmmo() == -1)
                     {
-                        clickTimer = clickCooldown;
-                        Instantiate(clickEffect, transform.position, transform.rotation, null);
+                        ammoManager.ReloadWeapon();
+                    }
+                    else
+                    {
+                        if (clickEffect != null && clickTimer <= 0)
+                        {
+                            clickTimer = clickCooldown;
+                            Instantiate(clickEffect, transform.position, transform.rotation, null);
+                        }
                     }
                 }
             }
