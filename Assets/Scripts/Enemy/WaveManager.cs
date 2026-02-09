@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 using System.Collections.Generic;
 
 public class WaveManager : MonoBehaviour
@@ -9,6 +10,7 @@ public class WaveManager : MonoBehaviour
     [SerializeField] private float checkRadius = 50f;
     [SerializeField] private int maxWaves = 3;
     [SerializeField] private float checkInterval = 5f;
+    [SerializeField] private float waveInterval = 10f;
 
     [Header("Player Detection")]
     [SerializeField] private LayerMask playerLayer;
@@ -44,37 +46,39 @@ public class WaveManager : MonoBehaviour
         if (active) return;
 
         active = true;
-        StartNextWave();
-        InvokeRepeating(nameof(CheckEnemiesAlive), checkInterval, checkInterval);
+        StartCoroutine(SpawnWaves());
+        InvokeRepeating(nameof(CheckAllEnemiesDead), checkInterval, checkInterval);
     }
 
-    void StartNextWave()
+    private IEnumerator SpawnWaves()
     {
-        if (currentWave >= maxWaves)
+        while (currentWave < maxWaves)
         {
-            Debug.Log("All waves completed");
-            CancelInvoke(nameof(CheckEnemiesAlive));
+            currentWave++;
+            Debug.Log($"WaveManager: Spawning Wave {currentWave}");
 
-            Destroy(objectToDestroy, destroyDelay);
-            return;
+            foreach (EnemySpawner spawner in spawners)
+            {
+                spawner.ResetSpawner();
+                spawner.SpawnEnemies();
+            }
+
+            yield return new WaitForSeconds(waveInterval);
         }
 
-        currentWave++;
-        Debug.Log($"Starting Wave {currentWave}");
-
-        foreach (EnemySpawner spawner in spawners)
-        {
-            spawner.ResetSpawner();
-            spawner.SpawnEnemies();
-        }
+        Debug.Log("WaveManager: All waves spawned");
     }
 
-    void CheckEnemiesAlive()
+    void CheckAllEnemiesDead()
     {
         int enemyCount = Physics.OverlapSphere(transform.position, checkRadius, enemyLayer).Length;
 
         if (enemyCount == 0)
-            StartNextWave();
+        {
+            Debug.Log("WaveManager: All enemies defeated. Destroying door.");
+            CancelInvoke(nameof(CheckAllEnemiesDead));
+            Destroy(objectToDestroy, destroyDelay);
+        }
     }
 
     void OnDrawGizmos()

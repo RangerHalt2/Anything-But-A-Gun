@@ -13,6 +13,10 @@ public class BossAbilities : MonoBehaviour
     public float timeBetweenWaves = 0.5f;
     public Vector3 initialScale = Vector3.one;
 
+    [Header("Missile Settings")]
+    public GameObject missilePrefab;
+    public float missileSpacing = 2f;
+
     [Header("Player Reference")]
     [SerializeField] private Transform player;
 
@@ -41,7 +45,7 @@ public class BossAbilities : MonoBehaviour
                     yield return StartCoroutine(ShockwaveAttack());
                     break;
                 case 1:
-                    AbilityTwo();
+                    MissileStrike();
                     break;
                 case 2:
                     AbilityThree();
@@ -91,9 +95,57 @@ public class BossAbilities : MonoBehaviour
         }
     }
 
-    void AbilityTwo()
+    void MissileStrike()
     {
-        Debug.Log("BossAbilities: Ability Two triggered");
+        if (player == null)
+        {
+            Debug.LogError("BossAbilities: Player reference not assigned!");
+            return;
+        }
+
+        Vector3[] offsets = new Vector3[]
+        {
+            new Vector3(-missileSpacing, 0, missileSpacing),
+            new Vector3(0, 0, missileSpacing),
+            new Vector3(missileSpacing, 0, missileSpacing),
+
+            new Vector3(-missileSpacing / 2f, 0, 0),
+            new Vector3(missileSpacing / 2f, 0, 0),
+
+            new Vector3(-missileSpacing, 0, -missileSpacing),
+            new Vector3(0, 0, -missileSpacing),
+            new Vector3(missileSpacing, 0, -missileSpacing)
+        };
+
+        Vector3 centerPosition = player.position;
+
+        foreach (Vector3 offset in offsets)
+        {
+            Vector3 spawnPos = centerPosition + offset;
+            SpawnMissileOnGround(spawnPos);
+        }
+
+        Debug.Log("BossAbilities: Missile Strike triggered!");
+    }
+
+    void SpawnMissileOnGround(Vector3 position)
+    {
+        if (missilePrefab == null)
+        {
+            Debug.LogError("BossAbilities: Missile prefab not assigned!");
+            return;
+        }
+
+        RaycastHit hit;
+        if (Physics.Raycast(position + Vector3.up * 10f, Vector3.down, out hit, 20f))
+        {
+            Vector3 spawnPosition = hit.point;
+            Instantiate(missilePrefab, spawnPosition, Quaternion.identity);
+        }
+        else
+        {
+            Debug.LogWarning("BossAbilities: No ground found at position " + position);
+        }
     }
 
     void AbilityThree()
