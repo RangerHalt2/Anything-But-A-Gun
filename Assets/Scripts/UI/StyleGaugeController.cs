@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.Rendering;
+using UnityEngine.UI;
 
 public class StyleGaugeController : MonoBehaviour
 {
@@ -16,6 +17,8 @@ public class StyleGaugeController : MonoBehaviour
     [SerializeField] float enemyDeathScoreAdd; //Amount added if the player kills an enemy. (Later we can make this different for each enemy if we want)
     [SerializeField] float playerDamageScoreSubtract; //Amount subtracted when the player takes damage.
     private float stall; //This is the timer that will count up to the scoreStallTimer value.
+    [SerializeField] private Image scoreFill; //The fill portion of the style UI
+
 
     void Start() 
     {
@@ -62,6 +65,10 @@ public class StyleGaugeController : MonoBehaviour
         { 
             score = difBetweenLevels;
         }
+
+        // Set the slider's value to the current percentage of health the object has
+        float fillPercent = Mathf.Clamp01(score / difBetweenLevels);
+        scoreFill.fillAmount = fillPercent;
     }
 
     public void IncreaseScore(bool enemyDeath, bool critHit) //When the player kills an enemy, or crits.
