@@ -26,13 +26,6 @@ public class Hitscan : MonoBehaviour, IWeaponLevel
     [SerializeField] private float critMult;
     [Space]
 
-    [Space]
-    [Tooltip("Determines whether or not the projectile can deal bonus damage for hitting an enemy's weakpoint.")]
-    [SerializeField] private bool canCrit;
-    [Tooltip("A multiplier added to a weapon's damage when hitting a weakpoint.")]
-    [SerializeField] private float critMult;
-    [Space]
-
     [SerializeField] private LayerMask ignoreThese;
 
     [Header("Spread & Range Settings")]

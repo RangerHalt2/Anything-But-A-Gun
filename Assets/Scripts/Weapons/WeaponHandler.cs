@@ -22,6 +22,8 @@ public class WeaponHandler : MonoBehaviour
     [SerializeField] private float weaponSwitchRate = 0.3f;
     private float lastSwitch = Mathf.NegativeInfinity;
 
+    private float timer = 0;
+
     [SerializeField] private Transform gunHolder;
 
     [Header("Cheat Settings")]
@@ -48,6 +50,7 @@ public class WeaponHandler : MonoBehaviour
             currentWeapon.transform.position = weaponLocation.position;
         }
         SwitchGun();
+        timer  -= Time.deltaTime;
     }
 
     public void FireWeapon()
@@ -62,6 +65,7 @@ public class WeaponHandler : MonoBehaviour
 
     void SwitchGun() //When the player want's to rotate to a different weapon in their wheel
     {
+        Debug.Log("WEAPON HANDLER - Switch Gun Function Start");
         if (inputManager != null)
         {
             scrollValue = inputManager.scrollAction.ReadValue<float>();
@@ -87,9 +91,11 @@ public class WeaponHandler : MonoBehaviour
             return;
         }
 
+        Debug.Log("WEAPON HANDLER - Passed all NULL checks");
+
         // If enough time has passed since the last round was fired
 
-        if ((Time.timeSinceLevelLoad - lastSwitch) > weaponSwitchRate)
+        if (timer <= 0)
         {
             if (weapons.Count > 1 && (scrollValue != 0 || inputManager.NextInput != 0) && !currentWeapon.GetComponent<AmmoManager>().IsReloading())
             {
@@ -139,7 +145,7 @@ public class WeaponHandler : MonoBehaviour
 
             }
 
-            lastSwitch = Time.timeSinceLevelLoad;
+            timer = weaponSwitchRate;
         }
 
         if (currentWeapon.activeSelf == false)
@@ -289,27 +295,6 @@ public class WeaponHandler : MonoBehaviour
         }
     }
 
-    public void ToggleCheats() //Enables/Disables unlimited ammo
-    {
-        if (!cheatsEnabled)
-        {
-            cheatsEnabled = true;
-            currentWeapon.GetComponent<AmmoManager>().reserveAmmo = -1;
-            currentWeapon.GetComponent<AmmoManager>().updateDisplay();
-        }
-        else 
-        {
-            cheatsEnabled = false;
-            foreach (var weapon in weapons)
-            {
-                if (weapon.GetComponent<AmmoManager>().reserveAmmo == -1 && weapon.name != starterWeapon.name)
-                {
-                    weapon.GetComponent<AmmoManager>().reserveAmmo = 20;
-                }
-            }
-            currentWeapon.GetComponent<AmmoManager>().updateDisplay();
-        }
-    }
 
     public void EmergencyChooseWeaponZero()
     {
