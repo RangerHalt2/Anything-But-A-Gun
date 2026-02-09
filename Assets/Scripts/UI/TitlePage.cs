@@ -15,7 +15,10 @@ public class TitlePage : MonoBehaviour
             Destroy(controller.gameObject);
         }
 
+        GameObject canvas = GameObject.Find("Master Canvas");
+
         SceneManager.LoadScene("Level Gen 2");
+        Destroy(canvas);
     }
     public void QuitGame()
     {
