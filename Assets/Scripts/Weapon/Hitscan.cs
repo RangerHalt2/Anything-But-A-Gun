@@ -54,6 +54,10 @@ public class Hitscan : MonoBehaviour, IWeaponLevel
     [Tooltip("The trail left by \"Bullets\"")]
     [SerializeField] private TrailRenderer bulletTrail;
     [SerializeField] private LineRenderer lineRenderer;
+    [SerializeField] private Transform trailSpawnPoint;
+
+    private bool firedThisFrame = false;
+
     #endregion
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -90,7 +94,7 @@ public class Hitscan : MonoBehaviour, IWeaponLevel
         // While the bullet is allowed to continue ricocheting
         while (remainingDistance > 0)
         {
-            Ray ray = new Ray(bulletSpawnPoint.position, direction);
+            Ray ray = new Ray(origin, direction);
             RaycastHit hit;
 
             if (Physics.Raycast(ray, out hit, remainingDistance, ignoreThese))
@@ -110,13 +114,13 @@ public class Hitscan : MonoBehaviour, IWeaponLevel
                 // If a bulletTrail has been assinged, play it
                 if (bulletTrail != null)
                 {
-                    TrailRenderer trail = Instantiate(bulletTrail, origin, Quaternion.identity);
+                    TrailRenderer trail = Instantiate(bulletTrail, trailSpawnPoint != null ? trailSpawnPoint.position : origin, Quaternion.identity);
                     StartCoroutine(SpawnTrail(trail, hitPoint));
                 }
 
                 if(lineRenderer != null)
                 {
-                    LineRenderer line = Instantiate(lineRenderer, origin, Quaternion.identity);
+                    LineRenderer line = Instantiate(lineRenderer, trailSpawnPoint != null ? trailSpawnPoint.position : origin, Quaternion.identity);
                     StartCoroutine(SpawnLine(line, hitPoint));
                 }
 
@@ -171,13 +175,13 @@ public class Hitscan : MonoBehaviour, IWeaponLevel
 
                 if (bulletTrail != null)
                 {
-                    TrailRenderer trail = Instantiate(bulletTrail, origin, Quaternion.identity);
+                    TrailRenderer trail = Instantiate(bulletTrail, trailSpawnPoint != null ? trailSpawnPoint.position : origin, Quaternion.identity);
                     StartCoroutine(SpawnTrail(trail, hitPoint));
                 }
 
-                if (lineRenderer != null)
+                if(lineRenderer != null)
                 {
-                    LineRenderer line = Instantiate(lineRenderer, origin, Quaternion.identity);
+                    LineRenderer line = Instantiate(lineRenderer, trailSpawnPoint != null ? trailSpawnPoint.position : origin, Quaternion.identity);
                     StartCoroutine(SpawnLine(line, hitPoint));
                 }
 
@@ -185,6 +189,9 @@ public class Hitscan : MonoBehaviour, IWeaponLevel
             }
         }
     }
+
+    void ResetFire() => firedThisFrame = false;
+
 
     private IEnumerator SpawnTrail(TrailRenderer trail, Vector3 hitPoint)
     {
@@ -206,6 +213,8 @@ public class Hitscan : MonoBehaviour, IWeaponLevel
 
     private IEnumerator SpawnLine(LineRenderer line, Vector3 hitPoint)
     {
+        line.useWorldSpace = true;
+
         Vector3 startPosition = line.transform.position;
 
         line.positionCount = 2;
