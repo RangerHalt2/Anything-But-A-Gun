@@ -26,6 +26,8 @@ public class BrushScript : WeaponClass
     [SerializeField] private Transform gunShotTrans;
     [SerializeField] private AudioClip brushSFX;
 
+    private float timer = 0f;
+
     private void Start()
     {
         weaponLevelRef = GetComponent<WeaponLevel>();
@@ -35,7 +37,7 @@ public class BrushScript : WeaponClass
     public override void Shoot()
     {
         // If enough time has passed since the last round was fired
-        if ((Time.timeSinceLevelLoad - lastFired) > fireRate)
+        if (timer <= 0)
         {
             Debug.Log("Shooting weapon");
             // If there is an assigned ammo manager, and that ammo manager has at least one round of ammo loaded
@@ -64,7 +66,7 @@ public class BrushScript : WeaponClass
                         SpawnProjectile();
                     }
                     // Update lastFired
-                    lastFired = Time.timeSinceLevelLoad;
+                    timer = fireRate;
                 }
                 else if (ammoManager != null)
                 {

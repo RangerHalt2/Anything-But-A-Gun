@@ -14,6 +14,8 @@ public class JoustingHorseScript : WeaponClass
     private float pcBaseSpeed;
     public bool JOUSTING = false;
 
+    private float timer = 0f;
+
     private WeaponLevel weaponLevelRef;
 
     void Start()
@@ -30,7 +32,7 @@ public class JoustingHorseScript : WeaponClass
     public override void Shoot()
     {
         // If enough time has passed since the last round was fired
-        if ((Time.timeSinceLevelLoad - lastFired) > fireRate)
+        if (timer <= 0)
         {
                 // If there is an assigned ammo manager, and that ammo manager has at least one round of ammo loaded
             if (ammoManager != null && ammoManager.GetCurrentAmmo() > 0)
@@ -52,7 +54,7 @@ public class JoustingHorseScript : WeaponClass
 
                     StartCoroutine(JOUST());
                     // Update lastFired
-                    lastFired = Time.timeSinceLevelLoad;
+                    timer = fireRate;
                 }
             }
             else if (ammoManager != null)

@@ -20,10 +20,12 @@ public class CameraWeaponScript : WeaponClass
     private List<GameObject> enemiesInRange = new List<GameObject>();
     //[SerializeField] private GameObject gunShot;
 
+    private float timer = 0f;
+
     public override void Shoot() //Haha, because camera?
     {
         // If enough time has passed since the last round was fired
-        if ((Time.timeSinceLevelLoad - lastFired) > fireRate)
+        if (timer <= 0)
         {
             // If there is an assigned ammo manager, and that ammo manager has at least one round of ammo loaded
             if (ammoManager != null && ammoManager.GetCurrentAmmo() > 0)
@@ -36,7 +38,7 @@ public class CameraWeaponScript : WeaponClass
                         SnapCamera();
                         Instantiate(flashVFX, transform.position, transform.rotation, null);
                     // Update lastFired
-                    lastFired = Time.timeSinceLevelLoad;
+                    timer = fireRate;
                 }
             }
             else if (ammoManager != null)

@@ -13,6 +13,8 @@ public class KnightWeaponScript : WeaponClass
 
     private WeaponLevel weaponLevelRef;
 
+    private float timer = 0f;
+
     private void Start()
     {
         weaponLevelRef = GetComponent<WeaponLevel>();
@@ -21,7 +23,7 @@ public class KnightWeaponScript : WeaponClass
     public override void Shoot()
     {
         // If enough time has passed since the last round was fired
-        if ((Time.timeSinceLevelLoad - lastFired) > fireRate)
+        if (timer <= 0)
         {
                 // If there is an assigned ammo manager, and that ammo manager has at least one round of ammo loaded
                 if (ammoManager != null && ammoManager.GetCurrentAmmo() > 0)
@@ -37,7 +39,7 @@ public class KnightWeaponScript : WeaponClass
                             SpawnProjectile();
                         }
                         // Update lastFired
-                        lastFired = Time.timeSinceLevelLoad;
+                        timer = fireRate;
 
                     }
                 }

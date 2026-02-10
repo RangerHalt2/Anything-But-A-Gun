@@ -10,6 +10,8 @@ public class OfficeCatScript : WeaponClass
     [SerializeField] private Transform projectileSpawnPoint;
     //private float lastFired = Mathf.NegativeInfinity;
 
+    private float timer = 0f;
+
     private WeaponLevel weaponLevelRef;
 
     private void Start()
