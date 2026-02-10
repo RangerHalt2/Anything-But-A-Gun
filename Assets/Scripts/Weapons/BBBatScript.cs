@@ -5,28 +5,66 @@ public class BBBatScript : WeaponClass
 {
     //[SerializeField] public int level {get; set;}
 
-    [SerializeField] private int health = 10; //Health of the melee weapon
+    //[SerializeField] private int health = 10; //Health of the melee weapon
     [SerializeField] private int teamID;
+    private int health = 10;
+    private bool striking = false;
     //[SerializeField] private float baseDamage = 15f;
     [SerializeField] private float growthRate = 1.15f;
     //private float cummulativeDamage;
-    private bool striking = false;
+    //private bool striking = false;
     private Health enemyHealth;
     //private AmmoManager ammoManager;
     //private WeaponLevel currentWeaponLevel;
     //[SerializeField] private GameObject whackEffect;
+    private WeaponCollectScript wcs;
+    private WeaponHandler wh;
+    private Projectile proj;
+    private Collider col;
 
     [Tooltip("This is a sort of back-end buffer time to how frequently the player can hit the enemy with the baseball bat")]
     [SerializeField] private float attackCooldownBuffer = 0.5f;
     private float attackTimer = 0;
+    private bool throwing = false;
 
     private void Start()
     {
+        //proj = GetComponent<Projectile>();
+        wcs = GetComponent<WeaponCollectScript>();
+        wh = GetComponentInParent<WeaponHandler>();
         ammoManager = GetComponent<AmmoManager>();
         weaponLevel = GetComponent<WeaponLevel>();
+        col = GetComponent<Collider>();
         if(weaponLevel != null)
             UpdateLevelDamage();
     }
+    //This is me trying to make a new BBBat script working.
+    /*private void Update() 
+    {
+        if (wcs.collected)
+        {
+            col.enabled = false;
+        }
+        else if (!throwing)
+        {
+            col.enabled = true;
+        }
+    }
+
+    public override void Shoot()
+    {
+        if (!throwing) 
+        {
+            throwing = true;
+            ThorsMight(); 
+        }
+    }
+
+    void ThorsMight() 
+    {
+        wh.DropWeapon(gameObject);
+        proj.enabled = true;
+    }*/
 
     void Update()
     {

@@ -55,8 +55,10 @@ public class StyleGaugeController : MonoBehaviour
         else if (score <= 0 && level == 0) 
         {
             score = 0;
-            totalGauge.SetActive(false);
-            gaugeVFX.SetActive(false);
+            if(totalGauge != null)
+                totalGauge.SetActive(false);
+            if(gaugeVFX != null)
+                gaugeVFX.SetActive(false);
         }
 
         if (score > difBetweenLevels && level < maxLevel) //Increase your level and change the letter (This will also be where filters are applied)
@@ -81,8 +83,10 @@ public class StyleGaugeController : MonoBehaviour
     {
         if (!totalGauge.activeSelf) 
         {
-            totalGauge.SetActive(true);
-            gaugeVFX.SetActive(true);
+            if(totalGauge != null)
+                totalGauge.SetActive(true);
+            if(gaugeVFX != null)
+                gaugeVFX.SetActive(true);
         }
 
         stall = scoreStallTimer;
