@@ -107,6 +107,7 @@ public class LaserScript : WeaponClass
         {
             overheated = false;
         }
+        timer -= Time.deltaTime;
 
     }
 
