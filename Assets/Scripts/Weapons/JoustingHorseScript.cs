@@ -75,12 +75,6 @@ public class JoustingHorseScript : WeaponClass
 
         }
     }
-
-    private void Update()
-    {
-        timer -= Time.deltaTime;
-    }
-
     private void OnDisable()
     {
         StopCoroutine(JOUST());
@@ -101,6 +95,8 @@ public class JoustingHorseScript : WeaponClass
 
     void Update() 
     {
+        timer -= Time.deltaTime;
+
         if (JOUSTING) 
         {
             pc.movementSpeed += pcBaseSpeed * joustSpeedMultiplier * Time.deltaTime * 0.1f;
