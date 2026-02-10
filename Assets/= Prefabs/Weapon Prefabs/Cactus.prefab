@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 629687148059011471}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.062, y: 0.33169985, z: -0.155}
+  m_LocalPosition: {x: 0, y: 0.0685, z: 0.0101}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -159,6 +159,8 @@ MonoBehaviour:
   shootingSystem: {fileID: 0}
   impactSystem: {fileID: 0}
   bulletTrail: {fileID: 6916985597012422058, guid: 23c81b4dd187f454b8d47e3f836410b4, type: 3}
+  lineRenderer: {fileID: 0}
+  trailSpawnPoint: {fileID: 0}
 --- !u!114 &785455090434947426
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -231,6 +233,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CactusScript
   ammoManager: {fileID: 785455090434947426}
   gunShot: {fileID: 5383701307693267320, guid: 5dcf3c15003edf94f8dcf5208f138c04, type: 3}
+  clickEffect: {fileID: 9061005177392946849, guid: 3a22977f8fecec540ac19600cc354706, type: 3}
+  clickCooldown: 0.5
+  clickTimer: 0
   projectilePrefab: {fileID: 0}
   lastFired: -Infinity
   weaponInterface: {fileID: 5281992545741624872}
@@ -254,7 +259,6 @@ MonoBehaviour:
   acceptablePackAPunchOptions:
   - {fileID: 11400000, guid: 400b49d056ae7e44fafc9f2feebd7aca, type: 2}
   hitscan: {fileID: 3161134012043242097}
-  clickEffect: {fileID: 9061005177392946849, guid: 3a22977f8fecec540ac19600cc354706, type: 3}
 --- !u!114 &4032989489154535396
 MonoBehaviour:
   m_ObjectHideFlags: 0
