@@ -22,7 +22,7 @@ public class OfficeCatScript : WeaponClass
     public override void Shoot()
     {
         // If enough time has passed since the last round was fired
-        if ((Time.timeSinceLevelLoad - lastFired) > fireRate)
+        if (timer <= 0)
         {
                 // If there is an assigned ammo manager, and that ammo manager has at least one round of ammo loaded
                 if (ammoManager != null && ammoManager.GetCurrentAmmo() > 0)
@@ -38,7 +38,7 @@ public class OfficeCatScript : WeaponClass
                             SpawnProjectile();
                         }
                         // Update lastFired
-                        lastFired = Time.timeSinceLevelLoad;
+                        timer = fireRate;
 
                     }
                 }

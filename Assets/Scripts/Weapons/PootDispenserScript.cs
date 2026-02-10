@@ -10,6 +10,8 @@ public class PootDispenserScript : WeaponClass
     [SerializeField] private Transform projectileSpawnPoint;
     //private float lastFired = Mathf.NegativeInfinity;
 
+    private float timer = 0f;
+
     private WeaponLevel weaponLevelRef;
 
     private void Start()
@@ -21,7 +23,7 @@ public class PootDispenserScript : WeaponClass
     public void Shoot()
     {
         // If enough time has passed since the last round was fired
-        if ((Time.timeSinceLevelLoad - lastFired) > fireRate)
+        if (timer <= 0)
         {
                 // If there is an assigned ammo manager, and that ammo manager has at least one round of ammo loaded
                 if (ammoManager != null && ammoManager.GetCurrentAmmo() > 0)
@@ -37,11 +39,10 @@ public class PootDispenserScript : WeaponClass
                             SpawnProjectile();
                         }
                         // Update lastFired
-                        lastFired = Time.timeSinceLevelLoad;
+                        timer = fireRate;
 
                     }
                 }
-
             else if (ammoManager != null)
             {
                 if (ammoManager.GetReserveAmmo() > 0 || ammoManager.GetReserveAmmo() == -1)
