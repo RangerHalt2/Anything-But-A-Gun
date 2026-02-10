@@ -65,7 +65,7 @@ public class WeaponHandler : MonoBehaviour
 
     void SwitchGun() //When the player want's to rotate to a different weapon in their wheel
     {
-        Debug.Log("WEAPON HANDLER - Switch Gun Function Start");
+        //Debug.Log("WEAPON HANDLER - Switch Gun Function Start");
         if (inputManager != null)
         {
             scrollValue = inputManager.scrollAction.ReadValue<float>();
@@ -91,7 +91,7 @@ public class WeaponHandler : MonoBehaviour
             return;
         }
 
-        Debug.Log("WEAPON HANDLER - Passed all NULL checks");
+        //Debug.Log("WEAPON HANDLER - Passed all NULL checks");
 
         // If enough time has passed since the last round was fired
 

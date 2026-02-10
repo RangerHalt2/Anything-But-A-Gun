@@ -53,6 +53,7 @@ public class Hitscan : MonoBehaviour, IWeaponLevel
     [SerializeField] private ParticleSystem impactSystem;
     [Tooltip("The trail left by \"Bullets\"")]
     [SerializeField] private TrailRenderer bulletTrail;
+    [SerializeField] private LineRenderer lineRenderer;
     #endregion
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -113,6 +114,12 @@ public class Hitscan : MonoBehaviour, IWeaponLevel
                     StartCoroutine(SpawnTrail(trail, hitPoint));
                 }
 
+                if(lineRenderer != null)
+                {
+                    LineRenderer line = Instantiate(lineRenderer, origin, Quaternion.identity);
+                    StartCoroutine(SpawnLine(line, hitPoint));
+                }
+
                 // Deal damage to target object // MG - Grab the parent of the object with the Head and Body colliders 
                 Health targetHealth = hit.collider.GetComponentInParent<Health>();
                 // If the target object has a health component and the teamID is different than the one assigned to the weapon
@@ -168,6 +175,12 @@ public class Hitscan : MonoBehaviour, IWeaponLevel
                     StartCoroutine(SpawnTrail(trail, hitPoint));
                 }
 
+                if (lineRenderer != null)
+                {
+                    LineRenderer line = Instantiate(lineRenderer, origin, Quaternion.identity);
+                    StartCoroutine(SpawnLine(line, hitPoint));
+                }
+
                 break;
             }
         }
@@ -189,6 +202,21 @@ public class Hitscan : MonoBehaviour, IWeaponLevel
         trail.transform.position = hitPoint;
 
         Destroy(trail.gameObject, trail.time);
+    }
+
+    private IEnumerator SpawnLine(LineRenderer line, Vector3 hitPoint)
+    {
+        Vector3 startPosition = line.transform.position;
+
+        line.positionCount = 2;
+        line.SetPosition(0, startPosition);
+        line.SetPosition(1, hitPoint);
+
+        // Optional: small lifetime
+        float lifetime = 0.05f;
+        yield return new WaitForSeconds(lifetime);
+
+        Destroy(line.gameObject);
     }
 
     //Calculates the cummulativeDamage that the weapon should do, this function should be called on the weapon levelling up.
