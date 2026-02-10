@@ -30,6 +30,8 @@ public class VolleyBallScript : WeaponClass
         playerController = GameObject.FindAnyObjectByType<PlayerController>();
     }
 
+
+
     //If the player is not reloading and this function is called it should check if the character controller is grounded and spawn the correct projectile
     public override void Shoot()
     {

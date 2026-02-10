@@ -34,6 +34,11 @@ public class BrushScript : WeaponClass
         playerRef = GameObject.FindAnyObjectByType<PlayerController>();
     }
 
+    private void Update()
+    {
+        timer -= Time.deltaTime;
+    }
+
     public override void Shoot()
     {
         // If enough time has passed since the last round was fired

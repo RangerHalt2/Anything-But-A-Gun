@@ -68,6 +68,11 @@ public class LavaLampScript : WeaponClass
 
     }
 
+    private void Update()
+    {
+        timer -= Time.deltaTime;
+    }
+
     /*public void Reload()
     {
         if (ammoManager.GetReserveAmmo() > 0 || ammoManager.GetReserveAmmo() == -1) 

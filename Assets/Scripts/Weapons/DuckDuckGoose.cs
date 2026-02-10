@@ -25,6 +25,11 @@ public class DuckDuckGoose : WeaponClass
         weaponLevelRef = GetComponent<WeaponLevel>();
     }
 
+    private void Update()
+    {
+        timer -= Time.deltaTime;
+    }
+
     public override void Shoot()
     {
         if (timer < 0)

@@ -62,6 +62,11 @@ public class PootDispenserScript : WeaponClass
 
     }
 
+    private void Update()
+    {
+        timer -= Time.deltaTime;
+    }
+
     override
     public void Reload()
     {

@@ -76,6 +76,11 @@ public class JoustingHorseScript : WeaponClass
         }
     }
 
+    private void Update()
+    {
+        timer -= Time.deltaTime;
+    }
+
     private void OnDisable()
     {
         StopCoroutine(JOUST());

@@ -83,5 +83,6 @@ public class CactusScript : WeaponClass
     private void Update()
     {
         clickTimer -= Time.deltaTime;
+        timer -= Time.deltaTime;
     }
 }

@@ -101,6 +101,10 @@ public class CameraWeaponScript : WeaponClass
         }
     }
 
+    private void Update()
+    {
+        timer -= Time.deltaTime;
+    }
     public void SetWeaponLevelReference(WeaponLevel weaponLevel)
     {
         currentWeaponLevel = weaponLevel;
