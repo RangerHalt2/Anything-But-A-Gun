@@ -211,8 +211,8 @@ public class Projectile : MonoBehaviour, IWeaponLevel
             DoDamage(health);
         }
 
-        // Only destroy on impact if wall behavior is Impact 
-        if (collider.gameObject.CompareTag("Wall") && wallBehavior == WallBehavior.Impact)
+        // Only destroy on impact if wall behavior is Impact EW: Added !unique to make unique weapons not destroy when in contact with the wall.
+        if (collider.gameObject.CompareTag("Wall") && wallBehavior == WallBehavior.Impact && !unique)
         {
             Destroy(gameObject);
         }

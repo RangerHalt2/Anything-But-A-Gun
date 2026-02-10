@@ -5,6 +5,7 @@ using System.Collections.Generic;
 
 public class BlackholeScript : MonoBehaviour, IWeaponLevel
 {
+
     public float targetScale = 5.0f; // Max projectile growth
     public float growthSpeed = 0.65f; // How fast the projectile grows per second
 
