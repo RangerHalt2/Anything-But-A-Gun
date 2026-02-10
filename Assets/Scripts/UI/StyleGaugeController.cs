@@ -20,6 +20,7 @@ public class StyleGaugeController : MonoBehaviour
     [SerializeField] private Image scoreFill; //The fill portion of the style UI
     [SerializeField] private GameObject totalGauge; //The full gauge for turning off and on.
     [SerializeField] private GameObject gaugeVFX; //Same thing as last ^^^
+    [SerializeField] private float simulationSpeedChange = 1f; //The amount that the simulationSpeed of the above VFX changes
 
 
     void Start() 
@@ -51,6 +52,11 @@ public class StyleGaugeController : MonoBehaviour
             Debug.Log("Level is now: " + level);
             bWBoxVolume.blendDistance = color[level];
             if (letter[level] != null) { letter[level].SetActive(true); }
+            if (gaugeVFX != null)
+            {
+                var main = gaugeVFX.GetComponent<ParticleSystem>().main;
+                main.simulationSpeed -= simulationSpeedChange;
+            }
         }
         else if (score <= 0 && level == 0) 
         {
@@ -68,6 +74,11 @@ public class StyleGaugeController : MonoBehaviour
             level++;
             bWBoxVolume.blendDistance = color[level];
             if (letter[level] != null) { letter[level].SetActive(true); }
+            if (gaugeVFX != null) 
+            {
+                var main = gaugeVFX.GetComponent<ParticleSystem>().main;
+                main.simulationSpeed += simulationSpeedChange; 
+            }
         }
         else if (score > difBetweenLevels && level == maxLevel) 
         { 
