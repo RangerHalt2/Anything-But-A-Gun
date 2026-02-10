@@ -90,13 +90,16 @@ public class CameraWeaponScript : WeaponClass
     {
         foreach (GameObject enemy in enemiesInRange) //Create a snapshot of every enemy in range
         {
-            GameObject target = enemy.transform.parent.gameObject;
-            target.GetComponent<Health>().TakeDamage(cumulativeDamage);
-            Debug.Log("This variable is " + baseDamage);
-            GameObject snapshot = Instantiate(enemyCopy, target.transform.position, target.transform.rotation, null);
-            snapshot.SetActive(false);
-            snapshot.GetComponent<SnapshotBehaviorScript>().copyOf = target;
-            snapshot.SetActive(true);
+            if (enemy != null)
+            {
+                GameObject target = enemy.transform.parent.gameObject;
+                target.GetComponent<Health>().TakeDamage(cumulativeDamage);
+                Debug.Log("This variable is " + baseDamage);
+                GameObject snapshot = Instantiate(enemyCopy, target.transform.position, target.transform.rotation, null);
+                snapshot.SetActive(false);
+                snapshot.GetComponent<SnapshotBehaviorScript>().copyOf = target;
+                snapshot.SetActive(true);
+            }
             
         }
     }
