@@ -15,8 +15,8 @@ public class LaserScript : WeaponClass
 
     [SerializeField] private float currentHeat;
     private float overheatAmount = 10f;
-    private float heatRate = 3f;
-    private float coolRate = 1f;
+    private float heatRate = 1f;
+    private float coolRate = 5f;
     private bool overheated = false;
 
     //Logan: This needs a prefab, ryan has a test one and I also made a test one, it allows us to spawn a noise basically and have it play

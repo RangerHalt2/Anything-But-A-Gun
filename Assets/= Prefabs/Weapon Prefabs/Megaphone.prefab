@@ -99,6 +99,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MegaphonScript
   ammoManager: {fileID: -136479085653885347}
   gunShot: {fileID: 5383701307693267320, guid: 10c66d0c8719aeb4b9bf9a0204f9c02a, type: 3}
+  clickEffect: {fileID: 0}
+  clickCooldown: 0.5
+  clickTimer: 0
   projectilePrefab: {fileID: 1506664740527934108, guid: ee413c7e1ae29644cb9494ca23842429, type: 3}
   lastFired: -Infinity
   weaponInterface: {fileID: 0}
@@ -107,7 +110,7 @@ MonoBehaviour:
   weaponLevel: {fileID: 6390123147976668450}
   cumulativeDamage: 0
   weaponName: Megaphone
-  tagline: Loud and Proud
+  tagline: Projectiles grow as they travel and damage drops
   weaponType: 1
   promotionName: No Promotion
   promotionEffect: No Promotion
@@ -495,7 +498,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2015027676335755598, guid: 59e0f25de0e691344889fcd773f95b30, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 1
+      value: 1.357
       objectReference: {fileID: 0}
     - target: {fileID: 2015027676335755598, guid: 59e0f25de0e691344889fcd773f95b30, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

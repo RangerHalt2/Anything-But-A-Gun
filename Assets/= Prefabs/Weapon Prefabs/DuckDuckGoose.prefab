@@ -193,6 +193,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DuckDuckGoose
   ammoManager: {fileID: 7556800813267705354}
   gunShot: {fileID: 0}
+  clickEffect: {fileID: 0}
+  clickCooldown: 0.5
+  clickTimer: 0
   projectilePrefab: {fileID: 1506664740527934108, guid: 5e13d917bdad019499d7e121eb537a60, type: 3}
   lastFired: -Infinity
   weaponInterface: {fileID: 0}
@@ -201,14 +204,14 @@ MonoBehaviour:
   weaponLevel: {fileID: 1441169586980562079}
   cumulativeDamage: 0
   weaponName: Duck Duck Goose!
-  tagline: Annnnnddd GOOOOOSE!
-  weaponType: 0
+  tagline: Ricochets to foes with a chance to goose
+  weaponType: 6
   promotionName: No Promotion
   promotionEffect: No Promotion
   level: 1
   baseDamage: 10
   levelDamage: 0
-  fireRate: 0.5
+  fireRate: 0.7
   reloadTime: 1.2
   AmmoCapacity: 10
   reserveAmmo: 120
@@ -873,8 +876,32 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3548151832871790943, guid: d55b9b8d4c70d3a40b8dae5c5dc46576, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8730699112782799471}
   m_SourcePrefab: {fileID: 100100000, guid: d55b9b8d4c70d3a40b8dae5c5dc46576, type: 3}
+--- !u!1 &2502804427704780014 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3548151832871790943, guid: d55b9b8d4c70d3a40b8dae5c5dc46576, type: 3}
+  m_PrefabInstance: {fileID: 1406862609128828337}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &8730699112782799471
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2502804427704780014}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36aeb7eb22422024a909a8c979ead610, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FloatAndRotate
+  amplitude: 0.1
+  frequency: 1
+  rotationSpeed: 50
+  rotationAxis: 2
 --- !u!4 &3022038432138272340 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4212626964492137445, guid: d55b9b8d4c70d3a40b8dae5c5dc46576, type: 3}
@@ -1285,7 +1312,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2015027676335755598, guid: 59e0f25de0e691344889fcd773f95b30, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.803
+      value: 1.114
       objectReference: {fileID: 0}
     - target: {fileID: 2015027676335755598, guid: 59e0f25de0e691344889fcd773f95b30, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

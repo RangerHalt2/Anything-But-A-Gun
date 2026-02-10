@@ -91,7 +91,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.5, y: 0.5, z: 0.5}
+  m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &1802305520914099029
 MonoBehaviour:
@@ -143,8 +143,8 @@ MonoBehaviour:
   weaponLevel: {fileID: 5358080070095141081}
   cumulativeDamage: 0
   weaponName: Lava Lamp
-  tagline: Tubular
-  weaponType: 1
+  tagline: Deals damage on impact and leaves puddles
+  weaponType: 0
   promotionName: No Promotion
   promotionEffect: No Promotion
   level: 0
@@ -446,7 +446,7 @@ MonoBehaviour:
   amplitude: 0.1
   frequency: 1
   rotationSpeed: 50
-  rotationAxis: 1
+  rotationAxis: 2
 --- !u!1001 &2921084522704512941
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -617,7 +617,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2015027676335755598, guid: 59e0f25de0e691344889fcd773f95b30, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 1
+      value: 1.532
       objectReference: {fileID: 0}
     - target: {fileID: 2015027676335755598, guid: 59e0f25de0e691344889fcd773f95b30, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

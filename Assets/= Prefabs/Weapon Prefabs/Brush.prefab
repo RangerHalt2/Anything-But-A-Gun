@@ -208,6 +208,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   ammoManager: {fileID: 1802305520914099029}
   gunShot: {fileID: 653573502046088657, guid: 8ebac850058c8c14684c305f9b61eea5, type: 3}
+  clickEffect: {fileID: 0}
+  clickCooldown: 0.5
+  clickTimer: 0
   projectilePrefab: {fileID: 2858475928119156006, guid: f165c6422bea5914d8f9f24875c41104, type: 3}
   lastFired: -Infinity
   weaponInterface: {fileID: 0}
@@ -216,7 +219,7 @@ MonoBehaviour:
   weaponLevel: {fileID: -6769214916585257692}
   cumulativeDamage: 0
   weaponName: Brush
-  tagline: Splatter Thy Foes
+  tagline: A spread of projectiles that works best close range
   weaponType: 1
   promotionName: No Promotion
   promotionEffect: No Promotion
@@ -444,8 +447,32 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: dc87595e518e40041916b3c6c1b53131, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 389935149540283679}
   m_SourcePrefab: {fileID: 100100000, guid: dc87595e518e40041916b3c6c1b53131, type: 3}
+--- !u!1 &1334506640926546494 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: dc87595e518e40041916b3c6c1b53131, type: 3}
+  m_PrefabInstance: {fileID: 2180999415880132463}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &389935149540283679
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1334506640926546494}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36aeb7eb22422024a909a8c979ead610, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FloatAndRotate
+  amplitude: 0.1
+  frequency: 1
+  rotationSpeed: 50
+  rotationAxis: 1
 --- !u!4 &1859650284404588676 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: dc87595e518e40041916b3c6c1b53131, type: 3}
@@ -621,7 +648,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2015027676335755598, guid: 59e0f25de0e691344889fcd773f95b30, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 1
+      value: 1.258
       objectReference: {fileID: 0}
     - target: {fileID: 2015027676335755598, guid: 59e0f25de0e691344889fcd773f95b30, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -831,6 +858,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6309036767483702213, guid: 59e0f25de0e691344889fcd773f95b30, type: 3}
+      propertyPath: weaponData
+      value: 
+      objectReference: {fileID: 2150252300496388889}
     - target: {fileID: 6309036767483702213, guid: 59e0f25de0e691344889fcd773f95b30, type: 3}
       propertyPath: ammoManager
       value: 
