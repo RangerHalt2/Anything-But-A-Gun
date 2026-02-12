@@ -627,6 +627,7 @@ MonoBehaviour:
   - {fileID: 1656085694357095973}
   - {fileID: 836298236149701613}
   - {fileID: 6544263693604342771}
+  - {fileID: 2519888869594111912}
   maxEnemyCount: 3
   commonEnemyChance: 50
 --- !u!1 &2252358428329511865
@@ -1104,6 +1105,37 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &4503605637952258928
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2519888869594111912}
+  m_Layer: 0
+  m_Name: Spawn Point (4)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2519888869594111912
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4503605637952258928}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 3, y: 0.5, z: -3}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7036923912782059787}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4640266042799499012
 GameObject:
   m_ObjectHideFlags: 0
@@ -1780,6 +1812,7 @@ Transform:
   - {fileID: 3939908235471386279}
   - {fileID: 1656085694357095973}
   - {fileID: 836298236149701613}
+  - {fileID: 2519888869594111912}
   - {fileID: 6544263693604342771}
   - {fileID: 3957514852294048960}
   - {fileID: 6720050194052737678}
@@ -3044,7 +3077,7 @@ PrefabInstance:
     - target: {fileID: 4642833653008647295, guid: fa10415b777d814499ac38ebe3ecebfc, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 172c00be8e204ef4eb334798f67634e1, type: 2}
+      objectReference: {fileID: 2100000, guid: 4c65bb86cfe923d4ca23f1d925552da4, type: 2}
     m_RemovedComponents:
     - {fileID: 5502577799099182903, guid: fa10415b777d814499ac38ebe3ecebfc, type: 3}
     m_RemovedGameObjects: []
