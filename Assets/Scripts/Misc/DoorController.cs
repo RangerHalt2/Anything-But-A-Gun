@@ -2,7 +2,8 @@ using UnityEngine;
 using System.Collections.Generic;
 public class DoorController : MonoBehaviour
 {
-    [SerializeField] private CentralEnemyManager enemyManager;
+    private CentralEnemyManager enemyManager;
+    [SerializeField] private bool doorsClosed;
 
     void Start()
     {
@@ -14,6 +15,7 @@ public class DoorController : MonoBehaviour
     {
         if (enemyManager.ActiveEnemyCount() == 0)
         {
+            doorsClosed = false;
             //Doors will be turned off
             foreach (Transform child in transform)
             {
@@ -27,6 +29,7 @@ public class DoorController : MonoBehaviour
     {
         if (_other.CompareTag("Player")) 
         {
+            doorsClosed = true;
             //Turn on the doors
             foreach (Transform child in transform)
             {

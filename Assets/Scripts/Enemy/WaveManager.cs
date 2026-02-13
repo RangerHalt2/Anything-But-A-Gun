@@ -77,7 +77,11 @@ public class WaveManager : MonoBehaviour
         {
             Debug.Log("WaveManager: All enemies defeated. Destroying door.");
             CancelInvoke(nameof(CheckAllEnemiesDead));
-            Destroy(objectToDestroy, destroyDelay);
+            if (objectToDestroy != null) //EW: Null check added to allow script without having something to destroy.
+            {
+                Destroy(objectToDestroy, destroyDelay);
+            }
+            
         }
     }
 

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 public class CentralEnemyManager : MonoBehaviour
 {
     public static CentralEnemyManager Instance { get; private set; }
-    private List<GameObject> activeEnemies = new List<GameObject>();
+    public List<GameObject> activeEnemies = new List<GameObject>();
 
     void Awake()
     {
