@@ -18,6 +18,8 @@ public class RoomWaveSpawner : MonoBehaviour
 
     private int interval = 0;
 
+    private bool locked_doors = false;
+
     private void Start()
     {
         this.gameObject.layer = LayerMask.NameToLayer("Ignore Raycast");
@@ -27,7 +29,14 @@ public class RoomWaveSpawner : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
+        {
             StartCoroutine(SpawnWaves());
+            locked_doors = true;
+            foreach (Transform trans in doors_to_remove)
+            {
+                trans.gameObject.SetActive(locked_doors);
+            }
+        }
     }
 
     private IEnumerator SpawnWaves()
@@ -80,9 +89,10 @@ public class RoomWaveSpawner : MonoBehaviour
 
         if(current_wave == num_of_waves && doors_to_remove != null)
         {
-            foreach(Transform trans in doors_to_remove)
+            locked_doors = false;
+            foreach (Transform trans in doors_to_remove)
             {
-                trans.gameObject.SetActive(false);
+                trans.gameObject.SetActive(locked_doors);
             }
         }
 
