@@ -262,6 +262,66 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &2460182311698820730
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7352323529424135573}
+  - component: {fileID: 3828248361614336378}
+  m_Layer: 0
+  m_Name: Enemy Spawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7352323529424135573
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2460182311698820730}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 2.61101, y: 5.66393, z: -13.36721}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2972316012125948500}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3828248361614336378
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2460182311698820730}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d655dd2810d11534bab38e9491802f94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemySpawner
+  commonEnemies:
+  - {fileID: 4925705786666085929, guid: 591e3428a19e77a47a42d36ff6724992, type: 3}
+  - {fileID: 3695943591121391829, guid: f9e61c70024881840a66c1af5a6c4c0e, type: 3}
+  - {fileID: 3695943591121391829, guid: 663ee90681e662244ba0fedff7dc6f7c, type: 3}
+  eliteEnemies: []
+  numReqEliteSpawns: 0
+  spawnPoints:
+  - {fileID: 367279194285960075}
+  - {fileID: 3693007624612424252}
+  - {fileID: 6550401078067455673}
+  - {fileID: 7827777821893335220}
+  - {fileID: 8910382514648618578}
+  maxEnemyCount: 5
+  commonEnemyChance: 75
+  enemies: []
+  aliveEnemies: []
 --- !u!1 &2684814513256343943
 GameObject:
   m_ObjectHideFlags: 0
@@ -917,6 +977,7 @@ Transform:
   - {fileID: 4492243083413073446}
   - {fileID: 4038054704677108706}
   - {fileID: 8029533162837641964}
+  - {fileID: 7352323529424135573}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &761208742016231538
@@ -1414,13 +1475,38 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7598888444960546557, guid: 92e50970c7500cb4ca55f5c60cc1887b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6080481633034662668}
   m_SourcePrefab: {fileID: 100100000, guid: 92e50970c7500cb4ca55f5c60cc1887b, type: 3}
 --- !u!4 &4492243083413073446 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2035371060873796165, guid: 92e50970c7500cb4ca55f5c60cc1887b, type: 3}
   m_PrefabInstance: {fileID: 2479425635633902691}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &5412232450590190238 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7598888444960546557, guid: 92e50970c7500cb4ca55f5c60cc1887b, type: 3}
+  m_PrefabInstance: {fileID: 2479425635633902691}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &6080481633034662668
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5412232450590190238}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0bd03a9a25639324fa6bb4037c3412f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RoomWaveSpawner
+  staggered_waves: 0
+  enemySpawner: {fileID: 3828248361614336378}
+  num_of_waves: 3
+  spawnAllBySeconds: 30
+  doors_to_remove: []
 --- !u!1001 &3463364679172180196
 PrefabInstance:
   m_ObjectHideFlags: 0
