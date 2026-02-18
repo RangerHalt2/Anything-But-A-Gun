@@ -199,6 +199,11 @@ public class Health : MonoBehaviour
             if(style != null)
                 style.IncreaseScore(true, false); //EW: Added for the style gauge.
             playerLevel.AddEXP(EXPDrop);
+            EnemyClass enmy = GetComponent<EnemyClass>();
+            if (enmy != null)
+            {
+                enmy.Die();
+            }
             Destroy(gameObject);
         }
         else if (isPlayer)

@@ -2,27 +2,27 @@ using UnityEngine;
 using UnityEngine.AI;
 using System.Collections;
 
-public class RoombaAI : MonoBehaviour
+public class RoombaAI : EnemyClass
 {
-    [Header("Target Layers and Player")]
-    [SerializeField] private NavMeshAgent agent;
-    [SerializeField] private Transform player;
-    [SerializeField] private LayerMask whatIsPlayer;
+    //[Header("Target Layers and Player")]
+    //[SerializeField] private NavMeshAgent agent;
+    //[SerializeField] private Transform player;
+    //[SerializeField] private LayerMask whatIsPlayer;
 
     [Header("NavMesh Patrol Settings")]
     [SerializeField] private float patrolDistance = 10f;
     [SerializeField] private float patrolSpeed = 3f;
-    [SerializeField] private float patrolWaitTime = 1.5f;
+    //[SerializeField] private float patrolWaitTime = 1.5f;
     [SerializeField] private float navEdgeCheckDistance = 2f;
 
     private Vector3 moveDirection;
-    private float patrolTimer;
+    //private float patrolTimer;
 
-    [Header("Sight and Attack Range")]
-    [SerializeField] private float sightRange = 10f;
-    [SerializeField] public float attackRange = 2f;
-    [SerializeField] private bool playerInSightRange;
-    [SerializeField] public bool playerInAttackRange;
+    //[Header("Sight and Attack Range")]
+    //[SerializeField] private float sightRange = 10f;
+    //[SerializeField] public float attackRange = 2f;
+    //[SerializeField] private bool playerInSightRange;
+    //[SerializeField] public bool playerInAttackRange;
 
     [Header("Investigation Settings")]
     private Vector3 lastKnownPlayerPosition;
@@ -30,10 +30,10 @@ public class RoombaAI : MonoBehaviour
     private float investigationWaitTime = 3f;
     private float investigationTimer;
 
-    [Header("Detection Indicator")]
-    [SerializeField] private GameObject detectionSprite;
-    [SerializeField] private float detectionDisplayTime = 1f;
-    private bool hasShownDetectionSprite = false;
+    //[Header("Detection Indicator")]
+    //[SerializeField] private GameObject detectionSprite;
+    //[SerializeField] private float detectionDisplayTime = 1f;
+    //private bool hasShownDetectionSprite = false;
 
     [Header("Sound and Visual Effects")]
     [SerializeField] private AudioSource audioSource;
@@ -165,14 +165,16 @@ public class RoombaAI : MonoBehaviour
 
         moveDirection = bestDirection;
     }
-
-    private void Chase()
+    
+    override
+    public void Chase()
     {
         agent.isStopped = false;
         agent.SetDestination(player.position);
     }
 
-    private void Attacking()
+    override
+    public void Attacking()
     {
         agent.isStopped = true;
         agent.SetDestination(transform.position);
@@ -223,6 +225,8 @@ public class RoombaAI : MonoBehaviour
                 if (health != null)
                     DoDamage(health);
             }
+
+            Die();
 
             Destroy(gameObject);
         }

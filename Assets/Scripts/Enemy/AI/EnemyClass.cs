@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -31,9 +32,11 @@ public class EnemyClass : MonoBehaviour
     public float detectionDisplayTime = 1f;
     public bool hasShownDetectionSprite = false;
 
+    public event Action<EnemyClass> OnEnemyDeath;
+
     public Vector3 GetRandomNavMeshPosition(Vector3 center, float range)
     {
-        Vector3 randomDirection = Random.insideUnitSphere * range;
+        Vector3 randomDirection = UnityEngine.Random.insideUnitSphere * range;
         randomDirection += center;
 
         if (NavMesh.SamplePosition(randomDirection, out NavMeshHit navHit, range, NavMesh.AllAreas))
@@ -112,4 +115,10 @@ public class EnemyClass : MonoBehaviour
     {
         alreadyAttacked = false;
     }
+
+    public void Die()
+    {
+       OnEnemyDeath?.Invoke(this);
+    }
+
 }

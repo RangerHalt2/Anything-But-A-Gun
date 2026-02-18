@@ -2,6 +2,7 @@
 //Purpose: This script handles dynamically for each room the spawning of enemies. This code works in conjunction with SpawnTrigger.cs handling the actual placement and spawning of enemies
 //Use: This script needs to be placed on each prefab room that can be spawned with the expected enemies, count, and placements expected of this room.
 
+using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
@@ -20,6 +21,9 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private float maxEnemyCount;
     [Tooltip("Common Weight in percentage. 100 is 100% chance, 75 is 75% common enemies")]
     [SerializeField] private float commonEnemyChance = 75;
+
+    [HideInInspector] public List<EnemyClass> enemies;
+    [HideInInspector] public List<EnemyClass> aliveEnemies;
 
     private bool spawnedEnemies = false;
     #endregion
@@ -65,6 +69,11 @@ public class EnemySpawner : MonoBehaviour
             index++;
         }
 
+        foreach(EnemyClass enemy in enemies)
+        {
+            aliveEnemies.Add(enemy);
+        }
+
         spawnedEnemies = true;
 
     }
@@ -72,12 +81,14 @@ public class EnemySpawner : MonoBehaviour
     //Separated for readability
     private void SpawnElite(Transform spawnPoint, int eliteChoice)
     {
-        Instantiate(eliteEnemies[eliteChoice], spawnPoint.position, spawnPoint.rotation);
+        EnemyClass enemy = Instantiate(eliteEnemies[eliteChoice], spawnPoint.position, spawnPoint.rotation).GetComponent<EnemyClass>();
+        enemies.Add(enemy);
     }
 
     private void SpawnRegular(Transform spawnPoint, int commonChoice)
     {
-        Instantiate(commonEnemies[commonChoice], spawnPoint.position, spawnPoint.rotation);
+        EnemyClass enemy = Instantiate(commonEnemies[commonChoice], spawnPoint.position, spawnPoint.rotation).GetComponent<EnemyClass>();
+        enemies.Add(enemy);
     }
 
     //Reset Spawner: MG

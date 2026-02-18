@@ -181,6 +181,7 @@ public class RombaAI : MonoBehaviour
         {
             if (!explosionPrefab.GetComponent<ParticleSystem>().isPlaying)
             {
+                
                 Destroy(gameObject);
             }
         }
