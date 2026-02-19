@@ -93,8 +93,70 @@ Transform:
   - {fileID: 6088063003404618013}
   - {fileID: 7381372904320807933}
   - {fileID: 8806851597768981117}
+  - {fileID: 7284397215759928456}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &941672947694979139
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7284397215759928456}
+  - component: {fileID: 7373776938525331927}
+  m_Layer: 0
+  m_Name: Enemy Spawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7284397215759928456
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 941672947694979139}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -11.44, y: 1.96646, z: 8.38}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7420876136058575393}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7373776938525331927
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 941672947694979139}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d655dd2810d11534bab38e9491802f94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemySpawner
+  commonEnemies:
+  - {fileID: 4925705786666085929, guid: 591e3428a19e77a47a42d36ff6724992, type: 3}
+  - {fileID: 3695943591121391829, guid: f9e61c70024881840a66c1af5a6c4c0e, type: 3}
+  - {fileID: 3695943591121391829, guid: 663ee90681e662244ba0fedff7dc6f7c, type: 3}
+  eliteEnemies: []
+  numReqEliteSpawns: 0
+  spawnPoints:
+  - {fileID: 800474050367936523}
+  - {fileID: 7690329164381572605}
+  - {fileID: 7381372904320807933}
+  - {fileID: 5949958085457306960}
+  - {fileID: 8676751407687071447}
+  - {fileID: 6088063003404618013}
+  maxEnemyCount: 5
+  commonEnemyChance: 75
+  enemies: []
+  aliveEnemies: []
 --- !u!1 &1208939178893244566
 GameObject:
   m_ObjectHideFlags: 0
@@ -1731,7 +1793,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6583840176009584619, guid: 4195922b477a19242b4b0c97a86960e0, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.879
+      value: 2.881
       objectReference: {fileID: 0}
     - target: {fileID: 6583840176009584619, guid: 4195922b477a19242b4b0c97a86960e0, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2259,11 +2321,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 54208231814393858, guid: 92e50970c7500cb4ca55f5c60cc1887b, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 882571468453877100, guid: 92e50970c7500cb4ca55f5c60cc1887b, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2035371060873796165, guid: 92e50970c7500cb4ca55f5c60cc1887b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2319,7 +2381,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2975762035780162832, guid: 92e50970c7500cb4ca55f5c60cc1887b, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 13.125
+      value: 13.25
       objectReference: {fileID: 0}
     - target: {fileID: 6065778677567304182, guid: 92e50970c7500cb4ca55f5c60cc1887b, type: 3}
       propertyPath: m_Size.x
@@ -2355,13 +2417,50 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8360739073108331997, guid: 92e50970c7500cb4ca55f5c60cc1887b, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -12
+      value: -12.125
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7598888444960546557, guid: 92e50970c7500cb4ca55f5c60cc1887b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8576669035252873990}
   m_SourcePrefab: {fileID: 100100000, guid: 92e50970c7500cb4ca55f5c60cc1887b, type: 3}
+--- !u!1 &1113377755985510085 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7598888444960546557, guid: 92e50970c7500cb4ca55f5c60cc1887b, type: 3}
+  m_PrefabInstance: {fileID: 7351897608436572216}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &8576669035252873990
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1113377755985510085}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0bd03a9a25639324fa6bb4037c3412f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RoomWaveSpawner
+  staggered_waves: 0
+  enemySpawner: {fileID: 7373776938525331927}
+  num_of_waves: 2
+  spawnAllBySeconds: 30
+  doors_to_remove:
+  - {fileID: 1297142314245696997}
+  - {fileID: 5713704679165326632}
+--- !u!4 &1297142314245696997 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8360739073108331997, guid: 92e50970c7500cb4ca55f5c60cc1887b, type: 3}
+  m_PrefabInstance: {fileID: 7351897608436572216}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &5713704679165326632 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2975762035780162832, guid: 92e50970c7500cb4ca55f5c60cc1887b, type: 3}
+  m_PrefabInstance: {fileID: 7351897608436572216}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8806851597768981117 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2035371060873796165, guid: 92e50970c7500cb4ca55f5c60cc1887b, type: 3}
