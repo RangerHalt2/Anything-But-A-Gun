@@ -5050,6 +5050,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dae25685be2a6f34dbfba63806a3754c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CentralEnemyManager
+  activeEnemies: []
 --- !u!4 &253086062
 Transform:
   m_ObjectHideFlags: 0
@@ -5466,26 +5467,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SectionGenerator
   spawnRoomPrefabs:
-  - {fileID: 4680326205732850777, guid: 0eb0afb5d760161419d9c490bd2cd44a, type: 3}
-  bossRoomPrefabs:
-  - {fileID: 4405970286633129309, guid: 570dbbe312710d0419bfcd66d49b6ea1, type: 3}
-  roomSections:
-  - {fileID: 2362544075785383720, guid: a6e9d346355e210448b3f2ffb5c54713, type: 3}
-  - {fileID: 2362544075785383720, guid: 5060f34b3cf850246a3a37755066560a, type: 3}
-  - {fileID: 4405970286633129309, guid: 615128941b0b2d748ab3f3dd679282f3, type: 3}
-  - {fileID: 8724441875870556482, guid: ffe968b4cddcadd489f34032f16436fa, type: 3}
-  - {fileID: 8724441875870556482, guid: 4c6f61ba1142de141a7ee08cedd11c98, type: 3}
-  - {fileID: 8724441875870556482, guid: 0a338e8f7a4531242b80564603411a53, type: 3}
-  - {fileID: 2362544075785383720, guid: b9864f11314cef348a0cffce096ca55f, type: 3}
-  - {fileID: 2362544075785383720, guid: 14d1625ae94ea9347a0d76e450c6e978, type: 3}
-  - {fileID: 8724441875870556482, guid: 10c1da174c6ac5d4384a1ad0e2c91ae2, type: 3}
-  - {fileID: 1283115065026293127, guid: 30f9b9aee1d3f4441aff3c327ff75dfe, type: 3}
-  - {fileID: 1283115065026293127, guid: a0f284dc04dc673428fdadb6defc981e, type: 3}
-  specialRooms:
-  - {fileID: 3461508500947951413, guid: a5bb6d799c41f674dadf3b63b64e59e5, type: 3}
-  - {fileID: 3373898963129723866, guid: c2cf3f437eae7ce4e99261d0ef042ae6, type: 3}
-  - {fileID: 3461508500947951413, guid: 6911884a8659bfe4dbf4a1ea4c91559e, type: 3}
-  - {fileID: 3373898963129723866, guid: ceb159cb65c822641a88118aa9758c9d, type: 3}
+  - {fileID: 4680326205732850777, guid: 1b7e3890c8e3a10469ce17fae31876de, type: 3}
+  bossRoomPrefabs: []
+  roomSections: []
+  specialRooms: []
   minRooms: 7
   maxRooms: 7
   specialRoomCount: 3
