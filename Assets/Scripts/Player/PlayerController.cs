@@ -19,6 +19,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float gravity = -30f;
     [SerializeField] private float terminalVelocity = -60f;
 
+    [SerializeField] private float controllerSens = 3f;
+
     private float momentumDecay = 0.0001f;
     private float maxMomentum = 0.03f;
 
@@ -145,7 +147,7 @@ public class PlayerController : MonoBehaviour
 
     private void Rotate(Vector2 RotationVector)
     {
-        rotationY += RotationVector.x * sensitivity;
+        rotationY += RotationVector.x * sensitivity * (inputs.ControllerLast ? controllerSens : 1f);
         transform.localRotation = Quaternion.Euler(0, rotationY, 0);
     }
 

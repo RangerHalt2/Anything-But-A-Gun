@@ -19,7 +19,7 @@ public class WeaponHandler : MonoBehaviour
 
     [SerializeField] private InputManager inputManager;
     private float scrollValue;
-    [SerializeField] private float weaponSwitchRate = 0.3f;
+    [SerializeField] private float weaponSwitchRate = 0.5f;
     private float lastSwitch = Mathf.NegativeInfinity;
 
     private float timer = 0;

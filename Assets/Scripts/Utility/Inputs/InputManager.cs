@@ -24,6 +24,8 @@ public class InputManager : MonoBehaviour
     [SerializeField] private string next = "NextWeapon";
     [SerializeField] private string interact = "Interact";
     [SerializeField] private string cheats = "Cheats";
+    [SerializeField] private string controllerCheck = "Controller Check";
+    [SerializeField] private string keyboardCheck = "Keyboard Check";
 
     //LB: This is an action input, each one needs one assigned
     private InputAction moveAction;
@@ -37,6 +39,8 @@ public class InputManager : MonoBehaviour
     private InputAction nextAction;
     private InputAction interactAction;
     private InputAction cheatsAction;
+    private InputAction controllerAction;
+    private InputAction keyboardAction;
 
     //LB: This is the getters and setters for the inputs, this will be used to manage their values overall
     public Vector2 MoveInput { get; private set; }
@@ -50,7 +54,7 @@ public class InputManager : MonoBehaviour
     public float NextInput { get; private set; }
     public bool InteractInput { get; private set; }
     public bool CheatsInput { get; private set; }
-
+    public bool ControllerLast { get; set; } = false;
     //LB: Instance Handler
     public static InputManager Instance { get; private set; }
 
@@ -79,6 +83,8 @@ public class InputManager : MonoBehaviour
         nextAction = playerControls.FindActionMap(actionMapName).FindAction(next);
         interactAction = playerControls.FindActionMap(actionMapName).FindAction(interact);
         cheatsAction = playerControls.FindActionMap(actionMapName).FindAction(cheats);
+        controllerAction = playerControls.FindActionMap(actionMapName).FindAction(controllerCheck);
+        keyboardAction = playerControls.FindActionMap(actionMapName).FindAction(keyboardCheck);
         RegisterInputActions();
     }
 
@@ -117,6 +123,9 @@ public class InputManager : MonoBehaviour
 
         cheatsAction.performed += context => CheatsInput = true;
         cheatsAction.canceled += context => CheatsInput = false;
+
+        controllerAction.performed += context => ControllerLast = true;
+        keyboardAction.performed += context => ControllerLast = false;
     }
 
     //LB: Enable and Disable the actions
@@ -133,6 +142,8 @@ public class InputManager : MonoBehaviour
         nextAction.Enable();
         interactAction.Enable();
         cheatsAction.Enable();
+        controllerAction.Enable();
+        keyboardAction.Enable();
     }
 
     private void OnDisable()
@@ -148,6 +159,8 @@ public class InputManager : MonoBehaviour
         nextAction.Disable();
         interactAction.Disable();
         cheatsAction.Disable();
+        controllerAction.Disable();
+        keyboardAction.Disable();
     }
 
 }

@@ -8,6 +8,7 @@ public class CameraRotation : MonoBehaviour
     [SerializeField] private float sensitivity = 5f;
     [SerializeField] private float maxLookingAngle = -80f;
     [SerializeField] private float minLookingAngle = 80f;
+    [SerializeField] private float controllerSens = 7f;
 
     private InputManager inputs;
 
@@ -26,7 +27,7 @@ public class CameraRotation : MonoBehaviour
 
     private void Rotate(Vector2 Rotation)
     {
-        rotationX += -Rotation.y * sensitivity;
+        rotationX += -Rotation.y * sensitivity * (inputs.ControllerLast ? controllerSens : 1f);
         rotationX = Mathf.Clamp(rotationX, minLookingAngle, maxLookingAngle);
         transform.localRotation = Quaternion.Euler(rotationX, 0, 0);
     }
