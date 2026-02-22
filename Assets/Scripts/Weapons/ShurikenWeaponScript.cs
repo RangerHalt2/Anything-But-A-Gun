@@ -36,6 +36,9 @@ public class ShurikenWeaponScript : WeaponClass
                         if (projectilePrefab != null)
                         {
                             SpawnProjectile();
+                            // Play sound effect (added by Aaron)
+                            if (gunShot != null)
+                            Instantiate(gunShot, transform.position, transform.rotation, null);
                         }
                         // Update lastFired
                         timer = fireRate;
@@ -47,6 +50,9 @@ public class ShurikenWeaponScript : WeaponClass
                 if (ammoManager.GetReserveAmmo() > 0 || ammoManager.GetReserveAmmo() == -1)
                 {
                     ammoManager.ReloadWeapon();
+                    // Play sound effect (added by Aaron)
+                    if (gunShot != null)
+                    Instantiate(gunShot, transform.position, transform.rotation, null);
                 }
                 else
                 {
