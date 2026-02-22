@@ -27,20 +27,34 @@ public class InputManager : MonoBehaviour
     [SerializeField] private string controllerCheck = "Controller Check";
     [SerializeField] private string keyboardCheck = "Keyboard Check";
 
+    private Dictionary<RebindableAction, InputAction> actionMap;
+
+    public enum RebindableAction
+    {
+        Move,
+        Fire,
+        AltFire,
+        Jump,
+        Sprint,
+        Reload,
+        Next, //This is an alternative to scrollwheel for swapping weapons
+        Interact,
+    }
+
     //LB: This is an action input, each one needs one assigned
-    private InputAction moveAction;
-    private InputAction fireAction;
-    private InputAction altFireAction;
-    private InputAction jumpAction;
-    public InputAction scrollAction;
-    public InputAction lookAction;
-    public InputAction sprintAction;
-    public InputAction reloadAction;
-    private InputAction nextAction;
-    private InputAction interactAction;
-    private InputAction cheatsAction;
-    private InputAction controllerAction;
-    private InputAction keyboardAction;
+    public InputAction moveAction { get; private set; }
+    public InputAction fireAction { get; private set; }
+    public InputAction altFireAction { get; private set; }
+    public InputAction jumpAction { get; private set; }
+    public InputAction scrollAction { get; private set; }
+    public InputAction lookAction { get; private set; }
+    public InputAction sprintAction { get; private set; }
+    public InputAction reloadAction { get; private set; }
+    public InputAction nextAction { get; private set; }
+    public InputAction interactAction { get; private set; }
+    public InputAction cheatsAction { get; private set; }
+    public InputAction controllerAction { get; private set; }
+    public InputAction keyboardAction { get; private set; }
 
     //LB: This is the getters and setters for the inputs, this will be used to manage their values overall
     public Vector2 MoveInput { get; private set; }
@@ -70,8 +84,15 @@ public class InputManager : MonoBehaviour
         {
             //Destroy(gameObject);
         }
-        
+
         //LB: This assigns the values of the actions to the input actions from the physical asset
+        RegisterActionMapping();
+        RegisterInputActions();
+        LoadRebinds();
+    }
+
+    void RegisterActionMapping()
+    {
         moveAction = playerControls.FindActionMap(actionMapName).FindAction(movement);
         fireAction = playerControls.FindActionMap(actionMapName).FindAction(fire);
         altFireAction = playerControls.FindActionMap(actionMapName).FindAction(altFire);
@@ -85,7 +106,19 @@ public class InputManager : MonoBehaviour
         cheatsAction = playerControls.FindActionMap(actionMapName).FindAction(cheats);
         controllerAction = playerControls.FindActionMap(actionMapName).FindAction(controllerCheck);
         keyboardAction = playerControls.FindActionMap(actionMapName).FindAction(keyboardCheck);
-        RegisterInputActions();
+
+
+        actionMap = new Dictionary<RebindableAction, InputAction>
+        {
+            { RebindableAction.Move, moveAction },
+            { RebindableAction.Fire, fireAction },
+            { RebindableAction.AltFire, altFireAction },
+            { RebindableAction.Jump, jumpAction },
+            { RebindableAction.Sprint, sprintAction },
+            { RebindableAction.Reload, reloadAction },
+            { RebindableAction.Next, nextAction },
+            { RebindableAction.Interact, interactAction },
+        };
     }
 
     //LB: This piece of code handles their values with pseudo functions
@@ -162,5 +195,50 @@ public class InputManager : MonoBehaviour
         controllerAction.Disable();
         keyboardAction.Disable();
     }
+
+    #region Input Remapping
+    public void RebindInput(RebindableAction actionType, int bindingIndex)
+    {
+        if (!actionMap.TryGetValue(actionType, out InputAction action))
+            return;
+
+        action.Disable();
+        action.PerformInteractiveRebinding(bindingIndex)
+        .WithCancelingThrough("<Keyboard>/escape")
+        .WithCancelingThrough("<Gamepad>/start")
+        .OnComplete(op =>
+        {
+            op.Dispose();
+            action.Enable();
+            SaveRebinds();
+            Debug.Log("INPUT MANAGER - The button to move: " + actionType.ToString()
+                      + " is: " + action.GetBindingDisplayString(bindingIndex));
+        })
+        .Start();
+
+    }
+
+    private void SaveRebinds()
+    {
+        string rebinds = playerControls.SaveBindingOverridesAsJson();
+        PlayerPrefs.SetString("rebinds", rebinds);
+        PlayerPrefs.Save();
+    }
+
+    private void LoadRebinds()
+    {
+        if (PlayerPrefs.HasKey("rebinds"))
+        {
+            string rebinds = PlayerPrefs.GetString("rebinds");
+            if (!string.IsNullOrEmpty(rebinds))
+            {
+                playerControls.LoadBindingOverridesFromJson(rebinds);
+            }
+        }
+    }
+
+    #endregion
+
+
 
 }
