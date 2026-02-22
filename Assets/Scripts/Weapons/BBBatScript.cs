@@ -3,7 +3,8 @@ using System.Collections;
 
 public class BBBatScript : WeaponClass
 {
-    //[SerializeField] public int level {get; set;}
+
+    /*//[SerializeField] public int level {get; set;}
 
     //[SerializeField] private int health = 10; //Health of the melee weapon
     [SerializeField] private int teamID;
@@ -64,7 +65,7 @@ public class BBBatScript : WeaponClass
     {
         wh.DropWeapon(gameObject);
         proj.enabled = true;
-    }*/
+    }
 
     void Update()
     {
@@ -116,11 +117,93 @@ public class BBBatScript : WeaponClass
         {
             ammoManager.ReloadWeapon();
         }
-    }*/
+    }
 
     public void UpdateLevelDamage()
     {
         levelDamage = baseDamage * Mathf.Pow(growthRate, weaponLevel.Level);
     }
 
+}*/
+
+    public bool launched;
+    [SerializeField] private Transform projectileSpawnPoint;
+    public MeshRenderer mesh; //For turning off
+    private WeaponLevel weaponLevelRef;
+    private float cummulativeDamage;
+    private WeaponLevel currentWeaponLevel;
+    [SerializeField] private float growthRate;
+
+    private void Start()
+    {
+        weaponLevelRef = GetComponent<WeaponLevel>();
+        mesh = GetComponentInChildren<MeshRenderer>();
+    }
+
+    public override void Shoot() //Default is spawn projectile
+    {
+        if (!launched)
+        {
+            // If enough time has passed since the last round was fired
+            if ((Time.timeSinceLevelLoad - lastFired) > fireRate)
+            {
+                // If there is an assigned ammo manager, and that ammo manager has at least one round of ammo loaded
+                if (ammoManager != null && ammoManager.GetCurrentAmmo() > 0)
+                {
+                    // Attempt to fire the weapon
+                    ammoManager.Fire();
+                    // If the weapon is not reloading
+                    if (!ammoManager.IsReloading())
+                    {
+
+                        if (projectilePrefab != null)
+                        {
+                            SpawnProjectile();
+                        }
+                        // Update lastFired
+                        lastFired = Time.timeSinceLevelLoad;
+
+                    }
+                }
+                else if (ammoManager != null)
+                {
+                    if (ammoManager.GetReserveAmmo() > 0 || ammoManager.GetReserveAmmo() == -1)
+                    {
+                        ammoManager.ReloadWeapon();
+                    }
+                    else
+                    {
+                        if (clickEffect != null && clickTimer <= 0)
+                        {
+                            clickTimer = clickCooldown;
+                            Instantiate(clickEffect, transform.position, transform.rotation, null);
+                        }
+                    }
+                }
+
+            }
+        }
+    } //"Virtual" allows children to override it
+
+
+    public override void SpawnProjectile()
+    {
+        //Disable the visible mesh.
+        mesh.enabled = false;
+
+        //Spawn the projectile
+        // Check that the prefab is valid
+        if (projectilePrefab != null)
+        {
+            launched = true;
+
+            // Create the projectile
+            GameObject projectileGameObject = Instantiate(projectilePrefab, projectileSpawnPoint.transform.position, transform.rotation, null);
+
+            Projectile proj = projectileGameObject.GetComponent<Projectile>();
+            proj.baseDamage = baseDamage;
+            proj.SetWeaponLevelReference(weaponLevelRef);
+            projectileGameObject.GetComponent<BBBatProjectileScript>().baseWeapon = gameObject;
+        }
+    }
 }
