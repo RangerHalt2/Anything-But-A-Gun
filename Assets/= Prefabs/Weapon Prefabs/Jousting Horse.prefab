@@ -94,9 +94,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85ba3114f4a01154fac3f3d072bbdb9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  damage: 0
+  damage: 75
   myTeamID: 0
-  currentSpeed: 0
 --- !u!1 &3634324867199572480
 GameObject:
   m_ObjectHideFlags: 0
@@ -226,13 +225,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df2d13e84e38fb446a97a180533aba8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AmmoManager
-  reserveAmmo: 20
-  ammoCapacity: 10
-  currentAmmo: 10
+  reserveAmmo: 0
+  ammoCapacity: 3
+  currentAmmo: 3
   ammoConsumption: 1
-  reloadTime: 1
+  reloadTime: 0
   canCancelReload: 0
-  reloadMode: 0
+  reloadMode: 2
   crosshair: {fileID: 0}
   ammoDisplayText: {fileID: 0}
   reloadEffect: {fileID: 0}
@@ -278,6 +277,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::JoustingHorseScript
   ammoManager: {fileID: 1802305520914099029}
   gunShot: {fileID: 0}
+  clickEffect: {fileID: 0}
+  clickCooldown: 0.5
+  clickTimer: 0
   projectilePrefab: {fileID: 0}
   lastFired: -Infinity
   weaponInterface: {fileID: 0}
@@ -291,8 +293,8 @@ MonoBehaviour:
   promotionName: No Promotion
   promotionEffect: No Promotion
   level: 0
-  baseDamage: 10
-  levelDamage: 0
+  baseDamage: 50
+  levelDamage: 5
   fireRate: 1
   reloadTime: 2
   AmmoCapacity: 5
@@ -301,10 +303,11 @@ MonoBehaviour:
   acceptablePackAPunchOptions:
   - {fileID: 11400000, guid: f153000db5f302a429e740f53881858f, type: 2}
   joustingCollider: {fileID: 2555991686337407770}
-  joustSpeedMultiplier: 2
-  joustTime: 10
-  pc: {fileID: 0}
-  JOUSTING: 0
+  joustForce: 10
+  joustTime: 0.25
+  joustCD: 0.25
+  dashEffect: {fileID: 0}
+  timeBetweenJoustCharges: 5
 --- !u!135 &1403364850935749457
 SphereCollider:
   m_ObjectHideFlags: 0
