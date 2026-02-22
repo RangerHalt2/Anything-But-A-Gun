@@ -106,6 +106,14 @@ public class PlayerController : MonoBehaviour
         Dashes = maxDashLimit;
 
         if (terminalVelocity > 0) terminalVelocity = -terminalVelocity; //Just makes it negative
+
+        sensitivity = LoadSensitivity();
+    }
+
+    private float LoadSensitivity()
+    {
+        return PlayerPrefs.GetFloat("sensitivity", 0.1f);
+        // 1.0f is default if no value exists
     }
 
     private void Move(Vector2 MovementVector)

@@ -46,6 +46,8 @@ public class UI_Input_Helper : MonoBehaviour
         inputManager = GameObject.FindAnyObjectByType<InputManager>();
         playerController = GameObject.FindAnyObjectByType<PlayerController>();
         cameraRotation = GameObject.FindAnyObjectByType<CameraRotation>();
+
+        sensSlider.value = PlayerPrefs.GetFloat("sensitivity", 0.3f);
     }
 
     private void Update()
@@ -115,6 +117,10 @@ public class UI_Input_Helper : MonoBehaviour
             cameraRotation.sensitivity = sensSlider.value;
             Debug.Log("UI INPUT HELPER - Sensitivity:" + sensSlider.value);
         }
+
+        PlayerPrefs.SetFloat("sensitivity", sensSlider.value);
+        PlayerPrefs.Save();
+
     }
 
 }

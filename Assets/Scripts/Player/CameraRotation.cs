@@ -23,6 +23,14 @@ public class CameraRotation : MonoBehaviour
         inputs = GameObject.FindAnyObjectByType<InputManager>();
         playerHealth = GetComponentInParent<Health>();
         winEvent = GameObject.FindAnyObjectByType<WinEvent>();
+
+        sensitivity = LoadSensitivity();
+    }
+
+    private float LoadSensitivity()
+    {
+        return PlayerPrefs.GetFloat("sensitivity", 0.1f);
+        // 1.0f is default if no value exists
     }
 
     private void Rotate(Vector2 Rotation)
