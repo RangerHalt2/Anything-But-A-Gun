@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviour
     public float movementSpeed = 10f;
     [SerializeField] private float sprintMultiplier = 2f;
 
-    [SerializeField] private float sensitivity = 10f;
+    [SerializeField] public float sensitivity = 10f;
 
     [SerializeField] private float jumpForce = 5f;
     [SerializeField] private float gravity = -30f;

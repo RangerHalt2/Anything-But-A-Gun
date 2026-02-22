@@ -1,6 +1,7 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 using static UnityEngine.Rendering.DebugUI;
 
 public class UI_Input_Helper : MonoBehaviour
@@ -30,13 +31,21 @@ public class UI_Input_Helper : MonoBehaviour
     [SerializeField] private TextMeshProUGUI CNTRL_Dash_Keybind;
     [SerializeField] private TextMeshProUGUI CNTRL_Interact_Keybind;
 
+    [Space(2)]
+    [SerializeField] private TextMeshProUGUI sensitivityText;
+    [SerializeField] private Slider sensSlider;
+
     private InputManager inputManager;
+    private PlayerController playerController;
+    private CameraRotation cameraRotation;
 
     private bool isKeyboard = true;
 
     private void Start()
     {
         inputManager = GameObject.FindAnyObjectByType<InputManager>();
+        playerController = GameObject.FindAnyObjectByType<PlayerController>();
+        cameraRotation = GameObject.FindAnyObjectByType<CameraRotation>();
     }
 
     private void Update()
@@ -92,6 +101,20 @@ public class UI_Input_Helper : MonoBehaviour
         }
     }
 
+    public void UpdateSensitivity()
+    {
+        sensitivityText.text = (sensSlider.value.ToString("F2"));
+        if(playerController != null)
+        {
+            playerController.sensitivity = sensSlider.value;
+            Debug.Log("UI INPUT HELPER - Sensitivity: " + sensSlider.value);
+        }
 
+        if(cameraRotation != null)
+        {
+            cameraRotation.sensitivity = sensSlider.value;
+            Debug.Log("UI INPUT HELPER - Sensitivity:" + sensSlider.value);
+        }
+    }
 
 }
