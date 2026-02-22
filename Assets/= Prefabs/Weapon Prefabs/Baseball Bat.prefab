@@ -15,7 +15,6 @@ GameObject:
   - component: {fileID: -3932295107658604157}
   - component: {fileID: 973126755458432689}
   - component: {fileID: -6749029174857571121}
-  - component: {fileID: 5198387631224120451}
   m_Layer: 14
   m_Name: Baseball Bat
   m_TagString: Untagged
@@ -38,6 +37,7 @@ Transform:
   m_Children:
   - {fileID: 4653297688541789586}
   - {fileID: 1500702397106884870}
+  - {fileID: 7632502931210757121}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &8629663528519822453
@@ -78,7 +78,7 @@ MonoBehaviour:
   clickEffect: {fileID: 0}
   clickCooldown: 0.5
   clickTimer: 0
-  projectilePrefab: {fileID: 0}
+  projectilePrefab: {fileID: 1506664740527934108, guid: 97a20ac94b12a2145810c55154f9edf2, type: 3}
   lastFired: -Infinity
   weaponInterface: {fileID: 0}
   weaponAmmoManager: {fileID: 9216862354450597352}
@@ -87,21 +87,22 @@ MonoBehaviour:
   cumulativeDamage: 0
   weaponName: Baseball Bat
   tagline: Swing for the Stars
-  weaponType: 5
+  weaponType: 0
   promotionName: No Promotion
   promotionEffect: No Promotion
-  level: 0
-  baseDamage: 15
+  level: 1
+  baseDamage: 50
   levelDamage: 5
   fireRate: 1
-  reloadTime: 0
+  reloadTime: 0.1
   AmmoCapacity: 20
   reserveAmmo: 20
   hasPackAPunch: 0
   acceptablePackAPunchOptions: []
-  teamID: 0
+  launched: 0
+  projectileSpawnPoint: {fileID: 7632502931210757121}
+  mesh: {fileID: 5825680219657340669}
   growthRate: 1.15
-  attackCooldownBuffer: 0.8
 --- !u!114 &9216862354450597352
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -179,37 +180,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4892176ad31b13847abf3f92f0005b5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WeaponLevel
---- !u!114 &5198387631224120451
-MonoBehaviour:
+--- !u!1 &3093487079884910118
+GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2262196305256265501}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 74aff1f5201db904e98ddcc93fae52e2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Projectile
-  speed: 10
-  lifeTime: 100000
-  teamID: 0
-  baseDamage: 100000
-  growthRate: 1.15
-  canCrit: 0
-  critMult: 2
-  externalDmgMod: 1
-  nonlethal: 0
-  piercing: 0
-  unique: 1
-  wallBehavior: 0
-  maxBounces: 0
-  bulletDrop: 0
-  gravityMultiplier: 1
-  IsAoe: 0
-  aoeRange: 0
-  ricochetSFX: []
-  spikedExplosionVFX: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7632502931210757121}
+  m_Layer: 0
+  m_Name: ProjectileSpawnPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7632502931210757121
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3093487079884910118}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.07, y: 0, z: 0.36}
+  m_LocalScale: {x: 0.125, y: 0.125, z: 0.11111112}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3291816693259412515}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8413919201376417393
 GameObject:
   m_ObjectHideFlags: 0
@@ -418,6 +419,11 @@ MonoBehaviour:
   frequency: 1
   rotationSpeed: 50
   rotationAxis: 1
+--- !u!23 &5825680219657340669 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -7511558181221131132, guid: 1661ab4f6e3331143803ba6e510f94a0, type: 3}
+  m_PrefabInstance: {fileID: 5123245805822581369}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7495447282614908794
 PrefabInstance:
   m_ObjectHideFlags: 0
