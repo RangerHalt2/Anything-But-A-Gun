@@ -12,6 +12,8 @@ public class FinalEntDoor : MonoBehaviour
             if (entranceDoor != null)
             {
                 entranceDoor.SetActive(true);
+
+                gameObject.SetActive(false);
             }
         }
     }
