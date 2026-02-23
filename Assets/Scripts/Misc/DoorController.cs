@@ -20,6 +20,7 @@ public class DoorController : MonoBehaviour
             foreach (Transform child in transform)
             {
                 // Set the child GameObject to inactive
+                Debug.Log("DOOR CONTROLLER - OPENING DOORS");
                 child.gameObject.SetActive(false);
             }
         }
@@ -29,6 +30,7 @@ public class DoorController : MonoBehaviour
     {
         if (_other.CompareTag("Player")) 
         {
+            Debug.Log("DOOR CONTROLLER - CLOSING DOORS");
             doorsClosed = true;
             //Turn on the doors
             foreach (Transform child in transform)

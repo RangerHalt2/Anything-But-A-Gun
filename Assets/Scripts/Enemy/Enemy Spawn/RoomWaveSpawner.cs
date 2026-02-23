@@ -28,10 +28,11 @@ public class RoomWaveSpawner : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
+        if (other.gameObject.layer == LayerMask.NameToLayer("Player") && current_wave < num_of_waves)
         {
             StartCoroutine(SpawnWaves());
             locked_doors = true;
+            Debug.Log("ROOM WAVE SPAWNER - Locking the doors");
             foreach (Transform trans in doors_to_remove)
             {
                 trans.gameObject.SetActive(locked_doors);
@@ -82,14 +83,15 @@ public class RoomWaveSpawner : MonoBehaviour
         Debug.Log("ROOM WAVE SPAWNER - Handle Enemy Death Event");
         enemySpawner.aliveEnemies.Remove(enemy);
 
-        if (enemySpawner.aliveEnemies.Count == 0 && staggered_waves && current_wave < num_of_waves)
+        if (enemySpawner.aliveEnemies.Count == 0  && current_wave < num_of_waves)
         {
             StartCoroutine(SpawnWaves());
         }
 
-        if(current_wave == num_of_waves && doors_to_remove != null)
+        if(current_wave == num_of_waves && doors_to_remove != null && enemySpawner.aliveEnemies.Count <= 0)
         {
             locked_doors = false;
+            Debug.Log("ROOM WAVE SPAWNER - Doors unlocking");
             foreach (Transform trans in doors_to_remove)
             {
                 trans.gameObject.SetActive(locked_doors);
