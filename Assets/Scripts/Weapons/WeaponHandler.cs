@@ -217,6 +217,7 @@ public class WeaponHandler : MonoBehaviour
                 }
 
                 currentWeapon.GetComponent<WeaponCollectScript>().enabled = false;
+                currentWeapon.SetActive(false);
                 currentWeapon.SetActive(true);
                 currentWeapon.GetComponent<AmmoManager>().updateDisplay();
                 //currentWeapon.GetComponent<AmmoManager>().updateDisplay();

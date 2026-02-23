@@ -1,6 +1,8 @@
 using System;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Rendering;
+using UnityEngine.UI;
 
 public class AirFrierScript : WeaponClass
 {
@@ -25,7 +27,22 @@ public class AirFrierScript : WeaponClass
     private PlayerController playerRef;
 
     //NEEDS UI FOR CHARGE TIME
+    [SerializeField] private Image cookFill; //The fill portion of the cook UI
+    [SerializeField] private GameObject totalGauge; //The full gauge for turning off and on.
 
+    private void OnEnable() 
+    {
+        if (GetComponent<WeaponCollectScript>().collected)
+        {
+            totalGauge.SetActive(true);
+        }
+    }
+
+    private void OnDisable() 
+    {
+        totalGauge.SetActive(false);
+    }
+    
     private void Awake()
     {
         cookTime = 0f;
@@ -38,6 +55,15 @@ public class AirFrierScript : WeaponClass
 
     private void Update() 
     {
+        if (totalGauge == null)
+        {
+            totalGauge = GameObject.Find("In-Game UI").GetComponentInChildren<WeaponChargeIdentifier>().weaponCharge;
+            cookFill = totalGauge.transform.Find("Fill").GetComponent<Image>();
+        }
+
+        float fillPercent = Mathf.Clamp01(cookTime / maxCookTime);
+        cookFill.fillAmount = fillPercent;
+
         if (cookTime >= 0)
         {
             cookTime -= coolSpeed;
