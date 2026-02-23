@@ -5415,26 +5415,13 @@ PrefabInstance:
       propertyPath: gaugeVFX
       value: 
       objectReference: {fileID: 684606886}
-    - target: {fileID: 9121515661158624816, guid: caa24201197b26b479e66c072d7d3e13, type: 3}
-      propertyPath: critHitScoreAdd
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 9121515661158624816, guid: caa24201197b26b479e66c072d7d3e13, type: 3}
-      propertyPath: scoreStallTimer
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 9121515661158624816, guid: caa24201197b26b479e66c072d7d3e13, type: 3}
-      propertyPath: difBetweenLevels
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 9121515661158624816, guid: caa24201197b26b479e66c072d7d3e13, type: 3}
-      propertyPath: playerDamageScoreSubtract
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6120725345040969484, guid: caa24201197b26b479e66c072d7d3e13, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 636112976}
   m_SourcePrefab: {fileID: 100100000, guid: caa24201197b26b479e66c072d7d3e13, type: 3}
 --- !u!1 &299931544
 GameObject:
@@ -5560,6 +5547,19 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 6120725345040969484, guid: caa24201197b26b479e66c072d7d3e13, type: 3}
   m_PrefabInstance: {fileID: 266335554}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &636112976
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 636112969}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f6d3598395c24e4989c8f75e74a915a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WeaponChargeIdentifier
+  weaponCharge: {fileID: 1732564156}
 --- !u!1 &684606886
 GameObject:
   m_ObjectHideFlags: 0
@@ -10844,6 +10844,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: db96ae0bd1f6a0844aa72ea910db323b, type: 3}
+--- !u!1 &1732564156 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2778169441628771100, guid: caa24201197b26b479e66c072d7d3e13, type: 3}
+  m_PrefabInstance: {fileID: 266335554}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1758886187 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8979866025819109789, guid: caa24201197b26b479e66c072d7d3e13, type: 3}

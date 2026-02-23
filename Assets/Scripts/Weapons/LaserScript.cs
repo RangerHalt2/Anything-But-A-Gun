@@ -1,6 +1,8 @@
 using System;
 using System.Threading;
 using UnityEngine;
+using UnityEngine.Rendering;
+using UnityEngine.UI;
 
 public class LaserScript : WeaponClass
 {
@@ -15,9 +17,12 @@ public class LaserScript : WeaponClass
 
     [SerializeField] private float currentHeat;
     private float overheatAmount = 10f;
-    private float heatRate = 1f;
+    private float heatRate = 0.1f;
     private float coolRate = 5f;
     private bool overheated = false;
+
+    [SerializeField] private Image heatFill; //The fill portion of the UI
+    [SerializeField] private GameObject totalGauge; //The full gauge for turning off and on.
 
     //Logan: This needs a prefab, ryan has a test one and I also made a test one, it allows us to spawn a noise basically and have it play
     //       Cooldown is there so it doesn't spam it per tick.
@@ -31,7 +36,7 @@ public class LaserScript : WeaponClass
     {
         if (!overheated)
         {
-            currentHeat += heatRate * Time.deltaTime;
+            currentHeat += heatRate;
             // If enough time has passed since the last round was fired
             if (timer <= 0)
             {
@@ -94,13 +99,26 @@ public class LaserScript : WeaponClass
 
     private void Update()
     {
+        if (totalGauge == null)
+        {
+            totalGauge = GameObject.Find("In-Game UI").GetComponentInChildren<WeaponChargeIdentifier>().weaponCharge;
+            heatFill = totalGauge.transform.Find("Fill").GetComponent<Image>();
+        }
+
+        float fillPercent = Mathf.Clamp01(currentHeat / overheatAmount);
+        heatFill.fillAmount = fillPercent;
+
         clickTimer -= Time.deltaTime;
-        if (currentHeat >= 0)
+        if (currentHeat > 0)
         {
             currentHeat -= Time.deltaTime * coolRate;
         }
-        if (!overheated && currentHeat > overheatAmount)
+        else if (currentHeat <= 0) 
         { 
+            currentHeat = 0;
+        }
+        if (!overheated && currentHeat > overheatAmount)
+        {
             overheated = true;
         }
         if (overheated && currentHeat <= 0) 
@@ -114,10 +132,17 @@ public class LaserScript : WeaponClass
     private void OnDisable() 
     {
         putAway = Time.time;
+
+        totalGauge.SetActive(false);
     }
     private void OnEnable()
     {
         currentHeat -= (Time.time - putAway) * coolRate;
+
+        if (GetComponent<WeaponCollectScript>().collected)
+        {
+            totalGauge.SetActive(true);
+        }
     }
 
 }
