@@ -33,7 +33,8 @@ public class AmmoManager : MonoBehaviour
     public enum ReloadMode
     {
         Magazine,
-        IndividualRounds
+        IndividualRounds,
+        Recharge //EW: Added specifically for the jousting horse
     }
 
     [Header("Display Settings")]
@@ -263,9 +264,32 @@ public class AmmoManager : MonoBehaviour
                     reloading = false;
                     updateDisplay();
                     break;
-                default:
-                    break;
-            }
+
+            case ReloadMode.Recharge:
+                // Set reloading bool to true
+                reloading = true;
+                updateDisplay();
+
+                    // Wait for reload time
+                    yield return new WaitForSeconds(reloadTime);
+
+                    // Add one round to the player's current ammo
+                    currentAmmo += 1;
+
+                    if (reserveAmmo > 0)
+                    {
+                        reserveAmmo -= 1;
+                    }
+
+                    updateDisplay();
+               
+                // Set reloading to false
+                reloading = false;
+                updateDisplay();
+                break;
+            default:
+                break;
+        }
         // Re-enable the crosshair once the reload has been completed
         if (crosshair != null)
         {

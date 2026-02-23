@@ -7,12 +7,17 @@ public class JoustingHorseScript : WeaponClass
     private Rigidbody joustingRB;
     public Collider joustingCollider;
     private JoustingColliderScript jCS;
-    [SerializeField] private float joustSpeedMultiplier; //How fast you joust
-    [SerializeField] private float joustTime; //How long a joust lasts
+    [SerializeField] private float joustForce; //How fast you joust
+    [SerializeField] private float joustTime; //How long the joust is
+    [SerializeField] private float joustCD;
+    [SerializeField] private ParticleSystem dashEffect;
+    private float joustCharge; //Time before next joust 
+    [SerializeField] private float timeBetweenJoustCharges;
+    private int maxJousts;
+    private int currentJousts;
     private float currentDamage;
-    [SerializeField] private PlayerController pc;
+    private PlayerController pc;
     private float pcBaseSpeed;
-    public bool JOUSTING = false;
 
     private float timer = 0f;
 
@@ -32,7 +37,7 @@ public class JoustingHorseScript : WeaponClass
     public override void Shoot()
     {
         // If enough time has passed since the last round was fired
-        if (timer <= 0)
+        if (pc.canDash && timer <= 0)
         {
                 // If there is an assigned ammo manager, and that ammo manager has at least one round of ammo loaded
             if (ammoManager != null && ammoManager.GetCurrentAmmo() > 0)
@@ -80,26 +85,64 @@ public class JoustingHorseScript : WeaponClass
         StopCoroutine(JOUST());
         pc.movementSpeed = pcBaseSpeed;
         joustingCollider.enabled = false;
-        JOUSTING = false;
+        pc.canDash = true;
     }
 
     private IEnumerator JOUST() 
     {
-        JOUSTING = true;
+        pc.canDash = false;
         joustingCollider.enabled = true;
-        yield return new WaitForSeconds(joustTime);
-        pc.movementSpeed = pcBaseSpeed;
+
+        float startTime = Time.time;
+        Vector3 dashDirection = Camera.main.gameObject.transform.forward;
+        if (dashDirection.sqrMagnitude < 0.1 * 0.1f)
+        {
+            dashDirection = pc.gameObject.transform.forward;
+        }
+
+        //EW: Need a null check to make sure the dash doesn't fail
+        if (gunShot != null)
+        {
+            // Play sound effect (added by Aaron)
+            Instantiate(gunShot, transform.position, transform.rotation, null);
+        }
+
+        while (Time.time < startTime + joustTime)
+        {
+            pc.GetPlayerCharacterController().Move(dashDirection * pc.movementSpeed * joustForce * Time.deltaTime);
+            yield return null;
+        }
+        if (dashEffect != null) dashEffect.Stop();
+
+        yield return new WaitForSeconds(joustCD); //Time before new joust can start
         joustingCollider.enabled = false;
-        JOUSTING = false;
+        pc.canDash = true;
     }
 
     void Update() 
     {
         timer -= Time.deltaTime;
+        maxJousts = ammoManager.GetAmmoCapacity();
+        currentJousts = ammoManager.GetCurrentAmmo();
 
-        if (JOUSTING) 
+        if (currentJousts < maxJousts)
         {
-            pc.movementSpeed += pcBaseSpeed * joustSpeedMultiplier * Time.deltaTime * 0.1f;
+            joustCharge += Time.deltaTime;
         }
+        else 
+        {
+            joustCharge = 0;
+        }
+
+        if (joustCharge >= timeBetweenJoustCharges) 
+        {
+            ammoManager.ReloadWeapon();
+            joustCharge = 0;
+        }
+    }
+
+    public override void Reload() 
+    { 
+        //Reload doesn't work normally on this weapon. Like, on purpose. It reloads it's charges overtime
     }
 }

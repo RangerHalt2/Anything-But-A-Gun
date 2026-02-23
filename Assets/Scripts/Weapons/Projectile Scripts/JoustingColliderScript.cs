@@ -5,28 +5,18 @@ public class JoustingColliderScript : MonoBehaviour
 {
     private JoustingHorseScript jHS;
     public float damage;
-    public int myTeamID;
-    public float currentSpeed;
-    private Vector3 lastPosition;
+    public int myTeamID = 0;
+    private PlayerController pc;
 
     void Start() 
     {
         jHS = GetComponentInParent<JoustingHorseScript>();
-    }
-
-    void Update() 
-    {
-        if (jHS != null && jHS.JOUSTING)
-        {
-            float distance = Vector3.Distance(transform.position, lastPosition);
-            currentSpeed = distance / Time.deltaTime;
-            lastPosition = transform.position;
-        }
+        pc = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
     }
 
     private void OnCollisionEnter(Collision collision) 
     {
-        if (jHS != null && jHS.JOUSTING) 
+        if (jHS != null && !pc.canDash) 
         {
             if (collision.collider.gameObject.tag == "Body")
             {
@@ -34,7 +24,7 @@ public class JoustingColliderScript : MonoBehaviour
                 Health potentialHit = collision.collider.gameObject.GetComponentInParent<Health>();
                 if (potentialHit != null && potentialHit.teamID != myTeamID)
                 {
-                    potentialHit.TakeDamage(damage * currentSpeed);
+                    potentialHit.TakeDamage(damage);
                 }
             }
         }

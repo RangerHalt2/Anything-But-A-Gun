@@ -7,6 +7,11 @@ public class PlayerController : MonoBehaviour
     #region Variables
     private CharacterController characterController;
 
+    public CharacterController GetPlayerCharacterController()
+    {
+        return characterController;
+    }
+
     [SerializeField] private Transform headPoint;
 
     [Header("Base Movement Fields")]
@@ -50,7 +55,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float dashCd = 0.25f; //Don't immediately dash again after the first dash
     public delegate void OnDashChangedDelegate();
     [HideInInspector] public OnDashChangedDelegate onDashChangedCallback;
-    private bool canDash = true;
+    public bool canDash = true;
     [SerializeField] private AudioClip dashSFX;
 
     private Vector3 momentum;
