@@ -101,7 +101,7 @@ public class LaserScript : WeaponClass
     {
         if (totalGauge == null)
         {
-            totalGauge = GameObject.Find("In-Game UI").GetComponentInChildren<WeaponChargeIdentifier>().weaponCharge;
+            totalGauge = GameObject.Find("In-Game UI").GetComponent<WeaponChargeIdentifier>().weaponCharge;
             heatFill = totalGauge.transform.Find("Fill").GetComponent<Image>();
         }
 
@@ -132,8 +132,8 @@ public class LaserScript : WeaponClass
     private void OnDisable() 
     {
         putAway = Time.time;
-
-        totalGauge.SetActive(false);
+        if(totalGauge != null)
+            totalGauge.SetActive(false);
     }
     private void OnEnable()
     {
@@ -141,7 +141,8 @@ public class LaserScript : WeaponClass
 
         if (GetComponent<WeaponCollectScript>().collected)
         {
-            totalGauge.SetActive(true);
+            if (totalGauge != null)
+                totalGauge.SetActive(true);
         }
     }
 

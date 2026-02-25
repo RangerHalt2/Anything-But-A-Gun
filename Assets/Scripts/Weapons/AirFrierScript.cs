@@ -34,13 +34,15 @@ public class AirFrierScript : WeaponClass
     {
         if (GetComponent<WeaponCollectScript>().collected)
         {
-            totalGauge.SetActive(true);
+            if (totalGauge != null)
+                totalGauge.SetActive(true);
         }
     }
 
     private void OnDisable() 
     {
-        totalGauge.SetActive(false);
+        if(totalGauge != null)
+            totalGauge.SetActive(false);
     }
     
     private void Awake()
@@ -57,7 +59,7 @@ public class AirFrierScript : WeaponClass
     {
         if (totalGauge == null)
         {
-            totalGauge = GameObject.Find("In-Game UI").GetComponentInChildren<WeaponChargeIdentifier>().weaponCharge;
+            totalGauge = GameObject.Find("In-Game UI").GetComponent<WeaponChargeIdentifier>().weaponCharge;
             cookFill = totalGauge.transform.Find("Fill").GetComponent<Image>();
         }
 

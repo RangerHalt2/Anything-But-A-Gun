@@ -34,6 +34,16 @@ public class EnemyClass : MonoBehaviour
 
     public event Action<EnemyClass> OnEnemyDeath;
 
+    public EnemyType enemyType;
+
+    public enum EnemyType
+    {
+        Common,
+        Elite,
+        Boss
+    }
+
+
     public Vector3 GetRandomNavMeshPosition(Vector3 center, float range)
     {
         Vector3 randomDirection = UnityEngine.Random.insideUnitSphere * range;

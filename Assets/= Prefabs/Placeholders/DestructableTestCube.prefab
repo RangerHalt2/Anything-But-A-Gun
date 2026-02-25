@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 4698798601818928302}
   - component: {fileID: 5286517468275171391}
   - component: {fileID: 4164879897423385120}
+  - component: {fileID: 277145387440852822}
   m_Layer: 11
   m_Name: DestructableTestCube
   m_TagString: Body
@@ -169,6 +170,41 @@ MonoBehaviour:
   inGameCanvas: {fileID: 0}
   isDead: 0
   damageNoise: {fileID: 0}
+  style: {fileID: 0}
+  ShiningArmor: 0
+--- !u!114 &277145387440852822
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5103132692918949605}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0bd3fd68f3e366e41ac0663b0c9bfed9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyClass
+  agent: {fileID: 0}
+  player: {fileID: 0}
+  whatIsPlayer:
+    serializedVersion: 2
+    m_Bits: 0
+  enemyBulletPrefab: {fileID: 0}
+  firePoint: {fileID: 0}
+  bulletForce: 10
+  patrolRange: 10
+  patrolWaitTime: 2
+  patrolTimer: 0
+  sightRange: 10
+  attackRange: 10
+  timeBetweenAttacks: 2.5
+  alreadyAttacked: 0
+  playerInSightRange: 0
+  playerInAttackRange: 0
+  detectionSprite: {fileID: 0}
+  detectionDisplayTime: 1
+  hasShownDetectionSprite: 0
+  enemyType: 0
 --- !u!1 &6968442708949271560
 GameObject:
   m_ObjectHideFlags: 0
