@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class DivorcePaper : WeaponClass
 {
-
+    [SerializeField] private Mesh[] meshes;
     [SerializeField] private Transform projectileSpawnPoint;
     private float timer = 0;
 
@@ -60,6 +60,13 @@ public class DivorcePaper : WeaponClass
 
         GameObject projectile = Instantiate(bullet, projectileSpawnPoint.position, projectileSpawnPoint.rotation, null);
         //Instantiate(gunShot, transform.position, transform.rotation, null);
+
+        if(projectile != null && meshes.Length > 0)
+        {
+            int index = UnityEngine.Random.Range(0, meshes.Length);
+            MeshFilter currentMesh = projectile.GetComponentInChildren<MeshFilter>();
+            currentMesh.mesh = meshes[index];
+        }
 
         Vector3 rotationEulerAngles = projectile.transform.rotation.eulerAngles;
         projectile.transform.rotation = Quaternion.Euler(rotationEulerAngles);
