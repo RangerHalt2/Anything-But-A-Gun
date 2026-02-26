@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class DivorcePaperProjectile : MonoBehaviour
 {
-
+    public float damage = 20f;
     [SerializeField] private float commonThreshold = 0.5f;
     [SerializeField] private float eliteThreshold = 0.20f;
     [SerializeField] private float bossThreshold = 0.05f;
@@ -124,7 +124,11 @@ public class DivorcePaperProjectile : MonoBehaviour
         {
             enemyHealth.TakeDamage(enemyHealth.currentHealth);
         }
-        Destroy(this.gameObject);
+        else
+        {
+            enemyHealth.TakeDamage(damage);
+        }
+            Destroy(this.gameObject);
     }
 
 }
