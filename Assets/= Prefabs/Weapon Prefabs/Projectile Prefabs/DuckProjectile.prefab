@@ -379,8 +379,32 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3548151832871790943, guid: d55b9b8d4c70d3a40b8dae5c5dc46576, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8418680619938908803}
   m_SourcePrefab: {fileID: 100100000, guid: d55b9b8d4c70d3a40b8dae5c5dc46576, type: 3}
+--- !u!1 &1391186175991590714 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3548151832871790943, guid: d55b9b8d4c70d3a40b8dae5c5dc46576, type: 3}
+  m_PrefabInstance: {fileID: 2482588677856872037}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &8418680619938908803
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1391186175991590714}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36aeb7eb22422024a909a8c979ead610, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FloatAndRotate
+  amplitude: 0
+  frequency: 1
+  rotationSpeed: 300
+  rotationAxis: 1
 --- !u!4 &1730979676963861888 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4212626964492137445, guid: d55b9b8d4c70d3a40b8dae5c5dc46576, type: 3}
