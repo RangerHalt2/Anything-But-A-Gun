@@ -955,6 +955,7 @@ Transform:
   - {fileID: 2340158834006158204}
   - {fileID: 749431892727409475}
   - {fileID: 4265749463885855505}
+  - {fileID: 8712472796459761503}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6544931893236675125
@@ -2341,6 +2342,106 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 4869604582191667626, guid: 55e152c1ebfc718478abc8a88bb47598, type: 3}
   m_PrefabInstance: {fileID: 2775198427615431167}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &3781107449394768142
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 875628917941965011}
+    m_Modifications:
+    - target: {fileID: 908924521841466589, guid: f599c5e95ed7e1547a2d545c4cbf11df, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 908924521841466589, guid: f599c5e95ed7e1547a2d545c4cbf11df, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5517431709261289041, guid: f599c5e95ed7e1547a2d545c4cbf11df, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 5.5059695
+      objectReference: {fileID: 0}
+    - target: {fileID: 5517431709261289041, guid: f599c5e95ed7e1547a2d545c4cbf11df, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -9.17
+      objectReference: {fileID: 0}
+    - target: {fileID: 5517431709261289041, guid: f599c5e95ed7e1547a2d545c4cbf11df, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -7.79
+      objectReference: {fileID: 0}
+    - target: {fileID: 5517431709261289041, guid: f599c5e95ed7e1547a2d545c4cbf11df, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5517431709261289041, guid: f599c5e95ed7e1547a2d545c4cbf11df, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5517431709261289041, guid: f599c5e95ed7e1547a2d545c4cbf11df, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5517431709261289041, guid: f599c5e95ed7e1547a2d545c4cbf11df, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5517431709261289041, guid: f599c5e95ed7e1547a2d545c4cbf11df, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5517431709261289041, guid: f599c5e95ed7e1547a2d545c4cbf11df, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5517431709261289041, guid: f599c5e95ed7e1547a2d545c4cbf11df, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6640356791849090559, guid: f599c5e95ed7e1547a2d545c4cbf11df, type: 3}
+      propertyPath: m_Name
+      value: DroneEnemy
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6640356791849090559, guid: f599c5e95ed7e1547a2d545c4cbf11df, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5987394380278494136}
+  m_SourcePrefab: {fileID: 100100000, guid: f599c5e95ed7e1547a2d545c4cbf11df, type: 3}
+--- !u!1 &7520580785137931505 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6640356791849090559, guid: f599c5e95ed7e1547a2d545c4cbf11df, type: 3}
+  m_PrefabInstance: {fileID: 3781107449394768142}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &5987394380278494136
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7520580785137931505}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: eef365ab042d6a548ba520786772ec78, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!4 &8712472796459761503 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5517431709261289041, guid: f599c5e95ed7e1547a2d545c4cbf11df, type: 3}
+  m_PrefabInstance: {fileID: 3781107449394768142}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4126805773552311973
 PrefabInstance:
