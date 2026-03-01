@@ -226,10 +226,10 @@ MonoBehaviour:
   level: 0
   baseDamage: 0
   levelDamage: 0
-  fireRate: 0.25
-  reloadTime: 1
-  AmmoCapacity: 10
-  reserveAmmo: 80
+  fireRate: 0.33
+  reloadTime: 0.4
+  AmmoCapacity: 4
+  reserveAmmo: 12
   hasPackAPunch: 0
   acceptablePackAPunchOptions:
   - {fileID: 11400000, guid: eca31965d964ef9468c904da4cdb57b8, type: 2}
@@ -251,10 +251,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AmmoManager
   reserveAmmo: 120
-  ammoCapacity: 10
-  currentAmmo: 10
+  ammoCapacity: 4
+  currentAmmo: 4
   ammoConsumption: 1
-  reloadTime: 0.5
+  reloadTime: 0.4
   canCancelReload: 0
   reloadMode: 0
   crosshair: {fileID: 0}
@@ -435,6 +435,10 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: dc87595e518e40041916b3c6c1b53131, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: dc87595e518e40041916b3c6c1b53131, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -7511558181221131132, guid: dc87595e518e40041916b3c6c1b53131, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
