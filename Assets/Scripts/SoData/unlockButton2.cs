@@ -4,9 +4,9 @@ using UnityEngine;
 public class unlockButton2 : ScriptableObject
 {
 
-	public bool _value;
+	public int _value;
 
-	public bool Value
+	public int Value
 	{
 		get { return _value; }
 		set { _value = value; }
