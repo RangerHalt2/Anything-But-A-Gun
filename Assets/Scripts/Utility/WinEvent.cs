@@ -18,6 +18,9 @@ public class WinEvent : MonoBehaviour
     [SerializeField] private Vector3 nextScenePos;
     public WaveManager doorOpen;
 
+    [SerializeField]
+    public unlockButton2 button2;
+
     public bool hasWon = false;
 
     public void Start()
@@ -45,6 +48,7 @@ public class WinEvent : MonoBehaviour
         // Ensure that the game object entering the trigger is the player
         if (other.gameObject.CompareTag("Player"))
          {
+            button2.Value = true;
             // If it is the final level
             if (isFinalLevel)
             {
