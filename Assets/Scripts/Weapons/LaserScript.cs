@@ -17,7 +17,7 @@ public class LaserScript : WeaponClass
 
     [SerializeField] private float currentHeat;
     private float overheatAmount = 10f;
-    private float heatRate = 0.1f;
+    private float heatRate = 0.06f;
     private float coolRate = 5f;
     private bool overheated = false;
 
