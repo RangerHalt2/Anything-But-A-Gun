@@ -560,7 +560,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7420876136058575393}
   m_Layer: 0
-  m_Name: Lab boss room
+  m_Name: final boss room
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1281,7 +1281,7 @@ Transform:
   m_GameObject: {fileID: 1208939178893244566}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.377, y: 1.174749, z: 0.076}
+  m_LocalPosition: {x: -27.436918, y: 1.5415082, z: -4.1926303}
   m_LocalScale: {x: 0.3757032, y: 3.882892, z: 0.2549827}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6725,6 +6725,7 @@ GameObject:
   - component: {fileID: 2676871660355413658}
   - component: {fileID: 6447446011956428866}
   - component: {fileID: 8600448259696540135}
+  - component: {fileID: 3238965485742618497}
   m_Layer: 0
   m_Name: suboffice stairs
   m_TagString: Untagged
@@ -6804,6 +6805,28 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &3238965485742618497
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2569951345870625032}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300000, guid: 539505f87bf63df47bc5bc50939a02e8, type: 2}
 --- !u!1 &2593179826432633575
 GameObject:
   m_ObjectHideFlags: 0
@@ -8224,7 +8247,7 @@ Transform:
   m_GameObject: {fileID: 5253650127622555703}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.4394311, y: 0.7081911, z: -3.2364452}
+  m_LocalPosition: {x: -25.479506, y: 1.6325431, z: -3.1089537}
   m_LocalScale: {x: 0.3757032, y: 3.882892, z: 0.2549827}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -8367,7 +8390,7 @@ Transform:
   m_GameObject: {fileID: 5697982205561549235}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.564, y: 0.9443195, z: -2.881}
+  m_LocalPosition: {x: -27.733725, y: 2.3452666, z: -3.491428}
   m_LocalScale: {x: 0.3757032, y: 3.882892, z: 0.2549827}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -8689,7 +8712,7 @@ Transform:
   m_GameObject: {fileID: 6121430832612860012}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.21, y: 0.9443195, z: 4.81}
+  m_LocalPosition: {x: -27.733725, y: 2.3452666, z: -3.491428}
   m_LocalScale: {x: 0.3757032, y: 3.882892, z: 0.2549827}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -8706,6 +8729,7 @@ GameObject:
   - component: {fileID: 1207455099290222663}
   - component: {fileID: 4768538715696077038}
   - component: {fileID: 7741548754789944065}
+  - component: {fileID: 5911021782629164553}
   m_Layer: 0
   m_Name: suboffice stairs (1)
   m_TagString: Untagged
@@ -8785,6 +8809,28 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &5911021782629164553
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6146454404834661011}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300000, guid: 539505f87bf63df47bc5bc50939a02e8, type: 2}
 --- !u!1 &6428011110641238629
 GameObject:
   m_ObjectHideFlags: 0
@@ -11093,30 +11139,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7420876136058575393}
     m_Modifications:
-    - target: {fileID: 268410239480067319, guid: 554e0d08c09c7564bac1d0ea3105d5d6, type: 3}
-      propertyPath: m_Size.x
-      value: 1.7871027
-      objectReference: {fileID: 0}
-    - target: {fileID: 268410239480067319, guid: 554e0d08c09c7564bac1d0ea3105d5d6, type: 3}
-      propertyPath: m_Size.y
-      value: 1.4297135
-      objectReference: {fileID: 0}
-    - target: {fileID: 268410239480067319, guid: 554e0d08c09c7564bac1d0ea3105d5d6, type: 3}
-      propertyPath: m_Size.z
-      value: 2.2273
-      objectReference: {fileID: 0}
-    - target: {fileID: 268410239480067319, guid: 554e0d08c09c7564bac1d0ea3105d5d6, type: 3}
-      propertyPath: m_Center.x
-      value: 3.7658463
-      objectReference: {fileID: 0}
-    - target: {fileID: 268410239480067319, guid: 554e0d08c09c7564bac1d0ea3105d5d6, type: 3}
-      propertyPath: m_Center.y
-      value: -0.21485654
-      objectReference: {fileID: 0}
-    - target: {fileID: 268410239480067319, guid: 554e0d08c09c7564bac1d0ea3105d5d6, type: 3}
-      propertyPath: m_Center.z
-      value: 3.4588792
-      objectReference: {fileID: 0}
     - target: {fileID: 2414442786891915341, guid: 554e0d08c09c7564bac1d0ea3105d5d6, type: 3}
       propertyPath: m_LocalPosition.x
       value: 49.20385
@@ -15944,18 +15966,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7420876136058575393}
     m_Modifications:
-    - target: {fileID: 268410239480067319, guid: 554e0d08c09c7564bac1d0ea3105d5d6, type: 3}
-      propertyPath: m_Size.x
-      value: 1.787102
-      objectReference: {fileID: 0}
-    - target: {fileID: 268410239480067319, guid: 554e0d08c09c7564bac1d0ea3105d5d6, type: 3}
-      propertyPath: m_Size.y
-      value: 1.4885504
-      objectReference: {fileID: 0}
-    - target: {fileID: 268410239480067319, guid: 554e0d08c09c7564bac1d0ea3105d5d6, type: 3}
-      propertyPath: m_Center.y
-      value: -0.2442753
-      objectReference: {fileID: 0}
     - target: {fileID: 2414442786891915341, guid: 554e0d08c09c7564bac1d0ea3105d5d6, type: 3}
       propertyPath: m_LocalPosition.x
       value: 49.20385

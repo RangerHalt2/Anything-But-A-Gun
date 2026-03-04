@@ -1082,8 +1082,8 @@ Transform:
   m_GameObject: {fileID: 4284266784969415518}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 15.4035, y: 4.4447, z: 23.448853}
-  m_LocalScale: {x: 10.868778, y: 2.1104789, z: 1.9984915}
+  m_LocalPosition: {x: 15.4035, y: 4.7183, z: 23.448853}
+  m_LocalScale: {x: 10.868778, y: 2.657726, z: 1.9984915}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7036923912782059787}
@@ -1345,7 +1345,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 04c47d91bc8ace049a88342eef164c1e, type: 2}
+  - {fileID: 2100000, guid: d0b5e4158ed9a0d4b8e195097fac9835, type: 2}
   - {fileID: 2100000, guid: 6b791ea179ecb814f90c9a9db06e489a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
@@ -1569,7 +1569,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 04c47d91bc8ace049a88342eef164c1e, type: 2}
+  - {fileID: 2100000, guid: d0b5e4158ed9a0d4b8e195097fac9835, type: 2}
   - {fileID: 2100000, guid: 6b791ea179ecb814f90c9a9db06e489a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
@@ -2521,6 +2521,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Vases_B
       objectReference: {fileID: 0}
+    - target: {fileID: 9206916753410140986, guid: f06797d7f791eac49aa997e6e38d96a2, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 9206916753410140986, guid: f06797d7f791eac49aa997e6e38d96a2, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 0c47ab76383c75640910aee4f560134f, type: 2}
+    - target: {fileID: 9206916753410140986, guid: f06797d7f791eac49aa997e6e38d96a2, type: 3}
+      propertyPath: 'm_Materials.Array.data[1]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 6b791ea179ecb814f90c9a9db06e489a, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
