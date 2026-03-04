@@ -84,6 +84,15 @@ public class AchievementManager : MonoBehaviour
         File.WriteAllText(filePath, json);
     }
 
+    // Getter method for achievements
+    public Achievement GetAchievement(string id)
+    {
+        if (database == null || database.achievements == null)
+            return null;
+
+        return database.achievements.Find(a => a.id == id);
+    }
+
     // Unlocks an achievement based on the provided id
     // To unlock an achievement in another script use the following line of code: AchievementManager.Instance.UnlockAchievement(achievementId);
     // achievementId is the internal id for the achievement

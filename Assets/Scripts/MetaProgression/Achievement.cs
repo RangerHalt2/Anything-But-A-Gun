@@ -15,6 +15,8 @@ public class Achievement
     public string flavorText;
     [Tooltip("The description of the achievement.")]
     public string description;
+    [Tooltip("The reward unlocked from beating attaining the achievement.")]
+    public string reward;
     [Tooltip("Flag used to determine if a specific achievmenet has been unlocked or not.")]
     public bool unlocked;
 
