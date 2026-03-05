@@ -30,7 +30,7 @@ public class AchievementInfoPanel : MonoBehaviour
     [SerializeField] private string defaultAchivementID;
 
 
-    void Awake()
+    void Start()
     {
         DisplayAchievement(defaultAchivementID);
     }
@@ -84,7 +84,7 @@ public class AchievementInfoPanel : MonoBehaviour
         }
         else
         {
-            rewardText.text = achievement.reward;
+            rewardText.text = "Reward: " + achievement.reward;
         }
 
         // If achievement is unlocked

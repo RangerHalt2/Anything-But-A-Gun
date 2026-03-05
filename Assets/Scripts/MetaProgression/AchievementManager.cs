@@ -12,6 +12,10 @@ public class AchievementManager : MonoBehaviour
 
     string filePath;
 
+    [Header("DEBUG/CHEATS")]
+    [Tooltip("For testing purposes only. Allows for the achievment menu to lock or unlock a given achievement by holding Ctrl + Shift when clicking on one of the achievments")]
+    [SerializeField] bool toggleAchivementState = false;
+
     void Awake()
     {
         // Ensure there is only one instance of the Achievement Manager at any one time
@@ -34,6 +38,7 @@ public class AchievementManager : MonoBehaviour
         Debug.Log(Application.persistentDataPath);
     }
 
+    #region Achievement Management
     void LoadAchievements()
     {
         // If player save exists, load it
@@ -131,6 +136,33 @@ public class AchievementManager : MonoBehaviour
 
         Debug.Log("AchievementManager: Unlocked: " + id);
     }
+#endregion
+
+    #region Debug
+    // Getter method for toggleAchievmentState. Intended for debug purposes only
+    public bool canToggle()
+    {
+        return toggleAchivementState;
+    }
+
+    // Toggles the state of an achievement between its locked and unlocked state. Intended for debug purposes only
+    public void ToggleAchievement(string id)
+    {
+        // Find an achievment in the database whose id matches the provided id
+        Achievement achievement = database.achievements.Find(a => a.id == id);
+
+        // If no achievmeent was found, do nothing
+        if (achievement == null)
+        {
+            Debug.LogWarning("AchievementManager: No achievement with id: " + id);
+            return;
+        }
+
+        // Toggle the state of the achievment
+        achievement.unlocked = !achievement.unlocked;
+
+        SaveAchievements();
+    }
 
     // Resets all of the player's achivements
     [ContextMenu("Reset All Achievements")]
@@ -154,6 +186,7 @@ public class AchievementManager : MonoBehaviour
 
         Debug.Log("AchievementManager: All achievements have been reset.");
     }
+    #endregion
 
     // Apply the metaprogression rewards for the given achivement
     public void ApplyMetaReward()

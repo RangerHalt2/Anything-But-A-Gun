@@ -2,6 +2,7 @@
 // Special Button code meant for the Achivement Menu
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;
 
 // Requires the object this script is applied to to be a button
 [RequireComponent(typeof(Button))]
@@ -30,7 +31,20 @@ public class AchievementButton : MonoBehaviour
     // Called when button is clicked
     void OnClick()
     {
-        if(infoPanel != null)
+        // Check if the player is holding ctrl or shift when pressing an achievement button
+        bool ctrl = Keyboard.current.leftCtrlKey.isPressed || Keyboard.current.rightCtrlKey.isPressed;
+        bool shift = Keyboard.current.leftShiftKey.isPressed || Keyboard.current.rightShiftKey.isPressed;
+
+        // Debug: Toggle Achievment
+        // If the Achievement Manager is set to allow for toggling achivement states, and the player presses a button while holding ctrl and shift, toggle the achievement
+        if(AchievementManager.Instance.canToggle() && ctrl && shift)
+        {
+            AchievementManager.Instance.ToggleAchievement(achievementID);
+            RefreshVisual();
+        }
+
+
+        if (infoPanel != null)
         {
             infoPanel.DisplayAchievement(achievementID);
         }
