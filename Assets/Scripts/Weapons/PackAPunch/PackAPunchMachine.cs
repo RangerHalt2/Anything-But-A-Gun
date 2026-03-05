@@ -27,6 +27,7 @@ public class PackAPunchMachine : MonoBehaviour, IInteractable
             if (worked)
             {
                 counter++;
+                GameEvent.OnWeaponModified?.Invoke();
             }
             if (counter == numOfUses)
             {

@@ -93,9 +93,33 @@ public class AchievementManager : MonoBehaviour
     public Achievement GetAchievement(string id)
     {
         if (database == null || database.achievements == null)
+        {
+            Debug.LogWarning("Achivement Manager: Get Achievement called with invalid id!");
             return null;
+        }
 
         return database.achievements.Find(a => a.id == id);
+    }
+    
+    public bool CheckAchivementStatus(string id)
+    {
+        if (database == null || database.achievements == null)
+        {
+            Debug.LogWarning("Achivement Manager: Check Achievement Status called with invalid id!");
+            return false;
+        }
+        // Find the achivement in the database
+        Achievement a = database.achievements.Find(a => a.id == id);
+        // Check if it is unlocked
+        if (a.unlocked)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+
     }
 
     // Unlocks an achievement based on the provided id
@@ -136,7 +160,49 @@ public class AchievementManager : MonoBehaviour
 
         Debug.Log("AchievementManager: Unlocked: " + id);
     }
-#endregion
+    #endregion
+
+    #region Event Management
+    private void OnEnable()
+    {
+        GameEvent.OnLevelCompleted += HandleLevelCompleted;
+        GameEvent.OnEnemyKilled += HandleEnemyKill;
+        GameEvent.OnWeaponModified += HandlePromotion;
+        GameEvent.StyleMaxxed += HandleStyleMaxxed;
+    }
+
+    private void OnDisable()
+    {
+        GameEvent.OnLevelCompleted += HandleLevelCompleted;
+    }
+
+    #region Event Handlers
+    // Attempts to unlock achievements when levels are completed
+    void HandleLevelCompleted(string levelID)
+    {
+        if (levelID == "office")
+            UnlockAchievement("beat_first_level");
+
+        if (levelID == "lab")
+            UnlockAchievement("beat_second_level");
+    }
+
+    void HandleEnemyKill()
+    {
+        UnlockAchievement("beat_first_enemy");
+    }
+
+    void HandlePromotion()
+    {
+        UnlockAchievement("modify_weapon");
+    }
+
+    void HandleStyleMaxxed()
+    {
+       UnlockAchievement("max_style");
+    }
+    #endregion
+    #endregion
 
     #region Debug
     // Getter method for toggleAchievmentState. Intended for debug purposes only

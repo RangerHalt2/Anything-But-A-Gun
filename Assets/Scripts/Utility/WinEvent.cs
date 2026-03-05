@@ -83,6 +83,14 @@ public class WinEvent : MonoBehaviour
                     player.transform.position = nextScenePos;
                     Debug.Log(other.transform.position);
 
+                    if(nextSceneName == "Level Gen 3")
+                    {
+                        GameEvent.OnLevelCompleted?.Invoke("office");
+                    }
+                    else if (nextSceneName == "Level Gen 4")
+                    {
+                        GameEvent.OnLevelCompleted?.Invoke("lab");
+                    }
                     // Go to the next scene
                     sceneController.GoToScene(nextSceneName);
                 }

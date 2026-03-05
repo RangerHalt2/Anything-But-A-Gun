@@ -16,6 +16,7 @@ public class Health : MonoBehaviour
     [SerializeField] public float maxHealth = 1f;
     [Tooltip("The amount of health the object currently has. If the current health is 0, the object is dead.")]
     [SerializeField] public float currentHealth = 1f;
+    private float intialMaxHealth;
 
     //EW: For nonlethal damage
     [Tooltip("Whether or not the enemy died from nonlethal damage. Public so other methods can call it.")]
@@ -64,6 +65,7 @@ public class Health : MonoBehaviour
         style = (StyleGaugeController)FindFirstObjectByType(typeof(StyleGaugeController));
         playerLevel = GameObject.FindAnyObjectByType<Player_Level>();
         isDead = false;
+        intialMaxHealth = maxHealth;
         // Automatically kill object if it has 0 or less health
         if (currentHealth <= 0)
         {
@@ -83,6 +85,12 @@ public class Health : MonoBehaviour
         if (healthBar != null && !healthBarActiveOnStartup)
         {
             healthBar.Deactivate();
+        }
+
+        // If object is the player
+        if (isPlayer)
+        {
+            ApplyAchievementHealthIncreases();
         }
     }
 
@@ -204,6 +212,8 @@ public class Health : MonoBehaviour
             {
                 enmy.Die();
             }
+            // RL: Event for Achievement Manager
+            GameEvent.OnEnemyKilled?.Invoke();
             Destroy(gameObject);
         }
         else if (isPlayer)
@@ -219,6 +229,29 @@ public class Health : MonoBehaviour
             inGameCanvas.SetActive(false);
             Cursor.lockState = CursorLockMode.None;
         }
+    }
+
+    public void ApplyAchievementHealthIncreases()
+    {
+        int healthUpAchievements = 0;
+
+        // If an achievement's reward contains the text "+5% health", add it to the tally of health up achievements
+        if (AchievementManager.Instance.database.achievements != null)
+        {
+            foreach(Achievement achievement  in AchievementManager.Instance.database.achievements)
+            {
+                if(achievement.unlocked && achievement.reward.Contains("+5% Health"))
+                {
+                    healthUpAchievements++;
+                }
+            }
+        }
+
+        // Calculate bonus health
+        float bonusHealth = healthUpAchievements * (intialMaxHealth * 0.05f);
+
+        // Set player's max health based on the amount of achievements
+        setMaxHealth(maxHealth + bonusHealth, true);
     }
 
     // Allows you to set a new maximum health for an object while either maintaining their relative health or fully healing them.

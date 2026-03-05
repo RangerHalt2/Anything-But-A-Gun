@@ -100,6 +100,7 @@ GameObject:
   - component: {fileID: -6795824228135107553}
   - component: {fileID: 7998753799558321746}
   - component: {fileID: 5316091083430951825}
+  - component: {fileID: -6655403942019965542}
   m_Layer: 11
   m_Name: Roomba
   m_TagString: Enemy
@@ -296,6 +297,7 @@ MonoBehaviour:
   detectionSprite: {fileID: 0}
   detectionDisplayTime: 1
   hasShownDetectionSprite: 0
+  enemyType: 0
   patrolDistance: 10
   patrolSpeed: 10
   navEdgeCheckDistance: 2
@@ -402,6 +404,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &-6655403942019965542
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3695943591121391829}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 917ea3948bf6f144996a90e42e87b398, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyType
+  enemyId: boomba
 --- !u!1 &6065764785548395232
 GameObject:
   m_ObjectHideFlags: 0

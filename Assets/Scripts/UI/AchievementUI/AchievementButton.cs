@@ -28,6 +28,11 @@ public class AchievementButton : MonoBehaviour
         RefreshVisual();
     }
 
+    void OnEnable()
+    {
+        RefreshVisual();
+    }
+
     // Called when button is clicked
     void OnClick()
     {

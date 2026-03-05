@@ -78,6 +78,12 @@ public class StyleGaugeController : MonoBehaviour
                 var main = gaugeVFX.GetComponent<ParticleSystem>().main;
                 main.simulationSpeed += simulationSpeedChange; 
             }
+
+            // RL: event for achivements
+            if (level == maxLevel)
+            {
+                GameEvent.StyleMaxxed?.Invoke();
+            }
         }
         else if (score > difBetweenLevels && level == maxLevel) 
         { 
