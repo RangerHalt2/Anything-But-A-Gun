@@ -17,6 +17,7 @@ public class AirplaneProjectileScript : MonoBehaviour
     [SerializeField] private float sightDistance = 1f; //Distance below that the plane can see an enemy.
     [SerializeField] private float searchRadius = 1f;
     [SerializeField] private LayerMask enemy;
+    [SerializeField] private GameObject explosion;
 
     void Start() 
     {
@@ -70,11 +71,14 @@ public class AirplaneProjectileScript : MonoBehaviour
         return currentTarget;
     }
 
-    /*void OnDestroy() 
+    void OnDestroy() 
     {
-        //Instantiate an explosion
-        Debug.Log("BOOM!!");
-    }*/
+        if (dive)
+        {
+            //Instantiate an explosion
+            Instantiate(explosion, transform.position, transform.rotation, null);
+        }
+    }
 
     public void SetWeaponLevelReference(WeaponLevel weaponLevel)
     {

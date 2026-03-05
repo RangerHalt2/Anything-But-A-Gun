@@ -21,7 +21,7 @@ public class StyleGaugeController : MonoBehaviour
     [SerializeField] private GameObject totalGauge; //The full gauge for turning off and on.
     [SerializeField] private GameObject gaugeVFX; //Same thing as last ^^^
     [SerializeField] private float simulationSpeedChange = 1f; //The amount that the simulationSpeed of the above VFX changes
-
+    [SerializeField] private float colorChangeSpeed = 1f; //The speed that the color changes when a player levels up;
 
     void Start() 
     {
@@ -50,7 +50,6 @@ public class StyleGaugeController : MonoBehaviour
             if (letter[level] != null) { letter[level].SetActive(false); }
             level--;
             Debug.Log("Level is now: " + level);
-            bWBoxVolume.blendDistance = color[level];
             if (letter[level] != null) { letter[level].SetActive(true); }
             if (gaugeVFX != null)
             {
@@ -72,7 +71,7 @@ public class StyleGaugeController : MonoBehaviour
             score -= difBetweenLevels;
             if (letter[level] != null) { letter[level].SetActive(false); }
             level++;
-            bWBoxVolume.blendDistance = color[level];
+            
             if (letter[level] != null) { letter[level].SetActive(true); }
             if (gaugeVFX != null) 
             {
@@ -88,6 +87,11 @@ public class StyleGaugeController : MonoBehaviour
         // Set the slider's value to the current percentage of health the object has
         float fillPercent = Mathf.Clamp01(score / difBetweenLevels);
         scoreFill.fillAmount = fillPercent;
+
+        //Blend Distance 
+        if (bWBoxVolume.blendDistance < color[level]) { bWBoxVolume.blendDistance += (Time.deltaTime / level) * colorChangeSpeed; }
+        else if (bWBoxVolume.blendDistance > color[level]) { bWBoxVolume.blendDistance -= (Time.deltaTime / level) * colorChangeSpeed; ; }
+        else { bWBoxVolume.blendDistance = color[level]; }
     }
 
     public void IncreaseScore(bool enemyDeath, bool critHit) //When the player kills an enemy, or crits.

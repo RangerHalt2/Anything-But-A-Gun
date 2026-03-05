@@ -65,7 +65,7 @@ public class PootCloudScript : MonoBehaviour, IWeaponLevel
         Health health = _other.gameObject.GetComponentInParent<Health>();
 
         // If the object has a health script
-        if (health != null)
+        if (health != null && health.gameObject.tag != "Player")
         {
             // Deal damage to targets health equal to projectile's damage
             health.TakeDamage(cummulativeDamage);
