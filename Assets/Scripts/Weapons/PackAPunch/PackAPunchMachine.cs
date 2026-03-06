@@ -11,7 +11,21 @@ public class PackAPunchMachine : MonoBehaviour, IInteractable
     private WeaponClass wc;
 
     public bool canInteract { get; set; } = true;
+    [Tooltip("Allows the promotion machine to ignore the player's currently unlocked achievements and spawn even if conditions are not met.")]
+    [SerializeField] private bool forceSpawn = true;
 
+    // RL: Added check for Achievement Manager to see if Promotion Machines should be enable based on whether or not the player has the achievement beat_first_level AKA Nine-To-Five
+    public void Start()
+    {
+        if (AchievementManager.Instance != null)
+        {
+            // If the player has not obtained the achievement Nine-To-Five (ID: beat_first_level) and the promotion is not set to be force spawned
+            if (!AchievementManager.Instance.CheckAchivementStatus("beat_first_level") && !forceSpawn)
+            {
+                Destroy(gameObject);
+            }
+        }
+    }
     public void Interact()
     {
         Debug.Log("Pack-A-Punch Machine Begin");
