@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Shockwave : MonoBehaviour
+public class BigShoot : MonoBehaviour
 {
     [Header("Damage Settings")]
     [SerializeField] private float damage = 20f;
@@ -22,4 +22,6 @@ public class Shockwave : MonoBehaviour
             health.TakeDamage(damage);
         }
     }
+
+    //Maybe add a breakeble object that can be used as cover
 }

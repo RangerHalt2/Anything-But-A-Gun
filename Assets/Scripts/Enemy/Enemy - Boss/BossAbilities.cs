@@ -17,6 +17,13 @@ public class BossAbilities : MonoBehaviour
     public GameObject missilePrefab;
     public float missileSpacing = 2f;
 
+    [Header("Big Shot Settings")]
+    public GameObject bigShotPrefab;
+    public float chargeTime = 2f;
+    public float fireDelay = 1f;
+    public float bigShotSpeed = 20f;
+    public Transform shootPoint;
+
     [Header("Player Reference")]
     [SerializeField] private Transform player;
 
@@ -24,7 +31,7 @@ public class BossAbilities : MonoBehaviour
     {
         if (player == null)
         {
-            Debug.LogError("BossAbilities: Player reference not assigned in the inspector!");
+            Debug.LogError("BossAbilities: Player reference not assigned!");
             return;
         }
 
@@ -44,11 +51,13 @@ public class BossAbilities : MonoBehaviour
                 case 0:
                     yield return StartCoroutine(ShockwaveAttack());
                     break;
+
                 case 1:
                     MissileStrike();
                     break;
+
                 case 2:
-                    AbilityThree();
+                    yield return StartCoroutine(AbilityThree());
                     break;
             }
         }
@@ -63,33 +72,32 @@ public class BossAbilities : MonoBehaviour
         Vector3 spawnPosition = transform.position;
         Vector3 currentScale = initialScale;
 
-        for (int i = 0; i < shockwaveCount + 1; i++)
-        {
-            spawnPosition += direction * (1.5f * i);
+        float previousLength = currentScale.z;
 
-            if (i == 0)
-            {
-                currentScale.x *= waveSize;
-                currentScale.z *= waveSize;
-                yield return new WaitForSeconds(timeBetweenWaves);
-                continue;
-            }
+        for (int i = 0; i < shockwaveCount; i++)
+        {
+            float newLength = previousLength * waveSize;
+
+            float spacing = (previousLength / 2f) + (newLength / 2f);
+            spawnPosition += direction * spacing;
 
             RaycastHit hit;
             if (Physics.Raycast(spawnPosition + Vector3.up * 5f, Vector3.down, out hit, 10f))
             {
                 Vector3 wavePosition = hit.point;
+
+                currentScale.x = newLength;
+                currentScale.z = newLength;
+                currentScale.y = newLength * 0.2f;
+
+                wavePosition += Vector3.up * (currentScale.y / 2f);
+
                 GameObject shockwave = Instantiate(shockwavePrefab, wavePosition, Quaternion.LookRotation(direction));
 
                 shockwave.transform.localScale = currentScale;
             }
-            else
-            {
-                Debug.LogWarning("BossAbilities: No ground found under spawn position!");
-            }
 
-            currentScale.x *= waveSize;
-            currentScale.z *= waveSize;
+            previousLength = newLength;
 
             yield return new WaitForSeconds(timeBetweenWaves);
         }
@@ -97,12 +105,6 @@ public class BossAbilities : MonoBehaviour
 
     void MissileStrike()
     {
-        if (player == null)
-        {
-            Debug.LogError("BossAbilities: Player reference not assigned!");
-            return;
-        }
-
         Vector3[] offsets = new Vector3[]
         {
             new Vector3(-missileSpacing, 0, missileSpacing),
@@ -130,26 +132,45 @@ public class BossAbilities : MonoBehaviour
 
     void SpawnMissileOnGround(Vector3 position)
     {
-        if (missilePrefab == null)
-        {
-            Debug.LogError("BossAbilities: Missile prefab not assigned!");
-            return;
-        }
-
         RaycastHit hit;
+
         if (Physics.Raycast(position + Vector3.up * 10f, Vector3.down, out hit, 20f))
         {
-            Vector3 spawnPosition = hit.point;
-            Instantiate(missilePrefab, spawnPosition, Quaternion.identity);
-        }
-        else
-        {
-            Debug.LogWarning("BossAbilities: No ground found at position " + position);
+            Instantiate(missilePrefab, hit.point, Quaternion.identity);
         }
     }
 
-    void AbilityThree()
+    IEnumerator AbilityThree()
     {
-        Debug.Log("BossAbilities: Ability Three triggered");
+        Debug.Log("BossAbilities: Charging Big Shot...");
+
+        BossAI bossAI = GetComponent<BossAI>();
+        if (bossAI != null)
+        {
+            bossAI.SetMovementEnabled(false);
+        }
+
+        yield return new WaitForSeconds(chargeTime);
+
+        Vector3 lockedPlayerPosition = player.position;
+
+        yield return new WaitForSeconds(fireDelay);
+
+        Vector3 direction = (lockedPlayerPosition - shootPoint.position).normalized;
+
+        GameObject shot = Instantiate(bigShotPrefab, shootPoint.position, Quaternion.LookRotation(direction) * Quaternion.Euler(90f, 0f, 0f));
+
+        Rigidbody rb = shot.GetComponent<Rigidbody>();
+        if (rb != null)
+        {
+            rb.linearVelocity = direction * bigShotSpeed;
+        }
+
+        Debug.Log("BossAbilities: Big Shot Fired!");
+
+        if (bossAI != null)
+        {
+            bossAI.SetMovementEnabled(true);
+        }
     }
 }
