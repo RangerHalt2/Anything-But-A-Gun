@@ -48,6 +48,7 @@ public class WinEvent : MonoBehaviour
         // Ensure that the game object entering the trigger is the player
         if (other.gameObject.CompareTag("Player"))
          {
+            if (button2 != null)
             button2.Value = 1;
             // If it is the final level
             if (isFinalLevel)
