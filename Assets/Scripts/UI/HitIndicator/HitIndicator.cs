@@ -15,6 +15,7 @@ public class HitIndicator : MonoBehaviour
     public void Initialize(Transform enemySource)
     {
         enemyLocation = enemySource;
+        lastKnownPosition = enemyLocation.position;
         playerLocation = GameObject.FindAnyObjectByType<PlayerController>().transform;
     }
 
@@ -37,7 +38,7 @@ public class HitIndicator : MonoBehaviour
         arrow.anchoredPosition = hitDir2D * radius;
 
         float angle = Mathf.Atan2(hitDir2D.x, hitDir2D.y) * Mathf.Rad2Deg;
-        transform.localRotation = Quaternion.Euler(0, 0, -angle);
+        arrow.localRotation = Quaternion.Euler(0, 0, -angle);
         if (enemyLocation != null)
         {
             lastKnownPosition = enemyLocation.position;

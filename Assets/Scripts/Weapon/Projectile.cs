@@ -247,7 +247,7 @@ public class Projectile : MonoBehaviour, IWeaponLevel
             else 
             {
                 //Take damage
-                health.TakeDamage(cummulativeDamage, this.gameObject.transform);
+                health.TakeDamage(cummulativeDamage, enemyPosition);
             }
             // If projectile is not piercing...
             if (!piercing && !unique)
