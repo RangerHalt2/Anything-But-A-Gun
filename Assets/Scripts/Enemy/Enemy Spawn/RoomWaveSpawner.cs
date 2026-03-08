@@ -66,6 +66,19 @@ public class RoomWaveSpawner : MonoBehaviour
         }
     }
 
+    private void Update()
+    {
+        if(current_wave == num_of_waves && doors_to_remove != null && enemySpawner.aliveEnemies.Count <= 0 && locked_doors)
+        {
+            locked_doors = false;
+            Debug.Log("ROOM WAVE SPAWNER - Doors unlocking from Update");
+            foreach (Transform trans in doors_to_remove)
+            {
+                trans.gameObject.SetActive(locked_doors);
+            }
+        }
+    }
+
     private void AssignListeners()
     {
         Debug.Log("ROOM WAVE SPAWNER - Assigning Listeners");
