@@ -105,6 +105,10 @@ public class EnemyClass : MonoBehaviour
             {
                 rb.AddForce(direction * bulletForce, ForceMode.Impulse);
             }
+            if(bullet.TryGetComponent(out Projectile projectile))
+            {
+                projectile.enemyPosition = this.transform;
+            }
         }
     }
 

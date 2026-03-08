@@ -82,12 +82,12 @@ public class SnapshotBehaviorScript : MonoBehaviour
             {
                 if (theirHealthUnchanged && (intermediaryHealth > myHealth.currentHealth)) //If my health decreased
                 {
-                    theirHealth.TakeDamage(intermediaryHealth - myHealth.currentHealth); //Decrease their health
+                    theirHealth.TakeDamage(intermediaryHealth - myHealth.currentHealth, this.transform); //Decrease their health
                     intermediaryHealth = myHealth.currentHealth;
                 }
                 else if (myHealthUnchanged && (intermediaryHealth > theirHealth.currentHealth)) //If their health decreased
                 {
-                    myHealth.TakeDamage(intermediaryHealth - theirHealth.currentHealth); //Decrease my health
+                    myHealth.TakeDamage(intermediaryHealth - theirHealth.currentHealth, this.transform); //Decrease my health
                     intermediaryHealth = theirHealth.currentHealth;
                 }
                 else if (theirHealthUnchanged && intermediaryHealth < myHealth.currentHealth) //If my health increased

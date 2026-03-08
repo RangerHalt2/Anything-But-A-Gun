@@ -68,7 +68,7 @@ public class PootCloudScript : MonoBehaviour, IWeaponLevel
         if (health != null && health.gameObject.tag != "Player")
         {
             // Deal damage to targets health equal to projectile's damage
-            health.TakeDamage(cummulativeDamage);
+            health.TakeDamage(cummulativeDamage, this.transform);
         }
     }
 

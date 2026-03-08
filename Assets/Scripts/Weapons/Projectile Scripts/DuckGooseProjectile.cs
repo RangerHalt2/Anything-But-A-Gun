@@ -132,7 +132,7 @@ public class DuckGooseProjectile : MonoBehaviour
             Instantiate(gooseVFX,this.transform.position, this.transform.rotation);
             UpdateLevelDamage(); //Check the damage final time
             cummulativeDamage = cummulativeDamage * gooseMulti; //Set the damage to the GOOSE damage.
-            enemyHealth.TakeDamage(cummulativeDamage); //Special take damage to cut earlier than usual with goose multi set
+            enemyHealth.TakeDamage(cummulativeDamage, this.gameObject.transform); //Special take damage to cut earlier than usual with goose multi set
             Destroy(gameObject);
             return;
         }
@@ -185,7 +185,7 @@ public class DuckGooseProjectile : MonoBehaviour
             else
                 cummulativeDamage = baseDamage;
             // Deal damage
-            health.TakeDamage(cummulativeDamage);
+            health.TakeDamage(cummulativeDamage, this.gameObject.transform);
         }
     }
 

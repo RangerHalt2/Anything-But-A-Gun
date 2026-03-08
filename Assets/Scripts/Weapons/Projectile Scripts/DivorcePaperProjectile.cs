@@ -122,11 +122,11 @@ public class DivorcePaperProjectile : MonoBehaviour
             (enemy.enemyType == EnemyClass.EnemyType.Elite && percentage <= eliteThreshold) ||
             (enemy.enemyType == EnemyClass.EnemyType.Boss && percentage <= bossThreshold))
         {
-            enemyHealth.TakeDamage(enemyHealth.currentHealth);
+            enemyHealth.TakeDamage(enemyHealth.currentHealth, this.transform);
         }
         else
         {
-            enemyHealth.TakeDamage(damage);
+            enemyHealth.TakeDamage(damage, this.gameObject.transform);
         }
             Destroy(this.gameObject);
     }

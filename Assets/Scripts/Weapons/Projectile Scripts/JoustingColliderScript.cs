@@ -24,7 +24,7 @@ public class JoustingColliderScript : MonoBehaviour
                 Health potentialHit = collision.collider.gameObject.GetComponentInParent<Health>();
                 if (potentialHit != null && potentialHit.teamID != myTeamID)
                 {
-                    potentialHit.TakeDamage(damage);
+                    potentialHit.TakeDamage(damage, this.gameObject.transform);
                 }
             }
         }

@@ -36,7 +36,7 @@ public class LavaPuddleScript : MonoBehaviour, IWeaponLevel
         if (health != null)
         {
             // Deal damage to targets health equal to projectile's damage
-            health.TakeDamage(cummulativeDamage);
+            health.TakeDamage(cummulativeDamage, this.transform);
         }
     }
 

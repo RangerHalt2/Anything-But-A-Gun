@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.AI;
 using System.Collections;
+using Unity.VisualScripting;
 
 public class RoombaAI : EnemyClass
 {
@@ -235,7 +236,7 @@ public class RoombaAI : EnemyClass
     private void DoDamage(Health health)
     {
         if (health.teamID != teamID)
-            health.TakeDamage(explosionDamage);
+            health.TakeDamage(explosionDamage, this.gameObject.transform);
     }
 
     private void StartInvestigation()

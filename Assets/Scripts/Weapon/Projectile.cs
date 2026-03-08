@@ -72,6 +72,8 @@ public class Projectile : MonoBehaviour, IWeaponLevel
     [Space]
     [SerializeField] public GameObject spikedExplosionVFX;
 
+    [HideInInspector] public Transform enemyPosition;
+
     public void SetIsAoE(bool isAoe)
     {
         this.IsAoe = isAoe;
@@ -245,7 +247,7 @@ public class Projectile : MonoBehaviour, IWeaponLevel
             else 
             {
                 //Take damage
-                health.TakeDamage(cummulativeDamage);
+                health.TakeDamage(cummulativeDamage, this.gameObject.transform);
             }
             // If projectile is not piercing...
             if (!piercing && !unique)

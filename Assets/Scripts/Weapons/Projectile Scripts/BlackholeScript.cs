@@ -100,7 +100,7 @@ public class BlackholeScript : MonoBehaviour, IWeaponLevel
                 Vector3 direction = (_other.gameObject.transform.position - (Vector3)transform.position).normalized;
                 float distance = Vector3.Distance(transform.position, _other.gameObject.transform.position);
                 float forceMultiplier = 1f - (distance / blackholeRadius); // Force decreases with distance
-                health.TakeDamage(cummulativeDamage * (distance / blackholeRadius));
+                health.TakeDamage(cummulativeDamage * (distance / blackholeRadius), this.transform);
 
                 Rigidbody rb = _other.gameObject.GetComponentInParent<Rigidbody>();
                 rb.AddForce(-direction * blackholeForce * (distance / blackholeRadius), ForceMode.Impulse);

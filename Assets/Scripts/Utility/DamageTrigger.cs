@@ -28,7 +28,7 @@ public class DamageTrigger : MonoBehaviour
             if (targetTeamIDs.Contains(otherTeamID))
             {
                 // Apply damage
-                health.TakeDamage(damage);
+                health.TakeDamage(damage, this.gameObject.transform);
             }
         }
     }

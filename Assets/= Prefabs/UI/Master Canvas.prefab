@@ -8900,6 +8900,7 @@ GameObject:
   - component: {fileID: 1000399530976485877}
   - component: {fileID: 3832155677641787041}
   - component: {fileID: 9121515661158624816}
+  - component: {fileID: 971570403760386252}
   m_Layer: 5
   m_Name: In-Game UI
   m_TagString: Untagged
@@ -9016,6 +9017,21 @@ MonoBehaviour:
   totalGauge: {fileID: 9046207370030144231}
   gaugeVFX: {fileID: 0}
   simulationSpeedChange: 1
+  colorChangeSpeed: 1
+--- !u!114 &971570403760386252
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6120725345040969484}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5dedf63f5a590ae48856af1cef2ebd89, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HitIndicatorManager
+  spawnPoint: {fileID: 6846335495680401102}
+  hitIndicatorPrefab: {fileID: 7816344813553802660, guid: 872282393cd667348a373ae8f742fae8, type: 3}
 --- !u!1 &6228892546362066551
 GameObject:
   m_ObjectHideFlags: 0

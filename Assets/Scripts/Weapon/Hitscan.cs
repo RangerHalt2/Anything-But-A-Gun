@@ -145,7 +145,7 @@ public class Hitscan : MonoBehaviour, IWeaponLevel
                         Debug.Log("Hitscan: Body shot.");
                     }
                     // Deal the weapon's damage to the target
-                    targetHealth.TakeDamage(appliedDamage);
+                    targetHealth.TakeDamage(appliedDamage, this.gameObject.transform);
 
                     // Stop ricocheting after hitting a valid target
                     break;

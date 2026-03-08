@@ -27,7 +27,7 @@ public class BatHitbox : MonoBehaviour
                     baseballBat.RegisterHit();
                 }
                 // Deal damage
-                health.TakeDamage(damage);
+                health.TakeDamage(damage, this.gameObject.transform);
             }
         }
     }

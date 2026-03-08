@@ -1,8 +1,9 @@
 // Created By: Ryan Lupoli
 // This is a script meant to track a game object's health
-using UnityEngine;
-using TMPro;
+using System;
 using System.IO;
+using TMPro;
+using UnityEngine;
 
 public class Health : MonoBehaviour
 {
@@ -57,7 +58,15 @@ public class Health : MonoBehaviour
 
     [HideInInspector] public bool ShiningArmor = false;
 
+    public event Action<DamageInfo> PlayerTookDamage;
+
     #endregion
+
+    public struct DamageInfo
+    {
+        public Transform source;
+        public float damage;
+    }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -101,7 +110,7 @@ public class Health : MonoBehaviour
     }
 
     // Applies a certain amount of damage to an object
-    public void TakeDamage(float damageAmount)
+    public void TakeDamage(float damageAmount, Transform sourcePosition)
     {
         if (ShiningArmor)
         {
@@ -123,6 +132,8 @@ public class Health : MonoBehaviour
         {
             if(style != null)
                 style.DecreaseScore();
+            DamageInfo info = new DamageInfo { source = sourcePosition, damage = damageAmount};
+            PlayerTookDamage?.Invoke(info);
         }
 
         // If the object has 0 or less current health

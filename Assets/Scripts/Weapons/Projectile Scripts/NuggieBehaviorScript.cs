@@ -158,7 +158,7 @@ public class NuggieBehaviorScript : MonoBehaviour, IWeaponLevel
     {
         if (target != null)
         {
-            target.gameObject.GetComponent<Health>().TakeDamage(nuggieBaseDamage);
+            target.gameObject.GetComponent<Health>().TakeDamage(nuggieBaseDamage, this.transform);
         }
     }
 

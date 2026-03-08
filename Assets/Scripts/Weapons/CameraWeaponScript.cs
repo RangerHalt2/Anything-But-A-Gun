@@ -93,7 +93,7 @@ public class CameraWeaponScript : WeaponClass
             if (enemy != null)
             {
                 GameObject target = enemy.transform.parent.gameObject;
-                target.GetComponent<Health>().TakeDamage(cumulativeDamage);
+                target.GetComponent<Health>().TakeDamage(cumulativeDamage, this.gameObject.transform);
                 Debug.Log("This variable is " + baseDamage);
                 GameObject snapshot = Instantiate(enemyCopy, target.transform.position, target.transform.rotation, null);
                 snapshot.SetActive(false);
