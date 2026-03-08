@@ -110,16 +110,14 @@ public class AchievementManager : MonoBehaviour
         }
         // Find the achivement in the database
         Achievement a = database.achievements.Find(a => a.id == id);
-        // Check if it is unlocked
-        if (a.unlocked)
+
+        if (a == null)
         {
-            return true;
-        }
-        else
-        {
+            Debug.LogWarning("AchievementManager: Achievement " + id + " not found.");
             return false;
         }
 
+        return a.unlocked;
     }
 
     // Unlocks an achievement based on the provided id
@@ -153,7 +151,7 @@ public class AchievementManager : MonoBehaviour
         achievement.unlocked = true;
 
         //Apply metaprogression rewards
-        ApplyMetaReward();
+        GameEvent.OnAchivementEarned?.Invoke();
 
         // Save newly unlocked achivement
         SaveAchievements();
@@ -226,6 +224,7 @@ public class AchievementManager : MonoBehaviour
 
         // Toggle the state of the achievment
         achievement.unlocked = !achievement.unlocked;
+        GameEvent.OnAchivementEarned?.Invoke();
 
         SaveAchievements();
     }

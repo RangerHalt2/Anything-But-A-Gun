@@ -240,5 +240,9 @@ public class InputManager : MonoBehaviour
     #endregion
 
 
-
+    // RL: Better Jump input recognition for double jumping
+    public bool JumpPressed()
+    {
+        return jumpAction.WasPressedThisFrame();
+    }
 }

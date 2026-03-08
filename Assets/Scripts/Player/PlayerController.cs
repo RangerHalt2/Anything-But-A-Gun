@@ -68,6 +68,14 @@ public class PlayerController : MonoBehaviour
     private bool canInteract = true;
 
     public bool isSpawned = false;
+
+    [Header("Achievement Ability Settings")]
+    [SerializeField] private bool canDoubleJump = false;
+    private bool hasDoubleJumped = false;
+    [SerializeField] private int dashCooldownReduction = 0;
+    private float baseDashChargeTime;
+    [SerializeField] private int bonusDashes = 0;
+    private int baseDashCount;
     #endregion
 
     #region Getters/Setters
@@ -113,6 +121,14 @@ public class PlayerController : MonoBehaviour
         if (terminalVelocity > 0) terminalVelocity = -terminalVelocity; //Just makes it negative
 
         sensitivity = LoadSensitivity();
+
+        // RL: Updating player values based on MetaProgression
+        // Storing base values for variables that will be effected by Metaprogression
+        baseDashChargeTime = dashChargeTime;
+        baseDashCount = maxDashLimit;
+
+        hasDoubleJumped = false;
+        ApplyAchievementRewards();
     }
 
     private float LoadSensitivity()
@@ -144,7 +160,8 @@ public class PlayerController : MonoBehaviour
         characterController.Move(move);
         if (characterController.isGrounded){ 
             verticalForce = -0.01f; //Vertical Force must always be slightly negative?
-            momentum = Vector3.zero;                                  
+            momentum = Vector3.zero;
+            hasDoubleJumped = false;
         }
         if (!characterController.isGrounded) {
             momentum = new Vector3(( Mathf.Abs(move.x) - momentumDecay < 0f) ? 0f : move.x - (move.x < 0f ? -momentumDecay : momentumDecay),
@@ -214,10 +231,21 @@ public class PlayerController : MonoBehaviour
         CheckHeadBump();
         
 
-        if (inputs.JumpInput == true && characterController.isGrounded)
+        if (inputs.JumpPressed())
         {
-            //Debug.Log("Attempting Jump");
-            verticalForce = jumpForce; //The Jump itself is handled in the Move() method handling gravity, making use of CharacterController instead of RigidBody
+            // Normal Jump
+            if (characterController.isGrounded)
+            {
+                //Debug.Log("Attempting Jump");
+                verticalForce = jumpForce; //The Jump itself is handled in the Move() method handling gravity, making use of CharacterController instead of RigidBody
+            }
+            // Double Jump
+            else if (canDoubleJump && !hasDoubleJumped)
+            {
+                Debug.Log("Player Controller: Attempting Double Jump");
+                verticalForce = jumpForce * 0.85f;
+                hasDoubleJumped = true;
+            }
         }
 
         Rotate(inputs.LookInput);
@@ -374,4 +402,57 @@ public class PlayerController : MonoBehaviour
             interactionText.gameObject.SetActive(false);
         }
     }
+
+    // RL: Code related to achievments and meta-progression
+    #region Achievement Code
+    private void OnEnable()
+    {
+        GameEvent.OnAchivementEarned += ApplyAchievementRewards;
+    }
+
+    public void ApplyAchievementRewards()
+    {
+        if (AchievementManager.Instance != null)
+        {
+            // Check relevant achivements for any bonus the player has acquired
+
+            // Check if player is allowed to double jump
+            canDoubleJump = false;
+            if (AchievementManager.Instance.CheckAchivementStatus("max_style"))
+            {
+                canDoubleJump = true;
+            }
+            // Check for any dash cooldown reduction
+            dashCooldownReduction = 0;
+            if (AchievementManager.Instance.CheckAchivementStatus("kill_boomba_1"))
+            {
+                dashCooldownReduction++;
+            }
+            if (AchievementManager.Instance.CheckAchivementStatus("kill_boomba_2"))
+            {
+                dashCooldownReduction++;
+            }
+            // Check for any additional dashes
+            bonusDashes = 0;
+            if (AchievementManager.Instance.CheckAchivementStatus("kill_boomba_3"))
+            {
+                bonusDashes++;
+            }
+
+            // Update values based on achievments
+            dashChargeTime = baseDashChargeTime - (0.25f * dashCooldownReduction);
+            maxDashLimit = baseDashCount + bonusDashes;
+            // Rebuild Dash UI according to the new current number of dashes
+            DashUI[] dashUIs = FindObjectsOfType<DashUI>();
+            foreach (DashUI dashUI in dashUIs)
+            {
+                dashUI.InstantiateDashContainers();
+            }
+        }
+        else
+        {
+            Debug.LogWarning("PlayerController: Achivement Manager not found. Cannot apply any potential Achievment based abilities.");
+        }
+    }
+    #endregion
 }

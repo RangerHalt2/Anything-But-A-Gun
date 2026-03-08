@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -29,7 +30,7 @@ public class DashUI : MonoBehaviour
     {
 
     }
-
+    
     void SetDashContainers()
     {
         for (int i = 0; i < dashContainers.Length; i++)
@@ -60,20 +61,43 @@ public class DashUI : MonoBehaviour
         }
     }
 
-    void InstantiateDashContainers()
+    public void InstantiateDashContainers()
     {
-        for (int i = 0; i < PlayerController.Instance.maxDashLimit; i++)
+        if (player == null) player = PlayerController.Instance;
+
+        if (dashContainers == null || dashContainers.Length != player.maxDashLimit)
+        {
+            dashContainers = new GameObject[player.maxDashLimit];
+            dashFills = new Image[player.maxDashLimit];
+        }
+
+        // RL: Destroy existing containers prior to instantiation
+        foreach (Transform child in dashesParent)
+        {
+            Destroy(child.gameObject);
+        }
+
+        int dashCount = player.maxDashLimit;
+
+        dashContainers = new GameObject[dashCount];
+        dashFills = new Image[dashCount];
+
+        for (int i = 0; i < dashCount; i++)
         {
             GameObject temp = Instantiate(dashContainerPrefab);
             temp.transform.SetParent(dashesParent, false);
             dashContainers[i] = temp;
             dashFills[i] = temp.transform.Find("dashFill").GetComponent<Image>();
         }
+
+        UpdateDashesHUD();
     }
 
     void UpdateDashesHUD()
     {
+        if (dashFills == null) return;
         SetDashContainers();
         SetFilledDashes();
     }
+    
 }
