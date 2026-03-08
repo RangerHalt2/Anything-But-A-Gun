@@ -19,7 +19,7 @@ public class BigShoot : MonoBehaviour
         {
             if (health.teamID == teamID) return;
 
-            health.TakeDamage(damage);
+            health.TakeDamage(damage, this.transform);
         }
     }
 

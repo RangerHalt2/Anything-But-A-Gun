@@ -130,10 +130,17 @@ public class Health : MonoBehaviour
 
         if (isPlayer) //EW: Added to make the player lose score after taking damage.
         {
+            Debug.Log("HEALTH - Instance ID: " + this.GetInstanceID());
             if(style != null)
                 style.DecreaseScore();
             DamageInfo info = new DamageInfo { source = sourcePosition, damage = damageAmount};
             PlayerTookDamage?.Invoke(info);
+            if (PlayerTookDamage != null)
+            {
+                Debug.Log("HEALTH - The player taking damage event has been invoked.");
+            }
+            else
+                Debug.Log("HEALTH - The player taking damage event is not invoking");
         }
 
         // If the object has 0 or less current health
@@ -324,4 +331,9 @@ public class Health : MonoBehaviour
         setMaxHealth(initialMaxHealth + bonusHealth, true);
     }
     #endregion
+
+    public bool HasDamageListeners()
+    {
+        return PlayerTookDamage != null;
+    }
 }

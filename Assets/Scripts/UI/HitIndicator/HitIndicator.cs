@@ -7,6 +7,10 @@ public class HitIndicator : MonoBehaviour
     private Transform enemyLocation;
     private Transform playerLocation;
 
+    private Vector3 lastKnownPosition;
+
+    [SerializeField] private RectTransform arrow;
+
 
     public void Initialize(Transform enemySource)
     {
@@ -16,7 +20,7 @@ public class HitIndicator : MonoBehaviour
 
     private void Update()
     {
-        if (enemyLocation != null)
+        if (enemyLocation != null || lastKnownPosition != null)
         {
             CheckRotation();
         }
@@ -26,13 +30,18 @@ public class HitIndicator : MonoBehaviour
     // Converts 3D coordinates to 2D visual representation. Forward is up, Backwards is down. Left and Right consistent.
     private void CheckRotation()
     {
-        Vector3 localDir = playerLocation.InverseTransformDirection(enemyLocation.position - playerLocation.position);
+        
+        Vector3 localDir = enemyLocation != null ? playerLocation.InverseTransformDirection(enemyLocation.position - playerLocation.position) : playerLocation.InverseTransformDirection(lastKnownPosition - playerLocation.position);
         Vector2 hitDir2D = new Vector2(localDir.x, localDir.z).normalized;
 
-        GetComponent<RectTransform>().anchoredPosition = hitDir2D * radius;
+        arrow.anchoredPosition = hitDir2D * radius;
 
         float angle = Mathf.Atan2(hitDir2D.x, hitDir2D.y) * Mathf.Rad2Deg;
         transform.localRotation = Quaternion.Euler(0, 0, -angle);
+        if (enemyLocation != null)
+        {
+            lastKnownPosition = enemyLocation.position;
+        }
     }
 
 }

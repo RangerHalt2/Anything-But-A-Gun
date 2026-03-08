@@ -48,7 +48,7 @@ public class Missile : MonoBehaviour
         {
             if (health.teamID == teamID) return;
 
-            health.TakeDamage(damage);
+            health.TakeDamage(damage, this.transform);
             Destroy(gameObject);
         }
     }
