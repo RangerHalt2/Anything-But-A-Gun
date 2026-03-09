@@ -60,7 +60,7 @@ public class WaveManager : MonoBehaviour
             foreach (EnemySpawner spawner in spawners)
             {
                 spawner.ResetSpawner();
-                StartCoroutine(spawner.SpawnEnemiesCoroutine(0.2f));
+                spawner.SpawnEnemies();
             }
 
             yield return new WaitForSeconds(waveInterval);

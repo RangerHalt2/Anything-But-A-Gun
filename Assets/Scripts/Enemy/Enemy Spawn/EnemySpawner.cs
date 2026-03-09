@@ -34,9 +34,9 @@ public class EnemySpawner : MonoBehaviour
         if (maxEnemyCount == 0) maxEnemyCount = -1; //Fail Safe
     }
 
-    public IEnumerator SpawnEnemiesCoroutine(float delayBetweenSpawns = 0.2f) //MG: Started Coroutine
+    public void SpawnEnemies()
     {
-        if (spawnedEnemies) yield break; //MG: Yield break instead of return for the coroutine
+        if (spawnedEnemies) return;
         int index = 0;
         int eliteCount = 0;
 
@@ -68,8 +68,6 @@ public class EnemySpawner : MonoBehaviour
                     SpawnRegular(spawnPoint, commonChoice);
             }
             index++;
-
-            yield return new WaitForSeconds(delayBetweenSpawns); //MG: Added for delay
         }
 
         foreach(EnemyClass enemy in enemies)
@@ -78,11 +76,6 @@ public class EnemySpawner : MonoBehaviour
         }
 
         spawnedEnemies = true;
-    }
-
-    public void SpawnEnemies() //MG: Regular Spawn logic for instant spawn
-    {
-        StartCoroutine(SpawnEnemiesCoroutine(0f));
     }
 
     //Separated for readability
