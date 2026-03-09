@@ -11,7 +11,7 @@ public class activeButtonLvl2 : MonoBehaviour
     {
         
 
-        if (button2.Value > 1)
+        if (button2.Value >= 1)
 
         {
             lvl2.SetActive(true);
