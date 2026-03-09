@@ -25,7 +25,7 @@ public class WinEvent : MonoBehaviour
 
     public void Start()
     {
-        uiManager = FindFirstObjectByType<UIManager>();
+        uiManager = GameObject.FindAnyObjectByType<UIManager>();
         if (uiManager == null)
         {
             Debug.LogWarning("Win Event: UI Manager could not be found in current scene!");
@@ -42,14 +42,11 @@ public class WinEvent : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-      
-
-
         // Ensure that the game object entering the trigger is the player
         if (other.gameObject.CompareTag("Player"))
          {
             if (button2 != null)
-            button2.Value = 1;
+                button2.Value = 1;
             // If it is the final level
             if (isFinalLevel)
             {
