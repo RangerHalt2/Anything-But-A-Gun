@@ -9970,6 +9970,9 @@ MonoBehaviour:
   interactCooldown: 0.5
   interactionText: {fileID: 0}
   isSpawned: 0
+  canDoubleJump: 0
+  dashCooldownReduction: 0
+  bonusDashes: 0
   dashSound: {fileID: 5383701307693267320, guid: 2d5ca1d5bd3429b418eb2fd209337431, type: 3}
 --- !u!114 &3398571290749484056
 MonoBehaviour:
@@ -10124,9 +10127,9 @@ CharacterController:
   m_Height: 2
   m_Radius: 0.5
   m_SlopeLimit: 45
-  m_StepOffset: 0.3
-  m_SkinWidth: 0.08
-  m_MinMoveDistance: 0.001
+  m_StepOffset: 0.2
+  m_SkinWidth: 0.15
+  m_MinMoveDistance: 0
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &1840295424487795494
 MonoBehaviour:

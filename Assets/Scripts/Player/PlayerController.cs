@@ -159,7 +159,7 @@ public class PlayerController : MonoBehaviour
 
         characterController.Move(move);
         if (characterController.isGrounded){ 
-            verticalForce = -0.01f; //Vertical Force must always be slightly negative?
+            verticalForce = -0.05f; //Vertical Force must always be slightly negative?
             momentum = Vector3.zero;
             hasDoubleJumped = false;
         }
@@ -230,6 +230,10 @@ public class PlayerController : MonoBehaviour
 
         CheckHeadBump();
         
+        if(!inputs.JumpPressed() && characterController.isGrounded)
+        {
+            verticalForce = -2f;
+        }
 
         if (inputs.JumpPressed())
         {

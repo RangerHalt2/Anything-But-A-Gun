@@ -60,7 +60,7 @@ public class InputManager : MonoBehaviour
     public Vector2 MoveInput { get; private set; }
     public bool FireInput { get; private set; }
     public bool AltFireInput { get; private set; }
-    public bool JumpInput { get; private set; }
+    public bool JumpInput { get; set; }
     public float MouseScrollInput { get; private set; }
     public Vector2 LookInput { get; private set; }
     public bool SprintInput { get; private set; }
