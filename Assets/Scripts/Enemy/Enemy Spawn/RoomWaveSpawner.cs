@@ -66,6 +66,7 @@ public class RoomWaveSpawner : MonoBehaviour
         }
     }
 
+    /*
     private void Update()
     {
         if(current_wave == num_of_waves && doors_to_remove != null && enemySpawner.aliveEnemies.Count <= 0 && locked_doors)
@@ -78,6 +79,7 @@ public class RoomWaveSpawner : MonoBehaviour
             }
         }
     }
+    */
 
     private void AssignListeners()
     {
