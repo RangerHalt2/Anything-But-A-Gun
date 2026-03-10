@@ -217,7 +217,7 @@ public class Health : MonoBehaviour
         if (!isPlayer)
         {
             EnemyType enemy = GetComponent<EnemyType>();
-            if (enemy != null)
+            if (enemy != null && KillTracker.Instance != null)
             {
                 KillTracker.Instance.RegisterKill(enemy.enemyId);
             }
