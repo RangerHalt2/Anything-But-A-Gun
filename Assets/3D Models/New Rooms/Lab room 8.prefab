@@ -249,7 +249,7 @@ Transform:
   m_GameObject: {fileID: 502745880089580698}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -54.5, y: 0.75790644, z: 60}
+  m_LocalPosition: {x: -54.5, y: 0.9, z: 60}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -287,10 +287,8 @@ Transform:
   - {fileID: 2476415253269330588}
   - {fileID: 1556367495075154997}
   - {fileID: 8279388940362136813}
-  - {fileID: 800474050367936523}
   - {fileID: 7690329164381572605}
   - {fileID: 7381372904320807933}
-  - {fileID: 3744119430592772185}
   - {fileID: 8806851597768981117}
   - {fileID: 7284397215759928456}
   - {fileID: 6093469396302227754}
@@ -629,43 +627,12 @@ MonoBehaviour:
   eliteEnemies: []
   numReqEliteSpawns: 0
   spawnPoints:
-  - {fileID: 800474050367936523}
+  - {fileID: 7381372904320807933}
   - {fileID: 7690329164381572605}
   maxEnemyCount: 5
   commonEnemyChance: 75
   enemies: []
   aliveEnemies: []
---- !u!1 &1208939178893244566
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 800474050367936523}
-  m_Layer: 0
-  m_Name: Spawn Point
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &800474050367936523
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1208939178893244566}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -59.59, y: 1.02, z: 56.59}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 7420876136058575393}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1982638316519126723
 GameObject:
   m_ObjectHideFlags: 0
@@ -1879,37 +1846,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!1 &6713934052691828205
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 3744119430592772185}
-  m_Layer: 0
-  m_Name: Spawn Point (3)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &3744119430592772185
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6713934052691828205}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -59.77, y: 0.75790644, z: 52}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 7420876136058575393}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6719393102500263648
 GameObject:
   m_ObjectHideFlags: 0
@@ -5089,6 +5025,10 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5052537413275923333, guid: f599c5e95ed7e1547a2d545c4cbf11df, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
     - target: {fileID: 5517431709261289041, guid: f599c5e95ed7e1547a2d545c4cbf11df, type: 3}
       propertyPath: m_LocalPosition.x
       value: -53.861027
@@ -5132,6 +5072,14 @@ PrefabInstance:
     - target: {fileID: 6640356791849090559, guid: f599c5e95ed7e1547a2d545c4cbf11df, type: 3}
       propertyPath: m_Name
       value: DroneEnemy (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6640356791849090559, guid: f599c5e95ed7e1547a2d545c4cbf11df, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 6640356791849090559, guid: f599c5e95ed7e1547a2d545c4cbf11df, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
