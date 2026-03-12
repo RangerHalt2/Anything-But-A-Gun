@@ -25,6 +25,7 @@ public class HitIndicatorManager : MonoBehaviour
     {
         GameObject spawnedHit = Instantiate(hitIndicatorPrefab, spawnPoint.transform);
         spawnedHit.transform.localScale = Vector3.one;
+        spawnedHit.transform.localPosition = Vector3.zero;
         HitIndicator indicator = spawnedHit.GetComponent<HitIndicator>();
 
         indicator.Initialize(info.source);
