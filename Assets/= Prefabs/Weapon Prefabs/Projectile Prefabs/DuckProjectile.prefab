@@ -92,10 +92,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74aff1f5201db904e98ddcc93fae52e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Projectile
-  speed: 20
-  lifeTime: 20
+  speed: 35
+  lifeTime: 10
   teamID: 0
-  baseDamage: 35
+  baseDamage: 15
   growthRate: 1.15
   canCrit: 0
   critMult: 2
@@ -106,11 +106,12 @@ MonoBehaviour:
   wallBehavior: 0
   maxBounces: 0
   bulletDrop: 1
-  gravityMultiplier: 1
+  gravityMultiplier: 1.15
   IsAoe: 0
   aoeRange: 5
   ricochetSFX: []
   spikedExplosionVFX: {fileID: 8428204072777953739, guid: b3e9719e5c491ad4f83a2e0b696463bb, type: 3}
+  enemyPosition: {fileID: 0}
 --- !u!54 &5258742335422185819
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -150,12 +151,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 209117b70b4bbba4fbfc1e24edf86148, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DuckGooseProjectile
-  gooseMulti: 3
+  gooseMulti: 2
   range: 10
   maxBounce: 5
   height: 1
-  duration: 0.65
-  chanceToGoose: 20
+  duration: 0.35
+  chanceToGoose: 10
   whatIsEnemy:
     serializedVersion: 2
     m_Bits: 2048
