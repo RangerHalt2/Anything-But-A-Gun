@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: -6608494925588196765}
   - component: {fileID: 5258742335422185819}
   - component: {fileID: -491377583283839999}
+  - component: {fileID: 1609438292519472167}
   m_Layer: 9
   m_Name: DuckProjectile
   m_TagString: Untagged
@@ -155,13 +156,28 @@ MonoBehaviour:
   range: 10
   maxBounce: 5
   height: 1
-  duration: 0.35
+  duration: 0.5
   chanceToGoose: 10
   whatIsEnemy:
     serializedVersion: 2
     m_Bits: 2048
   gooseVFX: {fileID: 615666183915522401, guid: 528fe706ca96a9745920fa19c320cce6, type: 3}
   baseDamage: 0
+--- !u!114 &1609438292519472167
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1506664740527934108}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a57ab42a5795d447bc37dba1fb464a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TimedObjectDestroyer
+  lifeTime: 3
+  thresholdToFade: 2
+  doesFade: 0
 --- !u!1 &5057169472560065501
 GameObject:
   m_ObjectHideFlags: 0
