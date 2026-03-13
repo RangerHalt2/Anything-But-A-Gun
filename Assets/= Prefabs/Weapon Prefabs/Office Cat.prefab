@@ -167,7 +167,7 @@ MonoBehaviour:
   ammoCapacity: 1
   currentAmmo: 1
   ammoConsumption: 1
-  reloadTime: 1.5
+  reloadTime: 1.1
   canCancelReload: 0
   reloadMode: 1
   crosshair: {fileID: 0}
@@ -1059,6 +1059,10 @@ PrefabInstance:
       value: CatToast Reload
       objectReference: {fileID: 0}
     - target: {fileID: 6253665268307667665, guid: 1ba9ad5f3410c8845aea183dff151d27, type: 3}
+      propertyPath: lengthInSec
+      value: 1.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6253665268307667665, guid: 1ba9ad5f3410c8845aea183dff151d27, type: 3}
       propertyPath: ShapeModule.type
       value: 10
       objectReference: {fileID: 0}
@@ -1088,7 +1092,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6253665268307667665, guid: 1ba9ad5f3410c8845aea183dff151d27, type: 3}
       propertyPath: ShapeModule.arc.speed.scalar
-      value: 0.38
+      value: 0.48
       objectReference: {fileID: 0}
     - target: {fileID: 6253665268307667665, guid: 1ba9ad5f3410c8845aea183dff151d27, type: 3}
       propertyPath: InitialModule.startSize.scalar
@@ -1096,11 +1100,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6253665268307667665, guid: 1ba9ad5f3410c8845aea183dff151d27, type: 3}
       propertyPath: InitialModule.startSpeed.scalar
-      value: -1.03
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 6253665268307667665, guid: 1ba9ad5f3410c8845aea183dff151d27, type: 3}
       propertyPath: EmissionModule.rateOverTime.scalar
-      value: 4
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 6253665268307667665, guid: 1ba9ad5f3410c8845aea183dff151d27, type: 3}
       propertyPath: InitialModule.startLifetime.scalar
