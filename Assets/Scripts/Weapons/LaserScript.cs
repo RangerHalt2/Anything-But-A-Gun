@@ -16,9 +16,9 @@ public class LaserScript : WeaponClass
     //private float lastFired = Mathf.NegativeInfinity;
 
     [SerializeField] private float currentHeat;
-    private float overheatAmount = 10f;
-    private float heatRate = 0.1f;
-    private float coolRate = 5f;
+    private float overheatAmount = 100f;
+    private float heatRate = 0.5f;
+    private float coolRate = 50f;
     private bool overheated = false;
 
     [SerializeField] private Image heatFill; //The fill portion of the UI
