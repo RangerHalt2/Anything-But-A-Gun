@@ -484,8 +484,8 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 0.7
-      minScalar: 0.5
+      scalar: 3
+      minScalar: 1.5
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -537,8 +537,8 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 1.7
-      minScalar: 1.5
+      scalar: 0.6
+      minScalar: 0.5
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -589,25 +589,25 @@ ParticleSystem:
         m_RotationOrder: 4
     startColor:
       serializedVersion: 2
-      minMaxState: 0
+      minMaxState: 4
       minColor: {r: 1, g: 1, b: 1, a: 1}
       maxColor: {r: 1, g: 0.9554569, b: 0.3820755, a: 1}
       maxGradient:
         serializedVersion: 2
-        key0: {r: 1, g: 1, b: 1, a: 1}
-        key1: {r: 1, g: 1, b: 1, a: 1}
-        key2: {r: 0, g: 0, b: 0, a: 0}
-        key3: {r: 0, g: 0, b: 0, a: 0}
-        key4: {r: 0, g: 0, b: 0, a: 0}
-        key5: {r: 0, g: 0, b: 0, a: 0}
+        key0: {r: 1, g: 0.3066038, b: 0.8732503, a: 1}
+        key1: {r: 0.24056602, g: 0.9574147, b: 1, a: 1}
+        key2: {r: 0.4292453, g: 1, b: 0.9547917, a: 0}
+        key3: {r: 0.6616757, g: 1, b: 0.11792451, a: 0}
+        key4: {r: 0.691229, g: 1, b: 0.18396229, a: 0}
+        key5: {r: 1, g: 0.83809566, b: 0.28773582, a: 0}
         key6: {r: 0, g: 0, b: 0, a: 0}
         key7: {r: 0, g: 0, b: 0, a: 0}
-        ctime0: 0
-        ctime1: 65535
-        ctime2: 0
-        ctime3: 0
-        ctime4: 0
-        ctime5: 0
+        ctime0: 16384
+        ctime1: 16449
+        ctime2: 32768
+        ctime3: 32833
+        ctime4: 49151
+        ctime5: 49217
         ctime6: 0
         ctime7: 0
         atime0: 0
@@ -619,8 +619,8 @@ ParticleSystem:
         atime6: 0
         atime7: 0
         m_Mode: 0
-        m_ColorSpace: -1
-        m_NumColorKeys: 2
+        m_ColorSpace: 0
+        m_NumColorKeys: 6
         m_NumAlphaKeys: 2
       minGradient:
         serializedVersion: 2
@@ -655,8 +655,8 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 0.3
-      minScalar: 0.2
+      scalar: 0.2
+      minScalar: 0.1
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -920,7 +920,7 @@ ParticleSystem:
     startRotation:
       serializedVersion: 2
       minMaxState: 0
-      scalar: -0.47839475
+      scalar: 0
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -1033,10 +1033,10 @@ ParticleSystem:
     serializedVersion: 6
     enabled: 1
     type: 4
-    angle: 8.5
+    angle: 0
     length: 5
     boxThickness: {x: 0, y: 0, z: 0}
-    radiusThickness: 1
+    radiusThickness: 0.1
     donutRadius: 0.2
     m_Position: {x: 0, y: 0, z: 0}
     m_Rotation: {x: 0, y: 0, z: 0}
@@ -1355,21 +1355,21 @@ ParticleSystem:
         m_Curve:
         - serializedVersion: 3
           time: 0
-          value: 0
-          inSlope: 7.2590947
-          outSlope: 7.2590947
+          value: 0.09851074
+          inSlope: 5.35511
+          outSlope: 5.35511
           tangentMode: 0
           weightedMode: 0
           inWeight: 0.33333334
-          outWeight: 0.03130547
+          outWeight: 0.02712192
         - serializedVersion: 3
           time: 0.4022241
           value: 1
-          inSlope: -0.025333647
-          outSlope: -0.025333647
+          inSlope: -0
+          outSlope: -0
           tangentMode: 0
           weightedMode: 0
-          inWeight: 0.13388199
+          inWeight: 0.08689532
           outWeight: 0.10259997
         - serializedVersion: 3
           time: 1
@@ -1860,11 +1860,12 @@ ParticleSystem:
     tilesY: 1
     animationType: 0
     rowIndex: 0
-    cycles: 1
+    cycles: 10
     uvChannelMask: -1
     rowMode: 1
     sprites:
-    - sprite: {fileID: -1657314788, guid: 69ac115fabea2524ea746d411451186f, type: 3}
+    - sprite: {fileID: -1657522157, guid: bf235f74432f7224e96a95b8f6f79a31, type: 3}
+    - sprite: {fileID: -2096015563, guid: bf235f74432f7224e96a95b8f6f79a31, type: 3}
     flipU: 0
     flipV: 0
   VelocityModule:
