@@ -434,7 +434,9 @@ MonoBehaviour:
   - {fileID: 4209116956189411003}
   - {fileID: 4623275363518067026}
   - {fileID: 7810676119265632755}
-  maxEnemyCount: 3
+  - {fileID: 8596464402254547504}
+  - {fileID: 3789181234415325481}
+  maxEnemyCount: 5
   commonEnemyChance: 75
   enemies: []
   aliveEnemies: []
@@ -827,7 +829,7 @@ Transform:
   m_GameObject: {fileID: 5864863263183503639}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.375, y: 5.13, z: 3.625}
+  m_LocalPosition: {x: 1.59, y: 5.02, z: 5.43}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -971,7 +973,7 @@ Transform:
   m_GameObject: {fileID: 6802302288451780723}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.375, y: 7.43, z: 11.375}
+  m_LocalPosition: {x: 2.375, y: 7.11, z: 11.375}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2405,8 +2407,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::RoomWaveSpawner
   staggered_waves: 1
   enemySpawner: {fileID: 5160910008559937986}
-  num_of_waves: 1
-  spawnAllBySeconds: 30
+  num_of_waves: 2
+  spawnAllBySeconds: 15
   doors_to_remove:
   - {fileID: 1247622228071500135}
   - {fileID: 5484040620799005098}
