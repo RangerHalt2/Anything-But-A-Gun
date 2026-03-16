@@ -80,8 +80,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 0
   serializedVersion: 3
-  m_Size: {x: 2.428152, y: 3.263855, z: 1.820655}
-  m_Center: {x: -0.7140728, y: -0.3303651, z: -0.9161562}
+  m_Size: {x: 5, y: 5, z: 6}
+  m_Center: {x: 0, y: 0, z: 3.31}
 --- !u!114 &7098127342461384866
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -293,9 +293,9 @@ MonoBehaviour:
   promotionName: No Promotion
   promotionEffect: No Promotion
   level: 0
-  baseDamage: 50
+  baseDamage: 100
   levelDamage: 5
-  fireRate: 1
+  fireRate: 0.3
   reloadTime: 2
   AmmoCapacity: 5
   reserveAmmo: 15
@@ -303,11 +303,11 @@ MonoBehaviour:
   acceptablePackAPunchOptions:
   - {fileID: 11400000, guid: f153000db5f302a429e740f53881858f, type: 2}
   joustingCollider: {fileID: 2555991686337407770}
-  joustForce: 10
+  joustForce: 5
   joustTime: 0.25
-  joustCD: 0.25
+  joustCD: 0.1
   dashEffect: {fileID: 0}
-  timeBetweenJoustCharges: 5
+  timeBetweenJoustCharges: 1.5
 --- !u!135 &1403364850935749457
 SphereCollider:
   m_ObjectHideFlags: 0
