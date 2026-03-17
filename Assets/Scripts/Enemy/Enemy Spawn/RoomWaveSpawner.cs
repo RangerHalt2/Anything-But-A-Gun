@@ -109,7 +109,8 @@ public class RoomWaveSpawner : MonoBehaviour
             Debug.Log("ROOM WAVE SPAWNER - Doors unlocking");
             foreach (Transform trans in doors_to_remove)
             {
-                trans.gameObject.SetActive(locked_doors);
+                if(trans != null)
+                    trans.gameObject.SetActive(locked_doors);
             }
         }
 
