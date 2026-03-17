@@ -11,6 +11,9 @@ public class WeaponClass : MonoBehaviour
     public AmmoManager ammoManager;
     public GameObject gunShot;
     public GameObject clickEffect;
+
+    public GameObject[] randomGunShots;
+
     public float clickCooldown = 0.5f;
     public float clickTimer = 0;
     public GameObject projectilePrefab;
@@ -319,6 +322,17 @@ public class WeaponClass : MonoBehaviour
     #endregion
 
     #region BasicWeaponFunction
+
+    public void RandomGunShot(Transform followTrans)
+    {
+        int num = UnityEngine.Random.Range(0, randomGunShots.Length);
+        GameObject selected = randomGunShots[num];
+        GameObject randomShot = Instantiate(selected, followTrans.position, Quaternion.identity);
+        MovingAudio movingAudio = randomShot.AddComponent<MovingAudio>();
+        movingAudio.targetToFollow = followTrans;
+    }
+
+
     public virtual void Shoot() //Default is spawn projectile
     {
         // If enough time has passed since the last round was fired
