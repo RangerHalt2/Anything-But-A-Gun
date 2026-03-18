@@ -144,6 +144,7 @@ public class BrushScript : WeaponClass
             foreach (Projectile proj in projs)
             {
                 proj.SetWeaponLevelReference(weaponLevelRef);
+                RandomGunShot(proj.transform);
                 Physics.IgnoreCollision(proj.GetComponent<CapsuleCollider>(), playerRef.GetComponent<CharacterController>(), true);
                 if (hasPackAPunch)
                 {

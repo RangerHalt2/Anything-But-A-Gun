@@ -30,8 +30,12 @@ public class KnightWeaponScript : WeaponClass
                 {
                     // Attempt to fire the weapon
                     ammoManager.Fire();
-                    // Play weapon sound (added by Aaron)
-                    Instantiate(gunShot, transform.position, transform.rotation, null);
+                    // Play weapon sound (added by Aaron) (null check added by jaime)
+                    if (gunShot != null)
+                    {
+                            Instantiate(gunShot, transform.position, transform.rotation, null);
+                    }
+                    
                     // If the weapon is not reloading
                     if (!ammoManager.IsReloading())
                     {
@@ -97,6 +101,7 @@ public class KnightWeaponScript : WeaponClass
 
             }
             Projectile proj = projectileGameObject.GetComponent<Projectile>();
+            RandomGunShot(proj.transform);
             proj.SetWeaponLevelReference(weaponLevelRef);
 
             if (hasPackAPunch)

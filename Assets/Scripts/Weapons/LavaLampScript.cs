@@ -100,6 +100,7 @@ public class LavaLampScript : WeaponClass
 
             }
             Projectile proj = projectileGameObject.GetComponent<Projectile>();
+            RandomGunShot(proj.transform);
             proj.SetWeaponLevelReference(weaponLevelRef);
 
             LavaProjectileScript lavaProj = projectileGameObject.GetComponent<LavaProjectileScript>();

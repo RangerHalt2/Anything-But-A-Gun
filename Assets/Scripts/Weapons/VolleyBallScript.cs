@@ -43,7 +43,11 @@ public class VolleyBallScript : WeaponClass
                 {
                     ammoManager.Fire();
                     // Play sound effect (added by Aaron)
-                    Instantiate(gunShot, transform.position, transform.rotation, null);
+                    if (gunShot != null)
+                    {
+                        Instantiate(gunShot, transform.position, transform.rotation, null);
+                    }
+                    
                     playerController.JitterDown();
                     SpawnProjectile((characterController.isGrounded ? groundProjectilePrefab : airProjectilePrefab)); //Inline Bool check, ground if grounded and air if not grounded 
                     timer = fireRate;
@@ -101,6 +105,7 @@ public class VolleyBallScript : WeaponClass
             }
         }
         Projectile proj = projectile.GetComponent<Projectile>();
+        RandomGunShot(proj.transform);
         proj.SetWeaponLevelReference(weaponLevelRef);
     }
 

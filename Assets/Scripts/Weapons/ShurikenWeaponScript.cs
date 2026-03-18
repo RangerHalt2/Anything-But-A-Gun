@@ -106,6 +106,7 @@ public class ShurikenWeaponScript : WeaponClass
             }
 
             Projectile shiProj = projectileGameObject.GetComponent<Projectile>();
+            RandomGunShot(shiProj.transform);
             shiProj.SetWeaponLevelReference(weaponLevelRef);
         }
     }
