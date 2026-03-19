@@ -4089,13 +4089,13 @@ ParticleSystem:
       properties: 0
       emitProbability: 1
   LightsModule:
-    enabled: 0
-    ratio: 0
-    light: {fileID: 0}
-    randomDistribution: 1
+    enabled: 1
+    ratio: 0.5
+    light: {fileID: 6231657618777261996, guid: 90b035ccff96429488104f5ea303ba13, type: 3}
+    randomDistribution: 0
     color: 1
     range: 1
-    intensity: 1
+    intensity: 0
     rangeCurve:
       serializedVersion: 2
       minMaxState: 0
@@ -4152,7 +4152,7 @@ ParticleSystem:
     intensityCurve:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1
+      scalar: 0.2
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -4202,7 +4202,7 @@ ParticleSystem:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
-    maxLights: 20
+    maxLights: 10
   TrailModule:
     enabled: 0
     mode: 0
@@ -5305,7 +5305,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 83baf2b54bddaf64dbea94e038f84d3c, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 0bb32b8d5309a0a48ad4338b4091b285, type: 2}
+      objectReference: {fileID: 2100000, guid: aa0f180c585aa9e43a703700d91820d8, type: 2}
     - target: {fileID: 919132149155446097, guid: 83baf2b54bddaf64dbea94e038f84d3c, type: 3}
       propertyPath: m_Name
       value: WeaponSpawnerPedestal
