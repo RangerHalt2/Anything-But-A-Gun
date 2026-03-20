@@ -57,7 +57,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.55
+  m_Radius: 0.4
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &-6608494925588196765
 MonoBehaviour:
@@ -74,7 +74,7 @@ MonoBehaviour:
   speed: 16
   lifeTime: 3
   teamID: 0
-  baseDamage: 0
+  baseDamage: 15
   growthRate: 1.15
   canCrit: 0
   critMult: 2
@@ -90,6 +90,7 @@ MonoBehaviour:
   aoeRange: 0
   ricochetSFX: []
   spikedExplosionVFX: {fileID: 0}
+  enemyPosition: {fileID: 0}
 --- !u!54 &5258742335422185819
 Rigidbody:
   m_ObjectHideFlags: 0
