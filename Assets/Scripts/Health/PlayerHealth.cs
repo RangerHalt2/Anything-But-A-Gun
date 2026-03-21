@@ -16,6 +16,8 @@ public class PlayerHealth : MonoBehaviour
     [Header("Color Gradient")]
     [SerializeField] private Gradient healthGradient;
 
+    public EndingGrade end; // added by Aaron
+
     private void Start()
     {
         currentHealth = maxHealth;
@@ -57,14 +59,18 @@ public class PlayerHealth : MonoBehaviour
     }
 }
 
-    private void HandleGameOver()
+    private void HandleGameOver() // I thought this was the part of the code that handled the game over but i was incorrect - Aaron
     {
         Time.timeScale = 0f;
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
 
+        Debug.Log("HELLOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO");
+
         if (gameOverScreen != null)
             gameOverScreen.SetActive(true);
+            end.EndingGradeCoroutine(); // Added by Aaron
+            Debug.Log("ENDING COROUTINE ATTEMPT");
     }
 
     public int GetHealth() => currentHealth;

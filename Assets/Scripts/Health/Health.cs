@@ -68,6 +68,8 @@ public class Health : MonoBehaviour
         public float damage;
     }
 
+    public EndingGrade end; // added by Aaron
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -246,6 +248,8 @@ public class Health : MonoBehaviour
             gameOverCanvas.SetActive(true);
             inGameCanvas.SetActive(false);
             Cursor.lockState = CursorLockMode.None;
+            Debug.Log("HELLLLOOOOOOOOOOOOOOOOOOOOO");
+            end.EndingGradeCoroutine(); // Added by Aaron
         }
     }
 
