@@ -238,18 +238,27 @@ public class Health : MonoBehaviour
         }
         else if (isPlayer)
         {
-            UIManager.instance.allowPause = false; //EW: Set this way to keep the player from pausing and unpausing after death because unpausing makes the main game UI show up.
-            //EW: Put this on the front, and made it check to see if it's paused first so that it won't pause an unpaused game.
             if (UIManager.instance.IsPaused)
             {
+                Debug.Log("HEALTH - UNPAUSING THE GAME AS THE PLAYER DIED");
                 UIManager.instance.TogglePause();
             }
+            else
+                Debug.Log("HEALTH - UI MANAGER INSTANCE IS PAUSED DOES NOT TOGGLE UN-PAUSE THE GAME");
+            UIManager.instance.allowPause = false; //EW: Set this way to keep the player from pausing and unpausing after death because unpausing makes the main game UI show up.
             isDead = true;
             gameOverCanvas.SetActive(true);
             inGameCanvas.SetActive(false);
             Cursor.lockState = CursorLockMode.None;
-            Debug.Log("HELLLLOOOOOOOOOOOOOOOOOOOOO");
-            end.EndingGradeCoroutine(); // Added by Aaron
+            Debug.Log("HEALTH - Ending Grade Script Activating");
+            end = GameObject.FindAnyObjectByType<EndingGrade>();
+            if (end != null)
+            {
+                StartCoroutine(end.EndingGradeCoroutine());
+                Debug.Log("HEALTH - END ISNOT NULL AND COROUTINE IS STARTING");
+            }
+            else
+                Debug.Log("HEALTH - END IS NULL");
         }
     }
 
