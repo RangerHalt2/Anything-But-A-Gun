@@ -32,41 +32,41 @@ public class CactusScript : WeaponClass
                 // If the weapon is not reloading
                 if (!ammoManager.IsReloading())
                 {
-                        if (hitscan != null)
+                    if (hitscan != null)
+                    {
+                        if (hasPackAPunch)
                         {
-                            if (hasPackAPunch)
+                            Type type = components[currPackAPunchIndex];
+                            if (type == typeof(P_Climactic))
                             {
-                                Type type = components[currPackAPunchIndex];
-                                if (type == typeof(P_Climactic))
-                                {
-                                    P_Climactic comp = gameObject.GetComponent<P_Climactic>();
-                                    float hitScanDmgMod = comp.HitScanDMGCalculation(ammoManager); //Going to connect this to a P_Climatic public function
-                                    hitscan.externalDmgMod = hitScanDmgMod;
-                                }
-                            }
-                            hitscan.Shoot();
-                            PlayOnomatopeia();
-                            if (gunShot != null)
-                            {
-                                Instantiate(gunShot, transform.position, transform.rotation, null);
+                                P_Climactic comp = gameObject.GetComponent<P_Climactic>();
+                                float hitScanDmgMod = comp.HitScanDMGCalculation(ammoManager); //Going to connect this to a P_Climatic public function
+                                hitscan.externalDmgMod = hitScanDmgMod;
                             }
                         }
+                        hitscan.Shoot();
+                        PlayOnomatopeia();
+                        if (gunShot != null)
+                        {
+                            Instantiate(gunShot, transform.position, transform.rotation, null);
+                        }
+                    }
                     // Update lastFired
                     timer = fireRate;
                 }
-                else if (ammoManager != null)
+            }
+            else if (ammoManager != null)
+            {
+                if (ammoManager.GetReserveAmmo() > 0 || ammoManager.GetReserveAmmo() == -1)
                 {
-                    if (ammoManager.GetReserveAmmo() > 0 || ammoManager.GetReserveAmmo() == -1)
+                    ammoManager.ReloadWeapon();
+                }
+                else
+                {
+                    if (clickEffect != null && clickTimer <= 0)
                     {
-                        ammoManager.ReloadWeapon();
-                    }
-                    else
-                    {
-                        if (clickEffect != null && clickTimer <= 0)
-                        {
-                            clickTimer = clickCooldown;
-                            Instantiate(clickEffect, transform.position, transform.rotation, null);
-                        }
+                        clickTimer = clickCooldown;
+                        Instantiate(clickEffect, transform.position, transform.rotation, null);
                     }
                 }
             }
