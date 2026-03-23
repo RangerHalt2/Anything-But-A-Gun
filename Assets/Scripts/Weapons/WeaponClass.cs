@@ -24,6 +24,7 @@ public class WeaponClass : MonoBehaviour
     [SerializeField] protected AmmoManager weaponAmmoManager;
     [SerializeField] private GameObject weaponInfoPanel;
     public WeaponLevel weaponLevel;
+    public int PTOAmount;
 
     [HideInInspector] public float cumulativeDamage;
     private WeaponInfoUI infoUI;

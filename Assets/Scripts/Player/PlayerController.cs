@@ -267,6 +267,10 @@ public class PlayerController : MonoBehaviour
         {
             StartDash();
         }
+        if (inputs.DropInput)
+        {
+            weaponHandler.DropButton();
+        }
 
         //Dash variable regulation
         if (Dashes < maxDashLimit)

@@ -234,7 +234,7 @@ public class Projectile : MonoBehaviour, IWeaponLevel
                 cummulativeDamage = baseDamage;
             }
             // If the projectile hit a weak point...
-            if (criticalHit)
+            if (canCrit && criticalHit)
             {
                 // Multiply cumulative damage by the critMult
                 cummulativeDamage *= critMult;

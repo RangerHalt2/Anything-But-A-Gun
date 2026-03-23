@@ -23,6 +23,7 @@ public class InputManager : MonoBehaviour
     [SerializeField] private string reload = "Reload";
     [SerializeField] private string next = "NextWeapon";
     [SerializeField] private string interact = "Interact";
+    [SerializeField] private string drop = "Drop";
     [SerializeField] private string cheats = "Cheats";
     [SerializeField] private string controllerCheck = "Controller Check";
     [SerializeField] private string keyboardCheck = "Keyboard Check";
@@ -39,6 +40,7 @@ public class InputManager : MonoBehaviour
         Reload,
         Next, //This is an alternative to scrollwheel for swapping weapons
         Interact,
+        Drop,
     }
 
     //LB: This is an action input, each one needs one assigned
@@ -52,6 +54,7 @@ public class InputManager : MonoBehaviour
     public InputAction reloadAction { get; private set; }
     public InputAction nextAction { get; private set; }
     public InputAction interactAction { get; private set; }
+    public InputAction dropAction { get; private set; }
     public InputAction cheatsAction { get; private set; }
     public InputAction controllerAction { get; private set; }
     public InputAction keyboardAction { get; private set; }
@@ -67,6 +70,7 @@ public class InputManager : MonoBehaviour
     public bool ReloadInput { get; private set; }
     public float NextInput { get; private set; }
     public bool InteractInput { get; private set; }
+    public bool DropInput { get; private set; }
     public bool CheatsInput { get; private set; }
     public bool ControllerLast { get; set; } = false;
     //LB: Instance Handler
@@ -103,6 +107,7 @@ public class InputManager : MonoBehaviour
         reloadAction = playerControls.FindActionMap(actionMapName).FindAction(reload);
         nextAction = playerControls.FindActionMap(actionMapName).FindAction(next);
         interactAction = playerControls.FindActionMap(actionMapName).FindAction(interact);
+        dropAction = playerControls.FindActionMap(actionMapName).FindAction(drop);
         cheatsAction = playerControls.FindActionMap(actionMapName).FindAction(cheats);
         controllerAction = playerControls.FindActionMap(actionMapName).FindAction(controllerCheck);
         keyboardAction = playerControls.FindActionMap(actionMapName).FindAction(keyboardCheck);
@@ -118,6 +123,7 @@ public class InputManager : MonoBehaviour
             { RebindableAction.Reload, reloadAction },
             { RebindableAction.Next, nextAction },
             { RebindableAction.Interact, interactAction },
+            { RebindableAction.Drop, dropAction },
         };
     }
 
@@ -154,6 +160,9 @@ public class InputManager : MonoBehaviour
         interactAction.performed += context => InteractInput = true;
         interactAction.canceled += context => InteractInput = false;
 
+        dropAction.performed += context => DropInput = true;
+        dropAction.canceled += context => DropInput = false;
+
         cheatsAction.performed += context => CheatsInput = true;
         cheatsAction.canceled += context => CheatsInput = false;
 
@@ -174,6 +183,7 @@ public class InputManager : MonoBehaviour
         reloadAction.Enable();
         nextAction.Enable();
         interactAction.Enable();
+        dropAction.Enable();
         cheatsAction.Enable();
         controllerAction.Enable();
         keyboardAction.Enable();
@@ -191,6 +201,7 @@ public class InputManager : MonoBehaviour
         reloadAction.Disable();
         nextAction.Disable();
         interactAction.Disable();
+        dropAction.Disable();
         cheatsAction.Disable();
         controllerAction.Disable();
         keyboardAction.Disable();

@@ -10,7 +10,7 @@ public class WeaponHandler : MonoBehaviour
     public GameObject starterWeapon;
 
     //Exactly what weapons we have
-    [HideInInspector] public List<GameObject> weapons = new List<GameObject>(); //List instead of an array for constant updating
+    public List<GameObject> weapons = new List<GameObject>(); //List instead of an array for constant updating
     public GameObject currentWeapon; //The weapon currently in the player's hands
     private int weaponSlot; //Which weapon in slot we're holding
     public GameObject newWeapon; //For if a player picks up a new gun.
@@ -19,10 +19,14 @@ public class WeaponHandler : MonoBehaviour
 
     [SerializeField] private InputManager inputManager;
     private float scrollValue;
-    [SerializeField] private float weaponSwitchRate = 0.5f;
+    
     private float lastSwitch = Mathf.NegativeInfinity;
 
-    private float timer = 0;
+    private float switchTimer = 0; 
+    [SerializeField] private float weaponSwitchRate = 0.5f;
+
+    private float dropTimer = 0;
+    [SerializeField] private float weaponDropRate = 0.5f;
 
     [SerializeField] private Transform gunHolder;
 
@@ -50,7 +54,8 @@ public class WeaponHandler : MonoBehaviour
             currentWeapon.transform.position = weaponLocation.position;
         }
         SwitchGun();
-        timer  -= Time.deltaTime;
+        switchTimer  -= Time.deltaTime;
+        dropTimer -= Time.deltaTime;
     }
 
     public void FireWeapon()
@@ -61,6 +66,15 @@ public class WeaponHandler : MonoBehaviour
     public void ReloadWeapon()
     {
         currentWeapon.GetComponent<WeaponClass>().Reload();
+    }
+
+    public void DropButton()
+    {
+        if (currentWeapon != starterWeapon)
+        {
+            DropWeapon(currentWeapon);
+            Debug.Log("WeaponHandler dropped weapon is " + currentWeapon);
+        }
     }
 
     void SwitchGun() //When the player want's to rotate to a different weapon in their wheel
@@ -81,7 +95,6 @@ public class WeaponHandler : MonoBehaviour
         if (currentWeapon == null)
         {
             Debug.LogError("CurrentWeapon is null — likely no starter weapon assigned.");
-            return;
         }
 
         AmmoManager ammo = currentWeapon.GetComponent<AmmoManager>();
@@ -95,7 +108,7 @@ public class WeaponHandler : MonoBehaviour
 
         // If enough time has passed since the last round was fired
 
-        if (timer <= 0)
+        if (switchTimer <= 0)
         {
             if (weapons.Count > 1 && (scrollValue != 0 || inputManager.NextInput != 0) && !currentWeapon.GetComponent<AmmoManager>().IsReloading())
             {
@@ -145,7 +158,7 @@ public class WeaponHandler : MonoBehaviour
 
             }
 
-            timer = weaponSwitchRate;
+            switchTimer = weaponSwitchRate;
         }
 
         if (currentWeapon.activeSelf == false)
@@ -159,6 +172,8 @@ public class WeaponHandler : MonoBehaviour
             currentWeapon.GetComponent<AmmoManager>().reserveAmmo = -1;
             currentWeapon.GetComponent<AmmoManager>().updateDisplay();
         }
+
+        currentWeapon.GetComponent<AmmoManager>().updateDisplay();
     }
 
     void AddWeapon(GameObject addWeapon)
@@ -185,7 +200,6 @@ public class WeaponHandler : MonoBehaviour
 
                     if (nameOfHeldScript == nameOfNewScript) //If we already have this weapon, drop the current weapon and replace it with the new one.
                     {
-                        weapons.Remove(heldWeapon);
                         DropWeapon(heldWeapon);
                         break;
                     }
@@ -230,46 +244,62 @@ public class WeaponHandler : MonoBehaviour
             currentWeapon.GetComponent<AmmoManager>().reserveAmmo = -1;
             currentWeapon.GetComponent<AmmoManager>().updateDisplay();
         }
+
+        currentWeapon.GetComponent<AmmoManager>().updateDisplay();
     }
 
     public void DropWeapon(GameObject dropWeapon) //Spawns a collectible that will allow you to recollect the weapon.
     {
-        Vector3 spawnPoint = transform.position + transform.forward * 2;
-        Vector3 scale = dropWeapon.transform.localScale;
-        //Spawn the collectible in front of the player
-        dropWeapon.transform.SetParent(null, true);
-        dropWeapon.transform.localScale = scale;
-        dropWeapon.transform.position = spawnPoint;
-        dropWeapon.SetActive(true);
-
-
-        dropWeapon.GetComponent<WeaponCollectScript>().enabled = true;
-        dropWeapon.GetComponent<WeaponCollectScript>().collected = false; //Currently, if you drop the weapon and pick it up too fast, there's a chance to scramble
-                                                                          //it's collected function and make it uncollectible. This won't be an issue if we change to
-                                                                          //interactive pick-ups.
-                                                                          // Check if there is a Weapon Transform Manager
-        WeaponTransformManager wtm = dropWeapon.GetComponentInChildren<WeaponTransformManager>();
-        // If so use it to update the weapon's scale
-        if (wtm != null)
+        if (dropTimer < 0)
         {
-            dropWeapon.transform.localRotation = Quaternion.identity;
-            wtm.SetGrounded();
-        }
-        // If not use the old system
-        else
-        {
-            dropWeapon.transform.rotation = Quaternion.identity;
-        }
+            weapons.Remove(dropWeapon);
+            weaponSlot = 0;
+            currentWeapon = weapons[weaponSlot];
+            currentWeapon.SetActive(false);
+            currentWeapon.SetActive(true);
+            currentWeapon.GetComponent<AmmoManager>().updateDisplay();
 
 
-        dropWeapon.layer = LayerMask.NameToLayer("Interactable");
+            Vector3 spawnPoint = transform.position + transform.forward * 2;
+            Vector3 scale = dropWeapon.transform.localScale;
+            //Spawn the collectible in front of the player
+            dropWeapon.transform.SetParent(null, true);
 
-        if(dropWeapon.GetComponent<FloatAndRotate>() != null)
-            dropWeapon.GetComponentInChildren<FloatAndRotate>().StartFloatAndRotate();
+            dropWeapon.transform.localScale = scale;
+            dropWeapon.transform.position = spawnPoint;
+            dropWeapon.SetActive(true);
 
-        if (cheatsEnabled)
-        {
-            currentWeapon.GetComponent<AmmoManager>().reserveAmmo = -1;
+
+            dropWeapon.GetComponent<WeaponCollectScript>().enabled = true;
+            dropWeapon.GetComponent<WeaponCollectScript>().collected = false; //Currently, if you drop the weapon and pick it up too fast, there's a chance to scramble
+                                                                              //it's collected function and make it uncollectible. This won't be an issue if we change to
+                                                                              //interactive pick-ups.
+                                                                              // Check if there is a Weapon Transform Manager
+            WeaponTransformManager wtm = dropWeapon.GetComponentInChildren<WeaponTransformManager>();
+            // If so use it to update the weapon's scale
+            if (wtm != null)
+            {
+                dropWeapon.transform.localRotation = Quaternion.identity;
+                wtm.SetGrounded();
+            }
+            // If not use the old system
+            else
+            {
+                dropWeapon.transform.rotation = Quaternion.identity;
+            }
+
+
+            dropWeapon.layer = LayerMask.NameToLayer("Interactable");
+
+            if (dropWeapon.GetComponent<FloatAndRotate>() != null)
+                dropWeapon.GetComponentInChildren<FloatAndRotate>().StartFloatAndRotate();
+
+            if (cheatsEnabled)
+            {
+                currentWeapon.GetComponent<AmmoManager>().reserveAmmo = -1;
+                currentWeapon.GetComponent<AmmoManager>().updateDisplay();
+            }
+
             currentWeapon.GetComponent<AmmoManager>().updateDisplay();
         }
     }
@@ -303,3 +333,4 @@ public class WeaponHandler : MonoBehaviour
     }
 
 }
+
