@@ -45,10 +45,11 @@ public class CactusScript : WeaponClass
                                 }
                             }
                             hitscan.Shoot();
-                            if(gunShot != null)
-                        {
-                            Instantiate(gunShot, transform.position, transform.rotation, null);
-                        }
+                            PlayOnomatopeia();
+                            if (gunShot != null)
+                            {
+                                Instantiate(gunShot, transform.position, transform.rotation, null);
+                            }
                         }
                     // Update lastFired
                     timer = fireRate;

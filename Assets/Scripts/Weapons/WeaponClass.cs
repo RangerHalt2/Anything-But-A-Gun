@@ -54,6 +54,9 @@ public class WeaponClass : MonoBehaviour
     protected int currPackAPunchIndex = -1;
     protected Component currPackAPunchComponent;
     //[HideInInspector] public bool isProjectile { get; set; }
+
+    protected ParticleSystem onomatopeiaVFX; //LB: Self explanitory
+
     public enum WeaponType
     {
         SemiAutomatic,
@@ -325,13 +328,25 @@ public class WeaponClass : MonoBehaviour
 
     public void RandomGunShot(Transform followTrans)
     {
-        int num = UnityEngine.Random.Range(0, randomGunShots.Length);
-        GameObject selected = randomGunShots[num];
-        GameObject randomShot = Instantiate(selected, followTrans.position, Quaternion.identity);
-        MovingAudio movingAudio = randomShot.AddComponent<MovingAudio>();
-        movingAudio.targetToFollow = followTrans;
+        if(randomGunShots != null)
+        {
+            int num = UnityEngine.Random.Range(0, randomGunShots.Length);
+            GameObject selected = randomGunShots[num];
+            GameObject randomShot = Instantiate(selected, followTrans.position, Quaternion.identity);
+            MovingAudio movingAudio = randomShot.AddComponent<MovingAudio>();
+            movingAudio.targetToFollow = followTrans;
+        }
     }
 
+    public void PlayOnomatopeia()
+    {
+        if(onomatopeiaVFX == null)
+        {
+            Debug.LogWarning("WEAPON CLASS - onomatopeia is null for this weapon");
+            return;
+        }
+        onomatopeiaVFX.Play();
+    }
 
     public virtual void Shoot() //Default is spawn projectile
     {

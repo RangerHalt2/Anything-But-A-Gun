@@ -88,7 +88,7 @@ public class WindbreakerScript : WeaponClass
             }
             Projectile proj = projectileGameObject.GetComponent<Projectile>();
             proj.SetWeaponLevelReference(weaponLevelRef);
-
+            PlayOnomatopeia();
             PootProjectileScript pootProj = projectileGameObject.GetComponent<PootProjectileScript>();
             pootProj.SetWeaponLevelReference(weaponLevelRef);
         }

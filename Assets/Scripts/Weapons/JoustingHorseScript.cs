@@ -106,7 +106,7 @@ public class JoustingHorseScript : WeaponClass
             // Play sound effect (added by Aaron)
             Instantiate(gunShot, transform.position, transform.rotation, null);
         }
-
+        PlayOnomatopeia();
         while (Time.time < startTime + joustTime)
         {
             pc.GetPlayerCharacterController().Move(dashDirection * pc.movementSpeed * joustForce * Time.deltaTime);
