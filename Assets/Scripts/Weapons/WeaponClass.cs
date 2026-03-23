@@ -347,7 +347,16 @@ public class WeaponClass : MonoBehaviour
             Debug.LogWarning("WEAPON CLASS - onomatopeia is null for this weapon");
             return;
         }
-        onomatopeiaVFX.Play();
+        if(onomatopeiaTimer <= 0)
+        {
+            onomatopeiaVFX.Play();
+            onomatopeiaTimer = onomatopeiaCooldown;
+        }
+    }
+
+    private void Update()
+    {
+        onomatopeiaTimer -= Time.deltaTime;
     }
 
     public virtual void Shoot() //Default is spawn projectile
