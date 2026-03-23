@@ -328,11 +328,14 @@ public class WeaponClass : MonoBehaviour
 
     public void RandomGunShot(Transform followTrans)
     {
-        int num = UnityEngine.Random.Range(0, randomGunShots.Length);
-        GameObject selected = randomGunShots[num];
-        GameObject randomShot = Instantiate(selected, followTrans.position, Quaternion.identity);
-        MovingAudio movingAudio = randomShot.AddComponent<MovingAudio>();
-        movingAudio.targetToFollow = followTrans;
+        if(randomGunShots != null)
+        {
+            int num = UnityEngine.Random.Range(0, randomGunShots.Length);
+            GameObject selected = randomGunShots[num];
+            GameObject randomShot = Instantiate(selected, followTrans.position, Quaternion.identity);
+            MovingAudio movingAudio = randomShot.AddComponent<MovingAudio>();
+            movingAudio.targetToFollow = followTrans;
+        }
     }
 
     public void PlayOnomatopeia()
