@@ -105,6 +105,7 @@ public class PootDispenserScript : WeaponClass
                 Component comp = projectileGameObject.AddComponent(components[currPackAPunchIndex]);
             }
             PlayOnomatopeia();
+            RandomGunShot(proj.transform);
             PootProjectileScript pootProj = projectileGameObject.GetComponent<PootProjectileScript>();
             pootProj.SetWeaponLevelReference(weaponLevelRef);
         }
