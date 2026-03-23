@@ -46,6 +46,7 @@ public class EndingGrade : MonoBehaviour
         yourScoreObject.SetActive(true);
 
         // step 4: use forloop to loop this set of code for every character in the yourScore string, increasing a variable at the same time
+        //for (int i = 0; i < 10; i++)
             // 4.1: take Nth letter of yourScore string and append it to yourScoreTyped string
             // 4.2: change text shown on screen to yourScoreTyped
             // 4.3: play random keyboard type sound effect from array
