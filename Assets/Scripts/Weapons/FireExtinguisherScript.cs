@@ -88,6 +88,7 @@ public class FireExtinguisherScript : WeaponClass
             Projectile proj = projectileGameObject.GetComponent<Projectile>();
             proj.SetWeaponLevelReference(weaponLevelRef);
             RandomGunShot(proj.transform);
+            PlayOnomatopeia();
             
             if (hasPackAPunch)
             {
