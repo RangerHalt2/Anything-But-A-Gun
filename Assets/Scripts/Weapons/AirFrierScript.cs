@@ -165,6 +165,7 @@ public class AirFrierScript : WeaponClass
 
                 Projectile proj = projectileGameObject.GetComponent<Projectile>();
                 RandomGunShot(proj.transform);
+                PlayOnomatopeia();
                 proj.SetWeaponLevelReference(weaponLevelRef);
 
                 NuggieSpawner ns = projectileGameObject.GetComponent<NuggieSpawner>();

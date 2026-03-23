@@ -141,6 +141,7 @@ public class BrushScript : WeaponClass
 
             }
             Projectile [] projs = projectileGameObject.GetComponentsInChildren<Projectile>();
+            PlayOnomatopeia();
             foreach (Projectile proj in projs)
             {
                 proj.SetWeaponLevelReference(weaponLevelRef);

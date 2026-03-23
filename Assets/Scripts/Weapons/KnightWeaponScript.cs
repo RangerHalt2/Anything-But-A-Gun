@@ -102,6 +102,7 @@ public class KnightWeaponScript : WeaponClass
             }
             Projectile proj = projectileGameObject.GetComponent<Projectile>();
             RandomGunShot(proj.transform);
+            PlayOnomatopeia();
             proj.SetWeaponLevelReference(weaponLevelRef);
 
             if (hasPackAPunch)

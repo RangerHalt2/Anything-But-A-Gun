@@ -82,6 +82,7 @@ public class DivorcePaper : WeaponClass
         }
         Projectile proj = projectile.GetComponent<Projectile>();
         proj.SetWeaponLevelReference(weaponLevel);
+        PlayOnomatopeia();
         RandomGunShot(proj.transform);
     }
 

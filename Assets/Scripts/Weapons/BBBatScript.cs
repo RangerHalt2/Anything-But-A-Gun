@@ -203,6 +203,7 @@ public class BBBatScript : WeaponClass
             Projectile proj = projectileGameObject.GetComponent<Projectile>();
             proj.baseDamage = baseDamage;
             proj.SetWeaponLevelReference(weaponLevelRef);
+            PlayOnomatopeia();
             projectileGameObject.GetComponent<BBBatProjectileScript>().baseWeapon = gameObject;
         }
     }

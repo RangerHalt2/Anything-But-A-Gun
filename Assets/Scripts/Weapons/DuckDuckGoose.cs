@@ -62,6 +62,7 @@ public class DuckDuckGoose : WeaponClass
         }
         proj.SetWeaponLevelReference(weaponLevelRef);
         proj2.SetWeaponLevelReference(weaponLevelRef);
+        PlayOnomatopeia();
     }
 
     /*public void Reload()

@@ -100,7 +100,7 @@ public class PaperAirplaneWeaponScript : WeaponClass
             {
                 Component comp = projectileGameObject.AddComponent(components[currPackAPunchIndex]);
             }
-
+            PlayOnomatopeia();
             AirplaneProjectileScript airProj = projectileGameObject.GetComponent<AirplaneProjectileScript>();
             airProj.SetWeaponLevelReference(weaponLevelRef);
         }

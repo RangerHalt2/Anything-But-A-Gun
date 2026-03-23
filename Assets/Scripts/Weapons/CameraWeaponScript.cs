@@ -35,8 +35,9 @@ public class CameraWeaponScript : WeaponClass
                 // If the weapon is not reloading
                 if (!ammoManager.IsReloading())
                 {
-                        SnapCamera();
-                        Instantiate(flashVFX, transform.position, transform.rotation, null);
+                    SnapCamera();
+                    PlayOnomatopeia();
+                    Instantiate(flashVFX, transform.position, transform.rotation, null);
                     // Update lastFired
                     timer = fireRate;
                 }

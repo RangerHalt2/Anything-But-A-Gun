@@ -68,6 +68,7 @@ public class DVDPlayer : WeaponClass
 
             Projectile proj = projectileGameObject.GetComponent<Projectile>();
             proj.SetWeaponLevelReference(weaponLevelRef);
+            PlayOnomatopeia();
         }
     }
 }

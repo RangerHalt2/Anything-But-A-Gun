@@ -54,6 +54,9 @@ public class WeaponClass : MonoBehaviour
     protected int currPackAPunchIndex = -1;
     protected Component currPackAPunchComponent;
     //[HideInInspector] public bool isProjectile { get; set; }
+
+    protected ParticleSystem onomatopeiaVFX; //LB: Self explanitory
+
     public enum WeaponType
     {
         SemiAutomatic,
@@ -332,6 +335,15 @@ public class WeaponClass : MonoBehaviour
         movingAudio.targetToFollow = followTrans;
     }
 
+    public void PlayOnomatopeia()
+    {
+        if(onomatopeiaVFX == null)
+        {
+            Debug.LogWarning("WEAPON CLASS - onomatopeia is null for this weapon");
+            return;
+        }
+        onomatopeiaVFX.Play();
+    }
 
     public virtual void Shoot() //Default is spawn projectile
     {
