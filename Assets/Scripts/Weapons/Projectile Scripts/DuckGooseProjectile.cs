@@ -9,11 +9,13 @@ public class DuckGooseProjectile : MonoBehaviour
     [SerializeField] private float gooseMulti = 3f;
     [SerializeField] private float range = 10f;
     [SerializeField] private int maxBounce = 5;
-    [SerializeField] private float height = 2f;
+    //[SerializeField] private float height = 2f; //LB: Now a variable of enemy, to be dynamic.
     [SerializeField] private float duration = 1f;
     [SerializeField] private float chanceToGoose = 15f;
     [SerializeField] private LayerMask whatIsEnemy;
     [SerializeField] private GameObject gooseVFX;
+    [SerializeField] private GameObject duckSFX;
+    [SerializeField] private GameObject gooseSFX;
     public float baseDamage;
 
     private List<Health> enemiesHit;
@@ -47,7 +49,16 @@ public class DuckGooseProjectile : MonoBehaviour
             Destroy(gameObject); // no valid target
             return;
         }
-        StartCoroutine(ArcToTarget(closestEnemy, duration, height));
+        EnemyClass enemy = closestEnemy.GetComponentInParent<EnemyClass>();
+        if (enemy != null)
+        {
+            StartCoroutine(ArcToTarget(closestEnemy, duration, enemy.height));
+        }
+        else
+        {
+            Debug.LogWarning("DUCK GOOSE PROJECTILE - ENEMY IS NULL FOR THE DUCK DUCK GOOSE, KILLING MYSELF");
+            Destroy(gameObject);
+        }
     }
 
     private IEnumerator ArcToTarget(Transform target, float duration, float height)
@@ -133,6 +144,7 @@ public class DuckGooseProjectile : MonoBehaviour
             UpdateLevelDamage(); //Check the damage final time
             cummulativeDamage = cummulativeDamage * gooseMulti; //Set the damage to the GOOSE damage.
             enemyHealth.TakeDamage(cummulativeDamage, this.gameObject.transform); //Special take damage to cut earlier than usual with goose multi set
+            Instantiate(gooseSFX, transform.position, transform.rotation, null); // Added by Aaron
             Destroy(gameObject);
             return;
         }
@@ -142,6 +154,7 @@ public class DuckGooseProjectile : MonoBehaviour
             P_Explosive pe = gameObject.GetComponent<P_Explosive>();
             if (pe == null)
             {
+                Instantiate(duckSFX, transform.position, transform.rotation, null); // Added by Aaron
                 DoDamage(enemyHealth);
             }
             else
@@ -153,6 +166,7 @@ public class DuckGooseProjectile : MonoBehaviour
                     {
                         Debug.Log("Exploding!");
                         ApplyAOE(this.transform);
+                        Instantiate(duckSFX, transform.position, transform.rotation, null); // Added by Aaron
                         Instantiate(projectileRef.spikedExplosionVFX, transform.position, transform.rotation, null);
                         ricochetTimer = ricochetCooldown;
                     }

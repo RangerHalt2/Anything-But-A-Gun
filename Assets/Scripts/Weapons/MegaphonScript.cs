@@ -88,7 +88,8 @@ public class MegaphonScript : WeaponClass
             Projectile proj = projectileGameObject.GetComponent<Projectile>();
             proj.SetWeaponLevelReference(weaponLevelRef);
             RandomGunShot(proj.transform);
-            
+            PlayOnomatopeia();
+
             if (hasPackAPunch)
             {
                 Component comp = proj.gameObject.AddComponent(components[currPackAPunchIndex]);

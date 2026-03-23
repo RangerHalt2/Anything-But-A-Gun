@@ -106,6 +106,7 @@ public class VolleyBallScript : WeaponClass
         }
         Projectile proj = projectile.GetComponent<Projectile>();
         RandomGunShot(proj.transform);
+        PlayOnomatopeia();
         proj.SetWeaponLevelReference(weaponLevelRef);
     }
 

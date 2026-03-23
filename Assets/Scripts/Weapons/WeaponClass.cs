@@ -55,6 +55,11 @@ public class WeaponClass : MonoBehaviour
     protected int currPackAPunchIndex = -1;
     protected Component currPackAPunchComponent;
     //[HideInInspector] public bool isProjectile { get; set; }
+
+    [SerializeField] protected ParticleSystem onomatopeiaVFX; //LB: Self explanitory
+    [SerializeField] private float onomatopeiaCooldown = 1.5f;
+    private float onomatopeiaTimer = 0;
+
     public enum WeaponType
     {
         SemiAutomatic,
@@ -326,18 +331,42 @@ public class WeaponClass : MonoBehaviour
 
     public void RandomGunShot(Transform followTrans)
     {
-        int num = UnityEngine.Random.Range(0, randomGunShots.Length);
-        GameObject selected = randomGunShots[num];
-        GameObject randomShot = Instantiate(selected, followTrans.position, Quaternion.identity);
-        MovingAudio movingAudio = randomShot.AddComponent<MovingAudio>();
-        movingAudio.targetToFollow = followTrans;
+        if(randomGunShots != null)
+        {
+            Debug.Log("WEAPON CLASS - RANDOM AUDIO NOT NULL");
+            int num = UnityEngine.Random.Range(0, randomGunShots.Length);
+            Debug.Log("WEAPON CLASS - RANDOM AUDIO CHOOSEN OF INDEX " + num);
+            GameObject selected = randomGunShots[num];
+            GameObject randomShot = Instantiate(selected, followTrans.position, Quaternion.identity);
+            MovingAudio movingAudio = randomShot.AddComponent<MovingAudio>();
+            movingAudio.targetToFollow = followTrans;
+        }
     }
 
+    public void PlayOnomatopeia()
+    {
+        if(onomatopeiaVFX == null)
+        {
+            Debug.LogWarning("WEAPON CLASS - onomatopeia is null for this weapon");
+            return;
+        }
+        if(onomatopeiaTimer <= 0)
+        {
+            onomatopeiaVFX.Play();
+            onomatopeiaTimer = onomatopeiaCooldown;
+        }
+    }
+
+    private void Update()
+    {
+        onomatopeiaTimer -= Time.deltaTime;
+    }
 
     public virtual void Shoot() //Default is spawn projectile
     {
         // If enough time has passed since the last round was fired
-        if ((Time.timeSinceLevelLoad - lastFired) > fireRate)
+        if ((Time.timeSinceLevelLoad - lastFired) > fireRate) //LB: Note To Self: Please remove, level load timer breaks the entire game after level 1.
+                                                              //
         {
             // If there is an assigned ammo manager, and that ammo manager has at least one round of ammo loaded
             if (ammoManager != null && ammoManager.GetCurrentAmmo() > 0)

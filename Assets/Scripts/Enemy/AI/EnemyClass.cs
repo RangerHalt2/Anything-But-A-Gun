@@ -36,6 +36,8 @@ public class EnemyClass : MonoBehaviour
 
     public EnemyType enemyType;
 
+    public float height = 2f;
+
     public enum EnemyType
     {
         Common,

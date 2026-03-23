@@ -61,6 +61,7 @@ public class LaserScript : WeaponClass
                                 }
                             }
                             hitscan.Shoot();
+                            PlayOnomatopeia();
                             if (gunShot != null)
                             {
                                 Instantiate(gunShot, transform.position, transform.rotation, null);

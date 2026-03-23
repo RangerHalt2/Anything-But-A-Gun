@@ -11,12 +11,12 @@ GameObject:
   - component: {fileID: 8068485874874718213}
   - component: {fileID: 5654519594672957894}
   - component: {fileID: -136479085653885347}
-  - component: {fileID: 1496291390409798946}
   - component: {fileID: 6390123147976668450}
   - component: {fileID: -4384429325781775618}
   - component: {fileID: 5462082225701915407}
   - component: {fileID: -9007097184272561893}
   - component: {fileID: 436870328171205861}
+  - component: {fileID: 7003536551666202435}
   m_Layer: 14
   m_Name: Fire Extinguisher
   m_TagString: Untagged
@@ -79,7 +79,7 @@ MonoBehaviour:
   currentAmmo: 100
   ammoConsumption: 1
   reloadTime: 1.75
-  canCancelReload: 0
+  canCancelReload: 1
   reloadMode: 0
   crosshair: {fileID: 0}
   ammoDisplayText: {fileID: 0}
@@ -87,47 +87,6 @@ MonoBehaviour:
   bottomlessMagazines: 0
   reloadVFX: {fileID: 4303473679594613467}
   weaponObject: {fileID: 764848643168647408}
---- !u!114 &1496291390409798946
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 151647689765970786}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 06149a7a9f667254d97990fa58aa5817, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::MegaphonScript
-  ammoManager: {fileID: -136479085653885347}
-  gunShot: {fileID: 5383701307693267320, guid: 10c66d0c8719aeb4b9bf9a0204f9c02a, type: 3}
-  clickEffect: {fileID: 0}
-  randomGunShots: []
-  clickCooldown: 0.5
-  clickTimer: 0
-  projectilePrefab: {fileID: 1506664740527934108, guid: f09e80239b86f844b86565d737fe48fd, type: 3}
-  lastFired: -Infinity
-  weaponInterface: {fileID: 0}
-  weaponAmmoManager: {fileID: -136479085653885347}
-  weaponInfoPanel: {fileID: 947121055663357798}
-  weaponLevel: {fileID: 6390123147976668450}
-  cumulativeDamage: 0
-  weaponName: Fire Extinguisher
-  tagline: Projectiles grow as they travel and damage drops
-  weaponType: 1
-  promotionName: No Promotion
-  promotionEffect: No Promotion
-  level: 0
-  baseDamage: 20
-  levelDamage: 10
-  fireRate: 0.05
-  reloadTime: 1.75
-  AmmoCapacity: 100
-  reserveAmmo: 1600
-  hasPackAPunch: 0
-  acceptablePackAPunchOptions:
-  - {fileID: 11400000, guid: 400b49d056ae7e44fafc9f2feebd7aca, type: 2}
-  projectileSpawnPoint: {fileID: 2296503841774643913}
 --- !u!114 &6390123147976668450
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -222,6 +181,49 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 1.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &7003536551666202435
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 151647689765970786}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f9d33b7a9acd0b4ba8ef0450649ad33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FireExtinguisherScript
+  ammoManager: {fileID: -136479085653885347}
+  gunShot: {fileID: 0}
+  clickEffect: {fileID: 0}
+  randomGunShots:
+  - {fileID: 6015612841358465451, guid: 871bd748f81bccc44a10242c16112a94, type: 3}
+  clickCooldown: 0.5
+  clickTimer: 0
+  projectilePrefab: {fileID: 1506664740527934108, guid: f09e80239b86f844b86565d737fe48fd, type: 3}
+  lastFired: -Infinity
+  weaponInterface: {fileID: 0}
+  weaponAmmoManager: {fileID: -136479085653885347}
+  weaponInfoPanel: {fileID: 947121055663357798}
+  weaponLevel: {fileID: 6390123147976668450}
+  cumulativeDamage: 0
+  weaponName: Fire Extinguisher
+  tagline: Fires a stream of constant damage
+  weaponType: 1
+  promotionName: No Promotion
+  promotionEffect: No Promotion
+  level: 0
+  baseDamage: 20
+  levelDamage: 10
+  fireRate: 0.05
+  reloadTime: 1.75
+  AmmoCapacity: 100
+  reserveAmmo: 1600
+  hasPackAPunch: 0
+  acceptablePackAPunchOptions: []
+  onomatopeiaVFX: {fileID: 0}
+  onomatopeiaCooldown: 1.5
+  projectileSpawnPoint: {fileID: 2296503841774643913}
 --- !u!1 &1107246703220286180
 GameObject:
   m_ObjectHideFlags: 0
