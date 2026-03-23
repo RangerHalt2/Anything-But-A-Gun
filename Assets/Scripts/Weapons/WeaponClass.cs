@@ -332,7 +332,9 @@ public class WeaponClass : MonoBehaviour
     {
         if(randomGunShots != null)
         {
+            Debug.Log("WEAPON CLASS - RANDOM AUDIO NOT NULL");
             int num = UnityEngine.Random.Range(0, randomGunShots.Length);
+            Debug.Log("WEAPON CLASS - RANDOM AUDIO CHOOSEN OF INDEX " + num);
             GameObject selected = randomGunShots[num];
             GameObject randomShot = Instantiate(selected, followTrans.position, Quaternion.identity);
             MovingAudio movingAudio = randomShot.AddComponent<MovingAudio>();
