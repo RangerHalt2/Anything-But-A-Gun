@@ -1,4 +1,6 @@
 using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
 
 public class ShredderButton: MonoBehaviour, IInteractable
 {
@@ -7,6 +9,8 @@ public class ShredderButton: MonoBehaviour, IInteractable
 
     public bool canInteract { get; set; } = true;
     private PlayerController pc;
+
+    HashSet<GameObject> uniqueObjects = new HashSet<GameObject>();
 
     [SerializeField] private LayerMask interactableLayer;
     [SerializeField] private BoxCollider boxTrigger;
@@ -35,18 +39,22 @@ public class ShredderButton: MonoBehaviour, IInteractable
         Quaternion orientation = transform.rotation;
         Collider[] hits = Physics.OverlapBox(center, halfExtents, orientation, interactableLayer);
 
-        Debug.Log(hits);
-
         foreach (Collider weapon in hits)
         {
-            GameObject check = weapon.gameObject;
-            Debug.Log("ShreddedButton tried to delete " + check);
-            if (check.GetComponent<WeaponClass>() != null)
+            WeaponClass check = weapon.gameObject.GetComponent<WeaponClass>();
+            if (check != null)
             {
-                pc.GetComponent<EconomyManager>().PTOAmount += check.GetComponent<WeaponClass>().PTOAmount;
-                Destroy(check);
+                uniqueObjects.Add(check.gameObject);
             }
 
+        }
+
+        foreach (GameObject obj in uniqueObjects) 
+        {
+            Debug.Log("ShreddedButton tried to delete " + obj);
+            
+            pc.GetComponent<EconomyManager>().PTOAmount += obj.GetComponent<WeaponClass>().PTOAmount;
+            Destroy(obj);
         }
     }
 
