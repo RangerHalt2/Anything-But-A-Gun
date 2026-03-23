@@ -9,7 +9,7 @@ public class DuckGooseProjectile : MonoBehaviour
     [SerializeField] private float gooseMulti = 3f;
     [SerializeField] private float range = 10f;
     [SerializeField] private int maxBounce = 5;
-    [SerializeField] private float height = 2f;
+    //[SerializeField] private float height = 2f; //LB: Now a variable of enemy, to be dynamic.
     [SerializeField] private float duration = 1f;
     [SerializeField] private float chanceToGoose = 15f;
     [SerializeField] private LayerMask whatIsEnemy;
@@ -47,7 +47,16 @@ public class DuckGooseProjectile : MonoBehaviour
             Destroy(gameObject); // no valid target
             return;
         }
-        StartCoroutine(ArcToTarget(closestEnemy, duration, height));
+        EnemyClass enemy = closestEnemy.GetComponentInParent<EnemyClass>();
+        if (enemy != null)
+        {
+            StartCoroutine(ArcToTarget(closestEnemy, duration, enemy.height));
+        }
+        else
+        {
+            Debug.LogWarning("DUCK GOOSE PROJECTILE - ENEMY IS NULL FOR THE DUCK DUCK GOOSE, KILLING MYSELF");
+            Destroy(gameObject);
+        }
     }
 
     private IEnumerator ArcToTarget(Transform target, float duration, float height)
