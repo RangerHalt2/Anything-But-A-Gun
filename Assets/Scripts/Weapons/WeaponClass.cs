@@ -55,7 +55,9 @@ public class WeaponClass : MonoBehaviour
     protected Component currPackAPunchComponent;
     //[HideInInspector] public bool isProjectile { get; set; }
 
-    protected ParticleSystem onomatopeiaVFX; //LB: Self explanitory
+    [SerializeField] protected ParticleSystem onomatopeiaVFX; //LB: Self explanitory
+    [SerializeField] private float onomatopeiaCooldown = 1.5f;
+    private float onomatopeiaTimer = 0;
 
     public enum WeaponType
     {
@@ -351,7 +353,8 @@ public class WeaponClass : MonoBehaviour
     public virtual void Shoot() //Default is spawn projectile
     {
         // If enough time has passed since the last round was fired
-        if ((Time.timeSinceLevelLoad - lastFired) > fireRate)
+        if ((Time.timeSinceLevelLoad - lastFired) > fireRate) //LB: Note To Self: Please remove, level load timer breaks the entire game after level 1.
+                                                              //
         {
             // If there is an assigned ammo manager, and that ammo manager has at least one round of ammo loaded
             if (ammoManager != null && ammoManager.GetCurrentAmmo() > 0)
