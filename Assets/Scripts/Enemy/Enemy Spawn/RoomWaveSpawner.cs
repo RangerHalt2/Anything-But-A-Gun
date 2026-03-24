@@ -11,6 +11,7 @@ public class RoomWaveSpawner : MonoBehaviour
     [SerializeField] private int num_of_waves = 3;
     private int current_wave = 0;
     [SerializeField] private float spawnAllBySeconds = 15f;
+    [SerializeField] private GameObject healthPack;
     
     [Space(2)]
     [Tooltip("An array of all the doors to remove when the wave manager is done")]
@@ -62,6 +63,7 @@ public class RoomWaveSpawner : MonoBehaviour
                 enemySpawner.SpawnEnemies();
                 current_wave++;
                 AssignListeners();
+                healthPack.SetActive(true);
             }
         }
     }

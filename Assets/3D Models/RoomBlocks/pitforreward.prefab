@@ -575,8 +575,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 10, y: 2.0474567, z: 10}
-  m_Center: {x: 0, y: 0.13185708, z: -0.000030441455}
+  m_Size: {x: 10, y: 1.6248804, z: 9.999999}
+  m_Center: {x: 0, y: -0.07943039, z: -0.00003056592}
 --- !u!114 &7765329943171946444
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -589,7 +589,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4209ad4f388cb9f41b777d62df002e1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DamageTrigger
-  damage: 20
+  damage: 10
+  distanceTolerance: 1
   targetTeamIDs: 0000000001000000
 --- !u!1 &1759311332521506096
 GameObject:
@@ -2168,8 +2169,8 @@ Transform:
   m_GameObject: {fileID: 8286855417577438092}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -5.3388, y: 0.55, z: -0.2171}
-  m_LocalScale: {x: 1.1533998, y: 1.4587, z: 9.565946}
+  m_LocalPosition: {x: -5.3388, y: 0.7959, z: -0.2171}
+  m_LocalScale: {x: 1.1533998, y: 1.9504278, z: 9.565946}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7886581921712824699}
@@ -2280,8 +2281,8 @@ Transform:
   m_GameObject: {fileID: 8346951142612169984}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -10.22, y: 0.6535, z: -0.36}
-  m_LocalScale: {x: 5.2379646, y: 1.5671, z: 10}
+  m_LocalPosition: {x: -10.22, y: 0.9343, z: -0.36}
+  m_LocalScale: {x: 5.2379646, y: 2.0953696, z: 10}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7886581921712824699}
@@ -2913,7 +2914,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1707801316454031238, guid: a1f0900fd13e2d348bf5568770a6a195, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.33
+      value: 1.94
       objectReference: {fileID: 0}
     - target: {fileID: 1707801316454031238, guid: a1f0900fd13e2d348bf5568770a6a195, type: 3}
       propertyPath: m_LocalPosition.z
