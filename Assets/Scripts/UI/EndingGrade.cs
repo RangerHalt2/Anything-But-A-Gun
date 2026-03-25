@@ -10,7 +10,7 @@ public class EndingGrade : MonoBehaviour
     // I will need this script to access the meta progression variables. Please do the code magic to make that happen thx
     public int totalEnemiesKilled;
     public int endingScore;
-    public string endingScoreString;
+    public string endingScoreString = "abcdef";
     public string endingScoreStringTyped;
     public GameObject endingScoreObject;
     public TextMeshProUGUI endingScoreText;
@@ -24,14 +24,20 @@ public class EndingGrade : MonoBehaviour
 
     public GameObject buttonGroupObject;
 
+    [Tooltip("The # of seconds between each typed out letter of the ending grade cutscene")]
+    public float textWritingInterval = 0.1f;
+    public GameObject textWritingSFX;
+    public GameObject letterGradeSFX;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         yourScoreTyped = "";
+        endingScoreText.text = "";
         yourScoreObject.SetActive(false);
         endingScoreObject.SetActive(false);
         letterGradeObject.SetActive(false);
-        buttonGroupObject.SetActive(true); // set this to false!!!
+        buttonGroupObject.SetActive(false); // set this to false!!!
     }
 
     public IEnumerator EndingGradeCoroutine(){ // Run this coroutine when the player gets game over
@@ -45,26 +51,33 @@ public class EndingGrade : MonoBehaviour
         yield return new WaitForSecondsRealtime(0.5f);
         yourScoreObject.SetActive(true);
 
-        // step 4: use forloop to loop this set of code for every character in the yourScore string, increasing a variable at the same time
-        //for (int i = 0; i < 10; i++)
-            // 4.1: take Nth letter of yourScore string and append it to yourScoreTyped string
-            // 4.2: change text shown on screen to yourScoreTyped
-            // 4.3: play random keyboard type sound effect from array
-        // step 5: wait for X seconds
+        for (int i = 0; i < yourScore.Length; i++)
+        {
+            yourScoreTyped = yourScoreTyped + yourScore[i];
+            yourScoreText.text = yourScoreTyped;
+            if (textWritingSFX != null)
+                Instantiate(textWritingSFX, transform.position, transform.rotation, null);
+            yield return new WaitForSecondsRealtime(textWritingInterval);
+        }
+
         yield return new WaitForSecondsRealtime(0.5f);
         endingScoreObject.SetActive(true);
+        Debug.Log("look here " + endingScoreString.Length);
 
-        // step 6: new forloop to loop this set of code like last time
-            // 6.1: take Nth letter FROM THE OTHER DIRECTION of endingScoreString and append it to endingScoreStringTyped string
-            // 6.2: change text shown on screen to endingScoreStringTyped
-            // 6.3: play random sfx
-        // step 7: wait X seconds
+        for (int j = 0; j < 6; j++)
+        {
+            endingScoreStringTyped = endingScoreString[Mathf.Abs(j - 5)] + endingScoreStringTyped;
+            endingScoreText.text = endingScoreStringTyped;
+            if (textWritingSFX != null)
+                Instantiate(textWritingSFX, transform.position, transform.rotation, null);
+            yield return new WaitForSecondsRealtime(textWritingInterval);
+        }
+
         yield return new WaitForSecondsRealtime(0.5f);
         letterGradeObject.SetActive(true);
+        if (textWritingSFX != null)
+            Instantiate(letterGradeSFX, transform.position, transform.rotation, null);
 
-        // step 8: enable scoreLetterObject
-            // 8.1: play sfx
-        // step 9: enable all buttons
         yield return new WaitForSecondsRealtime(0.5f);
         buttonGroupObject.SetActive(true);
 

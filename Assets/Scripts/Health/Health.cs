@@ -69,6 +69,7 @@ public class Health : MonoBehaviour
     }
 
     public EndingGrade end; // added by Aaron
+    private bool endScorePlaying; // added by Aaron
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -76,6 +77,7 @@ public class Health : MonoBehaviour
         style = (StyleGaugeController)FindFirstObjectByType(typeof(StyleGaugeController));
         playerLevel = GameObject.FindAnyObjectByType<Player_Level>();
         isDead = false;
+        endScorePlaying = false; // added by Aaron
         initialMaxHealth = maxHealth;
         // Automatically kill object if it has 0 or less health
         if (currentHealth <= 0)
@@ -252,8 +254,9 @@ public class Health : MonoBehaviour
             Cursor.lockState = CursorLockMode.None;
             Debug.Log("HEALTH - Ending Grade Script Activating");
             end = GameObject.FindAnyObjectByType<EndingGrade>();
-            if (end != null)
+            if (end != null && endScorePlaying != true) // added endScorePlaying variable to make sure the ending stuff only runs once
             {
+                endScorePlaying = true;
                 StartCoroutine(end.EndingGradeCoroutine());
                 Debug.Log("HEALTH - END ISNOT NULL AND COROUTINE IS STARTING");
             }
