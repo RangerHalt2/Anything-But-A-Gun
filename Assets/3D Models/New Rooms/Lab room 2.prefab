@@ -2789,6 +2789,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: HealthPack
       objectReference: {fileID: 0}
+    - target: {fileID: 3084862889655155144, guid: dd0767ff59403ba4195353f6bbcbccdf, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8907944595473368208, guid: dd0767ff59403ba4195353f6bbcbccdf, type: 3}
       propertyPath: m_LocalPosition.x
       value: -60.212234
@@ -2834,6 +2838,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dd0767ff59403ba4195353f6bbcbccdf, type: 3}
+--- !u!1 &979063471361883382 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3084862889655155144, guid: dd0767ff59403ba4195353f6bbcbccdf, type: 3}
+  m_PrefabInstance: {fileID: 2835569561376113982}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6685196825503646126 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8907944595473368208, guid: dd0767ff59403ba4195353f6bbcbccdf, type: 3}
@@ -3659,6 +3668,7 @@ MonoBehaviour:
   enemySpawner: {fileID: 7373776938525331927}
   num_of_waves: 1
   spawnAllBySeconds: 15
+  healthPack: {fileID: 979063471361883382}
   doors_to_remove:
   - {fileID: 1297142314245696997}
   - {fileID: 5713704679165326632}
