@@ -2,6 +2,8 @@ using System;
 
 public static class GameEvent
 {
+    public static Action<UnityEngine.GameObject> OnWeaponPickup;
+
     public static Action OnAchivementEarned;
 
     public static Action<string> OnLevelCompleted; // Event to be triggered when a level is completed
