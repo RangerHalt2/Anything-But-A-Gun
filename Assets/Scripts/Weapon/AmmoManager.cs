@@ -8,10 +8,12 @@ public class AmmoManager : MonoBehaviour
 {
     #region Variables
     [Header("Ammo Settings")]
+    [Tooltip("The maximum amount of ammo the gun can hold in reserve")]
+    public int maxAmmo; //EW: Added for the Ammo Box Math
     [Tooltip("The amount of ammo the player has in reserve. Set to -1 for infinite reserve ammo")]
     public int reserveAmmo = 20; //EW: Made public to enable cheats
     [Tooltip("The maximum amount of ammo the weapon can have loaded at once.")]
-    public int ammoCapacity = 10; //EW: Made public so the Ammo Box can see it.
+    private int ammoCapacity = 10;
     [Tooltip("The current amount of ammo the weapon can has loaded.")]
     [SerializeField] private int currentAmmo = 10;
     [Tooltip("The amount of ammo the weapon consumes per \"shot\".")]
@@ -117,6 +119,7 @@ public class AmmoManager : MonoBehaviour
     void Start()
     {
         // Set current Ammo to maximum
+        reserveAmmo = maxAmmo;
         currentAmmo = ammoCapacity;
         ammoDisplayText = GameObject.FindGameObjectWithTag("AmmoCounter").GetComponent<TextMeshProUGUI>();
 

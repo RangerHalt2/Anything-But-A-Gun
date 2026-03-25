@@ -16,7 +16,7 @@ public class AmmoBox : MonoBehaviour, IInteractable
 
         if (am != null) 
         {
-            int ammoGain = am.ammoCapacity * magazineGain;
+            int ammoGain = Mathf.RoundToInt(am.maxAmmo / 2);
             Debug.Log("Ammo Box found weapon to gain ammo");
             am.reserveAmmo += ammoGain;
             Destroy(gameObject);

@@ -11,6 +11,7 @@ public class WeaponClass : MonoBehaviour
     public AmmoManager ammoManager;
     public GameObject gunShot;
     public GameObject clickEffect;
+    public AudioSource audioSource;
 
     public GameObject[] randomGunShots;
 
@@ -37,6 +38,7 @@ public class WeaponClass : MonoBehaviour
     [SerializeField] private string promotionEffect = "No Promotion";
     [Space]
     public int level;
+
     [Header("Damage Settings")]
     public float baseDamage;
     public float levelDamage;
@@ -364,6 +366,11 @@ public class WeaponClass : MonoBehaviour
 
     public virtual void Shoot() //Default is spawn projectile
     {
+        if (audioSource != null && !audioSource.isPlaying) 
+        { 
+            audioSource.Play();
+        }
+
         // If enough time has passed since the last round was fired
         if ((Time.timeSinceLevelLoad - lastFired) > fireRate) //LB: Note To Self: Please remove, level load timer breaks the entire game after level 1.
                                                               //
@@ -404,6 +411,15 @@ public class WeaponClass : MonoBehaviour
 
         }
     } //"Virtual" allows children to override it
+
+    public virtual void ShootCancel() 
+    {
+        if (audioSource != null && audioSource.isPlaying) 
+        { 
+            audioSource.Stop();
+        }
+    }
+
     public virtual void Reload()
     {
         if (ammoManager.GetReserveAmmo() > 0 || ammoManager.GetReserveAmmo() == -1)

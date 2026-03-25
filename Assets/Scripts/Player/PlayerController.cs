@@ -259,8 +259,12 @@ public class PlayerController : MonoBehaviour
         {
             weaponHandler.FireWeapon();
         }
-        if (inputs.ReloadInput) 
-        { 
+        else 
+        {
+            weaponHandler.StopFireWeapon();
+        }
+        if (inputs.ReloadInput)
+        {
             weaponHandler.ReloadWeapon();
         }
         if (inputs.SprintInput)

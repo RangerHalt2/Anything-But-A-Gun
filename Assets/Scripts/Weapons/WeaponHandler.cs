@@ -63,6 +63,11 @@ public class WeaponHandler : MonoBehaviour
         currentWeapon.GetComponent<WeaponClass>().Shoot();
     }
 
+    public void StopFireWeapon() 
+    {
+        currentWeapon.GetComponent<WeaponClass>().ShootCancel();
+    }
+
     public void ReloadWeapon()
     {
         currentWeapon.GetComponent<WeaponClass>().Reload();
