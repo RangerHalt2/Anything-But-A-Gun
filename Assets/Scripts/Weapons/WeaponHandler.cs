@@ -63,10 +63,11 @@ public class WeaponHandler : MonoBehaviour
         currentWeapon.GetComponent<WeaponClass>().Shoot();
     }
 
-    public void StopFireWeapon() 
+    public void StopFireWeapon()
     {
         currentWeapon.GetComponent<WeaponClass>().ShootCancel();
     }
+
 
     public void ReloadWeapon()
     {
@@ -188,6 +189,7 @@ public class WeaponHandler : MonoBehaviour
             //Check if the weapon we're trying to pick up is of a type we already have
 
             WeaponClass newWeaponType = addWeapon.GetComponent<WeaponClass>();
+            GameEvent.OnWeaponPickup?.Invoke(addWeapon);
 
             System.Type newScriptName = newWeaponType.GetType();
             string nameOfNewScript = newScriptName.Name;

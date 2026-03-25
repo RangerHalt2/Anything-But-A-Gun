@@ -10,6 +10,8 @@ public class AchievementManager : MonoBehaviour
     // Runtime copy of achievement data
     public AchievementDatabase database;
 
+    private string lastAchievementID;
+
     string filePath;
 
     [Header("DEBUG/CHEATS")]
@@ -19,7 +21,7 @@ public class AchievementManager : MonoBehaviour
     void Awake()
     {
         // Ensure there is only one instance of the Achievement Manager at any one time
-        if(Instance != null)
+        if (Instance != null)
         {
             Destroy(gameObject);
             return;
@@ -64,7 +66,7 @@ public class AchievementManager : MonoBehaviour
 
             database = JsonUtility.FromJson<AchievementDatabase>(json);
 
-           // Debug.Log("AchievementManager: Parsed achievements count: {database.achievements.Count}");
+            // Debug.Log("AchievementManager: Parsed achievements count: {database.achievements.Count}");
 
             Debug.Log("AchievementManager: Seeded achievements from StreamingAssets");
 
@@ -100,7 +102,7 @@ public class AchievementManager : MonoBehaviour
 
         return database.achievements.Find(a => a.id == id);
     }
-    
+
     public bool CheckAchivementStatus(string id)
     {
         if (database == null || database.achievements == null)
@@ -133,7 +135,7 @@ public class AchievementManager : MonoBehaviour
         // If the achievment does not exist
         if (achievement == null)
         {
-            Debug.LogWarning("AchievementManager: There is no achivement with the id: " + id +"!");
+            Debug.LogWarning("AchievementManager: There is no achivement with the id: " + id + "!");
             // Do nothing
             return;
         }
@@ -149,6 +151,8 @@ public class AchievementManager : MonoBehaviour
 
         // Mark the achivement as unlocked
         achievement.unlocked = true;
+        // Record the ID of the last achievment unlocked so other scripts can easily access it
+        lastAchievementID = id;
 
         //Apply metaprogression rewards
         GameEvent.OnAchivementEarned?.Invoke();
@@ -197,10 +201,15 @@ public class AchievementManager : MonoBehaviour
 
     void HandleStyleMaxxed()
     {
-       UnlockAchievement("max_style");
+        UnlockAchievement("max_style");
     }
     #endregion
     #endregion
+
+    public string GetLastAchievement()
+    {
+        return lastAchievementID;
+    }
 
     #region Debug
     // Getter method for toggleAchievmentState. Intended for debug purposes only
