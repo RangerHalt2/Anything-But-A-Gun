@@ -45,6 +45,7 @@ public class P_Divorce : MonoBehaviour
             (enemy.enemyType == EnemyClass.EnemyType.Boss && percentage <= bossThreshold))
         {
             enemyHealth.TakeDamage(enemyHealth.currentHealth, this.transform);
+            Debug.Log("P_Divorce - Enemy Was Executed");
         }
     }
 

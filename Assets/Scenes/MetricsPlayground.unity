@@ -1369,7 +1369,9 @@ MonoBehaviour:
   enemySpawner: {fileID: 1949153498}
   num_of_waves: 3
   spawnAllBySeconds: 15
+  healthPack: {fileID: 0}
   doors_to_remove: []
+  healthPackRewards: []
 --- !u!1 &174197093
 GameObject:
   m_ObjectHideFlags: 0
@@ -5704,13 +5706,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21fe1fa4274795e42b8c3269124c1391, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WinEvent
-  isFinalLevel: 0
-  winPageIndex: 0
-  nextSceneName: 
-  nextScenePos: {x: 0, y: 0, z: 0}
-  doorOpen: {fileID: 0}
-  button2: {fileID: 0}
-  hasWon: 0
 --- !u!65 &724441677
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -20688,6 +20683,10 @@ PrefabInstance:
     - target: {fileID: 4559658094610591834, guid: 8cbf7fc61356e3746bef8ad5c3e0be06, type: 3}
       propertyPath: m_Name
       value: WaveSpawner
+      objectReference: {fileID: 0}
+    - target: {fileID: 4559658094610591834, guid: 8cbf7fc61356e3746bef8ad5c3e0be06, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7118954313735442748, guid: 8cbf7fc61356e3746bef8ad5c3e0be06, type: 3}
       propertyPath: m_LocalPosition.x
