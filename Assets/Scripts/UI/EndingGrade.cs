@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System.Collections;
+using UnityEngine.UIElements;
 
 // This script was written by Aaron and is used with the "Game Over" UI element
 
@@ -9,6 +10,8 @@ public class EndingGrade : MonoBehaviour
 {
     // I will need this script to access the meta progression variables. Please do the code magic to make that happen thx
     public int totalEnemiesKilled;
+    public int endingLevel;
+    private int tempScore;
     public int endingScore;
     public string endingScoreString = "abcdef";
     public string endingScoreStringTyped;
@@ -43,10 +46,27 @@ public class EndingGrade : MonoBehaviour
     public IEnumerator EndingGradeCoroutine(){ // Run this coroutine when the player gets game over
 
         Debug.Log("ENDING COROUTINE STARTED");
+        // RL: Accessing RunData to calculate ending Score
 
-        // step 1: count how many enemies were killed AND what level the player is currently on
-            // 1.1: do some sort of math to get a score value (i.e. (enemiesKilled x 100) + (levelsCompleted x 2000))
-        // step 2: set endingScore to that value and set endingScoreString to that value as well
+        // Get the total number of enemies killed in the run from the Run Data JSON
+        totalEnemiesKilled = RunDataRecorder.Instance.GetEnemiesKilled();
+        //Debug.Log("Ending Grade: Enemies killed: " + totalEnemiesKilled + " according to RunData");
+
+        // Get the level the player ended on
+        endingLevel = RunDataRecorder.Instance.GetLevelsCompleted() + 1; // Adding one since player score utilizes the level the player ended on
+        //Debug.Log("Ending Grade: Levels Completed " + endingLevel + " according to RunData");
+
+        // Calculate Ending Score
+        tempScore = (totalEnemiesKilled * 100) + (endingLevel * 2000);
+
+        // Set ending Score to the appropriate Value
+        endingScore = tempScore;
+
+        // Set Ending Score String
+        endingScoreString = endingScore.ToString();
+        //Debug.Log("Ending Grade: Score string " + endingScoreString);
+
+
         // step 3: enable yourScoreObject to be visible
         yield return new WaitForSecondsRealtime(0.5f);
         yourScoreObject.SetActive(true);
@@ -62,14 +82,17 @@ public class EndingGrade : MonoBehaviour
 
         yield return new WaitForSecondsRealtime(0.5f);
         endingScoreObject.SetActive(true);
-        Debug.Log("look here " + endingScoreString.Length);
 
-        for (int j = 0; j < 6; j++)
+        endingScoreStringTyped = "";
+
+        for (int j = endingScoreString.Length - 1; j >= 0; j--)
         {
-            endingScoreStringTyped = endingScoreString[Mathf.Abs(j - 5)] + endingScoreStringTyped;
+            endingScoreStringTyped = endingScoreString[j] + endingScoreStringTyped;
             endingScoreText.text = endingScoreStringTyped;
+
             if (textWritingSFX != null)
                 Instantiate(textWritingSFX, transform.position, transform.rotation, null);
+
             yield return new WaitForSecondsRealtime(textWritingInterval);
         }
 

@@ -24,6 +24,7 @@ public class ResetData : MonoBehaviour
     {
         ResetAchievements();
         ResetKillData();
+        ResetCareerData();
 
         Debug.Log("ResetData: All persistent player data has been reset.");
     }
@@ -51,6 +52,19 @@ public class ResetData : MonoBehaviour
         else
         {
             Debug.LogWarning("ResetData: KillTracker not found.");
+        }
+    }
+
+    void ResetCareerData()
+    {
+        if (CareerDataRecorder.Instance != null)
+        {
+            CareerDataRecorder.Instance.ResetCareerData();
+            Debug.Log("ResetData: Career data reset.");
+        }
+        else
+        {
+            Debug.LogWarning("ResetData: CareerDataRecorder not found.");
         }
     }
 }
