@@ -9,6 +9,7 @@ public class goToTitle : MonoBehaviour
 
     public void OnButtonClick ()
     {
+        GameEvent.RunEnded?.Invoke();
         SceneManager.LoadScene("Title Screen");
     }
     
