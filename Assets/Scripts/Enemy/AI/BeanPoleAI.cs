@@ -27,6 +27,10 @@ public class BeanPoleAI : EnemyClass
         {
             Attacking();
         }
+        else
+        {
+            Debug.Log("BEAN POLE AI - The player is not in my attacking range");
+        }
 
         if (!hasShownDetectionSprite)
         {

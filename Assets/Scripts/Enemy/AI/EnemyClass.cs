@@ -90,6 +90,7 @@ public class EnemyClass : MonoBehaviour
 
         if (!alreadyAttacked && HasLineOfSight())
         {
+            Debug.Log("ENEMY CLASS - Enemy has line of sight and is attacking!");
             Shoot();
             alreadyAttacked = true;
             Invoke(nameof(ResetAttack), timeBetweenAttacks);
