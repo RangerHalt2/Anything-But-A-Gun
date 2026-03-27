@@ -5089,6 +5089,7 @@ MonoBehaviour:
   ammoManager: {fileID: 7556800813267705354}
   gunShot: {fileID: 0}
   clickEffect: {fileID: 0}
+  audioSource: {fileID: 0}
   randomGunShots: []
   clickCooldown: 0.5
   clickTimer: 0
@@ -5143,8 +5144,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df2d13e84e38fb446a97a180533aba8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AmmoManager
-  maxAmmo: 0
-  reserveAmmo: -1
+  maxAmmo: 160
+  reserveAmmo: 160
+  ammoCapacity: 10
   currentAmmo: 15
   ammoConsumption: 1
   reloadTime: 1.2
