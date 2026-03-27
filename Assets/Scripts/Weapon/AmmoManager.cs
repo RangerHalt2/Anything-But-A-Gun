@@ -13,7 +13,7 @@ public class AmmoManager : MonoBehaviour
     [Tooltip("The amount of ammo the player has in reserve. Set to -1 for infinite reserve ammo")]
     public int reserveAmmo = 20; //EW: Made public to enable cheats
     [Tooltip("The maximum amount of ammo the weapon can have loaded at once.")]
-    private int ammoCapacity = 10;
+    [SerializeField] private int ammoCapacity = 10;
     [Tooltip("The current amount of ammo the weapon can has loaded.")]
     [SerializeField] private int currentAmmo = 10;
     [Tooltip("The amount of ammo the weapon consumes per \"shot\".")]
