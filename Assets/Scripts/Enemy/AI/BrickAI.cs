@@ -10,11 +10,15 @@ public class BrickAI : EnemyClass
     private float investigationWaitTime = 3f;
     private float investigationTimer;
 
+
+
     private void Awake()
     {
         player = GameObject.FindWithTag("Player").transform;
         agent = GetComponent<NavMeshAgent>();
         agent.autoTraverseOffMeshLink = true;
+
+        animator = GetComponent<Animator>();
 
         if (detectionSprite != null)
             detectionSprite.SetActive(false);
@@ -40,10 +44,14 @@ public class BrickAI : EnemyClass
             if (!playerInAttackRange)
             {
                 Chase();
+                if (animator != null)
+                    animator.SetBool("isPunching", false);
             }
             else
             {
                 Attacking();
+                if (animator != null)
+                    animator.SetBool("isPunching", true);
             }
         }
         else if (!playerInSightRange && lastKnownPlayerPosition != Vector3.zero && !isInvestigating)

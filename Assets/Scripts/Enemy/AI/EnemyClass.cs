@@ -38,6 +38,8 @@ public class EnemyClass : MonoBehaviour
 
     public float height = 2f;
 
+    [SerializeField] protected Animator animator;
+
     public enum EnemyType
     {
         Common,
