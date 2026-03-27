@@ -95,6 +95,10 @@ public class EnemyClass : MonoBehaviour
             alreadyAttacked = true;
             Invoke(nameof(ResetAttack), timeBetweenAttacks);
         }
+        else
+        {
+            Debug.Log("ENEMY CLASS - Already Attacked " + alreadyAttacked + " and HasLineOfSight " + HasLineOfSight());
+        }
     }
 
 
@@ -124,8 +128,8 @@ public class EnemyClass : MonoBehaviour
 
         if (Physics.Raycast(firePoint.position, direction, out RaycastHit hit, distance))
         {
-            Debug.Log("ENEMY CLASS - Line of Sight is true");
-            return hit.transform.CompareTag("Player");
+            //Debug.Log("ENEMY CLASS - Line of Sight is true");
+            return hit.collider.gameObject.GetComponentInParent<PlayerController>() != null;
         }
 
 
