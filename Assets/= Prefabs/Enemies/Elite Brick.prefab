@@ -65,7 +65,7 @@ GameObject:
   - component: {fileID: 2595451273414035364}
   - component: {fileID: 3725240078413770835}
   m_Layer: 0
-  m_Name: Particle System (1)
+  m_Name: Elite Particles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -280,11 +280,11 @@ ParticleSystem:
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 0, b: 0.14786863, a: 0.50980395}
-        key1: {r: 1, g: 0.51526874, b: 0, a: 0.50980395}
+        key1: {r: 1, g: 0.6060061, b: 0, a: 0.50980395}
         key2: {r: 1, g: 0, b: 0.08614111, a: 0}
-        key3: {r: 1, g: 0.5615011, b: 0, a: 0}
+        key3: {r: 1, g: 0.65038824, b: 0, a: 0}
         key4: {r: 0.9647059, g: 0.02352939, b: 0.07017641, a: 0}
-        key5: {r: 0.9647059, g: 0.02352939, b: 0.6890105, a: 0}
+        key5: {r: 0.9647059, g: 0.02352939, b: 0.07017641, a: 0}
         key6: {r: 0, g: 0, b: 0, a: 0}
         key7: {r: 0, g: 0, b: 0, a: 0}
         ctime0: 0
@@ -340,7 +340,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 0.3
+      scalar: 0.4
       minScalar: 0.2
       maxCurve:
         serializedVersion: 2
@@ -721,7 +721,7 @@ ParticleSystem:
     angle: 25
     length: 5
     boxThickness: {x: 0, y: 0, z: 0}
-    radiusThickness: 1
+    radiusThickness: 0
     donutRadius: 0.2
     m_Position: {x: 0, y: -0.12, z: 0}
     m_Rotation: {x: -90, y: 0, z: 0}
@@ -863,7 +863,7 @@ ParticleSystem:
     arc:
       value: 360
       mode: 1
-      spread: 0.05
+      spread: 0.03
       speed:
         serializedVersion: 2
         minMaxState: 0
@@ -5046,8 +5046,8 @@ Transform:
   m_GameObject: {fileID: 3695943591121391829}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.442, z: 0}
-  m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
+  m_LocalPosition: {x: 0, y: 1.691, z: 0}
+  m_LocalScale: {x: 0.28, y: 0.28, z: 0.28}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 7827221150270876552}
@@ -10897,7 +10897,7 @@ ParticleSystem:
     donutRadius: 0.2
     m_Position: {x: 0, y: 0, z: 0}
     m_Rotation: {x: 0, y: 0, z: 0}
-    m_Scale: {x: 1.54, y: 1.49, z: 1}
+    m_Scale: {x: 1.94, y: 2.04, z: 1}
     placementMode: 2
     m_MeshMaterialIndex: 0
     m_MeshNormalOffset: 0
@@ -15129,15 +15129,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3100933489124218655, guid: 5b7be6e1d661291418dbc11e32ee6cad, type: 3}
       propertyPath: m_Color.b
-      value: 1
+      value: 0.5754717
       objectReference: {fileID: 0}
     - target: {fileID: 3100933489124218655, guid: 5b7be6e1d661291418dbc11e32ee6cad, type: 3}
       propertyPath: m_Color.g
-      value: 1
+      value: 0.56352925
       objectReference: {fileID: 0}
     - target: {fileID: 3100933489124218655, guid: 5b7be6e1d661291418dbc11e32ee6cad, type: 3}
       propertyPath: m_Color.r
-      value: 1
+      value: 0.53475434
       objectReference: {fileID: 0}
     - target: {fileID: 4880114642729884298, guid: 5b7be6e1d661291418dbc11e32ee6cad, type: 3}
       propertyPath: m_Pivot.x
@@ -15217,7 +15217,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4880114642729884298, guid: 5b7be6e1d661291418dbc11e32ee6cad, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 5.56
+      value: 5.17
       objectReference: {fileID: 0}
     - target: {fileID: 4880114642729884298, guid: 5b7be6e1d661291418dbc11e32ee6cad, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -15343,6 +15343,18 @@ PrefabInstance:
     - target: {fileID: 5175827724676580760, guid: 29bc128e8cecccd41b5d18d03966a190, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5182157429662262788, guid: 29bc128e8cecccd41b5d18d03966a190, type: 3}
+      propertyPath: ShapeModule.m_Scale.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5182157429662262788, guid: 29bc128e8cecccd41b5d18d03966a190, type: 3}
+      propertyPath: ShapeModule.m_Scale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5182157429662262788, guid: 29bc128e8cecccd41b5d18d03966a190, type: 3}
+      propertyPath: ShapeModule.m_Scale.z
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
