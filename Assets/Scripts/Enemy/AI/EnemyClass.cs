@@ -124,9 +124,12 @@ public class EnemyClass : MonoBehaviour
 
         if (Physics.Raycast(firePoint.position, direction, out RaycastHit hit, distance))
         {
+            Debug.Log("ENEMY CLASS - Line of Sight is true");
             return hit.transform.CompareTag("Player");
         }
 
+
+        Debug.Log("ENEMY CLASS - Line of Sight is false");
         return false;
     }
 
