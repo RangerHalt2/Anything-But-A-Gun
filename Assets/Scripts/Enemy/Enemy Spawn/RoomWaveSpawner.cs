@@ -16,6 +16,8 @@ public class RoomWaveSpawner : MonoBehaviour
     [Space(2)]
     [Tooltip("An array of all the doors to remove when the wave manager is done")]
     [SerializeField] private Transform[] doors_to_remove;
+    [Tooltip("An array of all the health packs that should be made visible when the room is beaten")]
+    [SerializeField] private GameObject[] healthPackRewards;
 
     private int interval = 0;
 
@@ -37,6 +39,11 @@ public class RoomWaveSpawner : MonoBehaviour
             foreach (Transform trans in doors_to_remove)
             {
                 trans.gameObject.SetActive(locked_doors);
+            }
+            foreach (GameObject objs in healthPackRewards)
+            {
+                if (objs != null)
+                    objs.gameObject.SetActive(!locked_doors);
             }
         }
     }
@@ -113,6 +120,11 @@ public class RoomWaveSpawner : MonoBehaviour
             {
                 if(trans != null)
                     trans.gameObject.SetActive(locked_doors);
+            }
+            foreach (GameObject objs in healthPackRewards)
+            {
+                if(objs != null)
+                    objs.gameObject.SetActive(!locked_doors);
             }
         }
 
