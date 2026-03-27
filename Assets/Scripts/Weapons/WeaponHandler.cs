@@ -114,8 +114,7 @@ public class WeaponHandler : MonoBehaviour
 
         // If enough time has passed since the last round was fired
 
-        if (switchTimer <= 0)
-        {
+        
             if (weapons.Count > 1 && (scrollValue != 0 || inputManager.NextInput != 0) && !currentWeapon.GetComponent<AmmoManager>().IsReloading())
             {
                 currentWeapon.SetActive(false); //Deactivate (not destroy) current weapon
@@ -163,9 +162,6 @@ public class WeaponHandler : MonoBehaviour
                 //Play equip animation and activate new current weapon
 
             }
-
-            switchTimer = weaponSwitchRate;
-        }
 
         if (currentWeapon.activeSelf == false)
         {
