@@ -4,6 +4,9 @@ using UnityEngine.AI;
 public class BrickAI : EnemyClass
 {
 
+    [SerializeField] private float minSpeedMod;
+    [SerializeField] private float maxSpeedMod;
+
     [Header("Investigation Settings")]
     private Vector3 lastKnownPlayerPosition;
     private bool isInvestigating;
@@ -44,6 +47,7 @@ public class BrickAI : EnemyClass
             if (!playerInAttackRange)
             {
                 Chase();
+                SetRunSpeed();
                 if (animator != null)
                     animator.SetBool("isPunching", false);
             }
@@ -57,18 +61,21 @@ public class BrickAI : EnemyClass
         else if (!playerInSightRange && lastKnownPlayerPosition != Vector3.zero && !isInvestigating)
         {
             StartInvestigation();
+            SetRunSpeed();
             if (animator != null)
                 animator.SetBool("isPunching", false);
         }
         else if (isInvestigating)
         {
             Investigate();
+            SetRunSpeed();
             if (animator != null)
                 animator.SetBool("isPunching", false);
         }
         else
         {
             Patrolling();
+            SetRunSpeed();
             if (animator != null)
                 animator.SetBool("isPunching", false);
         }
@@ -77,6 +84,19 @@ public class BrickAI : EnemyClass
         {
             hasShownDetectionSprite = false;
         }
+    }
+
+    private void SetRunSpeed()
+    {
+        float maxSpeed = agent.speed;
+        float currVelocity = agent.velocity.magnitude;
+
+        float progress = currVelocity / maxSpeed;
+
+
+        float finMod = Mathf.Lerp(minSpeedMod, maxSpeedMod, progress);
+        if (animator != null)
+            animator.SetFloat("currentSpeed", finMod);
     }
 
     //TO DO: Manage an "Alerted" variable in the patrol functions and chasing functions
