@@ -57,14 +57,20 @@ public class BrickAI : EnemyClass
         else if (!playerInSightRange && lastKnownPlayerPosition != Vector3.zero && !isInvestigating)
         {
             StartInvestigation();
+            if (animator != null)
+                animator.SetBool("isPunching", false);
         }
         else if (isInvestigating)
         {
             Investigate();
+            if (animator != null)
+                animator.SetBool("isPunching", false);
         }
         else
         {
             Patrolling();
+            if (animator != null)
+                animator.SetBool("isPunching", false);
         }
 
         if (!playerInSightRange && hasShownDetectionSprite)
