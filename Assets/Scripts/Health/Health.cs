@@ -164,7 +164,8 @@ public class Health : MonoBehaviour
                 float speed = Mathf.Lerp(minSpeed, maxSpeed, percentage);
                 int count = (int)Mathf.Ceil(particlesCount);
                 ParticleSystem.EmitParams emitParams = new ParticleSystem.EmitParams();
-                emitParams.velocity *= speed;
+                ParticleSystem.MainModule main = bloodVFX.main;
+                main.startSpeed = speed;
                 bloodVFX.Emit(emitParams, count);
             }
         }
@@ -256,6 +257,14 @@ public class Health : MonoBehaviour
             {
                 enmy.Die();
             }
+
+            if(bloodVFX != null)
+            {
+                bloodVFX.transform.SetParent(null);
+                Destroy(bloodVFX.gameObject, 3f); 
+            }
+
+
             // RL: Event for Achievement Manager
             GameEvent.OnEnemyKilled?.Invoke();
             Destroy(gameObject);
