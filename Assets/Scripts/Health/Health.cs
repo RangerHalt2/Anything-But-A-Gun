@@ -66,6 +66,8 @@ public class Health : MonoBehaviour
     [SerializeField] private float minSpeed;
     [SerializeField] private float maxSpeed;
 
+    private P_FamilyPhoto familyPhotoPromotion;
+
     #endregion
 
     public struct DamageInfo
@@ -168,6 +170,11 @@ public class Health : MonoBehaviour
                 main.startSpeed = speed;
                 bloodVFX.Emit(emitParams, count);
             }
+
+            if((familyPhotoPromotion = GetComponent<P_FamilyPhoto>()) != null)
+            {
+                familyPhotoPromotion.SendHealing(damageAmount);
+            }
         }
 
         // If the object has 0 or less current health
@@ -266,6 +273,7 @@ public class Health : MonoBehaviour
                 main.scalingMode = ParticleSystemScalingMode.Local;
                 Destroy(bloodVFX.gameObject, 6f); 
             }
+
 
 
             // RL: Event for Achievement Manager

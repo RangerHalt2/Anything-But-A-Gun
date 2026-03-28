@@ -198,6 +198,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::AmmoManager
   maxAmmo: 200
   reserveAmmo: 200
+  ammoCapacity: 10
   currentAmmo: 10
   ammoConsumption: 1
   reloadTime: 1
@@ -270,6 +271,7 @@ MonoBehaviour:
   ammoManager: {fileID: -5568385785312581024}
   gunShot: {fileID: 0}
   clickEffect: {fileID: 0}
+  audioSource: {fileID: 0}
   randomGunShots:
   - {fileID: 5383701307693267320, guid: 4f7e67dfeb2e9fd49bb7f698cb98be66, type: 3}
   clickCooldown: 0.5
@@ -294,8 +296,8 @@ MonoBehaviour:
   reloadTime: 1
   AmmoCapacity: 10
   reserveAmmo: 200
-  hasPackAPunch: 0
-  acceptablePackAPunchOptions: []
+  acceptablePackAPunchOptions:
+  - {fileID: 11400000, guid: cb74dd369df8d3d47b501bc5686eb88e, type: 2}
   onomatopeiaVFX: {fileID: 1739070247969671470}
   onomatopeiaCooldown: 0
   meshes:
