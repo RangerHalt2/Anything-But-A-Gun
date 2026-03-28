@@ -260,7 +260,7 @@ public class Health : MonoBehaviour
 
             if(bloodVFX != null)
             {
-                bloodVFX.transform.SetParent(null);
+                bloodVFX.transform.SetParent(null, true);
                 Destroy(bloodVFX.gameObject, 3f); 
             }
 
