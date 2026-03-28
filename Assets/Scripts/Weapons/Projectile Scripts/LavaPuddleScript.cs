@@ -19,7 +19,7 @@ public class LavaPuddleScript : MonoBehaviour, IWeaponLevel
     // Update is called once per frame
     void Update()
     {
-        puddleTimer -= 1 * Time.deltaTime;
+        puddleTimer -= Time.deltaTime;
 
         if (puddleTimer < 0) 
         {
