@@ -1,3 +1,5 @@
+using System;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class LavaProjectileScript : MonoBehaviour
@@ -5,6 +7,8 @@ public class LavaProjectileScript : MonoBehaviour
     [SerializeField] private GameObject puddlePrefab;
 
     private WeaponLevel weaponLevelRef;
+
+    [HideInInspector] public Type promotion;
 
     public void SetWeaponLevelReference(WeaponLevel weaponLevel)
     {
@@ -17,6 +21,12 @@ public class LavaProjectileScript : MonoBehaviour
         ContactPoint contactPoint = _other.GetContact(0);
         GameObject puddleGameObject = Instantiate(puddlePrefab, contactPoint.point + new Vector3(0f, 1f, 0f), Quaternion.identity, null);
         LavaPuddleScript lavaPuddleScript = puddleGameObject.GetComponent<LavaPuddleScript>();
+
+        if(promotion == typeof(P_Prolonged))
+        {
+            lavaPuddleScript.AddComponent<P_Prolonged>();
+        }
+
         if (gameObject.GetComponent<P_Heavy>() != null)
         {
             lavaPuddleScript.externalDamageMod = gameObject.GetComponent<P_Heavy>().extraDamage;

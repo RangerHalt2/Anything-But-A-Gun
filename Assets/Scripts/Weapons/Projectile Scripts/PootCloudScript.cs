@@ -8,7 +8,7 @@ public class PootCloudScript : MonoBehaviour, IWeaponLevel
     private Vector3 initialScale;
     private bool growing = true;
 
-    [SerializeField] private float cloudTimer;
+    public float cloudTimer;
     [SerializeField] private float baseDamage;
     [SerializeField] private float maxDamage;
     [SerializeField] private float growthRate;

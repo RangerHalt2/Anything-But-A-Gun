@@ -100,13 +100,15 @@ public class PootDispenserScript : WeaponClass
             Projectile proj = projectileGameObject.GetComponent<Projectile>();
             proj.SetWeaponLevelReference(weaponLevelRef);
 
-            if (hasPackAPunch)
-            {
-                Component comp = projectileGameObject.AddComponent(components[currPackAPunchIndex]);
-            }
+            
             PlayOnomatopeia();
             RandomGunShot(proj.transform);
             PootProjectileScript pootProj = projectileGameObject.GetComponent<PootProjectileScript>();
+            if (hasPackAPunch)
+            {
+                Component comp = projectileGameObject.AddComponent(components[currPackAPunchIndex]);
+                pootProj.promotion = components[currPackAPunchIndex];
+            }
             pootProj.SetWeaponLevelReference(weaponLevelRef);
         }
     }

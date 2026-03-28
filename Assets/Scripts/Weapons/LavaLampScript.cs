@@ -107,6 +107,7 @@ public class LavaLampScript : WeaponClass
             if (hasPackAPunch)
             {
                 Component comp = proj.gameObject.AddComponent(components[currPackAPunchIndex]);
+                lavaProj.promotion = components[currPackAPunchIndex];
             }
             lavaProj.SetWeaponLevelReference(weaponLevelRef);
         }

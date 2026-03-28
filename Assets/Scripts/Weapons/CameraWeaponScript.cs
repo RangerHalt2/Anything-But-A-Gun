@@ -100,6 +100,12 @@ public class CameraWeaponScript : WeaponClass
                 snapshot.SetActive(false);
                 snapshot.GetComponent<SnapshotBehaviorScript>().copyOf = target;
                 snapshot.SetActive(true);
+
+                if (hasPackAPunch)
+                {
+                    if (currPackAPunchComponent.GetType() == typeof(P_Prolonged)) snapshot.GetComponent<SnapshotBehaviorScript>().snapshotTimer *= GetComponent<P_Prolonged>().modifierLength;
+                }
+
             }
             
         }

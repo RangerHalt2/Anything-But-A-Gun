@@ -17,7 +17,7 @@ public class SnapshotBehaviorScript : MonoBehaviour
     [SerializeField] private bool myHealthUnchanged;
     [SerializeField] private bool theirHealthUnchanged;
 
-    [SerializeField] private float snapshotTimer = 20f; //The amount of time that the snapshot sticks around.
+    public float snapshotTimer = 20f; //The amount of time that the snapshot sticks around.
 
     [SerializeField] private bool timesUp = false;
 

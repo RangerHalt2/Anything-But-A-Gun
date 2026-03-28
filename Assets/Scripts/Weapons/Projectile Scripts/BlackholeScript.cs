@@ -12,7 +12,7 @@ public class BlackholeScript : MonoBehaviour, IWeaponLevel
     private Vector3 initialScale;
     private bool growing = true;
 
-    [SerializeField] private float timer;
+    public float timer;
     [SerializeField] private float baseDamage;
     [SerializeField] private float maxDamage;
     [SerializeField] private float growthRate;

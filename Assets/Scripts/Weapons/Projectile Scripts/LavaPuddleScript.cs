@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class LavaPuddleScript : MonoBehaviour, IWeaponLevel
 {
-    [SerializeField] private float puddleTimer;
+    public float puddleTimer;
     [SerializeField] private float baseDamage;
     [SerializeField] private float growthRate = 1.15f;
     [HideInInspector] public float externalDamageMod = 1f;

@@ -97,6 +97,12 @@ public class OfficeCatScript : WeaponClass
             proj.SetWeaponLevelReference(weaponLevelRef);
             PlayOnomatopeia();
             OfficeCatProjectileScript catProj = projectileGameObject.GetComponent<OfficeCatProjectileScript>();
+
+            if (hasPackAPunch)
+            {
+                catProj.promotion = components[currPackAPunchIndex];
+            }
+
             catProj.SetWeaponLevelReference(weaponLevelRef);
         }
     }
