@@ -30,6 +30,7 @@ public class DivorcePaperProjectile : MonoBehaviour
 
     private float timeAlive;
 
+    private P_FamilyPhoto promotion;
 
     void Start()
     {
@@ -122,11 +123,19 @@ public class DivorcePaperProjectile : MonoBehaviour
             (enemy.enemyType == EnemyClass.EnemyType.Elite && percentage <= eliteThreshold) ||
             (enemy.enemyType == EnemyClass.EnemyType.Boss && percentage <= bossThreshold))
         {
+            if ((promotion = GetComponent<P_FamilyPhoto>()) != null)
+            {
+                promotion.SendHealing(enemyHealth.currentHealth);
+            }
             enemyHealth.TakeDamage(enemyHealth.currentHealth, this.transform);
         }
         else
         {
             enemyHealth.TakeDamage(damage, this.gameObject.transform);
+            if ((promotion = GetComponent<P_FamilyPhoto>()) != null)
+            {
+                promotion.SendHealing(damage);
+            }
         }
             Destroy(this.gameObject);
     }

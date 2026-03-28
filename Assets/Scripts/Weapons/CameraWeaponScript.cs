@@ -104,6 +104,7 @@ public class CameraWeaponScript : WeaponClass
                 if (hasPackAPunch)
                 {
                     if (currPackAPunchComponent.GetType() == typeof(P_Prolonged)) snapshot.GetComponent<SnapshotBehaviorScript>().snapshotTimer *= GetComponent<P_Prolonged>().modifierLength;
+                    if (currPackAPunchComponent.GetType() == typeof(P_FamilyPhoto)) snapshot.AddComponent<P_FamilyPhoto>();
                 }
 
             }
