@@ -60,6 +60,10 @@ public class Health : MonoBehaviour
 
     public event Action<DamageInfo> PlayerTookDamage;
 
+    [SerializeField] private ParticleSystem bloodVFX;
+    [SerializeField] private int minParticle;
+    [SerializeField] private int maxParticle;
+
     #endregion
 
     public struct DamageInfo
@@ -145,6 +149,20 @@ public class Health : MonoBehaviour
             }
             else
                 Debug.Log("HEALTH - The player taking damage event is not invoking");
+        }
+        else //LB: adding an else to emit particles for just NPCs
+        {
+            if(bloodVFX != null)
+            {
+                //LB: Takes the percentage interpolates between min and max, ceils into a final integer. Emits the count of particles.
+                float percentage = damageAmount / 100;
+                if(damageAmount > 100)
+                    percentage = 100;
+                float particlesCount = Mathf.Lerp(minParticle, maxParticle, percentage);
+                int count = (int)Mathf.Ceil(particlesCount);
+                ParticleSystem.EmitParams emitParams = new ParticleSystem.EmitParams();
+                bloodVFX.Emit(emitParams, count);
+            }
         }
 
         // If the object has 0 or less current health
