@@ -31,6 +31,7 @@ public class AmmoBox : MonoBehaviour, IInteractable
                 am.reserveAmmo += ammoGain;
             if (promotionType != null && promotionType == typeof(P_BottomlessMag))
                 am.SetCurrentAmmo(am.GetCurrentAmmo() + ammoGain);
+            am.updateDisplay();
             Destroy(gameObject);
         }
     }
