@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class BBBatProjectileScript : MonoBehaviour
@@ -11,6 +12,12 @@ public class BBBatProjectileScript : MonoBehaviour
     {
         GameObject returnGameObject = Instantiate(returnalPrefab, transform.position, transform.rotation, null);
         Projectile proj = returnGameObject.GetComponent<Projectile>();
+        
+        if(GetComponent<P_Explosive>() != null)
+        {
+            proj.AddComponent<P_Explosive>();
+        }
+
         returnGameObject.GetComponent<BBBatReturnalScript>().baseWeapon = baseWeapon;
     }
 }

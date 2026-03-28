@@ -134,6 +134,7 @@ public class BBBatScript : WeaponClass
     private WeaponLevel currentWeaponLevel;
     [SerializeField] private float growthRate;
 
+
     private void Start()
     {
         weaponLevelRef = GetComponent<WeaponLevel>();
@@ -204,6 +205,12 @@ public class BBBatScript : WeaponClass
             proj.baseDamage = baseDamage;
             proj.SetWeaponLevelReference(weaponLevelRef);
             PlayOnomatopeia();
+
+            if (hasPackAPunch)
+            {
+                proj.gameObject.AddComponent(components[currPackAPunchIndex]);
+            }
+
             projectileGameObject.GetComponent<BBBatProjectileScript>().baseWeapon = gameObject;
         }
     }
