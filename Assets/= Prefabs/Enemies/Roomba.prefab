@@ -246,7 +246,7 @@ MonoBehaviour:
   healthBar: {fileID: 8487157334695095963}
   healthDisplayText: {fileID: 0}
   hitEffect: {fileID: 1679044714977926775, guid: 227ededbef0066649ae73724748f7732, type: 3}
-  deathEffect: {fileID: 8428204072777953739, guid: e816fe1f7f82e6b4b80d894b3562bbb8, type: 3}
+  deathEffect: {fileID: 8428204072777953739, guid: b3e9719e5c491ad4f83a2e0b696463bb, type: 3}
   isPlayer: 0
   EXPDrop: 0
   gameOverCanvas: {fileID: 0}
@@ -255,6 +255,11 @@ MonoBehaviour:
   damageNoise: {fileID: 1266429678925616217, guid: 105827fd80746ec49a5f35d0745d40fe, type: 3}
   style: {fileID: 0}
   ShiningArmor: 0
+  bloodVFX: {fileID: 0}
+  minParticle: 0
+  maxParticle: 0
+  minSpeed: 0
+  maxSpeed: 0
   end: {fileID: 0}
 --- !u!114 &-6795824228135107553
 MonoBehaviour:
@@ -303,6 +308,7 @@ MonoBehaviour:
   hasShownDetectionSprite: 0
   enemyType: 0
   height: 0.5
+  animator: {fileID: 0}
   patrolDistance: 10
   patrolSpeed: 10
   navEdgeCheckDistance: 2
