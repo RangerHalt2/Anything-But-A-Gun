@@ -295,9 +295,9 @@ MonoBehaviour:
   ShiningArmor: 0
   bloodVFX: {fileID: 1415849034647683155}
   minParticle: 0
-  maxParticle: 40
+  maxParticle: 50
   minSpeed: 1
-  maxSpeed: 100
+  maxSpeed: 40
   end: {fileID: 0}
 --- !u!114 &1858845626273565094
 MonoBehaviour:
@@ -5814,6 +5814,42 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7801930844706279930, guid: 7dc059b9a2b91ef4cae18a9f79d1b946, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8242171606876981179, guid: 7dc059b9a2b91ef4cae18a9f79d1b946, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8638592601235305784, guid: 7dc059b9a2b91ef4cae18a9f79d1b946, type: 3}
+      propertyPath: TrailModule.enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8638592601235305784, guid: 7dc059b9a2b91ef4cae18a9f79d1b946, type: 3}
+      propertyPath: InitialModule.startSize.scalar
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8638592601235305784, guid: 7dc059b9a2b91ef4cae18a9f79d1b946, type: 3}
+      propertyPath: EmissionModule.rateOverTime.scalar
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8638592601235305784, guid: 7dc059b9a2b91ef4cae18a9f79d1b946, type: 3}
+      propertyPath: TrailModule.widthOverTrail.minMaxState
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8638592601235305784, guid: 7dc059b9a2b91ef4cae18a9f79d1b946, type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.key0.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8638592601235305784, guid: 7dc059b9a2b91ef4cae18a9f79d1b946, type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.key0.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8638592601235305784, guid: 7dc059b9a2b91ef4cae18a9f79d1b946, type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.key0.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8638592601235305784, guid: 7dc059b9a2b91ef4cae18a9f79d1b946, type: 3}
+      propertyPath: CollisionModule.multiplyColliderForceByCollisionAngle
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
