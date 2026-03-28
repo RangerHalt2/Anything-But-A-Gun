@@ -63,6 +63,8 @@ public class Health : MonoBehaviour
     [SerializeField] private ParticleSystem bloodVFX;
     [SerializeField] private int minParticle;
     [SerializeField] private int maxParticle;
+    [SerializeField] private float minSpeed;
+    [SerializeField] private float maxSpeed;
 
     #endregion
 
@@ -159,8 +161,10 @@ public class Health : MonoBehaviour
                 if(damageAmount > 100)
                     percentage = 100;
                 float particlesCount = Mathf.Lerp(minParticle, maxParticle, percentage);
+                float speed = Mathf.Lerp(minSpeed, maxSpeed, percentage);
                 int count = (int)Mathf.Ceil(particlesCount);
                 ParticleSystem.EmitParams emitParams = new ParticleSystem.EmitParams();
+                emitParams.velocity *= speed;
                 bloodVFX.Emit(emitParams, count);
             }
         }
