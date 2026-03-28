@@ -50,12 +50,12 @@ public class WeaponClass : MonoBehaviour
     [SerializeField] private int reserveAmmo;
 
     [Header("Pack-A-Punch Related Stuff")]
-    [SerializeField] protected bool hasPackAPunch = false;
+    [SerializeField] public bool hasPackAPunch { get; protected set; } = false;
     //[SerializeField] private string[] acceptablePackAPunchComponents; 
     [SerializeField] protected PAP_ScriptableObjects[] acceptablePackAPunchOptions;
     protected Type[] components;
     protected int currPackAPunchIndex = -1;
-    protected Component currPackAPunchComponent;
+    public Component currPackAPunchComponent { get; protected set; }
     //[HideInInspector] public bool isProjectile { get; set; }
 
     [SerializeField] protected ParticleSystem onomatopeiaVFX; //LB: Self explanitory
@@ -140,6 +140,11 @@ public class WeaponClass : MonoBehaviour
     public float GetReloadTime()
     {
         return reloadTime;
+    }
+
+    public void SetReloadTime(float reloadTime)
+    {
+        this.reloadTime = reloadTime;
     }
 
     public int GetAmmoCapacity()

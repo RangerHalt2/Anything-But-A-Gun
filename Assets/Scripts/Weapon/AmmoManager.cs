@@ -14,7 +14,7 @@ public class AmmoManager : MonoBehaviour
     public int reserveAmmo = 20; //EW: Made public to enable cheats
     [Tooltip("The maximum amount of ammo the weapon can have loaded at once.")]
     [SerializeField] private int ammoCapacity = 10;
-    [Tooltip("The current amount of ammo the weapon can has loaded.")]
+    [Tooltip("The current amount of ammo the weapon has loaded.")]
     [SerializeField] private int currentAmmo = 10;
     [Tooltip("The amount of ammo the weapon consumes per \"shot\".")]
     [SerializeField] private int ammoConsumption = 1;
