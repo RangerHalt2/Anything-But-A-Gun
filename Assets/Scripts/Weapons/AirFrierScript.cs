@@ -20,7 +20,7 @@ public class AirFrierScript : WeaponClass
     [SerializeField] private float cookLimit2 = 225f; //If cookTime reaches this, and the player fires, only two nuggets will spawn
     [SerializeField] private float maxCookTime = 300f; //Maximum time before the nuggets are forced to fire. If the player reaches this, three nuggets will spawn
     [SerializeField] private float cookTime = 0f; //Current time the nugget has been cooking
-    private float cookSpeed = 0.5f; //Temperature of the oven, ha ha
+    [SerializeField] private float cookSpeed = 0.5f; //Temperature of the oven, ha ha
     [SerializeField] private float coolSpeed = 0.1f; //Speed that the nuggies cool off
     [SerializeField] private InputManager IM;
 
@@ -66,9 +66,9 @@ public class AirFrierScript : WeaponClass
         float fillPercent = Mathf.Clamp01(cookTime / maxCookTime);
         cookFill.fillAmount = fillPercent;
 
-        if (cookTime >= 0)
+        if (cookTime > 0)
         {
-            cookTime -= coolSpeed;
+            cookTime -= coolSpeed * Time.deltaTime;
         }
         else 
         {
@@ -117,7 +117,7 @@ public class AirFrierScript : WeaponClass
     
     public override void Shoot()
     {
-       cookTime += cookSpeed;
+       cookTime += cookSpeed * Time.deltaTime;
     }
 
     /*public void Reload()

@@ -17,8 +17,8 @@ public class LaserScript : WeaponClass
 
     [SerializeField] private float currentHeat;
     private float overheatAmount = 100f;
-    private float heatRate = 0.5f;
-    private float coolRate = 50f;
+    [SerializeField] private float heatRate = 2f;
+    [SerializeField] private float coolRate = 50f;
     private bool overheated = false;
 
     [SerializeField] private Image heatFill; //The fill portion of the UI
@@ -36,7 +36,7 @@ public class LaserScript : WeaponClass
     {
         if (!overheated)
         {
-            currentHeat += heatRate;
+            currentHeat += heatRate * Time.deltaTime;
             // If enough time has passed since the last round was fired
             if (timer <= 0)
             {
