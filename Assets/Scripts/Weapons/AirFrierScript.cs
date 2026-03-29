@@ -66,11 +66,11 @@ public class AirFrierScript : WeaponClass
         float fillPercent = Mathf.Clamp01(cookTime / maxCookTime);
         cookFill.fillAmount = fillPercent;
 
-        if (cookTime > 0)
+        if (!IM.FireInput && cookTime > 0)
         {
             cookTime -= coolSpeed * Time.deltaTime;
         }
-        else 
+        else if (cookTime < 0)
         {
             cookTime = 0;
         }
@@ -117,7 +117,23 @@ public class AirFrierScript : WeaponClass
     
     public override void Shoot()
     {
-       cookTime += cookSpeed * Time.deltaTime;
+        if(ammoManager.GetCurrentAmmo() > 0)
+            cookTime += cookSpeed * Time.deltaTime;
+        else if (ammoManager != null)
+        {
+            if (ammoManager.GetReserveAmmo() > 0 || ammoManager.GetReserveAmmo() == -1)
+            {
+                ammoManager.ReloadWeapon();
+            }
+            else
+            {
+                if (clickEffect != null && clickTimer <= 0)
+                {
+                    clickTimer = clickCooldown;
+                    Instantiate(clickEffect, transform.position, transform.rotation, null);
+                }
+            }
+        }
     }
 
     /*public void Reload()

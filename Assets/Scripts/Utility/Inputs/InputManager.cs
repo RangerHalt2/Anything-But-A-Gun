@@ -61,7 +61,7 @@ public class InputManager : MonoBehaviour
 
     //LB: This is the getters and setters for the inputs, this will be used to manage their values overall
     public Vector2 MoveInput { get; private set; }
-    public bool FireInput { get; private set; }
+    public bool FireInput { get; set; }
     public bool AltFireInput { get; private set; }
     public bool JumpInput { get; set; }
     public float MouseScrollInput { get; private set; }

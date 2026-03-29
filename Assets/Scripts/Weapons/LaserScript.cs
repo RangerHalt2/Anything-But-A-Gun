@@ -36,53 +36,56 @@ public class LaserScript : WeaponClass
     {
         if (!overheated)
         {
-            currentHeat += heatRate * Time.deltaTime;
-            // If enough time has passed since the last round was fired
-            if (timer <= 0)
+            if (ammoManager.GetCurrentAmmo() > 0)
             {
-                // If there is an assigned ammo manager, and that ammo manager has at least one round of ammo loaded
-                if (ammoManager != null && ammoManager.GetCurrentAmmo() > 0)
+                currentHeat += heatRate * Time.deltaTime;
+                // If enough time has passed since the last round was fired
+                if (timer <= 0)
                 {
-                    // Attempt to fire the weapon
-                    ammoManager.Fire();
-                    // If the weapon is not reloading
-                    if (!ammoManager.IsReloading())
+                    // If there is an assigned ammo manager, and that ammo manager has at least one round of ammo loaded
+                    if (ammoManager != null && ammoManager.GetCurrentAmmo() > 0)
                     {
-                        if (hitscan != null)
+                        // Attempt to fire the weapon
+                        ammoManager.Fire();
+                        // If the weapon is not reloading
+                        if (!ammoManager.IsReloading())
                         {
-                            if (hasPackAPunch)
+                            if (hitscan != null)
                             {
-                                Type type = components[currPackAPunchIndex];
-                                if(type == typeof(P_Climactic))
+                                if (hasPackAPunch)
                                 {
-                                    P_Climactic comp = gameObject.GetComponent<P_Climactic>();
-                                    float hitScanDmgMod = comp.HitScanDMGCalculation(ammoManager); //Going to connect this to a P_Climatic public function
-                                    hitscan.externalDmgMod = hitScanDmgMod;
+                                    Type type = components[currPackAPunchIndex];
+                                    if (type == typeof(P_Climactic))
+                                    {
+                                        P_Climactic comp = gameObject.GetComponent<P_Climactic>();
+                                        float hitScanDmgMod = comp.HitScanDMGCalculation(ammoManager); //Going to connect this to a P_Climatic public function
+                                        hitscan.externalDmgMod = hitScanDmgMod;
+                                    }
+                                }
+                                hitscan.Shoot();
+                                PlayOnomatopeia();
+                                if (gunShot != null)
+                                {
+                                    Instantiate(gunShot, transform.position, transform.rotation, null);
                                 }
                             }
-                            hitscan.Shoot();
-                            PlayOnomatopeia();
-                            if (gunShot != null)
-                            {
-                                Instantiate(gunShot, transform.position, transform.rotation, null);
-                            }
+                            // Update lastFired
+                            timer = fireRate;
                         }
-                        // Update lastFired
-                        timer = fireRate;
                     }
-                }
-                else if (ammoManager != null)
-                {
-                    if (ammoManager.GetReserveAmmo() > 0 || ammoManager.GetReserveAmmo() == -1)
+                    else if (ammoManager != null)
                     {
-                        ammoManager.ReloadWeapon();
-                    }
-                    else
-                    {
-                        if (clickEffect != null && clickTimer <= 0)
+                        if (ammoManager.GetReserveAmmo() > 0 || ammoManager.GetReserveAmmo() == -1)
                         {
-                            clickTimer = clickCooldown;
-                            Instantiate(clickEffect, transform.position, transform.rotation, null);
+                            ammoManager.ReloadWeapon();
+                        }
+                        else
+                        {
+                            if (clickEffect != null && clickTimer <= 0)
+                            {
+                                clickTimer = clickCooldown;
+                                Instantiate(clickEffect, transform.position, transform.rotation, null);
+                            }
                         }
                     }
                 }
