@@ -10165,6 +10165,11 @@ MonoBehaviour:
   damageNoise: {fileID: 6015612841358465451, guid: 571c9937053209b4b9b7c03d8991ec49, type: 3}
   style: {fileID: 0}
   ShiningArmor: 0
+  bloodVFX: {fileID: 0}
+  minParticle: 0
+  maxParticle: 0
+  minSpeed: 0
+  maxSpeed: 0
   end: {fileID: 0}
 --- !u!114 &692855440486963092
 MonoBehaviour:
@@ -10903,8 +10908,8 @@ ParticleSystem:
         key5: {r: 0, g: 0, b: 0, a: 0}
         key6: {r: 0, g: 0, b: 0, a: 0}
         key7: {r: 0, g: 0, b: 0, a: 0}
-        ctime0: 21823
-        ctime1: 21889
+        ctime0: 7864
+        ctime1: 7871
         ctime2: 65535
         ctime3: 0
         ctime4: 0
@@ -10956,7 +10961,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.4
+      scalar: 0.5
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -11649,7 +11654,7 @@ ParticleSystem:
       countCurve:
         serializedVersion: 2
         minMaxState: 0
-        scalar: 60
+        scalar: 80
         minScalar: 30
         maxCurve:
           serializedVersion: 2
@@ -15519,7 +15524,7 @@ ParticleSystemRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: e823cd5b5d27c0f4b8256e7c12ee3e6d, type: 2}
-  - {fileID: 10306, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 161cb34d66d66e6449baee77c9c88fca, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
