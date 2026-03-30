@@ -359,12 +359,13 @@ public class WeaponClass : MonoBehaviour
         }
         if(onomatopeiaTimer <= 0)
         {
+            Debug.Log("Playing onomatopeia VFX, timer was: " + onomatopeiaTimer);
             onomatopeiaVFX.Play();
             onomatopeiaTimer = onomatopeiaCooldown;
         }
     }
 
-    private void Update()
+    protected void Update()
     {
         onomatopeiaTimer -= Time.deltaTime;
     }

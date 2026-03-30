@@ -82,19 +82,14 @@ public class DivorcePaper : WeaponClass
             }
         }
         Projectile proj = projectile.GetComponent<Projectile>();
-
-        if (hasPackAPunch)
-        {
-            proj.gameObject.AddComponent(components[currPackAPunchIndex]);
-        }
-
         proj.SetWeaponLevelReference(weaponLevel);
         PlayOnomatopeia();
         RandomGunShot(proj.transform);
     }
 
-    private void Update()
+    private new void Update()
     {
+        base.Update();
         timer -= Time.deltaTime;
     }
 
