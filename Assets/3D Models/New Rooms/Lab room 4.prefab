@@ -495,8 +495,9 @@ MonoBehaviour:
   - {fileID: 4925705786666085929, guid: 591e3428a19e77a47a42d36ff6724992, type: 3}
   - {fileID: 3695943591121391829, guid: f9e61c70024881840a66c1af5a6c4c0e, type: 3}
   - {fileID: 3695943591121391829, guid: 663ee90681e662244ba0fedff7dc6f7c, type: 3}
-  eliteEnemies: []
-  numReqEliteSpawns: 0
+  eliteEnemies:
+  - {fileID: 3695943591121391829, guid: 09f3bc2cb0c97de428309f51246f27f3, type: 3}
+  numReqEliteSpawns: 1
   spawnPoints:
   - {fileID: 800474050367936523}
   - {fileID: 7690329164381572605}
@@ -3563,9 +3564,11 @@ MonoBehaviour:
   enemySpawner: {fileID: 7373776938525331927}
   num_of_waves: 1
   spawnAllBySeconds: 15
+  healthPack: {fileID: 0}
   doors_to_remove:
   - {fileID: 1297142314245696997}
   - {fileID: 5713704679165326632}
+  healthPackRewards: []
 --- !u!4 &1297142314245696997 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8360739073108331997, guid: 92e50970c7500cb4ca55f5c60cc1887b, type: 3}
