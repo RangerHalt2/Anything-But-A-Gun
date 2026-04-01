@@ -19,7 +19,7 @@ public class DamageTrigger : MonoBehaviour
 
     private void Start()
     {
-        distanceTolerance = 2.5f;
+        distanceTolerance = 6f;
     }
 
     // Runs when something enters the trigger
