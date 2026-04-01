@@ -141,7 +141,6 @@ MonoBehaviour:
   reloadTime: 1
   AmmoCapacity: 10
   reserveAmmo: -1
-  hasPackAPunch: 0
   acceptablePackAPunchOptions: []
   onomatopeiaVFX: {fileID: 0}
   onomatopeiaCooldown: 1.5
@@ -160,6 +159,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::AmmoManager
   maxAmmo: -1
   reserveAmmo: -1
+  ammoCapacity: 10
   currentAmmo: 10
   ammoConsumption: 1
   reloadTime: 1
@@ -407,8 +407,44 @@ PrefabInstance:
       value: 1.25
       objectReference: {fileID: 0}
     - target: {fileID: 8742478054424041838, guid: ca11582e89fef4b42a20c4e537bcf5fb, type: 3}
+      propertyPath: NoiseModule.enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8742478054424041838, guid: ca11582e89fef4b42a20c4e537bcf5fb, type: 3}
+      propertyPath: NoiseModule.quality
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8742478054424041838, guid: ca11582e89fef4b42a20c4e537bcf5fb, type: 3}
+      propertyPath: NoiseModule.frequency
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8742478054424041838, guid: ca11582e89fef4b42a20c4e537bcf5fb, type: 3}
+      propertyPath: NoiseModule.separateAxes
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8742478054424041838, guid: ca11582e89fef4b42a20c4e537bcf5fb, type: 3}
+      propertyPath: NoiseModule.strength.scalar
+      value: 0.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 8742478054424041838, guid: ca11582e89fef4b42a20c4e537bcf5fb, type: 3}
+      propertyPath: NoiseModule.strengthY.scalar
+      value: 0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 8742478054424041838, guid: ca11582e89fef4b42a20c4e537bcf5fb, type: 3}
+      propertyPath: NoiseModule.strengthZ.scalar
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8742478054424041838, guid: ca11582e89fef4b42a20c4e537bcf5fb, type: 3}
       propertyPath: InitialModule.startSize.scalar
       value: 175
+      objectReference: {fileID: 0}
+    - target: {fileID: 8742478054424041838, guid: ca11582e89fef4b42a20c4e537bcf5fb, type: 3}
+      propertyPath: NoiseModule.scrollSpeed.scalar
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8742478054424041838, guid: ca11582e89fef4b42a20c4e537bcf5fb, type: 3}
+      propertyPath: NoiseModule.rotationAmount.scalar
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8887554640117605464, guid: ca11582e89fef4b42a20c4e537bcf5fb, type: 3}
       propertyPath: m_IsActive

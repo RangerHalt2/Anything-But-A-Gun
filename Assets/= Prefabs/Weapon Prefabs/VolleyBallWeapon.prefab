@@ -229,6 +229,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::AmmoManager
   maxAmmo: -1
   reserveAmmo: -1
+  ammoCapacity: 10
   currentAmmo: 10
   ammoConsumption: 1
   reloadTime: 1
@@ -280,7 +281,6 @@ MonoBehaviour:
   reloadTime: 1
   AmmoCapacity: 10
   reserveAmmo: -1
-  hasPackAPunch: 0
   acceptablePackAPunchOptions:
   - {fileID: 11400000, guid: eca31965d964ef9468c904da4cdb57b8, type: 2}
   - {fileID: 11400000, guid: 400b49d056ae7e44fafc9f2feebd7aca, type: 2}
@@ -1051,8 +1051,16 @@ PrefabInstance:
       value: Volleyball Catch
       objectReference: {fileID: 0}
     - target: {fileID: 6253665268307667665, guid: bffa02e7a92f69c469a9e8cecee77c2d, type: 3}
+      propertyPath: NoiseModule.enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6253665268307667665, guid: bffa02e7a92f69c469a9e8cecee77c2d, type: 3}
       propertyPath: ForceModule.y.scalar
       value: -1.65
+      objectReference: {fileID: 0}
+    - target: {fileID: 6253665268307667665, guid: bffa02e7a92f69c469a9e8cecee77c2d, type: 3}
+      propertyPath: NoiseModule.remapEnabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6253665268307667665, guid: bffa02e7a92f69c469a9e8cecee77c2d, type: 3}
       propertyPath: InitialModule.startSize.scalar
