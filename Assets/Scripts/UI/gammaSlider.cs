@@ -10,14 +10,14 @@ public class gammaSlider : MonoBehaviour
 {
 
     public Volume volume;
-    
+
     private LiftGammaGain liftGammaGain;
 
 
     public Slider slider;
 
-  
-   
+
+
     private const string PREF_KEY = "gamma";
 
 
@@ -29,7 +29,7 @@ public class gammaSlider : MonoBehaviour
 
 
 
-        slider.minValue = -1f;
+            slider.minValue = -1f;
         slider.maxValue = 3f;
         slider.value = 0f;
 
@@ -38,38 +38,21 @@ public class gammaSlider : MonoBehaviour
         // setting slider value for starting up
     }
 
-    // Update is called once per frame
-    private void OnEnable()
-    {
-        // Subscribe to the sceneLoaded event
-        SceneManager.sceneLoaded += OnSceneLoaded;
-    }
-
-         private void OnDisable()
-    {
-        // Unsubscribe to avoid memory leaks
-        SceneManager.sceneLoaded -= OnSceneLoaded; }
-
 
     private void Update()
     {
         if (volume = null) ;
         {
-            GameObject go = GameObject.FindWithTag("GV");
-            if (go != null) volume = go.GetComponent<UnityEngine.Rendering.Volume>();
+            volume = GameObject.Find("Global Volume")?.GetComponent<UnityEngine.Rendering.Volume>();
         }
     }
 
-    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+
+    void OnSliderChange(float value)
     {
-        volume = null;
-    }
-        
-   void OnSliderChange(float value)
-    {
-       ApplyGamma(value);
-       PlayerPrefs.SetFloat(PREF_KEY, value);
-       PlayerPrefs.Save();
+        ApplyGamma(value);
+        PlayerPrefs.SetFloat(PREF_KEY, value);
+        PlayerPrefs.Save();
     }
     // keeps the gamma value updated and saves it to player prefs so it can be loaded in the future
     public void ApplyGamma(float value)
@@ -81,3 +64,4 @@ public class gammaSlider : MonoBehaviour
 
     }
 }
+  

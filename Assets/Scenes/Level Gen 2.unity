@@ -441,6 +441,10 @@ PrefabInstance:
       value: -368
       objectReference: {fileID: 0}
     - target: {fileID: 1681764265898349197, guid: caa24201197b26b479e66c072d7d3e13, type: 3}
+      propertyPath: m_Value
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 1681764265898349197, guid: caa24201197b26b479e66c072d7d3e13, type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1812870462}
@@ -1149,6 +1153,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6208952021842856152, guid: caa24201197b26b479e66c072d7d3e13, type: 3}
+      propertyPath: m_Value
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 6208952021842856152, guid: caa24201197b26b479e66c072d7d3e13, type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1812870461}
@@ -1391,6 +1399,10 @@ PrefabInstance:
     - target: {fileID: 7537938572425084640, guid: caa24201197b26b479e66c072d7d3e13, type: 3}
       propertyPath: m_LocalPosition.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7590401398406902049, guid: caa24201197b26b479e66c072d7d3e13, type: 3}
+      propertyPath: m_Value
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 7590401398406902049, guid: caa24201197b26b479e66c072d7d3e13, type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -2038,7 +2050,6 @@ GameObject:
   m_Component:
   - component: {fileID: 856791606}
   - component: {fileID: 856791605}
-  - component: {fileID: 856791607}
   m_Layer: 0
   m_Name: Global Volume
   m_TagString: GV
@@ -2078,18 +2089,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &856791607
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 856791604}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f6a16ce2c04b1304a8dff3a550968755, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PersistAcrossScenes
 --- !u!114 &870304890 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6264904349156071812, guid: caa24201197b26b479e66c072d7d3e13, type: 3}
@@ -2844,7 +2843,7 @@ PrefabInstance:
     - target: {fileID: 6752538009076282273, guid: 6e79526cb5b40544c91f9ac79610f37c, type: 3}
       propertyPath: volume
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 856791605}
     - target: {fileID: 6752538009076282273, guid: 6e79526cb5b40544c91f9ac79610f37c, type: 3}
       propertyPath: gammaValueText
       value: 

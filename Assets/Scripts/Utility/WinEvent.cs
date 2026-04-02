@@ -17,6 +17,7 @@ public class WinEvent : MonoBehaviour
     [Tooltip("The position of the player in the next level.")]
     [SerializeField] private Vector3 nextScenePos;
     public WaveManager doorOpen;
+    public gammaSlider volume;
 
     [SerializeField]
     public unlockButton2 button2;
@@ -80,6 +81,7 @@ public class WinEvent : MonoBehaviour
                     controller.isSpawned = false;
                     player.transform.position = nextScenePos;
                     Debug.Log(other.transform.position);
+                    volume = null;
 
                     if(nextSceneName == "Level Gen 3")
                     {
