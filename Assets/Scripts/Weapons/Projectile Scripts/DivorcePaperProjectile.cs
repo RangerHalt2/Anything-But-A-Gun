@@ -145,6 +145,7 @@ public class DivorcePaperProjectile : MonoBehaviour
                     promotion.SendHealing(damage);
                 }
             }
+            return;
         }
 
         if ((enemy.enemyType == EnemyClass.EnemyType.Common && percentage <= commonThreshold) ||
