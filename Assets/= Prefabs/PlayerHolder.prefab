@@ -1,51 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &859177155560635868
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 682416783086870011}
-  - component: {fileID: 6752538009076282273}
-  m_Layer: 3
-  m_Name: Gamma Controller
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &682416783086870011
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 859177155560635868}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 4615339006202645375}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6752538009076282273
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 859177155560635868}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a1f33731c7b2c9a4a8e95296abe0f448, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::gammaSlider
-  volume: {fileID: 0}
-  slider: {fileID: 0}
 --- !u!1 &1283048164995048237
 GameObject:
   m_ObjectHideFlags: 0
@@ -89,16 +43,16 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 5526317149954458299, guid: 3f46534563766f242a6b65f25cdbb5af, type: 2}
   m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 8300000, guid: e0c48b4af19bb224b8062d0ff7456e42, type: 3}
+  m_Resource: {fileID: 8300000, guid: 918b40f42727c644581d35dd127c5b2d, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.338
-  m_Pitch: 0.89
+  m_Volume: 0.347
+  m_Pitch: 0.69
   Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
   Priority: 192
-  DopplerLevel: 1
+  DopplerLevel: 0.65
   MinDistance: 1
   MaxDistance: 500
   Pan2D: 0
@@ -15718,7 +15672,6 @@ Transform:
   - {fileID: 2264189080371545452}
   - {fileID: 3916997740505059967}
   - {fileID: 5256620709295122454}
-  - {fileID: 682416783086870011}
   m_Father: {fileID: 4823264852573140164}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3488080672531317121
