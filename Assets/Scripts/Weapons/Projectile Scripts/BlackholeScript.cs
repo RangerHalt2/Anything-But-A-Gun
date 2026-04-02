@@ -1,7 +1,8 @@
-using UnityEngine;
-using UnityEngine.AI;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
+using UnityEngine;
+using UnityEngine.AI;
 
 public class BlackholeScript : MonoBehaviour, IWeaponLevel
 {
@@ -97,15 +98,18 @@ public class BlackholeScript : MonoBehaviour, IWeaponLevel
         if (health != null)
         {
             // Deal damage to targets health equal to projectile's damage
-
-            if (_other.GetComponentInParent<NavMeshAgent>() != null)
+            NavMeshAgent enemyAgent = _other.GetComponentInParent<NavMeshAgent>();
+            if (enemyAgent = null)
             {
-                //_other.GetComponentInParent<NavMeshAgent>().enabled = false;
-                Vector3 direction = (_other.gameObject.transform.position - (Vector3)transform.position).normalized;
-                float distance = Vector3.Distance(transform.position, _other.gameObject.transform.position);
-                float forceMultiplier = 1f - (distance / blackholeRadius); // Force decreases with distance
-                health.TakeDamage(cummulativeDamage * (distance / blackholeRadius), this.transform);
-
+                enemyAgent = _other.GetComponentInChildren<NavMeshAgent>();
+            }
+            //_other.GetComponentInParent<NavMeshAgent>().enabled = false;
+            Vector3 direction = (_other.gameObject.transform.position - (Vector3)transform.position).normalized;
+            float distance = Vector3.Distance(transform.position, _other.gameObject.transform.position);
+            float forceMultiplier = 1f - (distance / blackholeRadius); // Force decreases with distance
+            health.TakeDamage(cummulativeDamage * (distance / blackholeRadius), this.transform);
+            if (enemyAgent != null)
+            {
                 Rigidbody rb = _other.gameObject.GetComponentInParent<Rigidbody>();
                 rb.AddForce(-direction * blackholeForce * (distance / blackholeRadius), ForceMode.Impulse);
             }
