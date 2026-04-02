@@ -1316,6 +1316,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -1.1800537
       objectReference: {fileID: 0}
+    - target: {fileID: 9063630768239304822, guid: caa24201197b26b479e66c072d7d3e13, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 9121515661158624816, guid: caa24201197b26b479e66c072d7d3e13, type: 3}
       propertyPath: gaugeVFX
       value: 
@@ -1355,6 +1359,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 6120725345040969484, guid: caa24201197b26b479e66c072d7d3e13, type: 3}
       insertIndex: -1
       addedObject: {fileID: 636112976}
+    - targetCorrespondingSourceObject: {fileID: 6120725345040969484, guid: caa24201197b26b479e66c072d7d3e13, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 636112977}
   m_SourcePrefab: {fileID: 100100000, guid: caa24201197b26b479e66c072d7d3e13, type: 3}
 --- !u!114 &266335555 stripped
 MonoBehaviour:
@@ -1400,6 +1407,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Slider
+--- !u!114 &266335559 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2567320021762419363, guid: caa24201197b26b479e66c072d7d3e13, type: 3}
+  m_PrefabInstance: {fileID: 266335554}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
 --- !u!1 &299931544
 GameObject:
   m_ObjectHideFlags: 0
@@ -1534,6 +1552,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WeaponChargeIdentifier
   weaponCharge: {fileID: 1732564156}
+--- !u!114 &636112977
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 636112969}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d89ef69ff473754b94700a12087a47b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UI_PTODisplay
+  moneyText: {fileID: 266335559}
 --- !u!1 &684606886 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1699244691577364675, guid: 6e79526cb5b40544c91f9ac79610f37c, type: 3}
@@ -2453,7 +2484,7 @@ MonoBehaviour:
       motionGridSize: 64
       colorBlindnessType: 0
       colorBlindnessStrength: 1
-  m_Resources: {fileID: 11400000, guid: d82512f9c8e5d4a4d938b575d47f88d4, type: 2}
+  m_Resources: {fileID: 0}
   m_ShowToolkit: 0
   m_ShowCustomSorter: 0
   breakBeforeColorGrading: 0
