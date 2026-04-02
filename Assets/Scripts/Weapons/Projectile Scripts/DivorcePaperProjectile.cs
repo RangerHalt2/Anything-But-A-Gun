@@ -127,6 +127,26 @@ public class DivorcePaperProjectile : MonoBehaviour
 
         float percentage = currHealth / maxHealth;
 
+        if(enemy == null && enemyHealth != null)
+        {
+            if(percentage <= commonThreshold)
+            {
+                if ((promotion = GetComponent<P_FamilyPhoto>()) != null)
+                {
+                    promotion.SendHealing(enemyHealth.currentHealth);
+                }
+                enemyHealth.TakeDamage(enemyHealth.currentHealth, this.transform);
+            }
+            else
+            {
+                enemyHealth.TakeDamage(damage, this.gameObject.transform);
+                if ((promotion = GetComponent<P_FamilyPhoto>()) != null)
+                {
+                    promotion.SendHealing(damage);
+                }
+            }
+        }
+
         if ((enemy.enemyType == EnemyClass.EnemyType.Common && percentage <= commonThreshold) ||
             (enemy.enemyType == EnemyClass.EnemyType.Elite && percentage <= eliteThreshold) ||
             (enemy.enemyType == EnemyClass.EnemyType.Boss && percentage <= bossThreshold))
