@@ -34,31 +34,45 @@ public class ShredderButton: MonoBehaviour, IInteractable
 
     public void Interact()
     {
+        if (counter <= numOfUses)
+        {
+            counter++;
+            StartCoroutine(Shredder());
+        }
+    }
+
+    private IEnumerator Shredder() 
+    {
+        uniqueObjects = new HashSet<GameObject>();
         Debug.Log("ShredderButton attempted");
         Vector3 center = boxTrigger.transform.position;
         Vector3 halfExtents = boxTrigger.size * 0.5f;
         Quaternion orientation = transform.rotation;
         Collider[] hits = Physics.OverlapBox(center, halfExtents, orientation, interactableLayer);
 
-        if (hits != null) 
-        {
-            Instantiate(blastVFX, center, orientation);
-        }
+        bool blast = false;
 
         foreach (Collider weapon in hits)
         {
             WeaponClass check = weapon.gameObject.GetComponent<WeaponClass>();
             if (check != null)
             {
+                if (blastVFX != null && blast == false)
+                {
+                    blast = true;
+                    Instantiate(blastVFX, center, orientation);
+                    yield return new WaitForSeconds(2);
+                }
+
                 uniqueObjects.Add(check.gameObject);
             }
 
         }
 
-        foreach (GameObject obj in uniqueObjects) 
+        foreach (GameObject obj in uniqueObjects)
         {
             Debug.Log("ShreddedButton tried to delete " + obj);
-            
+
             pc.GetComponent<EconomyManager>().PTOAmount += obj.GetComponent<WeaponClass>().PTOAmount;
             Destroy(obj);
         }
