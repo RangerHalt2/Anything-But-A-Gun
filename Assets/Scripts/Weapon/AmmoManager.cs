@@ -181,7 +181,8 @@ public class AmmoManager : MonoBehaviour
         {
             foreach (GameObject mesh in weaponObject)
             {
-                mesh.SetActive(false);
+                if (mesh != null)
+                    mesh.SetActive(false);
             }
 
         }
