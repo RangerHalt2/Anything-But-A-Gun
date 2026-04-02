@@ -56,7 +56,7 @@ public class AmmoManager : MonoBehaviour
 
     [Header("Reload Animations Stuff")]
     [SerializeField] private ParticleSystem reloadVFX;
-    [SerializeField] private MeshRenderer weaponObject;
+    [SerializeField] private GameObject[] weaponObject;
     #endregion
 
     #region Getters and Setters
@@ -178,7 +178,13 @@ public class AmmoManager : MonoBehaviour
         if (reloadVFX != null)
             reloadVFX.Play();
         if (weaponObject != null)
-            weaponObject.enabled = false;
+        {
+            foreach (GameObject mesh in weaponObject)
+            {
+                mesh.SetActive(false);
+            }
+
+        }
         // Disable the player's crosshair for the duration of the reloading process
         if (crosshair != null)
         {
@@ -232,9 +238,16 @@ public class AmmoManager : MonoBehaviour
                     reloading = false;
                     if(reloadVFX != null)
                         reloadVFX.Stop();
-                    if(weaponObject != null)
-                        weaponObject.enabled = true;
-                    updateDisplay();
+                if (weaponObject != null) 
+                {
+                    foreach (GameObject mesh in weaponObject) 
+                    {
+                        mesh.SetActive(true);
+                    }
+                    
+                }
+
+                updateDisplay();
                     break;
                 // Reload method for weapons that reload each round individually
                 case ReloadMode.IndividualRounds:

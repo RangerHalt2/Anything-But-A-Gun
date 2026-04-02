@@ -9864,7 +9864,7 @@ ParticleSystem:
   m_GameObject: {fileID: 3085607051926171309}
   serializedVersion: 8
   lengthInSec: 1
-  simulationSpeed: 0.4
+  simulationSpeed: 1
   stopAction: 0
   cullingMode: 0
   ringBufferMode: 0
@@ -14815,7 +14815,11 @@ MonoBehaviour:
   reloadEffect: {fileID: 0}
   bottomlessMagazines: 0
   reloadVFX: {fileID: 8783387001339099373}
-  weaponObject: {fileID: 0}
+  weaponObject:
+  - {fileID: 5829823442941568354}
+  - {fileID: 2103661214921434346}
+  - {fileID: 8394021529942099584}
+  - {fileID: 5896000602383824570}
 --- !u!114 &1285534625640415471
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24941,6 +24945,11 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 4141834473340896979}
   m_SourcePrefab: {fileID: 100100000, guid: 7074eba986a6794408889b511b86f05b, type: 3}
+--- !u!1 &2103661214921434346 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 266713341970127888, guid: 7074eba986a6794408889b511b86f05b, type: 3}
+  m_PrefabInstance: {fileID: 2198384326147848442}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &4864347275716302857 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6702368855183958259, guid: 7074eba986a6794408889b511b86f05b, type: 3}
@@ -24967,6 +24976,21 @@ MonoBehaviour:
   frequency: 1
   rotationSpeed: 50
   rotationAxis: 2
+--- !u!1 &5829823442941568354 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5649074608881720728, guid: 7074eba986a6794408889b511b86f05b, type: 3}
+  m_PrefabInstance: {fileID: 2198384326147848442}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &5896000602383824570 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5715340239254818368, guid: 7074eba986a6794408889b511b86f05b, type: 3}
+  m_PrefabInstance: {fileID: 2198384326147848442}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &8394021529942099584 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7710080090347552378, guid: 7074eba986a6794408889b511b86f05b, type: 3}
+  m_PrefabInstance: {fileID: 2198384326147848442}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2921084522704512941
 PrefabInstance:
   m_ObjectHideFlags: 0
