@@ -20,7 +20,7 @@ public class BlackholeScript : MonoBehaviour, IWeaponLevel
     [SerializeField] private float blackholeRadius;
     [SerializeField] private float blackholeForce;
     private float cummulativeDamage;
-    [SerializeField] private float teamID = 1;
+    [SerializeField] private float teamID = 0;
 
     private WeaponLevel currentWeaponLevel;
 
