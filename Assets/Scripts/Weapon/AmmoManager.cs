@@ -243,7 +243,8 @@ public class AmmoManager : MonoBehaviour
                 {
                     foreach (GameObject mesh in weaponObject) 
                     {
-                        mesh.SetActive(true);
+                        if(mesh != null)
+                            mesh.SetActive(true);
                     }
                     
                 }
@@ -327,7 +328,7 @@ public class AmmoManager : MonoBehaviour
                 }
                 else
                 {
-                    ammoDisplayText.text = string.Format(currentAmmo+"");
+                    ammoDisplayText.text = string.Format(currentAmmo + " / " + ammoCapacity + " (Reserve: " + reserveAmmo + ")");
                 }
             }
             else
