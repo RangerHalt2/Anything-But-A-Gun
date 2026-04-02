@@ -1540,7 +1540,8 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -100
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3237809853290516821, guid: caa24201197b26b479e66c072d7d3e13, type: 3}
     m_RemovedGameObjects:
     - {fileID: 2418504270796439118, guid: caa24201197b26b479e66c072d7d3e13, type: 3}
     m_AddedGameObjects: []
@@ -2037,9 +2038,10 @@ GameObject:
   m_Component:
   - component: {fileID: 856791606}
   - component: {fileID: 856791605}
+  - component: {fileID: 856791607}
   m_Layer: 0
   m_Name: Global Volume
-  m_TagString: Untagged
+  m_TagString: GV
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2069,13 +2071,25 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 856791604}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 8.570133, y: -18.940186, z: 13.6956625}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &856791607
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 856791604}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6a16ce2c04b1304a8dff3a550968755, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PersistAcrossScenes
 --- !u!114 &870304890 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6264904349156071812, guid: caa24201197b26b479e66c072d7d3e13, type: 3}
@@ -2547,6 +2561,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 859177155560635868, guid: 6e79526cb5b40544c91f9ac79610f37c, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1491433681064732397, guid: 6e79526cb5b40544c91f9ac79610f37c, type: 3}
       propertyPath: TrailModule.widthOverTrail.minMaxState
       value: 1
@@ -2826,7 +2844,7 @@ PrefabInstance:
     - target: {fileID: 6752538009076282273, guid: 6e79526cb5b40544c91f9ac79610f37c, type: 3}
       propertyPath: volume
       value: 
-      objectReference: {fileID: 856791605}
+      objectReference: {fileID: 0}
     - target: {fileID: 6752538009076282273, guid: 6e79526cb5b40544c91f9ac79610f37c, type: 3}
       propertyPath: gammaValueText
       value: 

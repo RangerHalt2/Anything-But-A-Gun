@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.PostProcessing;
 using UnityEngine.Rendering.Universal;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class gammaSlider : MonoBehaviour
@@ -38,7 +39,33 @@ public class gammaSlider : MonoBehaviour
     }
 
     // Update is called once per frame
-    void OnSliderChange(float value)
+    private void OnEnable()
+    {
+        // Subscribe to the sceneLoaded event
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+         private void OnDisable()
+    {
+        // Unsubscribe to avoid memory leaks
+        SceneManager.sceneLoaded -= OnSceneLoaded; }
+
+
+    private void Update()
+    {
+        if (volume = null) ;
+        {
+            GameObject go = GameObject.FindWithTag("GV");
+            if (go != null) volume = go.GetComponent<UnityEngine.Rendering.Volume>();
+        }
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        volume = null;
+    }
+        
+   void OnSliderChange(float value)
     {
        ApplyGamma(value);
        PlayerPrefs.SetFloat(PREF_KEY, value);
