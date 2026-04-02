@@ -98,7 +98,15 @@ public class DivorcePaperProjectile : MonoBehaviour
         if(other.gameObject.layer == LayerMask.NameToLayer("Enemy"))
         {
             Health enemyHealth = other.gameObject.GetComponentInParent<Health>();
+            if (enemyHealth == null)
+            {
+                enemyHealth = other.gameObject.GetComponentInChildren<Health>();
+            }
             EnemyClass enemy = other.gameObject.GetComponentInParent<EnemyClass>();
+            if(enemy == null)
+            {
+                enemy = other.gameObject.GetComponentInChildren<EnemyClass>();
+            }
             if(enemyHealth == null)
                 Debug.Log("DIVORCE PAPER PROJECTILE - Enemy Health is Null");
             if (enemy == null)
