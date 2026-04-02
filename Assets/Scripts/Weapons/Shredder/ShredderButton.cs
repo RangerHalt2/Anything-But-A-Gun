@@ -9,6 +9,7 @@ public class ShredderButton: MonoBehaviour, IInteractable
 
     public bool canInteract { get; set; } = true;
     private PlayerController pc;
+    [SerializeField] private GameObject blastVFX;
 
     HashSet<GameObject> uniqueObjects = new HashSet<GameObject>();
 
@@ -38,6 +39,11 @@ public class ShredderButton: MonoBehaviour, IInteractable
         Vector3 halfExtents = boxTrigger.size * 0.5f;
         Quaternion orientation = transform.rotation;
         Collider[] hits = Physics.OverlapBox(center, halfExtents, orientation, interactableLayer);
+
+        if (hits != null) 
+        {
+            Instantiate(blastVFX, center, orientation);
+        }
 
         foreach (Collider weapon in hits)
         {
