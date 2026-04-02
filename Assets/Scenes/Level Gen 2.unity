@@ -236,6 +236,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
       objectReference: {fileID: 1246938572}
+    - target: {fileID: 191410177082348660, guid: caa24201197b26b479e66c072d7d3e13, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 1.7000122
+      objectReference: {fileID: 0}
     - target: {fileID: 263996589393396957, guid: caa24201197b26b479e66c072d7d3e13, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -286,7 +290,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 579397576798918672, guid: caa24201197b26b479e66c072d7d3e13, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -10.64978
+      value: -10.649902
       objectReference: {fileID: 0}
     - target: {fileID: 719906694454491560, guid: caa24201197b26b479e66c072d7d3e13, type: 3}
       propertyPath: m_AnchorMax.y
@@ -686,7 +690,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3698789520101530168, guid: caa24201197b26b479e66c072d7d3e13, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -33.000122
+      value: -33.000244
       objectReference: {fileID: 0}
     - target: {fileID: 3714518204787343893, guid: caa24201197b26b479e66c072d7d3e13, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
@@ -1393,6 +1397,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1246938572}
     - target: {fileID: 9048823839874201029, guid: caa24201197b26b479e66c072d7d3e13, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -1.7788086
+      objectReference: {fileID: 0}
+    - target: {fileID: 9048823839874201029, guid: caa24201197b26b479e66c072d7d3e13, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -1.1800537
       objectReference: {fileID: 0}
@@ -1435,6 +1443,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 6120725345040969484, guid: caa24201197b26b479e66c072d7d3e13, type: 3}
       insertIndex: -1
       addedObject: {fileID: 636112976}
+    - targetCorrespondingSourceObject: {fileID: 6120725345040969484, guid: caa24201197b26b479e66c072d7d3e13, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 636112977}
     - targetCorrespondingSourceObject: {fileID: 6937414119088126817, guid: caa24201197b26b479e66c072d7d3e13, type: 3}
       insertIndex: -1
       addedObject: {fileID: 266335560}
@@ -1683,6 +1694,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WeaponChargeIdentifier
   weaponCharge: {fileID: 1732564156}
+--- !u!114 &636112977
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 636112969}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d89ef69ff473754b94700a12087a47b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UI_PTODisplay
+  moneyText: {fileID: 939150169}
 --- !u!1 &684606886 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1699244691577364675, guid: 6e79526cb5b40544c91f9ac79610f37c, type: 3}
@@ -1896,6 +1920,17 @@ MonoBehaviour:
 --- !u!114 &918290553 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2332575580554231381, guid: caa24201197b26b479e66c072d7d3e13, type: 3}
+  m_PrefabInstance: {fileID: 266335554}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
+--- !u!114 &939150169 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2567320021762419363, guid: caa24201197b26b479e66c072d7d3e13, type: 3}
   m_PrefabInstance: {fileID: 266335554}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
