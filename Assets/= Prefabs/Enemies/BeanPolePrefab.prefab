@@ -148,6 +148,7 @@ GameObject:
   - component: {fileID: 7633860298624178408}
   - component: {fileID: 8992063556814054335}
   - component: {fileID: 1052873763899505579}
+  - component: {fileID: 1120255486006563627}
   - component: {fileID: 5561038860284266260}
   - component: {fileID: 1858845626273565094}
   - component: {fileID: 8718023588053921820}
@@ -264,6 +265,22 @@ NavMeshAgent:
   m_BaseOffset: 5.0500007
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &1120255486006563627
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4925705786666085929}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1aaaf50279daa514e8f72ee751639937, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Billboard
+  billboardType: 0
+  lockX: 0
+  lockY: 0
+  lockZ: 0
 --- !u!114 &5561038860284266260
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -347,6 +364,9 @@ MonoBehaviour:
   enemyType: 0
   height: 2
   animator: {fileID: 0}
+  minRange: 6
+  maxRange: 8
+  orbitWidthMultiplier: 1.5
 --- !u!54 &6419318689120893974
 Rigidbody:
   m_ObjectHideFlags: 0
