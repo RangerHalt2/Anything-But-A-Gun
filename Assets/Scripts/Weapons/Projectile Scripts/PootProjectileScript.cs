@@ -14,7 +14,7 @@ public class PootProjectileScript : MonoBehaviour
         weaponLevelRef = weaponLevel;
     }
 
-    void OnTriggerEnter() //Can be changed to OnDestroy, IF and ONLY IF every wall is registered as a Wall in the tags.
+    void OnDestroy() //Can be changed to OnDestroy, IF and ONLY IF every wall is registered as a Wall in the tags.
     {
         Vector3 collisionPoint = transform.position;
         GameObject pootGameObject = Instantiate(pootPrefab, collisionPoint, Quaternion.identity, null);
