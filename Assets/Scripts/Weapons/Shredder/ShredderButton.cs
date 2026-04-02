@@ -61,7 +61,7 @@ public class ShredderButton: MonoBehaviour, IInteractable
                 {
                     blast = true;
                     Instantiate(blastVFX, center, orientation);
-                    yield return new WaitForSeconds(2);
+                    yield return new WaitForSeconds(3);
                 }
 
                 uniqueObjects.Add(check.gameObject);
