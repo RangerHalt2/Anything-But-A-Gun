@@ -36,10 +36,7 @@ public class gammaSlider : MonoBehaviour
         slider.onValueChanged.AddListener(OnSliderChange);
 
         // setting slider value for starting up
-        if (slider = null) ;
-        {
-            slider = GameObject.Find("GSlider")?.GetComponent<UnityEngine.UI.Slider>();
-        }
+        
     }
 
 
@@ -48,6 +45,10 @@ public class gammaSlider : MonoBehaviour
         if (volume = null) ;
         {
             volume = GameObject.Find("Global Volume")?.GetComponent<UnityEngine.Rendering.Volume>();
+        }
+        if (slider = null) ;
+        {
+            slider = GameObject.Find("GSlider")?.GetComponent<UnityEngine.UI.Slider>();
         }
     }
 
