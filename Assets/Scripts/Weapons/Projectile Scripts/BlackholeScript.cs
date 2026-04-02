@@ -20,6 +20,7 @@ public class BlackholeScript : MonoBehaviour, IWeaponLevel
     [SerializeField] private float blackholeRadius;
     [SerializeField] private float blackholeForce;
     private float cummulativeDamage;
+    [SerializeField] private float teamID = 1;
 
     private WeaponLevel currentWeaponLevel;
 
@@ -107,7 +108,8 @@ public class BlackholeScript : MonoBehaviour, IWeaponLevel
             Vector3 direction = (_other.gameObject.transform.position - (Vector3)transform.position).normalized;
             float distance = Vector3.Distance(transform.position, _other.gameObject.transform.position);
             float forceMultiplier = 1f - (distance / blackholeRadius); // Force decreases with distance
-            health.TakeDamage(cummulativeDamage * (distance / blackholeRadius), this.transform);
+            if(teamID != health.teamID)
+                health.TakeDamage(cummulativeDamage * (distance / blackholeRadius), this.transform);
             if (enemyAgent != null)
             {
                 Rigidbody rb = _other.gameObject.GetComponentInParent<Rigidbody>();
