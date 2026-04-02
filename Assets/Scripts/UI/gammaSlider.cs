@@ -28,9 +28,9 @@ public class gammaSlider : MonoBehaviour
 
 
 
-        slider.minValue = 0.5f;
-        slider.maxValue = 2f;
-        slider.value = 1f;
+        slider.minValue = -1f;
+        slider.maxValue = 3f;
+        slider.value = 0f;
 
         slider.onValueChanged.AddListener(OnSliderChange);
 

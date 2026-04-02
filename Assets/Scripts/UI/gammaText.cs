@@ -15,6 +15,8 @@ public class gammaText : MonoBehaviour
 
     public void UpdateSliderText(float value)
     {
-        valueText.text = value.ToString("F2");
+        float modifedValue = value + 1f;
+        valueText.text = modifedValue.ToString("F2");
     }
+
 }
