@@ -88,6 +88,10 @@ public class BlackholeScript : MonoBehaviour, IWeaponLevel
     {
         // Attempt to reference the health script on the collided object
         Health health = _other.gameObject.GetComponentInParent<Health>();
+        if(health == null)
+        {
+            health = _other.gameObject.GetComponentInChildren<Health>();
+        }
 
         // If the object has a health script
         if (health != null)
