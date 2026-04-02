@@ -5,7 +5,7 @@ public class SlopAI : EnemyClass
 {
     [Header("Slop Mortar Settings")]
     public float minRange = 15f;
-    public float attackRange = 40f;
+    public float mortarRange = 40f;
 
     private void Awake()
     {
@@ -38,7 +38,7 @@ public class SlopAI : EnemyClass
         {
             agent.isStopped = true;
 
-            if (distanceToPlayer <= attackRange)
+            if (distanceToPlayer <= mortarRange)
             {
                 Attacking();
             }
@@ -79,7 +79,7 @@ public class SlopAI : EnemyClass
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, attackRange);
+        Gizmos.DrawWireSphere(transform.position, mortarRange);
 
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(player.position, minRange);
