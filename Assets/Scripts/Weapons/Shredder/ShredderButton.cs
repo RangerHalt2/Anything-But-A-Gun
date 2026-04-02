@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public class ShredderButton: MonoBehaviour, IInteractable
 {
     public int numOfUses = 1; //Public because this is going to be changed later and fuck getters amirite or amirite
-    private int counter = 0;
+    [SerializeField] private int counter = 0;
 
     public bool canInteract { get; set; } = true;
     private PlayerController pc;
@@ -36,38 +36,37 @@ public class ShredderButton: MonoBehaviour, IInteractable
     {
         if (counter < numOfUses)
         {
-            counter++;
-            StartCoroutine(Shredder());
+            uniqueObjects = new HashSet<GameObject>();
+            Debug.Log("ShredderButton attempted");
+            Vector3 center = boxTrigger.transform.position;
+            Vector3 halfExtents = boxTrigger.size * 0.5f;
+            Quaternion orientation = transform.rotation;
+            Collider[] hits = Physics.OverlapBox(center, halfExtents, orientation, interactableLayer);
+            bool containsWeapon = false;
+            foreach (Collider weapon in hits) 
+            {
+                WeaponClass check = weapon.gameObject.GetComponent<WeaponClass>();
+                if (check != null) 
+                { 
+                    containsWeapon = true;
+                    uniqueObjects.Add(check.gameObject);
+                }
+            }
+
+            if (containsWeapon)
+            {
+                StartCoroutine(Shredder());
+            }
         }
     }
 
     private IEnumerator Shredder() 
     {
-        uniqueObjects = new HashSet<GameObject>();
-        Debug.Log("ShredderButton attempted");
-        Vector3 center = boxTrigger.transform.position;
-        Vector3 halfExtents = boxTrigger.size * 0.5f;
-        Quaternion orientation = transform.rotation;
-        Collider[] hits = Physics.OverlapBox(center, halfExtents, orientation, interactableLayer);
-
+        counter++;
         bool blast = false;
-
-        foreach (Collider weapon in hits)
-        {
-            WeaponClass check = weapon.gameObject.GetComponent<WeaponClass>();
-            if (check != null)
-            {
-                if (blastVFX != null && blast == false)
-                {
-                    blast = true;
-                    Instantiate(blastVFX, center, orientation);
-                    yield return new WaitForSeconds(3);
-                }
-
-                uniqueObjects.Add(check.gameObject);
-            }
-
-        }
+        
+        Instantiate(blastVFX, boxTrigger.transform.position, transform.rotation);
+        yield return new WaitForSeconds(3);
 
         foreach (GameObject obj in uniqueObjects)
         {
