@@ -34,7 +34,7 @@ public class ShredderButton: MonoBehaviour, IInteractable
 
     public void Interact()
     {
-        if (counter <= numOfUses)
+        if (counter < numOfUses)
         {
             counter++;
             StartCoroutine(Shredder());
