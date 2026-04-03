@@ -70,6 +70,7 @@ public class SlopAI : EnemyClass
     {
         if (!alreadyAttacked)
         {
+            Debug.Log("SLOP AI - Shoot fired");
             Shoot();
             alreadyAttacked = true;
             Invoke(nameof(ResetAttack), timeBetweenAttacks);
