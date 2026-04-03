@@ -27,7 +27,7 @@ public class AmmoBox : MonoBehaviour, IInteractable
         {
             int ammoGain = Mathf.RoundToInt(am.maxAmmo / 2);
             Debug.Log("Ammo Box found weapon to gain ammo");
-            if(promotionType != null && promotionType != typeof(P_BottomlessMag))
+            if((promotionType != null && promotionType != typeof(P_BottomlessMag)) || promotionType == null)
                 am.reserveAmmo += ammoGain;
             if (promotionType != null && promotionType == typeof(P_BottomlessMag))
                 am.SetCurrentAmmo(am.GetCurrentAmmo() + ammoGain);
