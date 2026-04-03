@@ -10032,7 +10032,6 @@ MonoBehaviour:
   reloadTime: 0.4
   AmmoCapacity: 4
   reserveAmmo: 12
-  hasPackAPunch: 0
   acceptablePackAPunchOptions:
   - {fileID: 11400000, guid: eca31965d964ef9468c904da4cdb57b8, type: 2}
   - {fileID: 11400000, guid: 9ac4c95993a3a534eaea2384cab0b872, type: 2}
@@ -10067,7 +10066,8 @@ MonoBehaviour:
   reloadEffect: {fileID: 0}
   bottomlessMagazines: 0
   reloadVFX: {fileID: 0}
-  weaponObject: {fileID: 0}
+  weaponObject:
+  - {fileID: 0}
 --- !u!114 &1519371405910464456
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24932,7 +24932,7 @@ PrefabInstance:
     - target: {fileID: -5754084199372789682, guid: dc87595e518e40041916b3c6c1b53131, type: 3}
       propertyPath: m_Mesh
       value: 
-      objectReference: {fileID: 7592219422122726565, guid: 27ca1918526d6244b86e0ddf95841256, type: 3}
+      objectReference: {fileID: 7592219422122726565, guid: dbf9a0ce2e08eac4394dc9d7c96d7ca8, type: 3}
     - target: {fileID: 919132149155446097, guid: dc87595e518e40041916b3c6c1b53131, type: 3}
       propertyPath: m_Name
       value: Calbrush
