@@ -42,11 +42,11 @@ public class gammaSlider : MonoBehaviour
 
     private void Update()
     {
-        if (volume = null) ;
+        if (volume == null) ;
         {
             volume = GameObject.Find("Global Volume")?.GetComponent<UnityEngine.Rendering.Volume>();
         }
-        if (slider = null) ;
+        if (slider == null) ;
         {
             slider = GameObject.Find("GSlider")?.GetComponent<UnityEngine.UI.Slider>();
         }
