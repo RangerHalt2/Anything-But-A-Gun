@@ -338,15 +338,18 @@ public class WeaponClass : MonoBehaviour
 
     public void RandomGunShot(Transform followTrans)
     {
-        if(randomGunShots != null)
+        if(randomGunShots != null && randomGunShots.Count() >= 0)
         {
             Debug.Log("WEAPON CLASS - RANDOM AUDIO NOT NULL");
-            int num = UnityEngine.Random.Range(0, randomGunShots.Length);
+            int num = UnityEngine.Random.Range(0, randomGunShots.Count());
             Debug.Log("WEAPON CLASS - RANDOM AUDIO CHOOSEN OF INDEX " + num);
             GameObject selected = randomGunShots[num];
-            GameObject randomShot = Instantiate(selected, followTrans.position, Quaternion.identity);
-            MovingAudio movingAudio = randomShot.AddComponent<MovingAudio>();
-            movingAudio.targetToFollow = followTrans;
+            if (selected != null)
+            {
+                GameObject randomShot = Instantiate(selected, followTrans.position, Quaternion.identity);
+                MovingAudio movingAudio = randomShot.AddComponent<MovingAudio>();
+                movingAudio.targetToFollow = followTrans;
+            }
         }
     }
 

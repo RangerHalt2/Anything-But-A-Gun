@@ -1,14 +1,8 @@
 using UnityEngine;
 
-public class PootDispenserScript : WeaponClass
+public class BreadCrumbWeapon : WeaponClass
 {
-    //[SerializeField] public int level {get; set;}
-
-    //[SerializeField] private float fireRate = 0.25f;
-    //[SerializeField] private AmmoManager ammoManager;
-    //[SerializeField] private GameObject projectilePrefab;
     [SerializeField] private Transform projectileSpawnPoint;
-    //private float lastFired = Mathf.NegativeInfinity;
 
     private float timer = 0f;
 
@@ -17,8 +11,8 @@ public class PootDispenserScript : WeaponClass
     private void Start()
     {
         weaponLevelRef = GetComponent<WeaponLevel>();
-    }
-
+    } 
+    
     override
     public void Shoot()
     {
@@ -101,10 +95,10 @@ public class PootDispenserScript : WeaponClass
             Projectile proj = projectileGameObject.GetComponent<Projectile>();
             proj.SetWeaponLevelReference(weaponLevelRef);
 
-            
+
             PlayOnomatopeia();
             RandomGunShot(proj.transform);
-            PootProjectileScript pootProj = projectileGameObject.GetComponent<PootProjectileScript>();
+            PidgeonProjectile pootProj = projectileGameObject.GetComponent<PidgeonProjectile>();
             if (hasPackAPunch)
             {
                 Component comp = projectileGameObject.AddComponent(components[currPackAPunchIndex]);
