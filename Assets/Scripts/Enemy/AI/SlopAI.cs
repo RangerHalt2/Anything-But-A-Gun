@@ -82,6 +82,6 @@ public class SlopAI : EnemyClass
         Gizmos.DrawWireSphere(transform.position, mortarRange);
 
         Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(player.position, minRange);
+        Gizmos.DrawWireSphere(transform.position, minRange);
     }
 }

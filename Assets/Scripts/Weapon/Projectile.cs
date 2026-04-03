@@ -12,6 +12,12 @@ public class Projectile : MonoBehaviour, IWeaponLevel
     [Tooltip("The speed at which the projectile will travel.")]
     public float speed; //EW: I made this public instead of private so it can be modified/referenced outside of this script.
 
+    [Header("Custom Mortar Settings")] //MG: Added Mortar Settings
+    [SerializeField] private bool useCustomMortar = false;
+    [SerializeField] private float customGravity = 20f;
+    [SerializeField] private float launchAngle = 45f;
+    private Vector3 currentVelocity;
+
 
     [Header("Lifetime Settings")]
     [Tooltip("The amount of time (in seconds) a projectile will exist for.")]
@@ -130,8 +136,16 @@ public class Projectile : MonoBehaviour, IWeaponLevel
         // Check if Rigidbody is present
         if (rb != null)
         {
+            //MG: Added Calculation for Mortars
             // Add speed to the velocity of the projectile
-            rb.linearVelocity = transform.forward * speed;
+            if (useCustomMortar && enemyPosition != null)
+            {
+                currentVelocity = CalculateLaunchVelocity(enemyPosition.position);
+            }
+            else
+            {
+                rb.linearVelocity = transform.forward * speed;
+            }
 
             // Start Coroutine to despawn projectile after set delay
             StartCoroutine(DestroyAfterDelay());
@@ -151,7 +165,24 @@ public class Projectile : MonoBehaviour, IWeaponLevel
     }
 
     void FixedUpdate()
+    //MG: Added Mortar calculat
     {
+        if (useCustomMortar)
+        {
+            // Apply custom gravity
+            currentVelocity.y -= customGravity * Time.fixedDeltaTime;
+
+            rb.linearVelocity = currentVelocity;
+
+            // Rotate to face movement direction
+            if (currentVelocity != Vector3.zero)
+            {
+                transform.forward = currentVelocity.normalized;
+            }
+
+            return;
+        }
+
         if (!bulletDrop)
         {
             return;
@@ -330,5 +361,28 @@ public class Projectile : MonoBehaviour, IWeaponLevel
             DoDamage(enemyHealth);
         }
     }
+
+    private Vector3 CalculateLaunchVelocity(Vector3 targetPosition)
+        {
+            Vector3 direction = targetPosition - transform.position;
+
+            float yOffset = direction.y;
+            direction.y = 0;
+
+            float distance = direction.magnitude;
+
+            float angleRad = launchAngle * Mathf.Deg2Rad;
+
+            float g = customGravity;
+
+            float velocity = Mathf.Sqrt(distance * g / Mathf.Sin(2 * angleRad));
+
+            float velocityY = velocity * Mathf.Sin(angleRad);
+            float velocityXZ = velocity * Mathf.Cos(angleRad);
+
+            Vector3 result = direction.normalized * velocityXZ + Vector3.up * velocityY;
+
+            return result;
+        }
     #endregion
 }
