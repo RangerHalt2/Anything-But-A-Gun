@@ -8,50 +8,72 @@ using UnityEngine.UI;
 
 public class gammaSlider : MonoBehaviour
 {
-
     public Volume volume;
-
     private LiftGammaGain liftGammaGain;
-
-
     public Slider slider;
-
-
-
     private const string PREF_KEY = "gamma";
 
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        // Subscribe to scene loads so we can re-acquire scene objects
+        // SceneManager.sceneLoaded += OnSceneLoaded;
 
-        if (volume.profile.TryGet(out liftGammaGain))
-
-
-
-            slider.minValue = -1f;
-        slider.maxValue = 3f;
-        slider.value = 0f;
-
-        slider.onValueChanged.AddListener(OnSliderChange);
-
-        // setting slider value for starting up
-        
+        SetupSlider();
     }
 
-
-    private void Update()
+    void OnDestroy()
     {
-        if (volume == null) ;
+        // SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    /*
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        // Re-find scene objects after every scene load
+        volume = null;
+        liftGammaGain = null;
+        slider = null;
+        SetupSlider();
+    }
+    */
+
+    private void SetupSlider()
+    {
+        // Find volume if not assigned
+        if (volume == null)
+            volume = GameObject.Find("Global Volume")?.GetComponent<Volume>();
+
+        // Find slider if not assigned
+        if (slider == null)
+            slider = GameObject.Find("GSlider")?.GetComponent<Slider>();
+
+        // Get the LiftGammaGain override from the volume profile
+        if (volume != null && volume.profile.TryGet(out liftGammaGain))
         {
-            volume = GameObject.Find("Global Volume")?.GetComponent<UnityEngine.Rendering.Volume>();
+            Debug.Log("LiftGammaGain found successfully.");
         }
-        if (slider == null) ;
+        else
         {
-            slider = GameObject.Find("GSlider")?.GetComponent<UnityEngine.UI.Slider>();
+            Debug.LogWarning("Could not find LiftGammaGain on volume profile.");
+        }
+
+        // Set up slider
+        if (slider != null)
+        {
+            slider.onValueChanged.RemoveListener(OnSliderChange); // avoid duplicate listeners
+            slider.minValue = -1f;
+            slider.maxValue = 3f;
+            // Load saved gamma, defaulting to 0
+            slider.value = PlayerPrefs.GetFloat(PREF_KEY, 0f);
+            slider.onValueChanged.AddListener(OnSliderChange);
+        }
+        else
+        {
+            Debug.LogWarning("Slider not found.");
         }
     }
 
+    // Update is no longer needed for finding references — removed
 
     void OnSliderChange(float value)
     {
@@ -59,14 +81,10 @@ public class gammaSlider : MonoBehaviour
         PlayerPrefs.SetFloat(PREF_KEY, value);
         PlayerPrefs.Save();
     }
-    // keeps the gamma value updated and saves it to player prefs so it can be loaded in the future
+
     public void ApplyGamma(float value)
     {
         if (liftGammaGain != null)
-
-
             liftGammaGain.gamma.value = new Vector4(1f, 1f, 1f, value);
-
     }
 }
-  
