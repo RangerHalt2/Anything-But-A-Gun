@@ -65,11 +65,15 @@ public class PidgeonAreaOfEffect : MonoBehaviour, IWeaponLevel
     {
         if (followingTarget) return; //If following target the rest is unnecessary
         Health enemyHealth = other.gameObject.GetComponentInParent<Health>();
-        if (enemyHealth != null)
+        if (enemyHealth == null)
         {
             enemyHealth = other.gameObject.GetComponentInChildren<Health>();
         }
-        if (enemyHealth == null || enemyHealth.teamID == 0) return; //If no enemy, or the health found is the player's
+        if (enemyHealth == null || enemyHealth.teamID == 0)
+        {
+            Debug.Log("PIDGEON AREA OF EFFECT - The enemy was either not found or is a player, returning.");
+            return; //If no enemy, or the health found is the player's
+        }
 
         this.gameObject.transform.SetParent(other.gameObject.transform, false);
         followingTarget = true;
