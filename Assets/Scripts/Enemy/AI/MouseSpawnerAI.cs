@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class MouseSpawnerAI : MonoBehaviour
+public class MouseSpawnerAI : EnemyClass
 {
     [Header("Spawn Settings")]
     [SerializeField] private GameObject[] enemyPrefabs;

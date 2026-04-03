@@ -43,6 +43,12 @@ public class gammaSlider : MonoBehaviour
         if (volume == null)
             volume = GameObject.Find("Global Volume")?.GetComponent<Volume>();
 
+        if(volume == null)
+        {
+            Debug.LogWarning("GAMMA SLIDER - No Volume Was Ever Found");
+            return;
+        }
+
         // Find slider if not assigned
         if (slider == null)
             slider = GameObject.Find("GSlider")?.GetComponent<Slider>();
@@ -72,8 +78,6 @@ public class gammaSlider : MonoBehaviour
             Debug.LogWarning("Slider not found.");
         }
     }
-
-    // Update is no longer needed for finding references — removed
 
     void OnSliderChange(float value)
     {

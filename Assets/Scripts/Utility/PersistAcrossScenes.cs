@@ -1,18 +1,19 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PersistAcrossScenes : MonoBehaviour
 {
-    private static PersistAcrossScenes instance;
+    private static List<string> persistedObjects = new List<string>();
 
     private void Awake()
     {
-        if (instance != null && instance != this)
+        if (persistedObjects.Contains(gameObject.name))
         {
             Destroy(gameObject);
             return;
         }
 
-        instance = this;
+        persistedObjects.Add(gameObject.name);
         DontDestroyOnLoad(gameObject);
     }
 }
