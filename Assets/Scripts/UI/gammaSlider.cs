@@ -16,17 +16,17 @@ public class gammaSlider : MonoBehaviour
     void Start()
     {
         // Subscribe to scene loads so we can re-acquire scene objects
-        // SceneManager.sceneLoaded += OnSceneLoaded;
+        SceneManager.sceneLoaded += OnSceneLoaded;
 
         SetupSlider();
     }
 
     void OnDestroy()
     {
-        // SceneManager.sceneLoaded -= OnSceneLoaded;
+        SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
-    /*
+    
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         // Re-find scene objects after every scene load
@@ -35,7 +35,7 @@ public class gammaSlider : MonoBehaviour
         slider = null;
         SetupSlider();
     }
-    */
+    
 
     private void SetupSlider()
     {
@@ -54,7 +54,7 @@ public class gammaSlider : MonoBehaviour
             slider = GameObject.Find("GSlider")?.GetComponent<Slider>();
 
         // Get the LiftGammaGain override from the volume profile
-        if (volume != null && volume.profile.TryGet(out liftGammaGain))
+        if (volume != null && volume.sharedProfile.TryGet(out liftGammaGain))
         {
             Debug.Log("LiftGammaGain found successfully.");
         }
@@ -81,6 +81,7 @@ public class gammaSlider : MonoBehaviour
 
     void OnSliderChange(float value)
     {
+        Debug.Log("GAMMA SLIDER - Gamma Slider Was Changed: " + value);
         ApplyGamma(value);
         PlayerPrefs.SetFloat(PREF_KEY, value);
         PlayerPrefs.Save();
