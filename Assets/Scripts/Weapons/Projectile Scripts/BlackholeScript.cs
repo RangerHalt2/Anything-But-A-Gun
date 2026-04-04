@@ -109,7 +109,7 @@ public class BlackholeScript : MonoBehaviour, IWeaponLevel
             float distance = Vector3.Distance(transform.position, _other.gameObject.transform.position);
             float forceMultiplier = 1f - (distance / blackholeRadius); // Force decreases with distance
             if(teamID != health.teamID)
-                health.TakeDamage(cummulativeDamage * (distance / blackholeRadius), this.transform);
+                health.TakeDamage(cummulativeDamage * (distance / blackholeRadius) * Time.deltaTime, this.transform);
             if (enemyAgent != null)
             {
                 Rigidbody rb = _other.gameObject.GetComponentInParent<Rigidbody>();

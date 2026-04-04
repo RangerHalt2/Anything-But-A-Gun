@@ -144,7 +144,7 @@ public class Health : MonoBehaviour
         {
             Debug.Log("HEALTH - Instance ID: " + this.GetInstanceID());
             if(style != null)
-                style.DecreaseScore();
+                style.DecreaseScore(damageAmount);
             DamageInfo info = new DamageInfo { source = sourcePosition, damage = damageAmount};
             PlayerTookDamage?.Invoke(info);
             if (PlayerTookDamage != null)

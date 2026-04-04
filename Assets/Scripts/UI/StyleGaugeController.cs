@@ -15,7 +15,7 @@ public class StyleGaugeController : MonoBehaviour
     [SerializeField] float scoreDecreaseSpeed = 1f; //Modifies how fast the score decreases.
     [SerializeField] float critHitScoreAdd; //Amount added if the player scores a crit.
     [SerializeField] float enemyDeathScoreAdd; //Amount added if the player kills an enemy. (Later we can make this different for each enemy if we want)
-    [SerializeField] float playerDamageScoreSubtract; //Amount subtracted when the player takes damage.
+    [SerializeField] float scoreSubtractMultiplier; //Amount multiplied by damage to get the subtracted amount.
     private float stall; //This is the timer that will count up to the scoreStallTimer value.
     [SerializeField] private Image scoreFill; //The fill portion of the style UI
     [SerializeField] private GameObject totalGauge; //The full gauge for turning off and on.
@@ -122,8 +122,8 @@ public class StyleGaugeController : MonoBehaviour
         }
     }
 
-    public void DecreaseScore() //When the player get's hit
+    public void DecreaseScore(float damageAmount) //When the player get's hit
     {
-        score -= playerDamageScoreSubtract;
+        score -= damageAmount * scoreSubtractMultiplier;
     }
 }
