@@ -34,14 +34,16 @@ public class SlopAI : EnemyClass
             agent.SetDestination(retreatTarget);
         }
 
+        else if (distanceToPlayer > mortarRange)
+        {
+            agent.isStopped = false;
+            agent.SetDestination(player.position);
+        }
+
         else
         {
             agent.isStopped = true;
-
-            if (distanceToPlayer <= mortarRange)
-            {
-                Attacking();
-            }
+            Attacking();
         }
 
         if (!hasShownDetectionSprite)
