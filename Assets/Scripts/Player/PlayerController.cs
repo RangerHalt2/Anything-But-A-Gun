@@ -329,7 +329,7 @@ public class PlayerController : MonoBehaviour
     private void TakeScreenShot()
     {
         bool saveAsJPEG = true;
-        int imageWidth = 1024;
+        int imageWidth = 8192;
         if (Input.GetKeyDown(KeyCode.H))
         {
             byte[] bytes = I360Render.Capture(imageWidth, saveAsJPEG);
