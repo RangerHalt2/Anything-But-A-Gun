@@ -292,10 +292,11 @@ public class Projectile : MonoBehaviour, IWeaponLevel
                 health.TakeDamage(cummulativeDamage, enemyPosition);
             }
             // If projectile is not piercing...
-            if (!piercing && !unique)
+            if (!piercing && !unique && currentBounces >= maxBounces)
             {
                 // Destroy the projectile
                 //Debug.Log("Found the culprit");
+                
                 Destroy(gameObject);
             }
         }

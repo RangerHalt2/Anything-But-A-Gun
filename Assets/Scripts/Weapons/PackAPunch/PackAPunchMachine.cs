@@ -6,6 +6,8 @@ public class PackAPunchMachine : MonoBehaviour, IInteractable
     private int counter = 0;
 
     [SerializeField] private Transform placeWeaponLocation;
+    [SerializeField] private GameObject[] visualSparks;
+
 
     private WeaponHandler wh;
     private WeaponClass wc;
@@ -46,6 +48,10 @@ public class PackAPunchMachine : MonoBehaviour, IInteractable
             if (counter == numOfUses)
             {
                 canInteract = false;
+                foreach (GameObject obj in visualSparks)
+                {
+                    obj.SetActive(false);
+                }
             }
         }
     }
