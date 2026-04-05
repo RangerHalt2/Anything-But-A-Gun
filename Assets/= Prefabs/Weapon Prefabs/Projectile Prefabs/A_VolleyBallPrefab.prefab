@@ -94,12 +94,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Projectile
   speed: 30
+  useCustomMortar: 0
+  customGravity: 20
+  launchAngle: 45
   lifeTime: 5
   teamID: 0
-  baseDamage: 22
+  baseDamage: 75
   growthRate: 1.15
   canCrit: 0
   critMult: 2
+  externalDmgMod: 1
   nonlethal: 0
   piercing: 0
   unique: 0
@@ -114,6 +118,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: cf7f32caeae06e44fb447aa606f2ae76, type: 3}
   - {fileID: 8300000, guid: f20f8f9c9bc1e0547b650ae0d3087cc4, type: 3}
   spikedExplosionVFX: {fileID: 8428204072777953739, guid: b3e9719e5c491ad4f83a2e0b696463bb, type: 3}
+  enemyPosition: {fileID: 0}
 --- !u!54 &5258742335422185819
 Rigidbody:
   m_ObjectHideFlags: 0
