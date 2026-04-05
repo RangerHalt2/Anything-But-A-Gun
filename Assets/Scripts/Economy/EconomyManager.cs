@@ -32,9 +32,9 @@ public class EconomyManager : MonoBehaviour
         {
             // Deduct the Spent PTO from the player's total
             PTOAmount -= spentPTO;
+            GameEvent.spendPTO?.Invoke();
             // Return true
             return true;
         }
-        
     }
 }

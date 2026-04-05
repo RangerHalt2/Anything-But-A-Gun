@@ -6,6 +6,7 @@ public class SceneController : MonoBehaviour
 {
     //Dynamic Scene Naming capabilities
     [SerializeField] private string MainMenu = "";
+    [SerializeField] private LoadingScene loader;
 
     void Start()
     {
@@ -20,11 +21,13 @@ public class SceneController : MonoBehaviour
 
     public void GoToScene(String sceneName)
     {
+        loader.LoadScene(sceneName);
         SceneManager.LoadScene(sceneName);
     }
 
     public void GoToMainMenu()
     {
+        loader.LoadScene("TitleScreen");
         SceneManager.LoadScene(MainMenu);
     }
 

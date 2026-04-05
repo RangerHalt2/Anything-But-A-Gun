@@ -9,8 +9,10 @@ public class WeaponChest : MonoBehaviour, IInteractable
     private bool weaponsSpawned = false;
 
     [Header("Spawn Count")]
-    [Tooltip("How many weapons will spawn when the chest is opened.")]
-    [SerializeField] private int numberOfWeaponsToSpawn = 3;
+    [Tooltip("How many weapons will spawn when the chest is opened normally.")]
+    [SerializeField] private int numberOfWeaponsToSpawn = 2;
+    [Tooltip("How many weapons will spawn when the chest is opened with the Crunch Culture Achievement unlocked.")]
+    [SerializeField] private int numberOfExtraWeaponsToSpawn = 3;
 
     [Header("Probability Settings")]
     [Tooltip("The weighted chance of a spawned weapon being taken from the common weapons pool.")]
@@ -40,6 +42,8 @@ public class WeaponChest : MonoBehaviour, IInteractable
     private int maxWeaponLevel;
 
     [Header("DEBUG")]
+    [Tooltip("Determnies whether or not this is the starter chest.")]
+    [SerializeField] private bool starterChest = false;
     [Tooltip("Overrides the player's level with the specified integer. If value is -1, then the player's actual level will be read")]
     [Range(-1, 10)][SerializeField] private int playerLevelOverride = -1;
     [SerializeField] private bool forceSpawn = true;
@@ -63,6 +67,11 @@ public class WeaponChest : MonoBehaviour, IInteractable
             maxWeaponLevel = playerLevelOverride;
         }
 
+        if (AchievementManager.Instance.CheckAchivementStatus("wave_master"))
+        {
+            numberOfWeaponsToSpawn = numberOfExtraWeaponsToSpawn;
+        }
+
         SpawnWeapons();
     }
 
@@ -71,7 +80,7 @@ public class WeaponChest : MonoBehaviour, IInteractable
         if (AchievementManager.Instance != null)
         {
             // If the player has not obtained the achievement Nine-To-Five (ID: beat_first_level) and the promotion is not set to be force spawned
-            if (!AchievementManager.Instance.CheckAchivementStatus("modify_weapon") && !forceSpawn)
+            if (!AchievementManager.Instance.CheckAchivementStatus("beat_first_level") && !forceSpawn)
             {
                 DestroySpawnedWeapons();
 

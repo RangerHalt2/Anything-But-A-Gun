@@ -6,6 +6,7 @@ using TMPro;
 //Script created By Anthony Mota
 public class TitlePage : MonoBehaviour 
 {
+    [SerializeField] private LoadingScene loader;
 
     public void PlayGame ()
     {
@@ -22,7 +23,7 @@ public class TitlePage : MonoBehaviour
 
         GameEvent.RunStarted?.Invoke();
 
-        SceneManager.LoadScene("Level Gen 2");
+        loader.LoadScene("Level Gen 2");
         Destroy(canvas);
     }
     public void QuitGame()

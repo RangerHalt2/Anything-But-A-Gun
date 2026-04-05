@@ -171,6 +171,7 @@ public class AchievementManager : MonoBehaviour
         GameEvent.OnEnemyKilled += HandleEnemyKill;
         GameEvent.OnWeaponModified += HandlePromotion;
         GameEvent.StyleMaxxed += HandleStyleMaxxed;
+        GameEvent.spendPTO += HandleConsumerism;
     }
 
     private void OnDisable()
@@ -187,6 +188,11 @@ public class AchievementManager : MonoBehaviour
 
         if (levelID == "lab")
             UnlockAchievement("beat_second_level");
+
+        if (CareerDataRecorder.Instance.GetLevelsCompleted() + RunDataRecorder.Instance.GetLevelsCompleted() >= 5)
+        {
+            UnlockAchievement("wave_master");
+        }
     }
 
     void HandleEnemyKill()
@@ -202,6 +208,11 @@ public class AchievementManager : MonoBehaviour
     void HandleStyleMaxxed()
     {
         UnlockAchievement("max_style");
+    }
+
+    void HandleConsumerism()
+    {
+        UnlockAchievement("consumer");
     }
     #endregion
     #endregion

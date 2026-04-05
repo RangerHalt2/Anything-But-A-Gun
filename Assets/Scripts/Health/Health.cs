@@ -387,6 +387,7 @@ public class Health : MonoBehaviour
 
         // Set player's max health based on the amount of achievements
         setMaxHealth(initialMaxHealth + bonusHealth, true);
+        healthBar.SetMaxHealth(maxHealth);
     }
     #endregion
 
