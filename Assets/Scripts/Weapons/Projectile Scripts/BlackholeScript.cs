@@ -22,6 +22,9 @@ public class BlackholeScript : MonoBehaviour, IWeaponLevel
     private float cummulativeDamage;
     [SerializeField] private float teamID = 0;
 
+    private float tick;
+    private float tickTimer;
+
     private WeaponLevel currentWeaponLevel;
 
     void Awake()

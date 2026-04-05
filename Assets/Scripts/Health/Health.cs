@@ -36,6 +36,8 @@ public class Health : MonoBehaviour
     [Header("Effect Settings")]
     [Tooltip("Reference to prefab for an effect which triggers when the object recieves damage. Optional.")]
     public GameObject hitEffect;
+    private float tickTimer;
+    private float tick = 0.1f; //Amount of time between VFX instantiations as a stall.
     [Tooltip("Reference to prefab for an effect which triggers when the object is destroyed. Optional.")]
     public GameObject deathEffect;
 
@@ -119,6 +121,7 @@ public class Health : MonoBehaviour
     void Update()
     {
         damageTimer -= Time.deltaTime;
+        if (tickTimer > 0) {tickTimer -= Time.deltaTime; }
     }
 
     // Applies a certain amount of damage to an object
@@ -156,7 +159,7 @@ public class Health : MonoBehaviour
         }
         else //LB: adding an else to emit particles for just NPCs
         {
-            if(bloodVFX != null)
+            if(bloodVFX != null && tickTimer <= 0)
             {
                 //LB: Takes the percentage interpolates between min and max, ceils into a final integer. Emits the count of particles.
                 float percentage = damageAmount / 100;
@@ -185,8 +188,9 @@ public class Health : MonoBehaviour
         else
         {
             // If a hit effect has been assigned
-            if (hitEffect != null)
+            if (hitEffect != null && tickTimer <= 0)
             {
+                tickTimer = tick;
                 // Play the hit effect for the object
                 Instantiate(hitEffect, transform.position, transform.rotation, null);
             }

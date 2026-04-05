@@ -154,6 +154,17 @@ public class Projectile : MonoBehaviour, IWeaponLevel
         {
             Debug.LogWarning("Projectile: " + gameObject.name + " is missing a rigidbody. Projectile Script cannot function properly without it!");
         }
+
+        int ignoreLayer = LayerMask.NameToLayer("IgnoreNonEnemy");
+        int enemyLayer = LayerMask.NameToLayer("Enemy");
+        for (int i = 0; i < 32; i++)
+        {
+            if (i != enemyLayer)
+            {
+                Physics.IgnoreLayerCollision(ignoreLayer, i, true);
+            }
+        }
+
     }
 
     // Update is called once per frame
