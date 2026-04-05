@@ -193,6 +193,7 @@ GameObject:
   - component: {fileID: 8140062244997518222}
   - component: {fileID: 4526440904185643024}
   - component: {fileID: -533308492436377045}
+  - component: {fileID: 649476409167274763}
   m_Layer: 11
   m_Name: MouseMouse
   m_TagString: Enemy
@@ -502,6 +503,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyType
   enemyId: mouse
+--- !u!114 &649476409167274763
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3695943591121391829}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a57ab42a5795d447bc37dba1fb464a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TimedObjectDestroyer
+  lifeTime: 9
+  thresholdToFade: 2
+  doesFade: 0
 --- !u!1 &6065764785548395232
 GameObject:
   m_ObjectHideFlags: 0

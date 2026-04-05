@@ -695,9 +695,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f39552438ae36da4aac1cd2303b46460, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MouseSpawnerAI
+  agent: {fileID: 0}
+  player: {fileID: 0}
+  whatIsPlayer:
+    serializedVersion: 2
+    m_Bits: 0
+  enemyBulletPrefab: {fileID: 0}
+  firePoint: {fileID: 0}
+  bulletForce: 10
+  patrolRange: 10
+  patrolWaitTime: 2
+  patrolTimer: 0
+  sightRange: 10
+  attackRange: 10
+  timeBetweenAttacks: 2.5
+  alreadyAttacked: 0
+  playerInSightRange: 0
+  playerInAttackRange: 0
+  detectionSprite: {fileID: 0}
+  detectionDisplayTime: 1
+  hasShownDetectionSprite: 0
+  enemyType: 0
+  height: 2
+  animator: {fileID: 0}
   enemyPrefabs:
   - {fileID: 3695943591121391829, guid: 207981f09de688a4481a8653d192e66b, type: 3}
-  spawnInterval: 3.5
+  spawnInterval: 3
   spawnPoint: {fileID: 6743008390126461033}
 --- !u!114 &3787569392080643853
 MonoBehaviour:
