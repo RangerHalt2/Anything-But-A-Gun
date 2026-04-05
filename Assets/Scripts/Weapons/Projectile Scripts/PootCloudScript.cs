@@ -61,15 +61,15 @@ public class PootCloudScript : MonoBehaviour, IWeaponLevel
 
     void OnTriggerStay(Collider _other)
     {
-        // Attempt to reference the health script on the collided object
-        Health health = _other.gameObject.GetComponentInParent<Health>();
+         // Attempt to reference the health script on the collided object
+         Health health = _other.gameObject.GetComponentInParent<Health>();
 
-        // If the object has a health script
-        if (health != null && health.gameObject.tag != "Player")
-        {
-            // Deal damage to targets health equal to projectile's damage
-            health.TakeDamage(cummulativeDamage * Time.deltaTime, this.transform);
-        }
+         // If the object has a health script
+         if (health != null && health.gameObject.tag != "Player")
+         {
+             // Deal damage to targets health equal to projectile's damage
+             health.TakeDamage(cummulativeDamage * Time.deltaTime, this.transform);
+         }
     }
 
     //LB: Updates the weapon's damage for what damage it should do.
