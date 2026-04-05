@@ -1,4 +1,5 @@
 using System.Collections;
+using System.IO;
 using TMPro;
 using UnityEngine;
 
@@ -136,7 +137,7 @@ public class PlayerController : MonoBehaviour
         return PlayerPrefs.GetFloat("sensitivity", 0.1f);
         // 1.0f is default if no value exists
     }
-
+    #region Movement Handling
     private void Move(Vector2 MovementVector)
     {
         //Default Base Case
@@ -219,6 +220,24 @@ public class PlayerController : MonoBehaviour
         canDash = true;
     }
 
+    public int Dashes
+    {
+        get { return dashes; }
+        set
+        {
+            if (dashes != value)
+            {
+                dashes = Mathf.Clamp(value, 0, maxDashLimit);
+
+                if (onDashChangedCallback != null)
+                {
+                    onDashChangedCallback.Invoke();
+                }
+            }
+        }
+    }
+
+    #endregion
     // Update is called once per frame     UPDATED BY JAIME AND RYAN 11/3/25
     void Update()
     {
@@ -292,6 +311,8 @@ public class PlayerController : MonoBehaviour
             Interact();
         }
 
+        TakeScreenShot();
+
         TimerDecrement();
     }
 
@@ -305,29 +326,29 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public int Dashes 
+    private void TakeScreenShot()
     {
-        get { return dashes; }
-        set
+        bool saveAsJPEG = true;
+        int imageWidth = 1024;
+        if (Input.GetKeyDown(KeyCode.H))
         {
-            if (dashes != value)
+            byte[] bytes = I360Render.Capture(imageWidth, saveAsJPEG);
+            if (bytes != null)
             {
-                dashes = Mathf.Clamp(value, 0, maxDashLimit);
-
-                if (onDashChangedCallback != null)
-                {
-                    onDashChangedCallback.Invoke();
-                }
+                string path = Path.Combine(Application.dataPath, "Scripts/Player/360Captures", "360render" + (saveAsJPEG ? ".jpeg" : ".png"));
+                File.WriteAllBytes(path, bytes);
+                Debug.Log("360 render saved to " + path);
             }
         }
     }
+
 
     //LB: Any and all future timers for the player will be managed in this area
     private void TimerDecrement()
     {
 
     }
-    
+    #region Interactions
     // RL: This code shoots a raycast to allow the player to interact with objects using the IInteractable interace
     private void Interact()
     {
@@ -414,7 +435,7 @@ public class PlayerController : MonoBehaviour
             interactionText.gameObject.SetActive(false);
         }
     }
-
+    #endregion
     // RL: Code related to achievments and meta-progression
     #region Achievement Code
     private void OnEnable()
