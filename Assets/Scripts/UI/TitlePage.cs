@@ -25,7 +25,7 @@ public class TitlePage : MonoBehaviour
 
         GameEvent.RunStarted?.Invoke();
 
-        loader.LoadScene("Level Gen 2");
+        loader.LoadScene("Level Gen 5");
         Destroy(canvas);
     }
     public void QuitGame()
