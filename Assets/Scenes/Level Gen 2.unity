@@ -136,7 +136,7 @@ GameObject:
   - component: {fileID: 253086061}
   - component: {fileID: 253086063}
   - component: {fileID: 253086064}
-  - component: {fileID: 253086065}
+  - component: {fileID: 253086066}
   m_Layer: 0
   m_Name: Manager
   m_TagString: Untagged
@@ -197,8 +197,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SceneController
   MainMenu: 
-  loader: {fileID: 253086065}
---- !u!114 &253086065
+  loader: {fileID: 0}
+--- !u!114 &253086066
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -207,11 +207,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 253086060}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2ebbc1526bfb4f0448bda6a6a07a4d0d, type: 3}
+  m_Script: {fileID: 11500000, guid: 08c08af89cc140d48a133d9ac5152871, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::LoadingScene
-  LoadingScreen: {fileID: 2096500768}
-  LoadingBarSlider: {fileID: 583120970}
+  m_EditorClassIdentifier: Assembly-CSharp::LevelStarted
 --- !u!1001 &266335554
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1496,6 +1494,14 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7747305900606444660, guid: caa24201197b26b479e66c072d7d3e13, type: 3}
+      propertyPath: LoadingScreen
+      value: 
+      objectReference: {fileID: 1363491729}
+    - target: {fileID: 7747305900606444660, guid: caa24201197b26b479e66c072d7d3e13, type: 3}
+      propertyPath: LoadingBarSlider
+      value: 
+      objectReference: {fileID: 1144103049}
     - target: {fileID: 7950325452483264388, guid: caa24201197b26b479e66c072d7d3e13, type: 3}
       propertyPath: m_LocalScale.x
       value: 1.664623
@@ -1935,17 +1941,6 @@ RectTransform:
   m_AnchoredPosition: {x: -5, y: 0}
   m_SizeDelta: {x: -20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &583120970 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 979748642995820315, guid: caa24201197b26b479e66c072d7d3e13, type: 3}
-  m_PrefabInstance: {fileID: 266335554}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Slider
 --- !u!1 &636112969 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6120725345040969484, guid: caa24201197b26b479e66c072d7d3e13, type: 3}
@@ -2454,6 +2449,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1089400786}
   m_CullTransparentMesh: 1
+--- !u!114 &1144103049 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 979748642995820315, guid: caa24201197b26b479e66c072d7d3e13, type: 3}
+  m_PrefabInstance: {fileID: 266335554}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Slider
 --- !u!1 &1217305674
 GameObject:
   m_ObjectHideFlags: 0
@@ -2673,6 +2679,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1363491729 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8710392009058814453, guid: caa24201197b26b479e66c072d7d3e13, type: 3}
+  m_PrefabInstance: {fileID: 266335554}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1414676961
 GameObject:
   m_ObjectHideFlags: 0
@@ -3899,11 +3910,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: -20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!1 &2096500768 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8710392009058814453, guid: caa24201197b26b479e66c072d7d3e13, type: 3}
-  m_PrefabInstance: {fileID: 266335554}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

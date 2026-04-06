@@ -33,11 +33,6 @@ public class PidgeonProjectile : MonoBehaviour
         if (enemyHealth != null)
             pidgeonAOEScript.followingTarget = true;
 
-        if (promotion == typeof(P_Prolonged))
-        {
-            pidgeonAOE.AddComponent<P_Prolonged>();
-        }
-
         pidgeonAOEScript.SetWeaponLevelReference(weaponLevelRef);
         Destroy(gameObject);
     }

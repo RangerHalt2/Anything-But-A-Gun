@@ -60,7 +60,7 @@ public class Projectile : MonoBehaviour, IWeaponLevel
     // How many times the projectile has bounced
     private int currentBounces = 0;
     //LB: Adding a cooldown on how often the ball can bounce, just by a fraction of a second
-    private float bounceCooldown = 0.2f;
+    private float bounceCooldown = 0.1f;
     private float bounceTimer = 0;
     [Space]
     [Tooltip("Determines whether the projectile will be effected by gravity.")]
@@ -165,13 +165,14 @@ public class Projectile : MonoBehaviour, IWeaponLevel
             }
         }
 
+        Physics.IgnoreLayerCollision(LayerMask.NameToLayer("Ignore Raycast"), LayerMask.NameToLayer("Projectile"));
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (bounceTimer > 0)
-            bounceTimer -= Time.deltaTime;
+        bounceTimer -= Time.deltaTime;
         ricochetTimer -= Time.deltaTime;
     }
 
@@ -312,7 +313,14 @@ public class Projectile : MonoBehaviour, IWeaponLevel
     #region Special Properties
    private void SimulateRicochet(Collision collision)
     {
-        if (bounceTimer > 0) return;
+        if (bounceTimer > 0)
+        {
+            Debug.Log("PROJECTILE - BOUNCE TIMER IS GREATER THAN 0");
+            return;
+        }
+
+
+        Debug.Log("PROJECTILE - Current Bounce Count: " + currentBounces);
 
         // If the projectile has reached its max bounces...
         if (currentBounces >= maxBounces)
@@ -351,11 +359,12 @@ public class Projectile : MonoBehaviour, IWeaponLevel
         if(ricochetSFX.Length > 0)
         {
             Debug.Log("attempt to play SFX");
-            SoundEffectsManager.instance.PlayRandomSoundEffectClip(ricochetSFX, transform, 1f);
+            // SoundEffectsManager.instance.PlayRandomSoundEffectClip(ricochetSFX, transform, 1f);
         }
 
         // Increment current bounces
         currentBounces++;
+        if(currentBounces >= maxBounces) { Destroy(gameObject); return; }
         // Reset the bounce timer
         bounceTimer = bounceCooldown;
     }

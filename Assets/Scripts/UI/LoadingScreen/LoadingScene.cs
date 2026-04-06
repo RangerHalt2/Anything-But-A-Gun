@@ -8,6 +8,13 @@ public class LoadingScene : MonoBehaviour
     public GameObject LoadingScreen;
     public Slider LoadingBarSlider;
 
+    private void Start()
+    {
+        if (LoadingScreen == null)
+            LoadingScreen = GameObject.FindAnyObjectByType<LoadingScene>().gameObject;
+
+    }
+
     public void LoadScene(string sceneName)
     {
         StartCoroutine(LoadSceneAsync(sceneName));

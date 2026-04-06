@@ -55,7 +55,7 @@ public class AirFrierScript : WeaponClass
         components = acceptablePackAPunchOptions.Select(t => t.GetTypeSafe()).ToArray();
     }
 
-    private void Update() 
+    private new void Update() 
     {
         if (totalGauge == null)
         {

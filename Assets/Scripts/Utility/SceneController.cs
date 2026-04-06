@@ -10,7 +10,8 @@ public class SceneController : MonoBehaviour
 
     void Start()
     {
-        
+        if (loader == null)
+            loader = GameObject.FindAnyObjectByType<LoadingScene>();
     }
 
     // Closes out of the application
