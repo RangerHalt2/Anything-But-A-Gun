@@ -6,12 +6,19 @@ using TMPro;
 //Script created By Anthony Mota
 public class TitlePage : MonoBehaviour 
 {
+
     [SerializeField] private LoadingScene loader;
+
+    private void Update()
+    {
+        if(loader == null)
+        {
+            loader = GameObject.FindAnyObjectByType<LoadingScene>();
+        }
+    }
 
     public void PlayGame ()
     {
-        Time.timeScale = 0f;
-        CleanupDontDestroyOnLoad.DestroyAllDontDestroyOnLoad();
         PlayerController controller = GameObject.FindAnyObjectByType<PlayerController>();
         if(controller != null)
         {
@@ -21,12 +28,11 @@ public class TitlePage : MonoBehaviour
         GameEvent.RunEnded?.Invoke();
 
         GameObject canvas = GameObject.Find("Master Canvas");
-        
-
+       
         GameEvent.RunStarted?.Invoke();
 
         loader.LoadScene("Level Gen 5");
-        Destroy(canvas);
+        CleanupDontDestroyOnLoad.DestroyAllDontDestroyOnLoad();
     }
     public void QuitGame()
     {

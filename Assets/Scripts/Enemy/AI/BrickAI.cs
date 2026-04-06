@@ -17,7 +17,8 @@ public class BrickAI : EnemyClass
 
     private void Awake()
     {
-        player = GameObject.FindWithTag("Player").transform;
+        if(GameObject.FindWithTag("Player") != null)
+            player = GameObject.FindWithTag("Player").transform;
         agent = GetComponent<NavMeshAgent>();
         agent.autoTraverseOffMeshLink = true;
 

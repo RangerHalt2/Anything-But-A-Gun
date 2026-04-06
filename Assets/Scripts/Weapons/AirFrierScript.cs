@@ -59,8 +59,10 @@ public class AirFrierScript : WeaponClass
     {
         if (totalGauge == null)
         {
-            totalGauge = GameObject.Find("In-Game UI").GetComponent<WeaponChargeIdentifier>().weaponCharge;
-            cookFill = totalGauge.transform.Find("Fill").GetComponent<Image>();
+            if(GameObject.Find("In-Game UI") != null && GameObject.Find("In-Game UI").GetComponent<WeaponChargeIdentifier>() != null)
+                totalGauge = GameObject.Find("In-Game UI").GetComponent<WeaponChargeIdentifier>().weaponCharge;
+            if(totalGauge != null && totalGauge.transform.Find("Fill") != null)
+                cookFill = totalGauge.transform.Find("Fill").GetComponent<Image>();
         }
 
         float fillPercent = Mathf.Clamp01(cookTime / maxCookTime);

@@ -105,8 +105,12 @@ public class LaserScript : WeaponClass
     {
         if (totalGauge == null)
         {
-            totalGauge = GameObject.Find("In-Game UI").GetComponent<WeaponChargeIdentifier>().weaponCharge;
-            heatFill = totalGauge.transform.Find("Fill").GetComponent<Image>();
+            if(GameObject.Find("In-Game UI") != null && GameObject.Find("In-Game UI").GetComponent<WeaponChargeIdentifier>() != null)
+            {
+                totalGauge = GameObject.Find("In-Game UI").GetComponent<WeaponChargeIdentifier>().weaponCharge;
+                if(totalGauge.transform.Find("Fill") != null)
+                    heatFill = totalGauge.transform.Find("Fill").GetComponent<Image>();
+            }
         }
 
         float fillPercent = Mathf.Clamp01(currentHeat / overheatAmount);

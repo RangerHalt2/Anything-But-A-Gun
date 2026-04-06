@@ -10,8 +10,12 @@ public class LoadingScene : MonoBehaviour
 
     private void Start()
     {
-        if (LoadingScreen == null)
-            LoadingScreen = GameObject.FindAnyObjectByType<LoadingScene>().gameObject;
+        if (LoadingScreen == null && GameObject.FindAnyObjectByType<LoadingIndicator>() != null)
+            LoadingScreen = GameObject.FindAnyObjectByType<LoadingIndicator>().gameObject;
+        if(LoadingBarSlider == null && GameObject.FindAnyObjectByType<LoadingBarIndicator>() != null)
+        {
+            LoadingBarSlider = GameObject.FindAnyObjectByType<LoadingBarIndicator>().GetComponent<Slider>();
+        }
 
     }
 
@@ -22,6 +26,7 @@ public class LoadingScene : MonoBehaviour
 
     private IEnumerator LoadSceneAsync(string sceneName)
     {
+        string previousScene = SceneManager.GetActiveScene().name;
         AsyncOperation operation = SceneManager.LoadSceneAsync(sceneName);
         operation.allowSceneActivation = false;
 
@@ -43,7 +48,16 @@ public class LoadingScene : MonoBehaviour
 
             yield return null;
         }
-
-        LoadingScreen.SetActive(false);
+        if (transform.root.gameObject.GetComponent<UIManager>() != null && previousScene != "Level Gen 5")
+        {
+            Debug.Log("LOADING SCENE - Previous Scene" + previousScene);
+            UIManager manager = transform.root.gameObject.GetComponent<UIManager>();
+            manager.GoToPage(0);
+            LoadingScreen.SetActive(false);
+        }
+        else
+        {
+            LoadingScreen.SetActive(false);
+        }
     }
 }

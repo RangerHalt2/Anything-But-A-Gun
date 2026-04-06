@@ -10,7 +10,7 @@ public class MovePlayerHolder : MonoBehaviour
         Debug.LogWarning("Code Started; Attempting to Find Player Holder");
         PlayerController controller = GameObject.FindAnyObjectByType<PlayerController>();
         if (controller != null)
-        {
+        {   
             Debug.LogWarning("Player Holder FOUND");
             StartCoroutine(LateStart(controller));
         }
@@ -36,5 +36,12 @@ public class MovePlayerHolder : MonoBehaviour
         playerHolder.position = transform.position;
         cc.enabled = true;
         controller.isSpawned = true;
+
+        if(GameObject.FindAnyObjectByType<LoadingIndicator>() != null)
+        {
+            GameObject loadingScreen = GameObject.FindAnyObjectByType<LoadingIndicator>().gameObject;
+            loadingScreen.SetActive(false);
+        }
+
     }
 }
