@@ -101,7 +101,7 @@ public class LaserScript : WeaponClass
         }
     }*/
 
-    private void Update()
+    private new void Update()
     {
         if (totalGauge == null)
         {

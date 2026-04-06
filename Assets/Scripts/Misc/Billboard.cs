@@ -18,8 +18,9 @@ public class Billboard : MonoBehaviour {
 
   // Use Late update so everything should have finished moving.
   void LateUpdate() {
-    // There are two ways people billboard things.
-    switch (billboardType) {
+        // There are two ways people billboard things.
+      if (Camera.main == null) return;
+      switch (billboardType) {
       case BillboardType.LookAtCamera:
         transform.LookAt(Camera.main.transform.position, Vector3.up);
         break;

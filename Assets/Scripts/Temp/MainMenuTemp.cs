@@ -10,6 +10,7 @@ public class MainMenuTemp : MonoBehaviour
 
         Destroy(canvas);
         Destroy(player);
+
     }
 
 }

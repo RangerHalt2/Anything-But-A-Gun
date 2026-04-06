@@ -10,6 +10,8 @@ public class TitlePage : MonoBehaviour
 
     public void PlayGame ()
     {
+        Time.timeScale = 0f;
+        CleanupDontDestroyOnLoad.DestroyAllDontDestroyOnLoad();
         PlayerController controller = GameObject.FindAnyObjectByType<PlayerController>();
         if(controller != null)
         {
