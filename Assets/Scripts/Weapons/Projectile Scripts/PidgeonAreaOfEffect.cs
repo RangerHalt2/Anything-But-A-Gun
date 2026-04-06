@@ -2,16 +2,12 @@ using UnityEngine;
 
 public class PidgeonAreaOfEffect : MonoBehaviour, IWeaponLevel
 {
-    public float targetScale = 5.0f; // Max projectile growth
-    public float growthSpeed = 0.65f; // How fast the projectile grows per second
 
-    private Vector3 initialScale;
-    private bool growing = true;
 
-    public float cloudTimer;
     [SerializeField] private float baseDamage;
-    [SerializeField] private float maxDamage;
-    [SerializeField] private float growthRate;
+    [SerializeField] private LayerMask whatIsEnemy;
+    [SerializeField] private float radius;
+    [SerializeField] private float timer;
     private float cummulativeDamage;
 
     public bool followingTarget = false;
@@ -20,7 +16,7 @@ public class PidgeonAreaOfEffect : MonoBehaviour, IWeaponLevel
 
     void Awake()
     {
-        initialScale = transform.localScale;
+        Invoke("Explode", timer);
     }
 
     public void SetWeaponLevelReference(WeaponLevel weaponLevel)
@@ -29,36 +25,22 @@ public class PidgeonAreaOfEffect : MonoBehaviour, IWeaponLevel
         if (currentWeaponLevel != null) UpdateLevelDamage();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Explode()
     {
-        cloudTimer -= 1 * Time.deltaTime;
-
-        if (cloudTimer < 0)
+        Collider[] enemies = Physics.OverlapSphere(transform.position, radius, whatIsEnemy);
+        foreach (Collider other in enemies)
         {
-            Destroy(gameObject);
-        }
-
-        if (growing)
-        {
-            Vector3 newScale = transform.localScale;
-
-            // Increase scale gradually
-            newScale.x += growthSpeed * Time.deltaTime;
-            newScale.y += growthSpeed * Time.deltaTime;
-            newScale.z += growthSpeed * Time.deltaTime;
-
-            transform.localScale = newScale;
-
-            baseDamage = (maxDamage / 1) * (1 / (transform.localScale.x / initialScale.x));
-
-            // Stop growing when target scale is reached
-            if (transform.localScale.x >= initialScale.x * targetScale)
+            Health health = other.gameObject.GetComponentInParent<Health>();
+            if(health == null)
+                health = other.gameObject.GetComponentInChildren<Health>();
+            // If the object has a health script
+            if (health != null && health.gameObject.tag != "Player")
             {
-                growing = false;
+                // Deal damage to targets health equal to projectile's damage
+                health.TakeDamage(baseDamage, this.transform);
             }
         }
-
+        Destroy(gameObject);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -79,22 +61,10 @@ public class PidgeonAreaOfEffect : MonoBehaviour, IWeaponLevel
         followingTarget = true;
     }
 
-    void OnTriggerStay(Collider _other)
-    {
-        // Attempt to reference the health script on the collided object
-        Health health = _other.gameObject.GetComponentInParent<Health>();
-
-        // If the object has a health script
-        if (health != null && health.gameObject.tag != "Player")
-        {
-            // Deal damage to targets health equal to projectile's damage
-            health.TakeDamage(cummulativeDamage * Time.deltaTime, this.transform);
-        }
-    }
-
     //LB: Updates the weapon's damage for what damage it should do.
+    //LB: This function is now Deprecated and should no longer be used while it's being removed
     public void UpdateLevelDamage()
     {
-        cummulativeDamage = baseDamage * Mathf.Pow(growthRate, currentWeaponLevel.Level);
+        //cummulativeDamage = baseDamage * Mathf.Pow(growthRate, currentWeaponLevel.Level);
     }
 }
