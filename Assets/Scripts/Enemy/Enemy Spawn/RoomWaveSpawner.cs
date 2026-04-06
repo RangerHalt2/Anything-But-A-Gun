@@ -122,7 +122,7 @@ public class RoomWaveSpawner : MonoBehaviour
             foreach (GameObject objs in healthPackRewards)
             {
                 if(objs != null)
-                    objs.gameObject.SetActive(!locked_doors);
+                    objs.gameObject.SetActive(true);
             }
         }
 
