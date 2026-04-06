@@ -136,7 +136,6 @@ GameObject:
   - component: {fileID: 253086061}
   - component: {fileID: 253086063}
   - component: {fileID: 253086064}
-  - component: {fileID: 253086065}
   m_Layer: 0
   m_Name: Manager
   m_TagString: Untagged
@@ -197,21 +196,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SceneController
   MainMenu: 
-  loader: {fileID: 253086065}
---- !u!114 &253086065
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 253086060}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2ebbc1526bfb4f0448bda6a6a07a4d0d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::LoadingScene
-  LoadingScreen: {fileID: 2096500768}
-  LoadingBarSlider: {fileID: 583120970}
+  loader: {fileID: 1063998674}
 --- !u!1001 &266335554
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -320,6 +305,10 @@ PrefabInstance:
       propertyPath: cheat
       value: 
       objectReference: {fileID: 2071142369}
+    - target: {fileID: 534235109909670146, guid: caa24201197b26b479e66c072d7d3e13, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 579397576798918672, guid: caa24201197b26b479e66c072d7d3e13, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -10.650085
@@ -862,7 +851,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4622185018303109548, guid: caa24201197b26b479e66c072d7d3e13, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4626257494119394054, guid: caa24201197b26b479e66c072d7d3e13, type: 3}
       propertyPath: m_Name
@@ -1576,6 +1565,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -3.0999985
       objectReference: {fileID: 0}
+    - target: {fileID: 8710392009058814453, guid: caa24201197b26b479e66c072d7d3e13, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8751972850385165542, guid: caa24201197b26b479e66c072d7d3e13, type: 3}
       propertyPath: m_text
       value: Achievments
@@ -2286,6 +2279,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3dcbd68ea8c8e54697730e2e7987d03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TokenCheat
+--- !u!114 &1063998674 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7747305900606444660, guid: caa24201197b26b479e66c072d7d3e13, type: 3}
+  m_PrefabInstance: {fileID: 266335554}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ebbc1526bfb4f0448bda6a6a07a4d0d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LoadingScene
 --- !u!1 &1089400786
 GameObject:
   m_ObjectHideFlags: 0
@@ -3998,11 +4002,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.3672643, y: 2.7225976, z: 0.12069689}
   m_Center: {x: -0.68363094, y: 0.030193985, z: 0.00044994822}
---- !u!1 &2096500768 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8710392009058814453, guid: caa24201197b26b479e66c072d7d3e13, type: 3}
-  m_PrefabInstance: {fileID: 266335554}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
