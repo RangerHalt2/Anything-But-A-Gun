@@ -72,7 +72,8 @@ public class Hitscan : MonoBehaviour, IWeaponLevel
     // Update is called once per frame
     void Update()
     {
-
+        if(bulletSpawnPoint == null)
+            bulletSpawnPoint = GameObject.FindAnyObjectByType<Camera>().transform;
     }
 
     public void Shoot()

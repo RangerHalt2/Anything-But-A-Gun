@@ -6,6 +6,11 @@ public class LevelStarted : MonoBehaviour
     void Start()
     {
         Time.timeScale = 1f;
+        PlayerController playerController = GameObject.FindAnyObjectByType<PlayerController>();
+        if (playerController != null)
+        {
+            playerController.isSpawned = true;
+        }
 
     }
 }
