@@ -37,6 +37,7 @@ public class PidgeonAreaOfEffect : MonoBehaviour, IWeaponLevel
             if (health != null && health.gameObject.tag != "Player")
             {
                 // Deal damage to targets health equal to projectile's damage
+                Debug.Log("PIDGEON AREA OF EFFECT - Dealing Damage to this chud");
                 health.TakeDamage(baseDamage, this.transform);
             }
         }
@@ -46,10 +47,10 @@ public class PidgeonAreaOfEffect : MonoBehaviour, IWeaponLevel
     private void OnTriggerEnter(Collider other)
     {
         if (followingTarget) return; //If following target the rest is unnecessary
-        Health enemyHealth = other.gameObject.GetComponentInParent<Health>();
+        Health enemyHealth = other.transform.root.GetComponentInParent<Health>();
         if (enemyHealth == null)
         {
-            enemyHealth = other.gameObject.GetComponentInChildren<Health>();
+            enemyHealth = other.transform.root.GetComponentInChildren<Health>();
         }
         if (enemyHealth == null || enemyHealth.teamID == 0)
         {
@@ -57,7 +58,8 @@ public class PidgeonAreaOfEffect : MonoBehaviour, IWeaponLevel
             return; //If no enemy, or the health found is the player's
         }
 
-        this.gameObject.transform.SetParent(other.gameObject.transform, false);
+        Debug.Log("PIDGEON AREA OF EFFECT - The enemy has been assigned their own pidgeon bomb");
+        this.gameObject.transform.SetParent(other.gameObject.transform, true);
         followingTarget = true;
     }
 
