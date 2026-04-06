@@ -23,6 +23,8 @@ public class EndingGrade : MonoBehaviour
     public GameObject yourScoreObject;
     public TextMeshProUGUI yourScoreText;
 
+    public string letterGrade;
+    public TextMeshProUGUI letterGradeText;
     public GameObject letterGradeObject;
 
     public GameObject buttonGroupObject;
@@ -58,6 +60,37 @@ public class EndingGrade : MonoBehaviour
 
         // Calculate Ending Score
         tempScore = (totalEnemiesKilled * 100) + (endingLevel * 2000);
+
+        // Calculate Ending Grade (added by Aaron)
+        if (tempScore >= 2000)
+        {
+            if (tempScore >= 4000)
+            {
+                if (tempScore >= 6000)
+                {
+                    if (tempScore >= 8000)
+                    {
+                        letterGrade = "A";
+                    }
+                    else
+                    {
+                        letterGrade = "B";
+                    }
+                }
+                else
+                {
+                    letterGrade = "C";
+                }
+            }
+            else
+            {
+                letterGrade = "D";
+            }
+        }
+        else
+        {
+            letterGrade = "F";
+        }
 
         // Set ending Score to the appropriate Value
         endingScore = tempScore;
@@ -97,6 +130,7 @@ public class EndingGrade : MonoBehaviour
         }
 
         yield return new WaitForSecondsRealtime(0.5f);
+        letterGradeText.text = letterGrade;
         letterGradeObject.SetActive(true);
         if (textWritingSFX != null)
             Instantiate(letterGradeSFX, transform.position, transform.rotation, null);
