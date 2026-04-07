@@ -112,11 +112,16 @@ public class MovePlayerHolder : MonoBehaviour
             playerHealth.updateDisplay();
             Debug.Log("MOVE PLAYER HOLDER - Reset the Health");
 
-            AmmoManager am = GameObject.FindAnyObjectByType<AmmoManager>();
-            if(am != null)
+            WeaponHandler wh = GameObject.FindAnyObjectByType<WeaponHandler>();
+            if(wh != null)
             {
-                am.updateDisplay();
+                AmmoManager am = wh.currentWeapon.GetComponent<AmmoManager>();
+                if (am != null)
+                {
+                    am.updateDisplay();
+                }
             }
+            
 
         }
 

@@ -259,6 +259,7 @@ public class Health : MonoBehaviour
             // Set current health to max health
             currentHealth = maxHealth;
         }
+        updateDisplay();
     }
 
     public void Die()
@@ -385,7 +386,8 @@ public class Health : MonoBehaviour
     #region MetaProgression
     private void OnEnable()
     {
-        GameEvent.OnAchivementEarned += ApplyAchievementHealthIncreases;
+        if(isPlayer)
+            GameEvent.OnAchivementEarned += ApplyAchievementHealthIncreases;
     }
     public void ApplyAchievementHealthIncreases()
     {
@@ -420,8 +422,11 @@ public class Health : MonoBehaviour
         }
 
         // Set player's max health based on the amount of achievements
+        Debug.Log("HEALTH - new max health will be: " + (initialMaxHealth + bonusHealth));
         setMaxHealth(initialMaxHealth + bonusHealth, false);
+        Debug.Log("HEALTH - max health is: " + maxHealth + " and the should be max health is: " + (initialMaxHealth + bonusHealth));
         healthBar.SetMaxHealth(maxHealth);
+        updateDisplay();
     }
     #endregion
 

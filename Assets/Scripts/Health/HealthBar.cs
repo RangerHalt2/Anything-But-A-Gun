@@ -18,8 +18,12 @@ public class HealthBar : MonoBehaviour
 
     public void SetMaxHealth(float health)
     {
+        float fillAmount = fill.fillAmount;
+        float currHealth = fillAmount * maxHealth;
         maxHealth = health;
-        SetHealth(health);
+        Debug.Log("HEALTH BAR - Max Health is: " + maxHealth);
+        Debug.Log("HEALTH BAR - Curr Health is: " + currHealth);
+        SetHealth(currHealth);
 
         // Update Color
         fill.color = gradient.Evaluate(1f);
