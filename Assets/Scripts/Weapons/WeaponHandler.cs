@@ -211,7 +211,10 @@ public class WeaponHandler : MonoBehaviour
 
                 weapons.Add(addWeapon); //Adds the weapon to the list of weapons available.
                 weaponSlot = weapons.Count - 1;
+                currentWeapon.gameObject.SetActive(false);
                 currentWeapon = weapons[weaponSlot]; //Make the current weapon the new weapon we just added
+                currentWeapon.gameObject.SetActive(true);
+
 
                 // RL: Check if there is a Weapon Transform Manager
                 WeaponTransformManager wtm = currentWeapon.GetComponentInChildren<WeaponTransformManager>();
