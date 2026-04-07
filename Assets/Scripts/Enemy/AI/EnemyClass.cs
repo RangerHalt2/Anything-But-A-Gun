@@ -40,6 +40,12 @@ public class EnemyClass : MonoBehaviour
 
     [SerializeField] protected Animator animator;
 
+    [Header("Money Collectible Related")]
+    // [SerializeField] private GameObject collectible; //Obsolete
+    [SerializeField] private int chanceToGetMoney = 55; // 0-100
+    [SerializeField] private int minGain = 3;
+    [SerializeField] private int maxGain = 5;
+
     public enum EnemyType
     {
         Common,
@@ -144,7 +150,20 @@ public class EnemyClass : MonoBehaviour
 
     public void Die()
     {
+        GivePlayerMoney();
        OnEnemyDeath?.Invoke(this);
+    }
+
+    private void GivePlayerMoney()
+    {
+        int randomGain = UnityEngine.Random.Range(minGain, maxGain);
+        int randomChance = UnityEngine.Random.Range(0, 101);
+
+        if(randomChance <= chanceToGetMoney)
+        {
+            EconomyManager.Instance.PTOAmount += randomGain;
+        }
+
     }
 
 }
