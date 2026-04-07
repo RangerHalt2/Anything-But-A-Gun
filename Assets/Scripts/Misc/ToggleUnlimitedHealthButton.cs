@@ -11,6 +11,7 @@ public class ToggleUnlimitedHealthButton : MonoBehaviour
 
     public void OnClick()
     {
+        cheats = GameObject.FindWithTag("Player").GetComponent<HealthCheats>();
         if (cheats != null) 
         {
             cheats.ToggleCheats();

@@ -12,6 +12,11 @@ public class HealthCheats : MonoBehaviour
 
     public void ToggleCheats() //Toggling unlimited health and not
     {
+        health = GetComponent<Health>();
+        if (health == null)
+        {
+            Debug.LogWarning("HEALTH CHEATS - Could not find the player's health");
+        }
         if (!cheatsEnabled)
         {
             cheatsEnabled = true;
