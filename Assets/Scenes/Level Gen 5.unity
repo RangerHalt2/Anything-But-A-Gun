@@ -288,7 +288,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 68578094405065540, guid: caa24201197b26b479e66c072d7d3e13, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -6.001343
+      value: -6.0012817
       objectReference: {fileID: 0}
     - target: {fileID: 99934294080178663, guid: caa24201197b26b479e66c072d7d3e13, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
@@ -372,7 +372,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 579397576798918672, guid: caa24201197b26b479e66c072d7d3e13, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -10.6501465
+      value: -10.650269
       objectReference: {fileID: 0}
     - target: {fileID: 654407675536531757, guid: caa24201197b26b479e66c072d7d3e13, type: 3}
       propertyPath: m_IsActive
@@ -5740,6 +5740,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: HubLevel
       objectReference: {fileID: 0}
+    - target: {fileID: 5213476135042798232, guid: c8631f6c5c025d64b8f883334b0f7654, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5213476135042798232, guid: c8631f6c5c025d64b8f883334b0f7654, type: 3}
+      propertyPath: 'm_Materials.Array.data[1]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 6b791ea179ecb814f90c9a9db06e489a, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 7356749632767205192, guid: c8631f6c5c025d64b8f883334b0f7654, type: 3}
@@ -5752,18 +5760,6 @@ PrefabInstance:
       insertIndex: 21
       addedObject: {fileID: 981323229}
     m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 4018456747937581337, guid: c8631f6c5c025d64b8f883334b0f7654, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2089110829}
-    - targetCorrespondingSourceObject: {fileID: 4018456747937581337, guid: c8631f6c5c025d64b8f883334b0f7654, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2089110833}
-    - targetCorrespondingSourceObject: {fileID: 1241861100995655647, guid: c8631f6c5c025d64b8f883334b0f7654, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2089110827}
-    - targetCorrespondingSourceObject: {fileID: 1241861100995655647, guid: c8631f6c5c025d64b8f883334b0f7654, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2089110832}
     - targetCorrespondingSourceObject: {fileID: 9056617643553907493, guid: c8631f6c5c025d64b8f883334b0f7654, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2089110831}
@@ -5774,44 +5770,6 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: c8631f6c5c025d64b8f883334b0f7654, type: 3}
---- !u!1 &2089110826 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1241861100995655647, guid: c8631f6c5c025d64b8f883334b0f7654, type: 3}
-  m_PrefabInstance: {fileID: 2089110825}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &2089110827
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2089110826}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fc6b2e3a663a4e549b6e258c90c92239, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::HubLevelSender
-  LevelName: Level Gen 2
-  nextScenePos: {x: -5, y: 1, z: 16}
---- !u!1 &2089110828 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4018456747937581337, guid: c8631f6c5c025d64b8f883334b0f7654, type: 3}
-  m_PrefabInstance: {fileID: 2089110825}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &2089110829
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2089110828}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fc6b2e3a663a4e549b6e258c90c92239, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::HubLevelSender
-  LevelName: Level Gen 3
-  nextScenePos: {x: 0, y: 0, z: 0}
 --- !u!1 &2089110830 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 9056617643553907493, guid: c8631f6c5c025d64b8f883334b0f7654, type: 3}
@@ -5838,48 +5796,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 60, y: 10, z: 60}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!65 &2089110832
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2089110826}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1.3672643, y: 2.7225976, z: 0.12069689}
-  m_Center: {x: -0.6836325, y: 0.030193985, z: 0.0004537629}
---- !u!65 &2089110833
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2089110828}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1.3672643, y: 2.7225976, z: 0.12069689}
-  m_Center: {x: -0.68363094, y: 0.030193985, z: 0.00044994822}
 --- !u!1 &2146531248
 GameObject:
   m_ObjectHideFlags: 0
