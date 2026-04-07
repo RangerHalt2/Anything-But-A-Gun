@@ -70,6 +70,8 @@ public class Health : MonoBehaviour
 
     private P_FamilyPhoto familyPhotoPromotion;
 
+    public bool infiniteHealthOn = false;
+
     #endregion
 
     public struct DamageInfo
@@ -144,6 +146,7 @@ public class Health : MonoBehaviour
     // Applies a certain amount of damage to an object
     public void TakeDamage(float damageAmount, Transform sourcePosition)
     {
+        if (infiniteHealthOn) return;
         if (ShiningArmor)
         {
             Debug.Log("HEALTH - SHINING ARMOR - damage intercepted");

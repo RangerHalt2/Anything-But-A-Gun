@@ -20,12 +20,12 @@ public class HealthCheats : MonoBehaviour
         if (!cheatsEnabled)
         {
             cheatsEnabled = true;
-            health.currentHealth = Mathf.Infinity;
+            health.infiniteHealthOn = true;
         }
         else 
         {
             cheatsEnabled = false;
-            health.currentHealth = health.maxHealth;
+            health.infiniteHealthOn = false;
         }
     }
 }
