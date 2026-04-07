@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class DashUI : MonoBehaviour
 {
-    PlayerController player;
+    public PlayerController player;
 
     private GameObject[] dashContainers;
     private Image[] dashFills;
@@ -23,6 +23,17 @@ public class DashUI : MonoBehaviour
         PlayerController.Instance.onDashChangedCallback += UpdateDashesHUD;
         InstantiateDashContainers();
         UpdateDashesHUD();
+    }
+    private void OnEnable()
+    {
+        if (PlayerController.Instance != null)
+            PlayerController.Instance.onDashChangedCallback += UpdateDashesHUD;
+    }
+
+    private void OnDisable()
+    {
+        if (PlayerController.Instance != null)
+            PlayerController.Instance.onDashChangedCallback -= UpdateDashesHUD;
     }
 
     // Update is called once per frame

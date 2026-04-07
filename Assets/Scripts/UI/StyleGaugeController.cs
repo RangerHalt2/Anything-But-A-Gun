@@ -25,8 +25,17 @@ public class StyleGaugeController : MonoBehaviour
 
     void Start() 
     {
+        Initialize();
+    }
+
+    public void Initialize()
+    {
+        if(GameObject.FindAnyObjectByType<StyleMeterGaugeIndicator>() != null)
+            gaugeVFX = GameObject.FindAnyObjectByType<StyleMeterGaugeIndicator>().gameObject;
+
         totalGauge.SetActive(false);
-        gaugeVFX.SetActive(false);
+        if(gaugeVFX != null)
+            gaugeVFX.SetActive(false);
         bWBoxVolume = GameObject.Find("BW Box Volume").GetComponent<Volume>();
         maxLevel = letter.Length - 1;
         bWBoxVolume.blendDistance = color[level];

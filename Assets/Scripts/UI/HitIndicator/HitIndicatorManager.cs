@@ -7,7 +7,7 @@ public class HitIndicatorManager : MonoBehaviour
     [SerializeField] private GameObject hitIndicatorPrefab;
 
     private PlayerController playerController;
-    private Health playerHealth;
+    public Health playerHealth;
 
     private void Start()
     {
@@ -20,6 +20,11 @@ public class HitIndicatorManager : MonoBehaviour
     }
 
     //public void Confirm
+
+    public void AssignTookDamageEvent()
+    {
+        playerHealth.PlayerTookDamage += SpawnIndicator;
+    }
 
     private void SpawnIndicator(Health.DamageInfo info)
     {

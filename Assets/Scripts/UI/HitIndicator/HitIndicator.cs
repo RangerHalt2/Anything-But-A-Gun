@@ -31,7 +31,7 @@ public class HitIndicator : MonoBehaviour
     // Converts 3D coordinates to 2D visual representation. Forward is up, Backwards is down. Left and Right consistent.
     private void CheckRotation()
     {
-        
+        if (playerLocation == null) return;   
         Vector3 localDir = enemyLocation != null ? playerLocation.InverseTransformDirection(enemyLocation.position - playerLocation.position) : playerLocation.InverseTransformDirection(lastKnownPosition - playerLocation.position);
         Vector2 hitDir2D = new Vector2(localDir.x, localDir.z).normalized;
 

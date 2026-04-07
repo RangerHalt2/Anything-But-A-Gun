@@ -26,7 +26,7 @@ public class UIManager : MonoBehaviour
     [Tooltip("Determines whether or not the player is allowed to pause. Set to true to enable pausing.")]
     public bool allowPause = true;
     // Whether or not the game is currently paused
-    private bool isPaused = false;
+    public bool isPaused = false;
     public bool IsPaused => isPaused;
 
 
@@ -80,6 +80,7 @@ public class UIManager : MonoBehaviour
     // Toggles whether or not the game is currently paused
     public void TogglePause()
     {
+        Debug.Log("UI MANAGER - Toggling Pause");
         // If pausing is allowed
         if (allowPause)
         {

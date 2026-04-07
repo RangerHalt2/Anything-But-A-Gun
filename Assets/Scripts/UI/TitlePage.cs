@@ -32,7 +32,7 @@ public class TitlePage : MonoBehaviour
         GameEvent.RunStarted?.Invoke();
 
         loader.LoadScene("Level Gen 5");
-        CleanupDontDestroyOnLoad.DestroyAllDontDestroyOnLoad();
+        CleanupDontDestroyOnLoad.DestroyAllDontDestroyOnLoad(transform.root.gameObject);
     }
     public void QuitGame()
     {

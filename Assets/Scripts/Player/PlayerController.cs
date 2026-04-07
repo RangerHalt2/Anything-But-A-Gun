@@ -65,7 +65,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float interactRange = 3f;
     [SerializeField] private LayerMask interactableMask;
     [SerializeField] private float interactCooldown = 0.5f;
-    [SerializeField] private TextMeshProUGUI interactionText;
+    [SerializeField] public TextMeshProUGUI interactionText;
     private bool canInteract = true;
 
     public bool isSpawned = false;
@@ -130,6 +130,12 @@ public class PlayerController : MonoBehaviour
 
         hasDoubleJumped = false;
         ApplyAchievementRewards();
+
+        if (GameObject.FindAnyObjectByType<InteractionTextIndicator>())
+        {
+            interactionText = GameObject.FindAnyObjectByType<InteractionTextIndicator>().GetComponent<TextMeshProUGUI>();
+
+        }
     }
 
     private float LoadSensitivity()

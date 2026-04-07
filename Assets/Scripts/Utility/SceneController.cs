@@ -22,8 +22,10 @@ public class SceneController : MonoBehaviour
 
     public void GoToScene(String sceneName)
     {
+        if(loader.LoadingScreen != null)
+            loader.LoadingScreen.SetActive(true);
         loader.LoadScene(sceneName);
-        SceneManager.LoadScene(sceneName);
+        return;
     }
 
     public void GoToMainMenu()

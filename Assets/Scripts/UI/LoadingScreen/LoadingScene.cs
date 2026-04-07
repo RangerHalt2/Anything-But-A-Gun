@@ -26,23 +26,48 @@ public class LoadingScene : MonoBehaviour
 
     private IEnumerator LoadSceneAsync(string sceneName)
     {
+        Debug.Log("LOADING SCENE - LoadingScreen before checks: " + LoadingScreen + " | is null: " + (LoadingScreen == null) + " | ReferenceEquals null: " + ReferenceEquals(LoadingScreen, null));
+
+        if (LoadingScreen == null)
+        {
+            LoadingIndicator indicator = GameObject.FindAnyObjectByType<LoadingIndicator>(FindObjectsInactive.Include);
+            Debug.Log("LOADING SCENE - Indicator found: " + indicator);
+            if (indicator != null)
+                LoadingScreen = indicator.gameObject;
+        }
+
+        if (LoadingBarSlider == null)
+        {
+            LoadingBarIndicator barIndicator = GameObject.FindAnyObjectByType<LoadingBarIndicator>(FindObjectsInactive.Include);
+            if (barIndicator != null)
+                LoadingBarSlider = barIndicator.GetComponent<Slider>();
+        }
+
         string previousScene = SceneManager.GetActiveScene().name;
         AsyncOperation operation = SceneManager.LoadSceneAsync(sceneName);
         operation.allowSceneActivation = false;
 
-        LoadingScreen.SetActive(true);
 
+
+        Debug.Log("LOADING SCENE - LoadingScreen: " + LoadingScreen + " | Slider: " + LoadingBarSlider);
+        LoadingScreen.SetActive(true);
+        Debug.Log("LOADING SCENE - loading scene was set to active: " + LoadingScreen.activeInHierarchy);
+        operation.allowSceneActivation = false;
+        bool readyToLoad = false;
         while (!operation.isDone)
         {
             float targetProgress = Mathf.Clamp01(operation.progress / 0.9f);
 
-            
-            LoadingBarSlider.value = Mathf.Lerp(LoadingBarSlider.value, targetProgress, Time.deltaTime * 5f);
+            if (LoadingBarSlider != null)
+                LoadingBarSlider.value = Mathf.Lerp(LoadingBarSlider.value, targetProgress, Time.deltaTime * 5f);
 
             
-            if (operation.progress >= 0.9f)
+            if (operation.progress >= 0.9f && !readyToLoad)
             {
-                LoadingBarSlider.value = 1f; 
+                if (LoadingBarSlider != null)
+                    LoadingBarSlider.value = 1f;
+                readyToLoad = true;
+                yield return new WaitForSeconds(0.3f);
                 operation.allowSceneActivation = true;
             }
 
@@ -53,11 +78,13 @@ public class LoadingScene : MonoBehaviour
             Debug.Log("LOADING SCENE - Previous Scene" + previousScene);
             UIManager manager = transform.root.gameObject.GetComponent<UIManager>();
             manager.GoToPage(0);
-            LoadingScreen.SetActive(false);
+            if (LoadingBarSlider != null)
+                LoadingScreen.SetActive(false);
         }
         else
         {
-            LoadingScreen.SetActive(false);
+            if (LoadingBarSlider != null)
+                LoadingScreen.SetActive(false);
         }
     }
 }

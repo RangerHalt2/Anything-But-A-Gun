@@ -318,6 +318,10 @@ public class AmmoManager : MonoBehaviour
     public void updateDisplay()
     {
         // Used if there is a TMPro Display assinged
+
+        if(ammoDisplayText == null)
+            ammoDisplayText = GameObject.FindGameObjectWithTag("AmmoCounter").GetComponent<TextMeshProUGUI>();
+
         if (ammoDisplayText != null)
         {
             if (!reloading)

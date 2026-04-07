@@ -29,7 +29,7 @@ public class Health : MonoBehaviour
     // Tracks if the healthbar is currently active
     private bool healthBarActive;
     [Tooltip("Reference to healthbar prefab. Optional.")]
-    [SerializeField] private HealthBar healthBar;
+    [SerializeField] public HealthBar healthBar;
     [Tooltip("Reference to TMPro Object used to track current AP. Optional.")]
     [SerializeField] private TextMeshProUGUI healthDisplayText;
 
@@ -48,7 +48,7 @@ public class Health : MonoBehaviour
     private Player_Level playerLevel;
 
     [SerializeField] private GameObject gameOverCanvas;
-    [SerializeField] private GameObject inGameCanvas;
+    [SerializeField] public GameObject inGameCanvas;
 
     public bool isDead;
 
@@ -90,6 +90,23 @@ public class Health : MonoBehaviour
         endScorePlaying = false; // added by Aaron
         initialMaxHealth = maxHealth;
         // Automatically kill object if it has 0 or less health
+
+        if (isPlayer)
+        {
+            if (GameObject.FindAnyObjectByType<HealthBarIndicator>() != null)
+            {
+                healthBar = GameObject.FindAnyObjectByType<HealthBarIndicator>().GetComponent<HealthBar>();
+                Debug.Log("HEALTH - health bar is: " + healthBar);
+            }
+            else Debug.Log("HEALTH - Could not automatically assign the HealthBar");
+
+            if (GameObject.FindAnyObjectByType<EndingGrade>() != null)
+                gameOverCanvas = GameObject.FindAnyObjectByType<EndingGrade>().gameObject;
+
+            if(GameObject.FindAnyObjectByType<StyleGaugeController>() != null)
+                inGameCanvas = GameObject.FindAnyObjectByType<StyleGaugeController>().gameObject;
+        }
+
         if (currentHealth <= 0)
         {
             Debug.Log(gameObject.name + "'s Initial Health was equal to or less than 0. They have been automatically destroyed.");
@@ -355,6 +372,10 @@ public class Health : MonoBehaviour
             healthBar.Activate();
             healthBar.SetHealth(currentHealth);
             healthBarActive = true;
+        }
+        else
+        {
+            Debug.Log("HEALTH - The Health Bar is null");
         }
     }
 
