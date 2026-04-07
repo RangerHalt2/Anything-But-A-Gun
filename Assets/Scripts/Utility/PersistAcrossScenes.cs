@@ -16,4 +16,10 @@ public class PersistAcrossScenes : MonoBehaviour
         persistedObjects.Add(gameObject.name);
         DontDestroyOnLoad(gameObject);
     }
+
+    private void OnDestroy()
+    {
+        persistedObjects.Remove(gameObject.name);
+    }
+
 }

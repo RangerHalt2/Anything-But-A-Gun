@@ -10,7 +10,11 @@ public class MainMenuTemp : MonoBehaviour
 
         Destroy(canvas);
         Destroy(player);
-
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        CleanupDontDestroyOnLoad.DestroyAllDontDestroyOnLoad();
     }
+
+
 
 }

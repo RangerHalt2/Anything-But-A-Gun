@@ -317,7 +317,7 @@ public class PlayerController : MonoBehaviour
             Interact();
         }
 
-        TakeScreenShot();
+        // TakeScreenShot();
 
         TimerDecrement();
     }
@@ -332,6 +332,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    //The screenshot is almost effectively a nuke, this should only be used for dev purposes not left for a player to use.
     private void TakeScreenShot()
     {
         bool saveAsJPEG = true;

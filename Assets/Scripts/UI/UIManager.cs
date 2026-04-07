@@ -64,7 +64,12 @@ public class UIManager : MonoBehaviour
         pauseAction.performed -= OnPausePerformed;
         UIControls.Disable();
     }
-    
+
+    private void OnDestroy()
+    {
+        Debug.Log("MASTER CANVAS - Destroyed! " + System.Environment.StackTrace);
+    }
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -93,6 +98,7 @@ public class UIManager : MonoBehaviour
                 Time.timeScale = 1f;
                 // Lock the cursor
                 Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
                 // Update pause boolean
                 isPaused = false;
             }
@@ -105,6 +111,7 @@ public class UIManager : MonoBehaviour
                 Time.timeScale = 0f;
                 // Lock the cursor
                 Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
                 // Update pause boolean
                 isPaused = true;
             }

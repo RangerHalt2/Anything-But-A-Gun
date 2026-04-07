@@ -56,6 +56,7 @@ public class LoadingScene : MonoBehaviour
         bool readyToLoad = false;
         while (!operation.isDone)
         {
+            Debug.Log("LOADING SCENE - iterating through the operation.");
             float targetProgress = Mathf.Clamp01(operation.progress / 0.9f);
 
             if (LoadingBarSlider != null)
@@ -64,10 +65,10 @@ public class LoadingScene : MonoBehaviour
             
             if (operation.progress >= 0.9f && !readyToLoad)
             {
+                Debug.Log("LOADING SCENE - operation should be done");
                 if (LoadingBarSlider != null)
                     LoadingBarSlider.value = 1f;
                 readyToLoad = true;
-                yield return new WaitForSeconds(0.3f);
                 operation.allowSceneActivation = true;
             }
 
