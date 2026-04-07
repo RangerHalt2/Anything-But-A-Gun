@@ -410,6 +410,12 @@ public class Health : MonoBehaviour
             return;
         }
 
+        if (GameObject.FindAnyObjectByType<HealthBarIndicator>() != null)
+        {
+            healthBar = GameObject.FindAnyObjectByType<HealthBarIndicator>().GetComponent<HealthBar>();
+            Debug.Log("HEALTH - health bar is: " + healthBar);
+        }
+
         // Set player's max health based on the amount of achievements
         setMaxHealth(initialMaxHealth + bonusHealth, true);
         healthBar.SetMaxHealth(maxHealth);
