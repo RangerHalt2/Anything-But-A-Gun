@@ -46,7 +46,8 @@ public class EndingGrade : MonoBehaviour
     }
 
     public IEnumerator EndingGradeCoroutine(){ // Run this coroutine when the player gets game over
-
+        yourScoreTyped = "";
+        endingScoreText.text = "";
         Debug.Log("ENDING COROUTINE STARTED");
         // RL: Accessing RunData to calculate ending Score
 
