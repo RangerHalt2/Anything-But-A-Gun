@@ -101,6 +101,10 @@ public class UIManager : MonoBehaviour
                 Cursor.visible = false;
                 // Update pause boolean
                 isPaused = false;
+
+                Health playerHealth = GameObject.FindAnyObjectByType<PlayerController>().GetComponent<Health>();
+                playerHealth.updateDisplay();
+
             }
             // If the game is not currently paused, pause it
             else
