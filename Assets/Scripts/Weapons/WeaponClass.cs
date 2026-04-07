@@ -215,7 +215,7 @@ public class WeaponClass : MonoBehaviour
             if(wh.currentWeapon == this.gameObject)
             {
                 wh.weapons.Remove(wh.currentWeapon);
-                wh.DropWeapon(wh.currentWeapon);
+                wh.DropWeapon(wh.currentWeapon, true);
                 wh.EmergencyChooseWeaponZero();
             }
         }

@@ -78,7 +78,7 @@ public class WeaponHandler : MonoBehaviour
     {
         if (currentWeapon != starterWeapon)
         {
-            DropWeapon(currentWeapon);
+            DropWeapon(currentWeapon, true);
             Debug.Log("WeaponHandler dropped weapon is " + currentWeapon);
         }
     }
@@ -203,7 +203,7 @@ public class WeaponHandler : MonoBehaviour
 
                     if (nameOfHeldScript == nameOfNewScript) //If we already have this weapon, drop the current weapon and replace it with the new one.
                     {
-                        DropWeapon(heldWeapon);
+                        DropWeapon(heldWeapon, false);
                         break;
                     }
 
@@ -251,13 +251,14 @@ public class WeaponHandler : MonoBehaviour
         currentWeapon.GetComponent<AmmoManager>().updateDisplay();
     }
 
-    public void DropWeapon(GameObject dropWeapon) //Spawns a collectible that will allow you to recollect the weapon.
+    public void DropWeapon(GameObject dropWeapon, bool swapToStapler) //Spawns a collectible that will allow you to recollect the weapon.
     {
         if (dropTimer < 0)
         {
             weapons.Remove(dropWeapon);
             weaponSlot = 0;
-            currentWeapon = weapons[weaponSlot];
+            if(swapToStapler)
+                currentWeapon = weapons[weaponSlot];
             currentWeapon.SetActive(false);
             currentWeapon.SetActive(true);
             currentWeapon.GetComponent<AmmoManager>().updateDisplay();
