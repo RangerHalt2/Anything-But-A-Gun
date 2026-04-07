@@ -295,7 +295,7 @@ public class Health : MonoBehaviour
                 bloodVFX.transform.localScale = Vector3.one;
                 ParticleSystem.MainModule main = bloodVFX.main;
                 main.scalingMode = ParticleSystemScalingMode.Local;
-                Destroy(bloodVFX.gameObject, 15f); 
+                Destroy(bloodVFX.gameObject, 8f); 
             }
 
 
