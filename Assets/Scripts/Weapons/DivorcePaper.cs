@@ -28,7 +28,14 @@ public class DivorcePaper : WeaponClass
                     // Play sound effect (added by Aaron)
                     if(gunShot != null)
                         Instantiate(gunShot, transform.position, transform.rotation, null);
-                    SpawnProjectile(projectilePrefab); //Inline Bool check, ground if grounded and air if not grounded 
+
+                    if (hasPackAPunch)
+                    {
+                        Type addedType = components[currPackAPunchIndex];
+                        if(addedType == typeof(P_FridayFunday))
+                            SpawnProjectile(projectilePrefab); //Spawn an extra projectile if we have Friday Funday.
+                    }
+                    SpawnProjectile(projectilePrefab);
                     timer = fireRate;
                 }
             }
