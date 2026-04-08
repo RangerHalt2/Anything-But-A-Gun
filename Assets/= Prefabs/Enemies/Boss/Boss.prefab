@@ -230,6 +230,11 @@ MonoBehaviour:
   detectionDisplayTime: 1
   hasShownDetectionSprite: 0
   enemyType: 0
+  height: 2
+  animator: {fileID: 0}
+  chanceToGetMoney: 55
+  minGain: 3
+  maxGain: 5
 --- !u!114 &8906723142069077055
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -243,8 +248,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Health
   teamID: 1
-  maxHealth: 100
-  currentHealth: 100
+  maxHealth: 1000
+  currentHealth: 1000
   nonlethalDefeat: 0
   healthBarActiveOnStartup: 0
   healthBar: {fileID: 0}
@@ -259,6 +264,13 @@ MonoBehaviour:
   damageNoise: {fileID: 0}
   style: {fileID: 0}
   ShiningArmor: 0
+  bloodVFX: {fileID: 0}
+  minParticle: 0
+  maxParticle: 0
+  minSpeed: 0
+  maxSpeed: 0
+  infiniteHealthOn: 0
+  end: {fileID: 0}
 --- !u!54 &409846101445682805
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -319,3 +331,8 @@ MonoBehaviour:
   detectionDisplayTime: 1
   hasShownDetectionSprite: 0
   enemyType: 0
+  height: 2
+  animator: {fileID: 0}
+  chanceToGetMoney: 55
+  minGain: 3
+  maxGain: 5
