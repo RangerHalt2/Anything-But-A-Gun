@@ -8,6 +8,7 @@ public class Missile : MonoBehaviour
     public int teamID = 1;
     
     public Material activeMaterial;
+    [SerializeField] private GameObject missileExplosionvfx;
 
     private Collider missileCollider;
     private Renderer missileRenderer;
@@ -35,6 +36,7 @@ public class Missile : MonoBehaviour
 
         if (missileCollider != null)
             missileCollider.enabled = true;
+            Instantiate(missileExplosionvfx, transform.position, transform.rotation);
 
         if (missileRenderer != null && activeMaterial != null)
             missileRenderer.material = activeMaterial;
