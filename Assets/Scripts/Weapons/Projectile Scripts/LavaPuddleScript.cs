@@ -27,7 +27,7 @@ public class LavaPuddleScript : MonoBehaviour, IWeaponLevel
         }
     }
 
-    void OnCollisionStay(Collision _other)
+    void OnColliderStay(Collision _other)
     {
         // Attempt to reference the health script on the collided object
         Health health = _other.gameObject.GetComponentInParent<Health>();
