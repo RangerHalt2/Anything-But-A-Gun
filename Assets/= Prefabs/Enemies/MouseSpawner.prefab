@@ -537,7 +537,6 @@ GameObject:
   - component: {fileID: 7981090072278086544}
   - component: {fileID: 640667046206538452}
   - component: {fileID: 3787569392080643853}
-  - component: {fileID: 2637258325942807671}
   m_Layer: 11
   m_Name: MouseSpawner
   m_TagString: Enemy
@@ -656,7 +655,6 @@ MonoBehaviour:
   maxParticle: 0
   minSpeed: 0
   maxSpeed: 0
-  infiniteHealthOn: 0
   end: {fileID: 0}
 --- !u!54 &7981090072278086544
 Rigidbody:
@@ -720,9 +718,6 @@ MonoBehaviour:
   enemyType: 0
   height: 2
   animator: {fileID: 0}
-  chanceToGetMoney: 55
-  minGain: 3
-  maxGain: 5
   enemyPrefabs:
   - {fileID: 3695943591121391829, guid: 207981f09de688a4481a8653d192e66b, type: 3}
   spawnInterval: 3
@@ -743,16 +738,3 @@ MonoBehaviour:
   lockX: 0
   lockY: 0
   lockZ: 0
---- !u!114 &2637258325942807671
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8498651308999933535}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 917ea3948bf6f144996a90e42e87b398, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::EnemyType
-  enemyId: ratrace
