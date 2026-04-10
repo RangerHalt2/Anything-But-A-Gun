@@ -6,6 +6,13 @@ public class BossAbilities : MonoBehaviour
     [Header("General Ability Settings")]
     public float abilityInterval = 10f;
 
+    [Header("Animation Settings")]
+    private Animator animator;
+    public float shockwaveAnimSpeed = 1f;
+    public float missileAnimSpeed = 1f;
+    public float bigShotAnimSpeed = 1f;
+    public float walkAnimSpeed = 1f;
+
     [Header("Shockwave Settings")]
     public GameObject shockwavePrefab;
     public int shockwaveCount = 3;
@@ -31,9 +38,34 @@ public class BossAbilities : MonoBehaviour
     {
         if (player == null)
         {
-            Debug.LogError("BossAbilities: Player reference not assigned!");
+            GameObject playerObj = GameObject.FindWithTag("Player");
+
+            if (playerObj != null)
+            {
+                player = playerObj.transform;
+            }
+        }
+
+        if (player == null)
+        {
+            Debug.LogError("BossAbilities: Player not found in scene!");
             return;
         }
+
+        if (animator == null)
+        {
+            animator = GetComponent<Animator>();
+        }
+
+        if (animator == null)
+        {
+            Debug.LogError("BossAbilities: Animator not found on this GameObject!");
+        }
+
+        animator.SetFloat("SpeedMultiplierShockwave", shockwaveAnimSpeed);
+        animator.SetFloat("SpeedMultiplierMissiles", missileAnimSpeed);
+        animator.SetFloat("SpeedMultiplierHeavyShot", bigShotAnimSpeed);
+        animator.SetFloat("SpeedMultiplierWalk", walkAnimSpeed);
 
         StartCoroutine(AbilityLoop());
     }
@@ -49,14 +81,23 @@ public class BossAbilities : MonoBehaviour
             switch (randomAbility)
             {
                 case 0:
+                    if (animator != null)
+                    animator.SetTrigger("Shockwave");
+
                     yield return StartCoroutine(ShockwaveAttack());
                     break;
 
                 case 1:
+                    if (animator != null)
+                    animator.SetTrigger("Missiles");
+
                     MissileStrike();
                     break;
 
                 case 2:
+                    if (animator != null)
+                    animator.SetTrigger("HeavyShot");
+
                     yield return StartCoroutine(AbilityThree());
                     break;
             }
