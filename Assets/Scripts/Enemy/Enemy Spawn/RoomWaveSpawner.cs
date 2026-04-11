@@ -22,6 +22,9 @@ public class RoomWaveSpawner : MonoBehaviour
 
     private bool locked_doors = false;
 
+    private int PTOGain;
+
+
     private void Start()
     {
         this.gameObject.layer = LayerMask.NameToLayer("Ignore Raycast");
@@ -112,6 +115,8 @@ public class RoomWaveSpawner : MonoBehaviour
 
         if(current_wave == num_of_waves && doors_to_remove != null && enemySpawner.aliveEnemies.Count <= 0)
         {
+            if(EconomyManager.Instance != null)
+                EconomyManager.Instance.PTOAmount += PTOGain;
             locked_doors = false;
             Debug.Log("ROOM WAVE SPAWNER - Doors unlocking");
             foreach (Transform trans in doors_to_remove)
