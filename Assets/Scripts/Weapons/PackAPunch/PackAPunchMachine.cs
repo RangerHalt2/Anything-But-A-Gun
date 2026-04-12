@@ -8,6 +8,7 @@ public class PackAPunchMachine : MonoBehaviour, IInteractable
     [SerializeField] private Transform placeWeaponLocation;
     [SerializeField] private GameObject[] visualSparks;
 
+    [SerializeField] private int price;
 
     private WeaponHandler wh;
     private WeaponClass wc;
@@ -33,6 +34,12 @@ public class PackAPunchMachine : MonoBehaviour, IInteractable
         Debug.Log("Pack-A-Punch Machine Begin");
         wh = GameObject.FindAnyObjectByType<WeaponHandler>();
         wc = wh.currentWeapon.GetComponent<WeaponClass>();
+
+        if (EconomyManager.Instance == null || EconomyManager.Instance.PTOAmount < price)
+        {
+            Debug.Log("PACK A PUNCH MACINE - the player does not have enough money or the EconomyManager is null");
+            return;
+        }
 
         if(wc != null && wc.GetPackAPunchIndex() == -1 && counter < numOfUses)
         {
