@@ -94,6 +94,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Projectile
   speed: 35
+  useCustomMortar: 0
+  customGravity: 20
+  launchAngle: 45
   lifeTime: 10
   teamID: 0
   baseDamage: 15
@@ -161,7 +164,10 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 2048
   gooseVFX: {fileID: 615666183915522401, guid: 528fe706ca96a9745920fa19c320cce6, type: 3}
-  duckSFX: {fileID: 5383701307693267320, guid: 9dd2fe347e7a8144e96389a3a13414e8, type: 3}
+  duckSFX:
+  - {fileID: 5383701307693267320, guid: 9dd2fe347e7a8144e96389a3a13414e8, type: 3}
+  - {fileID: 5383701307693267320, guid: 989743e2dc0232a4fb27fcd61fd2d518, type: 3}
+  - {fileID: 5383701307693267320, guid: ee89199c76aa07f4c95345e9bb0b1bb9, type: 3}
   gooseSFX: {fileID: 5383701307693267320, guid: 931be4a6147b2a34d8330bd9ef40f9fc, type: 3}
   baseDamage: 25
 --- !u!114 &1609438292519472167

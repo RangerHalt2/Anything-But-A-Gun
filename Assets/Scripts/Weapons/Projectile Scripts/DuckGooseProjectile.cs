@@ -14,7 +14,7 @@ public class DuckGooseProjectile : MonoBehaviour
     [SerializeField] private float chanceToGoose = 15f;
     [SerializeField] private LayerMask whatIsEnemy;
     [SerializeField] private GameObject gooseVFX;
-    [SerializeField] private GameObject duckSFX;
+    [SerializeField] private GameObject[] duckSFX;
     [SerializeField] private GameObject gooseSFX;
     public float baseDamage;
 
@@ -154,7 +154,8 @@ public class DuckGooseProjectile : MonoBehaviour
             P_Explosive pe = gameObject.GetComponent<P_Explosive>();
             if (pe == null)
             {
-                Instantiate(duckSFX, transform.position, transform.rotation, null); // Added by Aaron
+                //Instantiate(duckSFX, transform.position, transform.rotation, null); // Added by Aaron (commented out by Aaron 4/12/26)
+                RandomGunShot(transform); // Added by Aaron 4/12/26
                 DoDamage(enemyHealth);
             }
             else
@@ -166,7 +167,7 @@ public class DuckGooseProjectile : MonoBehaviour
                     {
                         Debug.Log("Exploding!");
                         ApplyAOE(this.transform);
-                        Instantiate(duckSFX, transform.position, transform.rotation, null); // Added by Aaron
+                        //Instantiate(duckSFX, transform.position, transform.rotation, null); // Added by Aaron (commented out by Aaron 4/12/26)
                         Instantiate(projectileRef.spikedExplosionVFX, transform.position, transform.rotation, null);
                         ricochetTimer = ricochetCooldown;
                     }
@@ -180,6 +181,14 @@ public class DuckGooseProjectile : MonoBehaviour
             Debug.Log("Starting a new bounce!");
             StartCoroutine(DelayedBounce());
         }
+    }
+
+    public void RandomGunShot(Transform followTrans)
+    {
+        int num = UnityEngine.Random.Range(0, duckSFX.Length);
+        GameObject selected = duckSFX[num];
+        GameObject randomShot = Instantiate(selected, followTrans.position, Quaternion.identity);
+        //MovingAudio movingAudio = randomShot AddComponent<MovingAudio>();
     }
 
     private void Update()
