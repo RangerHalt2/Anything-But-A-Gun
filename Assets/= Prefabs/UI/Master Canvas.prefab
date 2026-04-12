@@ -438,7 +438,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 191
+  m_fontSize: 190.95
   m_fontSizeBase: 75
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1407,6 +1407,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7682994205841929332}
+  - component: {fileID: 3562860415206694859}
   m_Layer: 0
   m_Name: ButtonGroup
   m_TagString: Untagged
@@ -1432,6 +1433,19 @@ Transform:
   - {fileID: 5801651308642888232}
   m_Father: {fileID: 8488512082390106947}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3562860415206694859
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 917696281196194122}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b66546ae3719ac4d8f1f101931a98eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TitlePage
+  loader: {fileID: 0}
 --- !u!1 &1008883410794140818
 GameObject:
   m_ObjectHideFlags: 0
@@ -6754,7 +6768,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 347.3
+  m_fontSize: 347.25
   m_fontSizeBase: 75
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -15935,10 +15949,10 @@ PrefabInstance:
     - target: {fileID: 1786146413467318312, guid: a60e0af07dd1146489aabe2d90a78034, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 3106313469285856751}
+      objectReference: {fileID: 3562860415206694859}
     - target: {fileID: 1786146413467318312, guid: a60e0af07dd1146489aabe2d90a78034, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: 
+      value: QuitGame
       objectReference: {fileID: 0}
     - target: {fileID: 5506964420145806919, guid: a60e0af07dd1146489aabe2d90a78034, type: 3}
       propertyPath: m_text
@@ -15987,11 +16001,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a60e0af07dd1146489aabe2d90a78034, type: 3}
---- !u!1 &3106313469285856751 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7629963743752143764, guid: a60e0af07dd1146489aabe2d90a78034, type: 3}
-  m_PrefabInstance: {fileID: 4825822771072185979}
-  m_PrefabAsset: {fileID: 0}
 --- !u!224 &5801651308642888232 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1331762695139581011, guid: a60e0af07dd1146489aabe2d90a78034, type: 3}
