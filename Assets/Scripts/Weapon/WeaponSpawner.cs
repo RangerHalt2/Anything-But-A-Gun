@@ -134,6 +134,8 @@ public class WeaponSpawner : MonoBehaviour, IInteractable
             {
                 // Disable the WeaponShopCanvas
                 weaponShopCanvas.SetActive(false);
+                canInteract = false;
+                gameObject.layer = LayerMask.NameToLayer("Default");
                 // If the weapon was spawned on start
                 if (spawnWeaponOnStart)
                 {
