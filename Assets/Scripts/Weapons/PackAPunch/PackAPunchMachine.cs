@@ -51,6 +51,7 @@ public class PackAPunchMachine : MonoBehaviour, IInteractable
             {
                 counter++;
                 GameEvent.OnWeaponModified?.Invoke();
+                EconomyManager.Instance.PTOAmount -= price;
             }
             if (counter == numOfUses)
             {
