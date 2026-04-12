@@ -22,7 +22,7 @@ public class RoomWaveSpawner : MonoBehaviour
 
     private bool locked_doors = false;
 
-    private int PTOGain;
+    private int PTOGain = 40;
 
 
     private void Start()
