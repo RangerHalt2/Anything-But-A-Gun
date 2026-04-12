@@ -67,11 +67,13 @@ public class WeaponChest : MonoBehaviour, IInteractable
             maxWeaponLevel = playerLevelOverride;
         }
 
-        if (AchievementManager.Instance.CheckAchivementStatus("wave_master"))
+        if (AchievementManager.Instance != null)
         {
-            numberOfWeaponsToSpawn = numberOfExtraWeaponsToSpawn;
+            if (AchievementManager.Instance.CheckAchivementStatus("wave_master"))
+            {
+                numberOfWeaponsToSpawn = numberOfExtraWeaponsToSpawn;
+            }
         }
-
         SpawnWeapons();
     }
 
@@ -134,7 +136,7 @@ public class WeaponChest : MonoBehaviour, IInteractable
 
             // Add the Weapon to the list of spwanedWeapons
             spawnedWeapons.Add(weapon);
-            usedPrefabs.Add(weapon);
+            usedPrefabs.Add(selectedWeapon);
         }
         weaponsSpawned = true;
     }
@@ -164,19 +166,53 @@ public class WeaponChest : MonoBehaviour, IInteractable
 
     private GameObject GetRandomWeaponNoDupes(List<GameObject> used)
     {
-        // Try to find a unique weapon not already spawned by the chest
-        for(int attempt = 0; attempt < 10; attempt++)
-        {
-            GameObject candidate = GetRandomWeapon();
+        // Build filtered pools (remove used weapons)
+        List<GameObject> common = commonWeaponPool.FindAll(w => !used.Contains(w));
+        List<GameObject> uncommon = uncommonWeaponPool.FindAll(w => !used.Contains(w));
+        List<GameObject> rare = rareWeaponPool.FindAll(w => !used.Contains(w));
 
-            if (candidate != null && !used.Contains(candidate))
+        // Build dynamic weights (only include non-empty pools)
+        int totalWeight = 0;
+
+        if (common.Count > 0) totalWeight += commonWeaponWeight;
+        if (uncommon.Count > 0) totalWeight += uncommonWeaponWeight;
+        if (rare.Count > 0) totalWeight += rareWeaponWeight;
+
+        if (totalWeight == 0)
+        {
+            return null; // no unique weapons left
+        }
+            
+        int roll = Random.Range(0, totalWeight);
+
+        // Select rarity based on remaining valid pools
+        if (common.Count > 0)
+        {
+            if (roll < commonWeaponWeight)
             {
-                return candidate;
+                return common[Random.Range(0, common.Count)];
             }
+
+            roll -= commonWeaponWeight;
         }
 
-        // If no unique weapon could be found, grab a random weapon with a potential dupe
-        return GetRandomWeapon();
+        if (uncommon.Count > 0)
+        {
+            if (roll < uncommonWeaponWeight)
+            {
+                return uncommon[Random.Range(0, uncommon.Count)];
+            }
+
+            roll -= uncommonWeaponWeight;
+        }
+
+        // fallback to rare
+        if (rare.Count > 0)
+        {
+            return rare[Random.Range(0, rare.Count)];
+        }
+
+        return null;
     }
 
     private GameObject GetRandomWeapon()
