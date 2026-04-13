@@ -27,6 +27,12 @@ public class LavaPuddleScript : MonoBehaviour, IWeaponLevel
         }
     }
 
+    private void OnCollisionStay(Collision collision)
+    {
+        OnColliderStay(collision);
+    }
+
+    //LB: On Collider Stay isn't a real function??? I moved this call to OnCollisionStay.
     void OnColliderStay(Collision _other)
     {
         // Attempt to reference the health script on the collided object
