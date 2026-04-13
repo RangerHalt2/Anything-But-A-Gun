@@ -81,28 +81,44 @@ public class BossAbilities : MonoBehaviour
             switch (randomAbility)
             {
                 case 0:
-                    if (animator != null)
                     animator.SetTrigger("Shockwave");
-
-                    yield return StartCoroutine(ShockwaveAttack());
                     break;
 
                 case 1:
-                    if (animator != null)
                     animator.SetTrigger("Missiles");
-
-                    MissileStrike();
                     break;
 
                 case 2:
-                    if (animator != null)
                     animator.SetTrigger("HeavyShot");
-
-                    yield return StartCoroutine(AbilityThree());
                     break;
             }
         }
     }
+
+    public void Anim_Shockwave()
+        {
+            StartCoroutine(ShockwaveAttack());
+        }
+
+    public void Anim_Missiles()
+        {
+            MissileStrike();
+        }
+
+    public void Anim_HeavyShot()
+        {
+            StartCoroutine(HeavyShot());
+        }
+    
+    public void Anim_StopMovement()
+        {
+            GetComponent<BossAI>()?.SetMovementEnabled(false);
+        }
+
+    public void Anim_StartMovement()
+        {
+            GetComponent<BossAI>()?.SetMovementEnabled(true);
+        }
 
     IEnumerator ShockwaveAttack()
     {
@@ -181,7 +197,7 @@ public class BossAbilities : MonoBehaviour
         }
     }
 
-    IEnumerator AbilityThree()
+    IEnumerator HeavyShot()
     {
         Debug.Log("BossAbilities: Charging Big Shot...");
 

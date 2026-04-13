@@ -1529,6 +1529,14 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2177681983479932731, guid: caa24201197b26b479e66c072d7d3e13, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -2.6000977
+      objectReference: {fileID: 0}
+    - target: {fileID: 2677088884279114072, guid: caa24201197b26b479e66c072d7d3e13, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 1.2211914
+      objectReference: {fileID: 0}
     - target: {fileID: 4626257494119394054, guid: caa24201197b26b479e66c072d7d3e13, type: 3}
       propertyPath: m_Name
       value: Master Canvas (1)
@@ -1815,6 +1823,7 @@ MonoBehaviour:
   spawnAllBySeconds: 15
   doors_to_remove: []
   healthPackRewards: []
+  doorJingle: {fileID: 0}
 --- !u!1 &174197093
 GameObject:
   m_ObjectHideFlags: 0
@@ -2180,6 +2189,7 @@ MonoBehaviour:
   inGameCanvas: {fileID: 0}
   isDead: 0
   damageNoise: {fileID: 0}
+  deathNoise: []
   style: {fileID: 0}
   ShiningArmor: 0
   bloodVFX: {fileID: 0}
@@ -4452,6 +4462,7 @@ MonoBehaviour:
   inGameCanvas: {fileID: 0}
   isDead: 0
   damageNoise: {fileID: 0}
+  deathNoise: []
   style: {fileID: 0}
   ShiningArmor: 0
   bloodVFX: {fileID: 0}
@@ -9521,6 +9532,7 @@ MonoBehaviour:
   inGameCanvas: {fileID: 0}
   isDead: 0
   damageNoise: {fileID: 0}
+  deathNoise: []
   style: {fileID: 0}
   ShiningArmor: 0
   bloodVFX: {fileID: 0}
@@ -13955,6 +13967,7 @@ MonoBehaviour:
   inGameCanvas: {fileID: 0}
   isDead: 0
   damageNoise: {fileID: 0}
+  deathNoise: []
   style: {fileID: 0}
   ShiningArmor: 0
   bloodVFX: {fileID: 0}
@@ -17241,6 +17254,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5673867487239586199, guid: 36c89ddfebcff8c4db8645ded0f8c9e5, type: 3}
+      propertyPath: walkAnimSpeed
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5673867487239586199, guid: 36c89ddfebcff8c4db8645ded0f8c9e5, type: 3}
+      propertyPath: bigShotAnimSpeed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5673867487239586199, guid: 36c89ddfebcff8c4db8645ded0f8c9e5, type: 3}
+      propertyPath: missileAnimSpeed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5673867487239586199, guid: 36c89ddfebcff8c4db8645ded0f8c9e5, type: 3}
+      propertyPath: shockwaveAnimSpeed
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -19608,6 +19637,7 @@ MonoBehaviour:
   inGameCanvas: {fileID: 0}
   isDead: 0
   damageNoise: {fileID: 0}
+  deathNoise: []
   style: {fileID: 0}
   ShiningArmor: 0
   bloodVFX: {fileID: 0}
@@ -21915,6 +21945,7 @@ MonoBehaviour:
   inGameCanvas: {fileID: 0}
   isDead: 0
   damageNoise: {fileID: 0}
+  deathNoise: []
   style: {fileID: 0}
   ShiningArmor: 0
   bloodVFX: {fileID: 0}
@@ -23228,6 +23259,7 @@ MonoBehaviour:
   inGameCanvas: {fileID: 0}
   isDead: 0
   damageNoise: {fileID: 0}
+  deathNoise: []
   style: {fileID: 0}
   ShiningArmor: 0
   bloodVFX: {fileID: 0}

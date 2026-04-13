@@ -23,16 +23,12 @@ public class BossAI : EnemyClass
 
         if (canMove && agent != null)
         {
-            agent.isStopped = false;
             agent.SetDestination(player.position);
-        }
-        else if (agent != null)
-        {
-            agent.isStopped = true;
         }
 
         float distanceToPlayer = Vector3.Distance(transform.position, player.position);
-        if (distanceToPlayer <= attackRange)
+
+        if (canMove && distanceToPlayer <= attackRange)
         {
             Attacking();
         }
@@ -70,7 +66,17 @@ public class BossAI : EnemyClass
     public void SetMovementEnabled(bool enabled)
     {
         canMove = enabled;
-        if (agent != null)
-            agent.isStopped = !enabled;
+
+        if (agent == null) return;
+
+        if (!enabled)
+        {
+            agent.isStopped = true;
+            agent.ResetPath();
+        }
+        else
+        {
+            agent.isStopped = false;
+        }
     }
 }
