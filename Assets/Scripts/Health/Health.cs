@@ -53,6 +53,7 @@ public class Health : MonoBehaviour
     public bool isDead;
 
     [SerializeField] private GameObject damageNoise;
+    [SerializeField] private GameObject[] deathNoise;
     private float damageTimer = 0f;
     private float damageCooldown = 0.5f;
 
@@ -269,6 +270,10 @@ public class Health : MonoBehaviour
         {
             // Play the death effect for the object
             Instantiate(deathEffect, transform.position, transform.rotation, null);
+            if (deathNoise.Length > 0)
+            {
+                RandomSFX(transform); // Added by Aaron 4/12/26
+            }
         }
 
         // Destroy the game object
@@ -433,5 +438,16 @@ public class Health : MonoBehaviour
     public bool HasDamageListeners()
     {
         return PlayerTookDamage != null;
+    }
+
+    public void RandomSFX(Transform followTrans)
+    {
+        int num = UnityEngine.Random.Range(0, deathNoise.Length);
+        GameObject selected = deathNoise[num];
+        if (selected != null)
+        {
+            GameObject randomShot = Instantiate(selected, followTrans.position, Quaternion.identity);
+        }
+        //MovingAudio movingAudio = randomShot AddComponent<MovingAudio>();
     }
 }
