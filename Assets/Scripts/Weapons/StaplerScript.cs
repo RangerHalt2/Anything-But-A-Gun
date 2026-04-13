@@ -15,6 +15,8 @@ public class StaplerScript : WeaponClass
     //private float clickCooldown = 0.5f;
     //private float clickTimer = 0;
 
+    [SerializeField] private GameObject[] staplerSFX;
+
     private float timer = 0;
 
     public override void Shoot()
@@ -34,9 +36,10 @@ public class StaplerScript : WeaponClass
                         {
                             hitscan.Shoot();
                             PlayOnomatopeia();
-                            // Play sound effect (added by Aaron)
-                            if (gunShot != null)
-                               Instantiate(gunShot, transform.position, transform.rotation, null);
+                            RandomGunShot(transform); // Added by Aaron 4/12/26
+                            // Play sound effect (added by Aaron) (commented out by Aaron 4/12/26)
+                            //if (gunShot != null)
+                            //   Instantiate(gunShot, transform.position, transform.rotation, null);
 
                             // Old sound effect player (commented out by Aaron)
                             /*if(gunShot != null)
@@ -65,6 +68,14 @@ public class StaplerScript : WeaponClass
             }
             
         }
+    }
+
+    public void RandomGunShot(Transform followTrans) // Added by Aaron 4/12/26
+    {
+        int num = UnityEngine.Random.Range(0, staplerSFX.Length);
+        GameObject selected = staplerSFX[num];
+        GameObject randomShot = Instantiate(selected, transform.position, transform.rotation, null);
+        //MovingAudio movingAudio = randomShot AddComponent<MovingAudio>();
     }
 
     /*public void Reload()

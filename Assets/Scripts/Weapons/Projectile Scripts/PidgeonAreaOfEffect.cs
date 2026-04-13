@@ -8,6 +8,7 @@ public class PidgeonAreaOfEffect : MonoBehaviour, IWeaponLevel
     [SerializeField] private LayerMask whatIsEnemy;
     [SerializeField] private float radius;
     [SerializeField] private float timer;
+    [SerializeField] private GameObject[] pidgeonSFX; // Added by Aaron 4/12/26
     private float cummulativeDamage;
 
     public bool followingTarget = false;
@@ -17,6 +18,7 @@ public class PidgeonAreaOfEffect : MonoBehaviour, IWeaponLevel
     void Awake()
     {
         Invoke("Explode", timer);
+        RandomGunShot(transform);
     }
 
     public void SetWeaponLevelReference(WeaponLevel weaponLevel)
@@ -61,6 +63,14 @@ public class PidgeonAreaOfEffect : MonoBehaviour, IWeaponLevel
         Debug.Log("PIDGEON AREA OF EFFECT - The enemy has been assigned their own pidgeon bomb");
         this.gameObject.transform.SetParent(other.gameObject.transform, true);
         followingTarget = true;
+    }
+
+    public void RandomGunShot(Transform followTrans) // Added by Aaron 4/12/26
+    {
+        int num = UnityEngine.Random.Range(0, pidgeonSFX.Length);
+        GameObject selected = pidgeonSFX[num];
+        GameObject randomShot = Instantiate(selected, followTrans.position, Quaternion.identity);
+        //MovingAudio movingAudio = randomShot AddComponent<MovingAudio>();
     }
 
     //LB: Updates the weapon's damage for what damage it should do.

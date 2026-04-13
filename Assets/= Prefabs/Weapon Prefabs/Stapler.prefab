@@ -117,10 +117,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NailgunScript
   ammoManager: {fileID: 785455090434947426}
-  gunShot: {fileID: 5383701307693267320, guid: 5dcf3c15003edf94f8dcf5208f138c04, type: 3}
+  gunShot: {fileID: 0}
   clickEffect: {fileID: 5383701307693267320, guid: e932fc293bad61d46974ae4ee27efb9a, type: 3}
   audioSource: {fileID: 0}
-  randomGunShots: []
+  randomGunShots:
+  - {fileID: 5383701307693267320, guid: 0e7f0ef0d10070345ba50e4c71ea4753, type: 3}
+  - {fileID: 5383701307693267320, guid: 66896afab5651654ca9dab48c3ef55bf, type: 3}
+  - {fileID: 5383701307693267320, guid: 2c9a00d255d35aa46906cf03fbce1cab, type: 3}
   clickCooldown: 0.5
   clickTimer: 0
   projectilePrefab: {fileID: 0}
@@ -147,6 +150,10 @@ MonoBehaviour:
   onomatopeiaVFX: {fileID: 0}
   onomatopeiaCooldown: 1.5
   hitscan: {fileID: 3161134012043242097}
+  staplerSFX:
+  - {fileID: 5383701307693267320, guid: 0e7f0ef0d10070345ba50e4c71ea4753, type: 3}
+  - {fileID: 5383701307693267320, guid: 66896afab5651654ca9dab48c3ef55bf, type: 3}
+  - {fileID: 5383701307693267320, guid: 2c9a00d255d35aa46906cf03fbce1cab, type: 3}
 --- !u!114 &785455090434947426
 MonoBehaviour:
   m_ObjectHideFlags: 0
