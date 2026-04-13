@@ -25,6 +25,7 @@ public class OfficeCatProjectileScript : MonoBehaviour
     {
         if (!blackholed)
         {
+            if (_other.CompareTag("Player")) return;
             blackholed = true;
             Vector3 collisionPoint = transform.position;
             GameObject blackholeGameObject = Instantiate(blackholePrefab, collisionPoint, Quaternion.identity, null);

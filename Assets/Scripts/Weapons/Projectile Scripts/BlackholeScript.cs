@@ -91,6 +91,7 @@ public class BlackholeScript : MonoBehaviour, IWeaponLevel
 
     void OnTriggerStay(Collider _other)
     {
+        if (_other.CompareTag("WeakPoint")) return;
         // Attempt to reference the health script on the collided object
         Health health = _other.gameObject.GetComponentInParent<Health>();
         if(health == null)

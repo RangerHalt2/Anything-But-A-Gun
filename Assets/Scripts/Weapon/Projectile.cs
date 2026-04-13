@@ -219,7 +219,7 @@ public class Projectile : MonoBehaviour, IWeaponLevel
         HandleCollision(collision.collider, contact.point, contact.normal);
 
         // Handle ricochet only on collision with walls and if ricochet is enabled
-        if (collision.gameObject.CompareTag("Wall") && wallBehavior == WallBehavior.Ricochet)
+        if (wallBehavior == WallBehavior.Ricochet)
         {
             SimulateRicochet(collision);
         }
