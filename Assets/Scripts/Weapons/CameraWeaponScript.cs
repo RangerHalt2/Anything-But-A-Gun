@@ -38,6 +38,7 @@ public class CameraWeaponScript : WeaponClass
                     SnapCamera();
                     PlayOnomatopeia();
                     Instantiate(flashVFX, transform.position, transform.rotation, null);
+                    Instantiate(gunShot, transform.position, transform.rotation, null);
                     // Update lastFired
                     timer = fireRate;
                 }

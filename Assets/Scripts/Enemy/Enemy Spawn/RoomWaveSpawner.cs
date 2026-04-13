@@ -17,6 +17,7 @@ public class RoomWaveSpawner : MonoBehaviour
     [SerializeField] private Transform[] doors_to_remove;
     [Tooltip("An array of all the health packs that should be made visible when the room is beaten")]
     [SerializeField] private GameObject[] healthPackRewards;
+    [SerializeField] private GameObject doorJingle;
 
     private int interval = 0;
 
@@ -119,6 +120,10 @@ public class RoomWaveSpawner : MonoBehaviour
                 EconomyManager.Instance.PTOAmount += PTOGain;
             locked_doors = false;
             Debug.Log("ROOM WAVE SPAWNER - Doors unlocking");
+            if (doorJingle != null)
+                {
+                    Instantiate(doorJingle, transform.position, transform.rotation, null);
+                }
             foreach (Transform trans in doors_to_remove)
             {
                 if(trans != null)
