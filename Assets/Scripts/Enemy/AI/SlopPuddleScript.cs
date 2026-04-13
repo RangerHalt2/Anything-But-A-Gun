@@ -6,6 +6,7 @@ public class SlopPuddleScript : MonoBehaviour
     [SerializeField] private float baseDamage;
     [SerializeField] private float growthRate = 1.15f;
     [HideInInspector] public float externalDamageMod = 1f;
+    [SerializeField] private int teamID = 1;
 
     void Start() 
     {
@@ -31,7 +32,7 @@ public class SlopPuddleScript : MonoBehaviour
         Health health = _other.gameObject.GetComponentInParent<Health>();
 
         // If the object has a health script
-        if (health != null)
+        if (health != null && health.teamID != teamID)
         {
             // Deal damage to targets health equal to projectile's damage
             health.TakeDamage(baseDamage * Time.deltaTime, this.transform);
