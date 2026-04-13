@@ -30,8 +30,10 @@ public class PidgeonAreaOfEffect : MonoBehaviour, IWeaponLevel
     private void Explode()
     {
         Collider[] enemies = Physics.OverlapSphere(transform.position, radius, whatIsEnemy);
+        
         foreach (Collider other in enemies)
         {
+            if (other.CompareTag("WeakPoint")) continue;
             Health health = other.gameObject.GetComponentInParent<Health>();
             if(health == null)
                 health = other.gameObject.GetComponentInChildren<Health>();
