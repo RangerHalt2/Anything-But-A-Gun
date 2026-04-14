@@ -192,12 +192,11 @@ public class BossAbilities : MonoBehaviour
     {
         RaycastHit hit;
 
-        if (Physics.Raycast(position + Vector3.up * 10f, Vector3.down, out hit, 20f))
+        if (Physics.Raycast(position + Vector3.up * 10f, Vector3.down, out hit, 50f, groundMask))
         {
             Instantiate(missilePrefab, hit.point, Quaternion.identity);
         }
     }
-
     IEnumerator HeavyShot()
     {
         Debug.Log("BossAbilities: Big Shot Fired!");
