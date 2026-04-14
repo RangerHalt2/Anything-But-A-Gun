@@ -25,7 +25,8 @@ public class RoomWaveSpawner : MonoBehaviour
 
     private int PTOGain = 25;
 
-
+    private bool waveOneSpawned = false;
+    
     private void Start()
     {
         this.gameObject.layer = LayerMask.NameToLayer("Ignore Raycast");
@@ -34,8 +35,9 @@ public class RoomWaveSpawner : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.layer == LayerMask.NameToLayer("Player") && current_wave < num_of_waves)
+        if (other.gameObject.layer == LayerMask.NameToLayer("Player") && current_wave < num_of_waves && !waveOneSpawned)
         {
+            waveOneSpawned = true;
             StartCoroutine(SpawnWaves());
             locked_doors = true;
             Debug.Log("ROOM WAVE SPAWNER - Locking the doors");
