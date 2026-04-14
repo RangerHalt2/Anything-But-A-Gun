@@ -11,7 +11,7 @@ public class BossAbilities : MonoBehaviour
     public float shockwaveAnimSpeed = 1f;
     public float missileAnimSpeed = 1f;
     public float bigShotAnimSpeed = 1f;
-    public float walkAnimSpeed = 1f;
+    public float walkAnimSpeed = 1.5f;
 
     [Header("Shockwave Settings")]
     public GameObject shockwavePrefab;
@@ -26,13 +26,14 @@ public class BossAbilities : MonoBehaviour
 
     [Header("Big Shot Settings")]
     public GameObject bigShotPrefab;
-    public float chargeTime = 2f;
-    public float fireDelay = 1f;
     public float bigShotSpeed = 20f;
     public Transform shootPoint;
 
     [Header("Player Reference")]
     [SerializeField] private Transform player;
+
+    [Header("Ground Reference")]
+    [SerializeField] private LayerMask groundMask;
 
     void Start()
     {
@@ -126,7 +127,7 @@ public class BossAbilities : MonoBehaviour
         direction.y = 0f;
         direction.Normalize();
 
-        Vector3 spawnPosition = transform.position;
+        Vector3 spawnPosition = transform.position + direction * 1f;
         Vector3 currentScale = initialScale;
 
         float previousLength = currentScale.z;
@@ -139,7 +140,7 @@ public class BossAbilities : MonoBehaviour
             spawnPosition += direction * spacing;
 
             RaycastHit hit;
-            if (Physics.Raycast(spawnPosition + Vector3.up * 5f, Vector3.down, out hit, 10f))
+            if (Physics.Raycast(spawnPosition + Vector3.up * 5f, Vector3.down, out hit, 10f, groundMask))
             {
                 Vector3 wavePosition = hit.point;
 
@@ -199,21 +200,9 @@ public class BossAbilities : MonoBehaviour
 
     IEnumerator HeavyShot()
     {
-        Debug.Log("BossAbilities: Charging Big Shot...");
+        Debug.Log("BossAbilities: Big Shot Fired!");
 
-        BossAI bossAI = GetComponent<BossAI>();
-        if (bossAI != null)
-        {
-            bossAI.SetMovementEnabled(false);
-        }
-
-        yield return new WaitForSeconds(chargeTime);
-
-        Vector3 lockedPlayerPosition = player.position;
-
-        yield return new WaitForSeconds(fireDelay);
-
-        Vector3 direction = (lockedPlayerPosition - shootPoint.position).normalized;
+        Vector3 direction = (player.position - shootPoint.position).normalized;
 
         GameObject shot = Instantiate(bigShotPrefab, shootPoint.position, Quaternion.LookRotation(direction) * Quaternion.Euler(90f, 0f, 0f));
 
@@ -223,11 +212,6 @@ public class BossAbilities : MonoBehaviour
             rb.linearVelocity = direction * bigShotSpeed;
         }
 
-        Debug.Log("BossAbilities: Big Shot Fired!");
-
-        if (bossAI != null)
-        {
-            bossAI.SetMovementEnabled(true);
-        }
+        yield return null;
     }
 }
