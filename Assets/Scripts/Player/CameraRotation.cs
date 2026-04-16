@@ -9,6 +9,7 @@ public class CameraRotation : MonoBehaviour
     [SerializeField] private float maxLookingAngle = -80f;
     [SerializeField] private float minLookingAngle = 80f;
     [SerializeField] private float controllerSens = 7f;
+    private CameraShake cameraShake;
 
     private InputManager inputs;
 
@@ -23,6 +24,7 @@ public class CameraRotation : MonoBehaviour
         inputs = GameObject.FindAnyObjectByType<InputManager>();
         playerHealth = GetComponentInParent<Health>();
         winEvent = GameObject.FindAnyObjectByType<WinEvent>();
+        cameraShake = GameObject.FindAnyObjectByType<CameraShake>();
 
         sensitivity = LoadSensitivity();
     }
@@ -37,9 +39,9 @@ public class CameraRotation : MonoBehaviour
     {
         rotationX += -Rotation.y * sensitivity * (inputs.ControllerLast ? controllerSens : 1f);
         rotationX = Mathf.Clamp(rotationX, minLookingAngle, maxLookingAngle);
-        transform.localRotation = Quaternion.Euler(rotationX, 0, 0);
+        Quaternion lookRotation = Quaternion.Euler(rotationX, 0, 0);
+        transform.localRotation = lookRotation * cameraShake.ShakeOffset;
     }
-
     private void Update()
     {
         if (playerHealth.isDead) return;

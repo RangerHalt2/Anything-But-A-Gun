@@ -62,6 +62,10 @@ public class WeaponClass : MonoBehaviour
     [SerializeField] private float onomatopeiaCooldown = 1.5f;
     private float onomatopeiaTimer = 0;
 
+    [SerializeField] private CameraShake.ShakeConfig shakeConfig;
+    private CameraShake cameraShake;
+    [SerializeField] private bool hasCustomShake = false;
+
     public enum WeaponType
     {
         SemiAutomatic,
@@ -282,6 +286,21 @@ public class WeaponClass : MonoBehaviour
             // Disable the info panel on startup
             weaponInfoPanel.SetActive(false);
         }
+        cameraShake = GameObject.FindAnyObjectByType<CameraShake>();
+
+        if (!hasCustomShake)
+        {
+            shakeConfig = new CameraShake.ShakeConfig
+            {
+                duration = 0.15f,
+                impactX = 1f,
+                impactY = 0.5f,
+                impactZ = 2f,
+                frequencyZ = 5f   // Hz — higher = faster back-and-forth
+            };
+        }
+       
+
         InitializeWeapon();
     }
 
@@ -336,6 +355,11 @@ public class WeaponClass : MonoBehaviour
 
     #region BasicWeaponFunction
 
+    public void WeaponRecoil()
+    {
+        cameraShake.Shake(shakeConfig);
+    }
+
     public void RandomGunShot(Transform followTrans)
     {
         if(randomGunShots != null && randomGunShots.Count() >= 0)
@@ -355,7 +379,8 @@ public class WeaponClass : MonoBehaviour
 
     public void PlayOnomatopeia()
     {
-        if(onomatopeiaVFX == null)
+        WeaponRecoil();
+        if (onomatopeiaVFX == null)
         {
             Debug.LogWarning("WEAPON CLASS - onomatopeia is null for this weapon");
             return;
