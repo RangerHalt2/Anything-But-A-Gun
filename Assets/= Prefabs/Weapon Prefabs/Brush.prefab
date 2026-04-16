@@ -129,7 +129,7 @@ Transform:
   m_GameObject: {fileID: 1314255560871991140}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.21329999, y: -0.46899998, z: 0.11442}
+  m_LocalPosition: {x: -0.21329999, y: -1.052, z: 0.11442}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -389,7 +389,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 22
+      scalar: 35
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -5007,9 +5007,9 @@ ParticleSystemRenderer:
   m_NormalDirection: 1
   m_ShadowBias: 0
   m_RenderAlignment: 2
-  m_Pivot: {x: 6.44, y: 0, z: 0}
+  m_Pivot: {x: 6.44, y: 0, z: 0.25}
   m_Flip: {x: 0, y: 0, z: 0}
-  m_EnableGPUInstancing: 1
+  m_EnableGPUInstancing: 0
   m_ApplyActiveColorSpace: 1
   m_AllowRoll: 1
   m_FreeformStretching: 0
@@ -5159,7 +5159,7 @@ MonoBehaviour:
   baseDamage: 0
   levelDamage: 0
   fireRate: 0.33
-  reloadTime: 0.25
+  reloadTime: 1
   AmmoCapacity: 4
   reserveAmmo: 12
   acceptablePackAPunchOptions:
@@ -5195,11 +5195,12 @@ MonoBehaviour:
   ammoCapacity: 4
   currentAmmo: 4
   ammoConsumption: 1
-  reloadTime: 0.25
+  reloadTime: 1
   canCancelReload: 0
   reloadMode: 0
   crosshair: {fileID: 0}
   ammoDisplayText: {fileID: 0}
+  reloadTimeReduction: 0
   reloadEffect: {fileID: 0}
   bottomlessMagazines: 0
   reloadVFX: {fileID: 8247439543920743372}
