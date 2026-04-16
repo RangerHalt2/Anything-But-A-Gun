@@ -357,6 +357,7 @@ public class WeaponClass : MonoBehaviour
 
     public void WeaponRecoil()
     {
+        if(cameraShake == null) cameraShake = GameObject.FindAnyObjectByType<CameraShake>();
         cameraShake.Shake(shakeConfig);
     }
 
