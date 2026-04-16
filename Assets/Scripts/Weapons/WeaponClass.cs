@@ -296,7 +296,7 @@ public class WeaponClass : MonoBehaviour
                 impactX = 1f,
                 impactY = 0.5f,
                 impactZ = 2f,
-                frequencyZ = 5f   // Hz — higher = faster back-and-forth
+                frequencyX = 5f   // Hz — higher = faster back-and-forth
             };
         }
        

@@ -12,7 +12,7 @@ public class CameraShake : MonoBehaviour
         public float impactX;        // Rotation strength on X axis (pitch)
         public float impactY;        // Rotation strength on Y axis (yaw)
         public float impactZ;        // Roll strength on Z axis
-        public float frequencyZ;     // Back-and-forth speed on Z
+        public float frequencyX;     // Back-and-forth speed on Z
     }
 
     private ShakeConfig _config;
@@ -43,12 +43,13 @@ public class CameraShake : MonoBehaviour
         float decay = 1f - Mathf.SmoothStep(0f, 1f, t);
 
         // X and Y: random noise scaled by impact and decay
-        float rotX = (Random.value * 2f - 1f) * _config.impactX * decay;
+        float rotX = Mathf.Sin(_elapsed * _config.frequencyX * Mathf.PI * 2f)
+                     * _config.impactX * decay; 
         float rotY = (Random.value * 2f - 1f) * _config.impactY * decay;
 
         // Z: oscillates back and forth like a pendulum
-        float rotZ = Mathf.Sin(_elapsed * _config.frequencyZ * Mathf.PI * 2f)
-                     * _config.impactZ * decay;
+        float rotZ = (Random.value * 2f - 1f) * _config.impactZ * decay;
+
 
         ShakeOffset = Quaternion.Euler(rotX, rotY, rotZ);
     }

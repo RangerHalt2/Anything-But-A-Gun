@@ -22,7 +22,7 @@ public class ShakeTest : MonoBehaviour
                 impactX = 3f,
                 impactY = 2f,
                 impactZ = 5f,
-                frequencyZ = 8f   // Hz — higher = faster back-and-forth
+                frequencyX = 8f   // Hz — higher = faster back-and-forth
             });
         }
     }
