@@ -46,6 +46,9 @@ public class AmmoManager : MonoBehaviour
     private GameObject ammoCounter;
     [SerializeField] private TextMeshProUGUI ammoDisplayText;
 
+    [Header("Reload Animations Stuff")]
+    [SerializeField] private float reloadTimeReduction;
+
     [Header("FX Settings")]
     [Tooltip("Reference to a prefab for an effect which triggers when the player reloads their weapon.")]
     public GameObject reloadEffect;
@@ -123,6 +126,7 @@ public class AmmoManager : MonoBehaviour
         currentAmmo = ammoCapacity;
         ammoDisplayText = GameObject.FindGameObjectWithTag("AmmoCounter").GetComponent<TextMeshProUGUI>();
 
+        ApplyAchievementRewards();
         updateDisplay();
     }
 
@@ -207,7 +211,7 @@ public class AmmoManager : MonoBehaviour
                     
                     updateDisplay();
 
-                    yield return new WaitForSeconds(reloadTime);
+                    yield return new WaitForSeconds(reloadTime * (1 - reloadTimeReduction));
 
                     // If reloading has not been cancelled
                     if (reloading)
@@ -339,6 +343,28 @@ public class AmmoManager : MonoBehaviour
             {
                 //ammoDisplayText.text = string.Format("Reloading!!! " + currentAmmo + " / " + ammoCapacity);
             }
+        }
+    }
+    private void OnEnable()
+    {
+        GameEvent.OnAchivementEarned += ApplyAchievementRewards;
+    }
+
+
+    private void ApplyAchievementRewards()
+    {
+        reloadTimeReduction = 0;
+        if (AchievementManager.Instance.CheckAchivementStatus("kill_turret_1"))
+        {
+            reloadTimeReduction += .033f;
+        }
+        if (AchievementManager.Instance.CheckAchivementStatus("kill_turret_2"))
+        {
+            reloadTimeReduction += .033f;
+        }
+        if (AchievementManager.Instance.CheckAchivementStatus("kill_turret_3"))
+        {
+            reloadTimeReduction += .033f;
         }
     }
 }

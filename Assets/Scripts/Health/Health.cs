@@ -73,6 +73,7 @@ public class Health : MonoBehaviour
 
     public bool infiniteHealthOn = false;
 
+    private int resistanceAchievements = 0;
     #endregion
 
     public struct DamageInfo
@@ -155,7 +156,8 @@ public class Health : MonoBehaviour
             return;
         }
         // Subtract the damage amount from the health of the object
-        currentHealth -= damageAmount;
+        // Player have a percentage of their damage reduced by their obtained slop kill achievments
+        currentHealth -= damageAmount * (1 - resistanceAchievements);
         if(damageNoise != null && damageTimer <= 0)
         {
             damageTimer = damageCooldown;
@@ -398,14 +400,23 @@ public class Health : MonoBehaviour
     {
         int healthUpAchievements = 0;
 
-        // If an achievement's reward contains the text "+5% health", add it to the tally of health up achievements
+        
         if (AchievementManager.Instance.database.achievements != null)
         {
+            // If an achievement's reward contains the text "+5% health", add it to the tally of health up achievements
             foreach (Achievement achievement in AchievementManager.Instance.database.achievements)
             {
                 if (achievement.unlocked && achievement.reward.Contains("+5% Health"))
                 {
                     healthUpAchievements++;
+                }
+            }
+            // If an achievement's reward contains the text "-2.5% damage recieved", add it to the tally of their resistance achievements
+            foreach (Achievement achievement in AchievementManager.Instance.database.achievements)
+            {
+                if (achievement.unlocked && achievement.reward.Contains("-2.5% damage recieved"))
+                {
+                    resistanceAchievements++;
                 }
             }
         }

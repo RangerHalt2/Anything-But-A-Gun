@@ -26,6 +26,8 @@ public class RoomWaveSpawner : MonoBehaviour
     private int PTOGain = 25;
 
     private bool waveOneSpawned = false;
+
+    private int bonusPTOAchievements = 0;
     
     private void Start()
     {
@@ -120,6 +122,14 @@ public class RoomWaveSpawner : MonoBehaviour
         {
             if(EconomyManager.Instance != null)
                 EconomyManager.Instance.PTOAmount += PTOGain;
+
+            // RL: roll chance for bonus money
+            int randomChance = UnityEngine.Random.Range(0, 101);
+            if (randomChance <= (bonusPTOAchievements * 5))
+            {
+                EconomyManager.Instance.PTOAmount += PTOGain;
+            }
+
             locked_doors = false;
             Debug.Log("ROOM WAVE SPAWNER - Doors unlocking");
             if (doorJingle != null)
@@ -138,6 +148,26 @@ public class RoomWaveSpawner : MonoBehaviour
             }
         }
 
+    }
+
+    private void OnEnable()
+    {
+        GameEvent.OnAchivementEarned += ApplyMetaRewards;
+    }
+    private void ApplyMetaRewards()
+    {
+        bonusPTOAchievements = 0;
+
+        if (AchievementManager.Instance.database.achievements != null)
+        {
+            foreach (Achievement achievement in AchievementManager.Instance.database.achievements)
+            {
+                if (achievement.unlocked && achievement.reward.Contains("+5% Chance for bonus PTO"))
+                {
+                    bonusPTOAchievements++;
+                }
+            }
+        }
     }
 
 }

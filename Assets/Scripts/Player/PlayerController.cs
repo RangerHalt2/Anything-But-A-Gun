@@ -73,6 +73,7 @@ public class PlayerController : MonoBehaviour
     [Header("Achievement Ability Settings")]
     [SerializeField] private bool canDoubleJump = false;
     private bool hasDoubleJumped = false;
+    [SerializeField] private bool dashUnlocked = false;
     [SerializeField] private int dashCooldownReduction = 0;
     private float baseDashChargeTime;
     [SerializeField] private int bonusDashes = 0;
@@ -190,10 +191,13 @@ public class PlayerController : MonoBehaviour
 
     private void StartDash()
     {
-        if (canDash && dashes > 0)
+        if(dashUnlocked)
         {
-            if(dashEffect != null) dashEffect.Play();
-            StartCoroutine(Dash());
+            if (canDash && dashes > 0)
+            {
+                if (dashEffect != null) dashEffect.Play();
+                StartCoroutine(Dash());
+            }
         }
     }
     
@@ -461,6 +465,12 @@ public class PlayerController : MonoBehaviour
             if (AchievementManager.Instance.CheckAchivementStatus("max_style"))
             {
                 canDoubleJump = true;
+            }
+            dashUnlocked = false;
+            // Check if player is allowed to dash
+            if (AchievementManager.Instance.CheckAchivementStatus("beat_first_enemy"))
+            {
+                dashUnlocked = true;
             }
             // Check for any dash cooldown reduction
             dashCooldownReduction = 0;

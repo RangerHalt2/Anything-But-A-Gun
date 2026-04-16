@@ -46,6 +46,9 @@ public class EnemyClass : MonoBehaviour
     [SerializeField] private int minGain = 3;
     [SerializeField] private int maxGain = 5;
 
+    [Header("MetaProgression")]
+    [SerializeField] private int bonusPTOAchievements = 0;
+
     public enum EnemyType
     {
         Common,
@@ -164,6 +167,32 @@ public class EnemyClass : MonoBehaviour
             EconomyManager.Instance.PTOAmount += randomGain;
         }
 
+        // RL: If the random chance was low enough to be under the chance provided by bonus PTO achievements, grant the player more money
+        if (randomChance <= (bonusPTOAchievements * 5))
+        {
+            randomGain = UnityEngine.Random.Range(minGain, maxGain);
+            EconomyManager.Instance.PTOAmount += randomGain;
+        }
+
     }
 
+    private void OnEnable()
+    {
+        GameEvent.OnAchivementEarned += ApplyMetaRewards;
+    }
+    private void ApplyMetaRewards()
+    {
+        bonusPTOAchievements = 0;
+
+        if (AchievementManager.Instance.database.achievements != null)
+        {
+            foreach (Achievement achievement in AchievementManager.Instance.database.achievements)
+            {
+                if (achievement.unlocked && achievement.reward.Contains("+5% Chance for bonus PTO"))
+                {
+                    bonusPTOAchievements++;
+                }
+            }
+        }
+    }
 }

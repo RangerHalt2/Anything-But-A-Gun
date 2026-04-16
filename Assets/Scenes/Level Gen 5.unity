@@ -2922,46 +2922,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5013945717278199119, guid: c4cecf56fea32d444aa58feb496b1000, type: 3}
   m_PrefabInstance: {fileID: 474705536}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &558212101 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8044337855506326763, guid: c8631f6c5c025d64b8f883334b0f7654, type: 3}
-  m_PrefabInstance: {fileID: 2089110825}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &558212105
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 558212101}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fc6b2e3a663a4e549b6e258c90c92239, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::HubLevelSender
-  LevelName: Level Gen 2
-  nextScenePos: {x: -5, y: 1, z: 16}
---- !u!65 &558212106
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 558212101}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.083798446, y: 1.7670984, z: 0.88729334}
-  m_Center: {x: -0.00006468596, y: 0.020251038, z: 0.44490898}
 --- !u!1 &567367371
 GameObject:
   m_ObjectHideFlags: 0
@@ -3772,46 +3732,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
---- !u!1 &879253799 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5286290968780298797, guid: c8631f6c5c025d64b8f883334b0f7654, type: 3}
-  m_PrefabInstance: {fileID: 2089110825}
-  m_PrefabAsset: {fileID: 0}
---- !u!65 &879253803
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 879253799}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.083798446, y: 1.7670984, z: 0.88729334}
-  m_Center: {x: -0.00006468596, y: 0.020251038, z: 0.44491065}
---- !u!114 &879253804
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 879253799}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fc6b2e3a663a4e549b6e258c90c92239, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::HubLevelSender
-  LevelName: Level Gen 3
-  nextScenePos: {x: 0, y: 0, z: 0}
 --- !u!1 &889804924
 GameObject:
   m_ObjectHideFlags: 0
@@ -5230,7 +5150,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::AchievementManager
   database:
     achievements: []
-  toggleAchivementState: 0
+  toggleAchivementState: 1
 --- !u!4 &1317919711
 Transform:
   m_ObjectHideFlags: 0
@@ -7861,24 +7781,12 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 899552185}
     - targetCorrespondingSourceObject: {fileID: 1158614090688138454, guid: c8631f6c5c025d64b8f883334b0f7654, type: 3}
-      insertIndex: 1
+      insertIndex: -1
       addedObject: {fileID: 1257531020}
     - targetCorrespondingSourceObject: {fileID: 6132579723231002485, guid: c8631f6c5c025d64b8f883334b0f7654, type: 3}
       insertIndex: 21
       addedObject: {fileID: 2036283911}
     m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 5286290968780298797, guid: c8631f6c5c025d64b8f883334b0f7654, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 879253804}
-    - targetCorrespondingSourceObject: {fileID: 5286290968780298797, guid: c8631f6c5c025d64b8f883334b0f7654, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 879253803}
-    - targetCorrespondingSourceObject: {fileID: 8044337855506326763, guid: c8631f6c5c025d64b8f883334b0f7654, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 558212106}
-    - targetCorrespondingSourceObject: {fileID: 8044337855506326763, guid: c8631f6c5c025d64b8f883334b0f7654, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 558212105}
     - targetCorrespondingSourceObject: {fileID: 9056617643553907493, guid: c8631f6c5c025d64b8f883334b0f7654, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2089110831}
