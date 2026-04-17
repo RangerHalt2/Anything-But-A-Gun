@@ -129,7 +129,7 @@ Transform:
   m_GameObject: {fileID: 1314255560871991140}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.21329999, y: -1.052, z: 0.11442}
+  m_LocalPosition: {x: -0.21329999, y: -1.204, z: 0.11442}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -218,7 +218,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1
+      scalar: 0.9
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -389,7 +389,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 35
+      scalar: 28
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -5159,21 +5159,21 @@ MonoBehaviour:
   baseDamage: 0
   levelDamage: 0
   fireRate: 0.33
-  reloadTime: 1
-  AmmoCapacity: 4
-  reserveAmmo: 12
+  reloadTime: 0.9
+  AmmoCapacity: 45
+  reserveAmmo: 450
   acceptablePackAPunchOptions:
   - {fileID: 11400000, guid: eca31965d964ef9468c904da4cdb57b8, type: 2}
   - {fileID: 11400000, guid: 9ac4c95993a3a534eaea2384cab0b872, type: 2}
   onomatopeiaVFX: {fileID: 8679181086491261877}
   onomatopeiaCooldown: 0
   shakeConfig:
-    duration: 0
-    impactX: 0
+    duration: 0.3
+    impactX: -2
     impactY: 0
-    impactZ: 0
-    frequencyX: 0
-  hasCustomShake: 0
+    impactZ: 0.2
+    frequencyX: 1
+  hasCustomShake: 1
   projectileSpawnPoint: {fileID: 2341579381627065503}
   gunShot2: {fileID: 653573502046088657, guid: 53d9a2124a2f1854d9a42f0be8da8c25, type: 3}
   gunShotTrans: {fileID: 3812552338003670470}
@@ -5190,12 +5190,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df2d13e84e38fb446a97a180533aba8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AmmoManager
-  maxAmmo: 120
-  reserveAmmo: 120
-  ammoCapacity: 4
-  currentAmmo: 4
-  ammoConsumption: 1
-  reloadTime: 1
+  maxAmmo: 450
+  reserveAmmo: 450
+  ammoCapacity: 45
+  currentAmmo: 45
+  ammoConsumption: 5
+  reloadTime: 0.9
   canCancelReload: 0
   reloadMode: 0
   crosshair: {fileID: 0}
