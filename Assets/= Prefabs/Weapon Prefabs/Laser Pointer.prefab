@@ -5042,7 +5042,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Hitscan
   teamID: 0
-  baseDamage: 10
+  baseDamage: 12
   growthRate: 1.15
   externalDmgMod: 1
   canCrit: 0
@@ -5079,7 +5079,7 @@ MonoBehaviour:
   currentAmmo: 100
   ammoConsumption: 1
   reloadTime: 0.5
-  canCancelReload: 1
+  canCancelReload: 0
   reloadMode: 0
   crosshair: {fileID: 0}
   ammoDisplayText: {fileID: 0}
@@ -5087,8 +5087,7 @@ MonoBehaviour:
   reloadEffect: {fileID: 6985806122707607359, guid: 95346eec370133543a2372ec2afd4783, type: 3}
   bottomlessMagazines: 0
   reloadVFX: {fileID: 1321751172093153757}
-  weaponObject:
-  - {fileID: 0}
+  weaponObject: []
 --- !u!65 &4591394418674582347
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5214,8 +5213,8 @@ MonoBehaviour:
   hasCustomShake: 1
   hitscan: {fileID: 3161134012043242097}
   currentHeat: 0
-  heatRate: 25
-  coolRate: 10
+  heatRate: 100
+  coolRate: 50
   heatFill: {fileID: 0}
   totalGauge: {fileID: 0}
 --- !u!135 &6221441326450053125
