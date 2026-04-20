@@ -1,8 +1,9 @@
 // Created By: Ryan Lupoli
 // Manages the player's ability to unlock achievements
 
-using UnityEngine;
+using System.Collections.Generic;
 using System.IO;
+using UnityEngine;
 
 public class AchievementManager : MonoBehaviour
 {
@@ -13,6 +14,29 @@ public class AchievementManager : MonoBehaviour
     private string lastAchievementID;
 
     string filePath;
+
+    [SerializeField]
+    private List<string> masterWeaponList = new List<string>()
+    {
+        "Breadcrumbs",
+        "Fire Extinguisher",
+        "Baseball Bat",
+        "Cat and Toast",
+        "Windbreaker",
+        "Volleyball",
+        "Cactus",
+        "Megaphone",
+        "Laser Pointer",
+        "Divorce Papers",
+        "Air Frier",
+        "Nose Dive",
+        "Paper Shuriken",
+        "Brush",
+        "Camera",
+        "Duck Duck Goose!",
+        "Knight",
+        "Lava Lamp"
+    };
 
     [Header("DEBUG/CHEATS")]
     [Tooltip("For testing purposes only. Allows for the achievment menu to lock or unlock a given achievement by holding Ctrl + Shift when clicking on one of the achievments")]
@@ -172,6 +196,7 @@ public class AchievementManager : MonoBehaviour
         GameEvent.OnWeaponModified += HandlePromotion;
         GameEvent.StyleMaxxed += HandleStyleMaxxed;
         GameEvent.spendPTO += HandleConsumerism;
+        GameEvent.OnWeaponPickup += CheckAllWeaponsCollected;
     }
 
     private void OnDisable()
@@ -214,6 +239,32 @@ public class AchievementManager : MonoBehaviour
     {
         UnlockAchievement("consumer");
     }
+
+    void CheckAllWeaponsCollected(GameObject weapon)
+    {
+        HashSet<string> combined = new HashSet<string>();
+
+        // Add run weapons
+        foreach (var w in RunDataRecorder.Instance.GetWeapons())
+            combined.Add(w);
+
+        // Add career weapons
+        foreach (var w in CareerDataRecorder.Instance.GetWeapons())
+            combined.Add(w);
+
+        // Check against master list
+        foreach (var required in masterWeaponList)
+        {
+            if (!combined.Contains(required))
+            {
+                return; // Missing at least one
+            }
+        }
+
+        // All collected
+        UnlockAchievement("weapon_master");
+    }
+
     #endregion
     #endregion
 

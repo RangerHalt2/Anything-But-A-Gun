@@ -103,6 +103,15 @@ public class WeaponSpawner : MonoBehaviour, IInteractable
         {
             SetPriceDisplay();
         }
+
+        // Check MetaProgression
+        // If player has the weapon_master acehivement, then slightly increaase the odds of finding rare weapons
+        if(AchievementManager.Instance.CheckAchivementStatus("weapon_master"))
+        {
+            commonWeaponWeight = 50;
+            uncommonWeaponWeight = 35;
+            rareWeaponWeight = 15;
+        }
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created

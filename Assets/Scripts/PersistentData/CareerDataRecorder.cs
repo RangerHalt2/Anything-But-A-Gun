@@ -1,4 +1,5 @@
 // Created By Ryan Lupoli
+using System.Collections.Generic;
 using System.IO;
 using Unity.IO;
 using UnityEngine;
@@ -44,6 +45,16 @@ public class CareerDataRecorder : MonoBehaviour
         // Add statistics from the current run to the player's career stats
         currentCareerData.enemiesKilled += RunDataRecorder.Instance.GetEnemiesKilled();
         currentCareerData.levelsCompleted += RunDataRecorder.Instance.GetLevelsCompleted();
+
+        // Merge weapon lists
+        foreach (var weapon in RunDataRecorder.Instance.GetWeapons())
+        {
+            if (!currentCareerData.weaponsCollected.Contains(weapon))
+            {
+                currentCareerData.weaponsCollected.Add(weapon);
+            }
+        }
+
         SaveCareerData();
     }
     #endregion
@@ -88,6 +99,11 @@ public class CareerDataRecorder : MonoBehaviour
     public int GetLevelsCompleted()
     {
         return currentCareerData.levelsCompleted;
+    }
+
+    public List<string> GetWeapons()
+    {
+        return currentCareerData.weaponsCollected;
     }
     #endregion
 }

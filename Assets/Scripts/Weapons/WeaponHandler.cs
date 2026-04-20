@@ -185,6 +185,11 @@ public class WeaponHandler : MonoBehaviour
             //Check if the weapon we're trying to pick up is of a type we already have
 
             WeaponClass newWeaponType = addWeapon.GetComponent<WeaponClass>();
+
+            // RL: Add weapon to run data list
+            string weaponName = newWeaponType.GetWeaponName();
+            RunDataRecorder.Instance.RecordWeapon(weaponName);
+
             GameEvent.OnWeaponPickup?.Invoke(addWeapon);
 
             System.Type newScriptName = newWeaponType.GetType();

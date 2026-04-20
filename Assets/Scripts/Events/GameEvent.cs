@@ -5,6 +5,7 @@ public static class GameEvent
     public static Action RunStarted; // Event to be called whenever the player starts a new run
     public static Action RunEnded; // Event to be called whenever the player ends a run
 
+    public static Action gainPTO; // Event to be called whenver the player earns PTO/Tokens
     public static Action spendPTO; // Event to be called whenever the player spends PTO/Tokens during a run
 
     public static Action<UnityEngine.GameObject> OnWeaponPickup; // Event to be triggered whenever a weapon is picked up by the player

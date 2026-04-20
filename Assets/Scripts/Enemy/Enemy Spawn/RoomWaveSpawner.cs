@@ -127,8 +127,9 @@ public class RoomWaveSpawner : MonoBehaviour
             int randomChance = UnityEngine.Random.Range(0, 101);
             if (randomChance <= (bonusPTOAchievements * 5))
             {
-                EconomyManager.Instance.PTOAmount += PTOGain;
+                EconomyManager.Instance.PTOAmount += bonusPTOAchievements * 2;
             }
+            GameEvent.gainPTO?.Invoke();
 
             locked_doors = false;
             Debug.Log("ROOM WAVE SPAWNER - Doors unlocking");

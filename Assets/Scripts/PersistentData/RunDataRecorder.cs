@@ -1,6 +1,7 @@
 // Created By: Ryan Lupoli
-using UnityEngine;
+using System.Collections.Generic;
 using System.IO;
+using UnityEngine;
 
 public class RunDataRecorder : MonoBehaviour
 {
@@ -52,6 +53,21 @@ public class RunDataRecorder : MonoBehaviour
     {
         currentRunData.levelsCompleted++;
         SaveRunData();
+    }
+
+    // Weapon Records
+    public void RecordWeapon(string weaponID)
+    {
+        if (!currentRunData.weaponsCollected.Contains(weaponID))
+        {
+            currentRunData.weaponsCollected.Add(weaponID);
+            SaveRunData();
+        }
+    }
+
+    public List<string> GetWeapons()
+    {
+        return currentRunData.weaponsCollected;
     }
 
     #endregion

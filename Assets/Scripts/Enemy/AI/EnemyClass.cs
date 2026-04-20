@@ -171,8 +171,9 @@ public class EnemyClass : MonoBehaviour
         if (randomChance <= (bonusPTOAchievements * 5))
         {
             randomGain = UnityEngine.Random.Range(minGain, maxGain);
-            EconomyManager.Instance.PTOAmount += randomGain;
+            EconomyManager.Instance.PTOAmount += bonusPTOAchievements * 2;
         }
+        GameEvent.gainPTO?.Invoke();
 
     }
 

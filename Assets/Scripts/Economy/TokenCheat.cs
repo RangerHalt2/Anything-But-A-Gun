@@ -19,7 +19,7 @@ public class TokenCheat : MonoBehaviour
 
     public void OnButtonPress()
     {
-        cheat.PTOAmount += 1000;
+        EconomyManager.Instance.ToggleInfinitePTO();
     }
 
 }
