@@ -191,7 +191,6 @@ GameObject:
   - component: {fileID: -6795824228135107553}
   - component: {fileID: 1751570449815843157}
   - component: {fileID: 8140062244997518222}
-  - component: {fileID: 4526440904185643024}
   - component: {fileID: -533308492436377045}
   m_Layer: 11
   m_Name: BrickPrefab
@@ -433,6 +432,7 @@ MonoBehaviour:
   chanceToGetMoney: 100
   minGain: 3
   maxGain: 4
+  bonusPTOAchievements: 0
   minSpeedMod: 0
   maxSpeedMod: 1.12
 --- !u!54 &8140062244997518222
@@ -462,44 +462,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &4526440904185643024
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3695943591121391829}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0bd3fd68f3e366e41ac0663b0c9bfed9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::EnemyClass
-  agent: {fileID: 0}
-  player: {fileID: 0}
-  whatIsPlayer:
-    serializedVersion: 2
-    m_Bits: 0
-  enemyBulletPrefab: {fileID: 0}
-  firePoint: {fileID: 0}
-  bulletForce: 10
-  patrolRange: 10
-  patrolWaitTime: 2
-  patrolTimer: 0
-  sightRange: 10
-  attackRange: 10
-  timeBetweenAttacks: 2.5
-  alreadyAttacked: 0
-  playerInSightRange: 0
-  playerInAttackRange: 0
-  detectionSprite: {fileID: 0}
-  detectionDisplayTime: 1
-  hasShownDetectionSprite: 0
-  enemyType: 0
-  height: 2
-  animator: {fileID: 0}
-  chanceToGetMoney: 100
-  minGain: 20
-  maxGain: 25
 --- !u!114 &-533308492436377045
 MonoBehaviour:
   m_ObjectHideFlags: 0

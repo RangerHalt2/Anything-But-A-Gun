@@ -153,7 +153,6 @@ GameObject:
   - component: {fileID: 1858845626273565094}
   - component: {fileID: 8718023588053921820}
   - component: {fileID: 6419318689120893974}
-  - component: {fileID: 4646116291724292716}
   - component: {fileID: -6636612442443407467}
   - component: {fileID: 7393537880825903831}
   m_Layer: 11
@@ -302,7 +301,7 @@ MonoBehaviour:
   healthBar: {fileID: 5809989467138609651}
   healthDisplayText: {fileID: 0}
   hitEffect: {fileID: 1679044714977926775, guid: 227ededbef0066649ae73724748f7732, type: 3}
-  deathEffect: {fileID: 615666183915522401, guid: 9240d42a70497a842b241983850f223e, type: 3}
+  deathEffect: {fileID: 615666183915522401, guid: 8db1a4ef1c7ddb94e9b2b973e85bc534, type: 3}
   isPlayer: 0
   EXPDrop: 0
   gameOverCanvas: {fileID: 0}
@@ -373,6 +372,7 @@ MonoBehaviour:
   chanceToGetMoney: 100
   minGain: 3
   maxGain: 4
+  bonusPTOAchievements: 0
   minRange: 12
   maxRange: 14
   orbitWidthMultiplier: 1.5
@@ -403,44 +403,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &4646116291724292716
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4925705786666085929}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0bd3fd68f3e366e41ac0663b0c9bfed9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::EnemyClass
-  agent: {fileID: 0}
-  player: {fileID: 0}
-  whatIsPlayer:
-    serializedVersion: 2
-    m_Bits: 0
-  enemyBulletPrefab: {fileID: 0}
-  firePoint: {fileID: 0}
-  bulletForce: 10
-  patrolRange: 10
-  patrolWaitTime: 2
-  patrolTimer: 0
-  sightRange: 10
-  attackRange: 40
-  timeBetweenAttacks: 1
-  alreadyAttacked: 0
-  playerInSightRange: 0
-  playerInAttackRange: 0
-  detectionSprite: {fileID: 0}
-  detectionDisplayTime: 1
-  hasShownDetectionSprite: 0
-  enemyType: 0
-  height: 2
-  animator: {fileID: 7393537880825903831}
-  chanceToGetMoney: 100
-  minGain: 20
-  maxGain: 25
 --- !u!114 &-6636612442443407467
 MonoBehaviour:
   m_ObjectHideFlags: 0
