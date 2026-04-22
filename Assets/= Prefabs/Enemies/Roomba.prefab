@@ -128,6 +128,7 @@ Transform:
   - {fileID: 8378687411455663180}
   - {fileID: 3826878261159736641}
   - {fileID: 4876459247673353389}
+  - {fileID: 8560383769431504032}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &7953701135046522539
@@ -253,13 +254,14 @@ MonoBehaviour:
   inGameCanvas: {fileID: 0}
   isDead: 0
   damageNoise: {fileID: 1266429678925616217, guid: 105827fd80746ec49a5f35d0745d40fe, type: 3}
+  deathNoise: []
   style: {fileID: 0}
   ShiningArmor: 0
-  bloodVFX: {fileID: 0}
+  bloodVFX: {fileID: 7883801120159092834}
   minParticle: 0
-  maxParticle: 0
-  minSpeed: 0
-  maxSpeed: 0
+  maxParticle: 40
+  minSpeed: 10
+  maxSpeed: 60
   infiniteHealthOn: 0
   end: {fileID: 0}
 --- !u!114 &-6795824228135107553
@@ -313,6 +315,7 @@ MonoBehaviour:
   chanceToGetMoney: 100
   minGain: 3
   maxGain: 4
+  bonusPTOAchievements: 0
   patrolDistance: 10
   patrolSpeed: 10
   navEdgeCheckDistance: 2
@@ -5379,6 +5382,73 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 3.36, y: 0.32, z: 1}
   m_Center: {x: 0, y: 1.98, z: 0}
+--- !u!1001 &1912500878994728282
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 6292279698727766}
+    m_Modifications:
+    - target: {fileID: 1157521579065441630, guid: 59bc3e176849cac41ab5ee37966f4582, type: 3}
+      propertyPath: m_Name
+      value: CogBolt Particles
+      objectReference: {fileID: 0}
+    - target: {fileID: 7801930844706279930, guid: 59bc3e176849cac41ab5ee37966f4582, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7801930844706279930, guid: 59bc3e176849cac41ab5ee37966f4582, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.1531695
+      objectReference: {fileID: 0}
+    - target: {fileID: 7801930844706279930, guid: 59bc3e176849cac41ab5ee37966f4582, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7801930844706279930, guid: 59bc3e176849cac41ab5ee37966f4582, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7801930844706279930, guid: 59bc3e176849cac41ab5ee37966f4582, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7801930844706279930, guid: 59bc3e176849cac41ab5ee37966f4582, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7801930844706279930, guid: 59bc3e176849cac41ab5ee37966f4582, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7801930844706279930, guid: 59bc3e176849cac41ab5ee37966f4582, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7801930844706279930, guid: 59bc3e176849cac41ab5ee37966f4582, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7801930844706279930, guid: 59bc3e176849cac41ab5ee37966f4582, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 59bc3e176849cac41ab5ee37966f4582, type: 3}
+--- !u!198 &7883801120159092834 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 8638592601235305784, guid: 59bc3e176849cac41ab5ee37966f4582, type: 3}
+  m_PrefabInstance: {fileID: 1912500878994728282}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &8560383769431504032 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7801930844706279930, guid: 59bc3e176849cac41ab5ee37966f4582, type: 3}
+  m_PrefabInstance: {fileID: 1912500878994728282}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2277931602616429104
 PrefabInstance:
   m_ObjectHideFlags: 0
