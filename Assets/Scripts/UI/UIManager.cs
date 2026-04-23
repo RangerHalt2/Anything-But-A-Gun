@@ -15,6 +15,7 @@ public class UIManager : MonoBehaviour
     public int currentPage = 0;
     [Tooltip("The index of the page the UI should start on when the UI Manager starts up.")]
     public int defaultPage = 0;
+    private int previousPage = 0;
 
     [Header("Pause Settings")]
     [Tooltip("Reference to InputActions Asset.")]
@@ -80,6 +81,7 @@ public class UIManager : MonoBehaviour
     private void InitilizeFirstPage()
     {
         GoToPage(defaultPage);
+        currentPage = pausePageIndex;
     }
 
     // Toggles whether or not the game is currently paused
@@ -92,25 +94,38 @@ public class UIManager : MonoBehaviour
             // If the game is currently paused, un-pause it
             if (isPaused)
             {
-                // Go to the default UI Page
-                GoToPage(defaultPage);
-                // Set time scale to 1 (normal speed)
-                Time.timeScale = 1f;
-                // Lock the cursor
-                Cursor.lockState = CursorLockMode.Locked;
-                Cursor.visible = false;
-                // Update pause boolean
-                isPaused = false;
+                // If the current page is the pause menu, un-pause the game
+                if (currentPage == pausePageIndex)
+                {
+                    // Go to the default UI Page
+                    GoToPage(defaultPage);
+                    currentPage = defaultPage;
+                    // Set time scale to 1 (normal speed)
+                    Time.timeScale = 1f;
+                    // Lock the cursor
+                    Cursor.lockState = CursorLockMode.Locked;
+                    Cursor.visible = false;
+                    // Update pause boolean
+                    isPaused = false;
 
-                Health playerHealth = GameObject.FindAnyObjectByType<PlayerController>().GetComponent<Health>();
-                playerHealth.updateDisplay();
-
+                    Health playerHealth = GameObject.FindAnyObjectByType<PlayerController>().GetComponent<Health>();
+                    playerHealth.updateDisplay();
+                    return;
+                }
+                // If the current page is not the pause menu, then try to go to the previous page
+                else
+                {
+                    GoToPage(previousPage);
+                    return;
+                }
             }
             // If the game is not currently paused, pause it
             else
             {
                 // Go to pause UI Page
+                previousPage = currentPage;
                 GoToPage(pausePageIndex);
+                currentPage = pausePageIndex;
                 // Set time scale to 0 (frozen)
                 Time.timeScale = 0f;
                 // Lock the cursor
@@ -118,6 +133,7 @@ public class UIManager : MonoBehaviour
                 Cursor.visible = true;
                 // Update pause boolean
                 isPaused = true;
+                return;
             }
         }
     }
@@ -131,7 +147,9 @@ public class UIManager : MonoBehaviour
             // Disable all pages
             SetActiveAllPages(false);
             // Activate the specified page
+            previousPage = currentPage;
             pages[pageIndex].gameObject.SetActive(true);
+            currentPage = pageIndex;
         }
     }
 
