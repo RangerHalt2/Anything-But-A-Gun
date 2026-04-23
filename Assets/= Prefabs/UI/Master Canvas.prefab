@@ -438,7 +438,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 191
+  m_fontSize: 190.95
   m_fontSizeBase: 75
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -5849,7 +5849,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2046139538615492707
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6768,7 +6768,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 347.3
+  m_fontSize: 347.25
   m_fontSizeBase: 75
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -7445,7 +7445,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &8488512082390106947
 RectTransform:
   m_ObjectHideFlags: 0
@@ -14142,6 +14142,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Achievement PopUp
       objectReference: {fileID: 0}
+    - target: {fileID: 6940219395262152685, guid: 948f8aa739cd3b845830c1102640a4bf, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8991212441747564505, guid: 948f8aa739cd3b845830c1102640a4bf, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -14747,13 +14751,33 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7117915342683532642, guid: 11ed71354e2769741badfa2e9b85c907, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2815901693085244942}
   m_SourcePrefab: {fileID: 100100000, guid: 11ed71354e2769741badfa2e9b85c907, type: 3}
 --- !u!224 &108525092138708398 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3716626823722760354, guid: 11ed71354e2769741badfa2e9b85c907, type: 3}
   m_PrefabInstance: {fileID: 3608951860499191052}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &5823850112245201006 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7117915342683532642, guid: 11ed71354e2769741badfa2e9b85c907, type: 3}
+  m_PrefabInstance: {fileID: 3608951860499191052}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2815901693085244942
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5823850112245201006}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7dee764704420294a8d55beebba19491, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HealthBarIndicator
 --- !u!1001 &4222464579104512494
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14772,11 +14796,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2777997438869525172, guid: c5cd46d94f6b2164e984c868c9ecdba7, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2777997438869525172, guid: c5cd46d94f6b2164e984c868c9ecdba7, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2777997438869525172, guid: c5cd46d94f6b2164e984c868c9ecdba7, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -14785,6 +14809,10 @@ PrefabInstance:
     - target: {fileID: 4721939898450590464, guid: c5cd46d94f6b2164e984c868c9ecdba7, type: 3}
       propertyPath: m_Name
       value: LoadingScreen
+      objectReference: {fileID: 0}
+    - target: {fileID: 4721939898450590464, guid: c5cd46d94f6b2164e984c868c9ecdba7, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4789774226828267547, guid: c5cd46d94f6b2164e984c868c9ecdba7, type: 3}
       propertyPath: m_IsActive
@@ -16480,11 +16508,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7180094443454843995, guid: 11ed71354e2769741badfa2e9b85c907, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7180094443454843995, guid: 11ed71354e2769741badfa2e9b85c907, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7180094443454843995, guid: 11ed71354e2769741badfa2e9b85c907, type: 3}
       propertyPath: m_SizeDelta.x

@@ -32,6 +32,8 @@ public class Health : MonoBehaviour
     [SerializeField] public HealthBar healthBar;
     [Tooltip("Reference to TMPro Object used to track current AP. Optional.")]
     [SerializeField] private TextMeshProUGUI healthDisplayText;
+    [Tooltip("Reference to Prefab of healthbar. (THIS IS A WORKAROUND FOR THE BOSS)")]
+    [SerializeField] private GameObject healthBarPrefab;
 
     [Header("Effect Settings")]
     [Tooltip("Reference to prefab for an effect which triggers when the object recieves damage. Optional.")]
@@ -43,6 +45,8 @@ public class Health : MonoBehaviour
 
     [Tooltip("Toggle this if this is on the player")]
     [SerializeField] private bool isPlayer;
+    [Tooltip("Toggle this if this is on the boss")]
+    [SerializeField] private bool isBoss;
     [Tooltip("How much EXP is given to the player on this NPC's death? Doesn't matter if it's the player")]
     [SerializeField] private float EXPDrop;
     private Player_Level playerLevel;
@@ -85,15 +89,10 @@ public class Health : MonoBehaviour
     public EndingGrade end; // added by Aaron
     private bool endScorePlaying; // added by Aaron
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private void Awake()
     {
-        style = (StyleGaugeController)FindFirstObjectByType(typeof(StyleGaugeController));
-        playerLevel = GameObject.FindAnyObjectByType<Player_Level>();
-        isDead = false;
-        endScorePlaying = false; // added by Aaron
-        initialMaxHealth = maxHealth;
-        // Automatically kill object if it has 0 or less health
+        if (GameObject.FindAnyObjectByType<StyleGaugeController>() != null)
+            inGameCanvas = GameObject.FindAnyObjectByType<StyleGaugeController>().gameObject;
 
         if (isPlayer)
         {
@@ -106,11 +105,47 @@ public class Health : MonoBehaviour
 
             if (GameObject.FindAnyObjectByType<EndingGrade>() != null)
                 gameOverCanvas = GameObject.FindAnyObjectByType<EndingGrade>().gameObject;
-
-            if(GameObject.FindAnyObjectByType<StyleGaugeController>() != null)
-                inGameCanvas = GameObject.FindAnyObjectByType<StyleGaugeController>().gameObject;
         }
 
+        if (isBoss)
+        {
+            if (healthBarPrefab != null && inGameCanvas != null)
+            {
+                GameObject bossBarInstance = Instantiate(healthBarPrefab, inGameCanvas.transform);
+
+                // Set position (UI uses RectTransform!)
+                RectTransform rt = bossBarInstance.GetComponent<RectTransform>();
+                rt.anchoredPosition = new Vector2(720f, 780f);
+                rt.localScale = Vector3.one;
+
+                // Assign HealthBar script
+                healthBar = bossBarInstance.GetComponent<HealthBar>();
+
+                if (healthBar != null)
+                {
+                    Debug.Log("HEALTH - Boss health bar instantiated and assigned.");
+                }
+                else
+                {
+                    Debug.LogWarning("HEALTH - Prefab missing HealthBar component!");
+                }
+            }
+            else
+            {
+                Debug.LogWarning("HEALTH - Missing healthBarPrefab or inGameCanvas!");
+            }
+        }
+    }
+
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    void Start()
+    {
+        style = (StyleGaugeController)FindFirstObjectByType(typeof(StyleGaugeController));
+        playerLevel = GameObject.FindAnyObjectByType<Player_Level>();
+        isDead = false;
+        endScorePlaying = false; // added by Aaron
+        initialMaxHealth = maxHealth;
+        // Automatically kill object if it has 0 or less health
         if (currentHealth <= 0)
         {
             Debug.Log(gameObject.name + "'s Initial Health was equal to or less than 0. They have been automatically destroyed.");
@@ -157,13 +192,14 @@ public class Health : MonoBehaviour
         }
         // Subtract the damage amount from the health of the object
         // Player have a percentage of their damage reduced by their obtained slop kill achievments
-        currentHealth -= damageAmount * (1 - resistanceAchievements);
-        if(damageNoise != null && damageTimer <= 0)
+        float recievedDamage = damageAmount * (1 - (resistanceAchievements * .025f));
+        currentHealth -= recievedDamage;
+        if (damageNoise != null && damageTimer <= 0)
         {
             damageTimer = damageCooldown;
             Instantiate(damageNoise, transform.position, transform.rotation, null);
         }
-        Debug.Log(gameObject.name + " took " + damageAmount + " damage. Current Health: " + currentHealth + "/" + maxHealth + ".");
+        Debug.Log(gameObject.name + " took " + recievedDamage + " damage. Current Health: " + currentHealth + "/" + maxHealth + ".");
         updateDisplay();
 
         if (isPlayer) //EW: Added to make the player lose score after taking damage.
@@ -278,6 +314,14 @@ public class Health : MonoBehaviour
             }
         }
 
+        if (isBoss)
+        {
+            if(healthBar != null)
+            {
+                Destroy(healthBar);
+            }
+        }
+
         // Destroy the game object
         Debug.Log(gameObject.name + " has died.");
         if (!isPlayer)
@@ -377,17 +421,8 @@ public class Health : MonoBehaviour
             healthDisplayText.text = string.Format(currentHealth + " / " + maxHealth);
         }
 
-        // If there is a healthBar assigned
-        if (healthBar != null)
-        {
-            healthBar.Activate();
-            healthBar.SetHealth(currentHealth);
-            healthBarActive = true;
-        }
-        else
-        {
-            Debug.Log("HEALTH - The Health Bar is null");
-        }
+        // Enable the healthbar
+        EnableHealthBar();
     }
 
     #region MetaProgression
@@ -460,5 +495,19 @@ public class Health : MonoBehaviour
             GameObject randomShot = Instantiate(selected, followTrans.position, Quaternion.identity);
         }
         //MovingAudio movingAudio = randomShot AddComponent<MovingAudio>();
+    }
+
+    public void EnableHealthBar()
+    {
+        if (healthBar != null)
+        {
+            healthBar.Activate();
+            healthBar.SetHealth(currentHealth);
+            healthBarActive = true;
+        }
+        else
+        {
+            Debug.Log("HEALTH - The Health Bar is null");
+        }
     }
 }
