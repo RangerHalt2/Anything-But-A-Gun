@@ -115,8 +115,18 @@ public class UIManager : MonoBehaviour
                 // If the current page is not the pause menu, then try to go to the previous page
                 else
                 {
-                    GoToPage(previousPage);
-                    return;
+                    // If current Page is 7, 8 , or 9
+                    if(currentPage == 7 || currentPage == 8 || currentPage == 9)
+                    {
+                        // Go to pause page
+                        GoToPage(pausePageIndex);
+                    }
+                    // If any other page, go to the previous page
+                    else
+                    {
+                        GoToPage(previousPage);
+                        return;
+                    }
                 }
             }
             // If the game is not currently paused, pause it
