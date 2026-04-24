@@ -777,7 +777,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 579397576798918672, guid: caa24201197b26b479e66c072d7d3e13, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -10.6502075
+      value: -10.6501465
       objectReference: {fileID: 0}
     - target: {fileID: 654407675536531757, guid: caa24201197b26b479e66c072d7d3e13, type: 3}
       propertyPath: m_IsActive
@@ -5556,6 +5556,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1486653211}
   m_CullTransparentMesh: 1
+--- !u!114 &1509064255 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3781046402072610160, guid: caa24201197b26b479e66c072d7d3e13, type: 3}
+  m_PrefabInstance: {fileID: 266335554}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
 --- !u!1001 &1515023986
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7125,6 +7136,10 @@ PrefabInstance:
       value: 0.913
       objectReference: {fileID: 0}
     - target: {fileID: 5808801276267967896, guid: 6e79526cb5b40544c91f9ac79610f37c, type: 3}
+      propertyPath: denyText
+      value: 
+      objectReference: {fileID: 1509064255}
+    - target: {fileID: 5808801276267967896, guid: 6e79526cb5b40544c91f9ac79610f37c, type: 3}
       propertyPath: dashSound
       value: 
       objectReference: {fileID: 5383701307693267320, guid: 2d5ca1d5bd3429b418eb2fd209337431, type: 3}
@@ -7527,6 +7542,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc6b2e3a663a4e549b6e258c90c92239, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HubLevelSender
+  denials: []
   LevelName: Level Gen 4
   nextScenePos: {x: 0, y: 0, z: 0}
 --- !u!1 &2037097090
@@ -7860,6 +7876,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc6b2e3a663a4e549b6e258c90c92239, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HubLevelSender
+  denials: []
   LevelName: Level Gen 2
   nextScenePos: {x: 0, y: 0, z: 0}
 --- !u!65 &2089110829
@@ -8074,6 +8091,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc6b2e3a663a4e549b6e258c90c92239, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HubLevelSender
+  denials: []
   LevelName: Level Gen 3
   nextScenePos: {x: 0, y: 0, z: 0}
 --- !u!135 &2105000221

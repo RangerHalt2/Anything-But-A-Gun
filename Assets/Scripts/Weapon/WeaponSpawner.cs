@@ -50,6 +50,9 @@ public class WeaponSpawner : MonoBehaviour, IInteractable
     [SerializeField] private GameObject weaponShopCanvas;
     [Tooltip("Reference to the TMPro object which displays the weapons price.")]
     [SerializeField] private TextMeshProUGUI weaponPriceTextbox;
+
+    [SerializeField] private string[] denials = new string[0];
+    public string[] denyText { get { return denials; } set { denials = value; } }
     // Reference to the Economy Manager
     private EconomyManager economyManager;
 
@@ -157,7 +160,11 @@ public class WeaponSpawner : MonoBehaviour, IInteractable
                     SpawnWeapon();
                 }
             }
-            return;
+            else 
+            {
+                GameObject.FindAnyObjectByType<PlayerController>().GetComponent<PlayerController>().DenyInteract(denyText[0]);
+            }
+                return;
         }
         // If a weapon has not spawned, and it is not a shop
         if (!weaponSpawned)

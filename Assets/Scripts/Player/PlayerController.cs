@@ -66,7 +66,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private LayerMask interactableMask;
     [SerializeField] private float interactCooldown = 0.5f;
     [SerializeField] public TextMeshProUGUI interactionText;
+    [SerializeField] public TextMeshProUGUI denyText;
     private bool canInteract = true;
+    private bool interactFail = false; //There was an interact failure.
 
     public bool isSpawned = false;
 
@@ -136,6 +138,10 @@ public class PlayerController : MonoBehaviour
         {
             interactionText = GameObject.FindAnyObjectByType<InteractionTextIndicator>().GetComponent<TextMeshProUGUI>();
 
+        }
+        if (GameObject.FindAnyObjectByType<DenialTextIndicator>()) 
+        {
+            denyText = GameObject.FindAnyObjectByType<DenialTextIndicator>().GetComponent<TextMeshProUGUI>();
         }
     }
 
@@ -413,7 +419,7 @@ public class PlayerController : MonoBehaviour
         if (Physics.Raycast(ray, out RaycastHit hit, interactRange, interactableMask))
         {
             IInteractable interact = hit.collider.gameObject.GetComponent<IInteractable>();
-            if (interactionText != null && interact.canInteract)
+            if (interactionText != null && interact.canInteract && !interactFail)
             {
                 //Debug.Log("PLAYERCONTROLLER - Interactable true");
                 interactionText.enabled = true;
@@ -446,6 +452,42 @@ public class PlayerController : MonoBehaviour
             interactionText.gameObject.SetActive(false);
         }
     }
+
+    public void DenyInteract(string text) 
+    {
+        Debug.Log("PlayerController DenyInteract " + text);
+        //Start Coroutine (So we can wait a second)
+        StartCoroutine(Denial(text));
+        
+    }
+
+    private IEnumerator Denial(string text) 
+    {
+        interactFail = true;
+        //Turn off interact text
+        LeftInteract();
+        if (denyText != null) 
+        {
+            //Change deny interact text to string (which comes from the IInteractible object and depends on the item)
+            denyText.text = text;
+
+            //Turn on deny interact text
+            denyText.enabled = true;
+            denyText.gameObject.SetActive(true);
+
+            //Wait a few seconds (turn off the ability to interact. IInteract will be a problem with making the interact text not reappear, or not reappearing when it,s done... OH! Just run CheckInteract again!!)
+            yield return new WaitForSeconds(3);
+
+            //Turn deny interact text off
+            denyText.enabled = false;
+            denyText.gameObject.SetActive(false);
+
+            CheckInteract();
+        }
+
+        interactFail = false;
+    }
+
     #endregion
     // RL: Code related to achievments and meta-progression
     #region Achievement Code

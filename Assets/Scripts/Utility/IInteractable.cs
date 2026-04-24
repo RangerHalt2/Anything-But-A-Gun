@@ -4,5 +4,7 @@ public interface IInteractable
 {
     bool canInteract { get; set; }
 
+    string[] denyText { get; set; }
+
     void Interact();
 }

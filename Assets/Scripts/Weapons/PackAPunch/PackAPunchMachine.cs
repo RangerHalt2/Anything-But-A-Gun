@@ -8,6 +8,9 @@ public class PackAPunchMachine : MonoBehaviour, IInteractable
     [SerializeField] private Transform placeWeaponLocation;
     [SerializeField] private GameObject[] visualSparks;
 
+    [SerializeField] private string[] denials = new string[1];
+    public string[] denyText { get { return denials; } set { denials = value; } }
+
     [SerializeField] private int price;
 
     private WeaponHandler wh;
@@ -34,14 +37,26 @@ public class PackAPunchMachine : MonoBehaviour, IInteractable
         Debug.Log("Pack-A-Punch Machine Begin");
         wh = GameObject.FindAnyObjectByType<WeaponHandler>();
         wc = wh.currentWeapon.GetComponent<WeaponClass>();
+        Debug.Log(wc);
+        Debug.Log(wh);
 
         if (EconomyManager.Instance == null || EconomyManager.Instance.PTOAmount < price)
         {
             Debug.Log("PACK A PUNCH MACINE - the player does not have enough money or the EconomyManager is null");
+            GameObject.FindAnyObjectByType<PlayerController>().GetComponent<PlayerController>().DenyInteract(denyText[0]);
             return;
         }
+        else if (wh.currentWeapon.GetComponent<StaplerScript>())
+        {
+            if (wc == wh.currentWeapon.GetComponent<StaplerScript>())
+            {
+                Debug.Log("Pack-a-Punch - Denied");
+                GameObject.FindAnyObjectByType<PlayerController>().GetComponent<PlayerController>().DenyInteract(denyText[1]);
+                return;
+            }
+        }
 
-        if(wc != null && wc.GetPackAPunchIndex() == -1 && counter < numOfUses)
+        if (wc != null && wc.GetPackAPunchIndex() == -1 && counter < numOfUses)
         {
             Debug.Log("Pack-A-Punch Machine determined it can be added");
             int selectedPunch = Random.Range(0, wc.GetPackAPunchLength());
@@ -61,6 +76,11 @@ public class PackAPunchMachine : MonoBehaviour, IInteractable
                     obj.SetActive(false);
                 }
             }
+        }
+        else if (counter >= numOfUses)
+        {
+            GameObject.FindAnyObjectByType<PlayerController>().GetComponent<PlayerController>().DenyInteract(denyText[2]);
+            return;
         }
     }
 

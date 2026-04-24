@@ -16,6 +16,9 @@ public class ShredderButton: MonoBehaviour, IInteractable
     [SerializeField] private LayerMask interactableLayer;
     [SerializeField] private BoxCollider boxTrigger;
 
+    [SerializeField] private string[] denials = new string[0];
+    public string[] denyText { get { return denials; } set { denials = value; } }
+
     private void Start() 
     {
         pc = GameObject.FindAnyObjectByType<PlayerController>();
@@ -43,11 +46,11 @@ public class ShredderButton: MonoBehaviour, IInteractable
             Quaternion orientation = transform.rotation;
             Collider[] hits = Physics.OverlapBox(center, halfExtents, orientation, interactableLayer);
             bool containsWeapon = false;
-            foreach (Collider weapon in hits) 
+            foreach (Collider weapon in hits)
             {
                 WeaponClass check = weapon.gameObject.GetComponent<WeaponClass>();
-                if (check != null) 
-                { 
+                if (check != null)
+                {
                     containsWeapon = true;
                     uniqueObjects.Add(check.gameObject);
                 }
@@ -57,6 +60,11 @@ public class ShredderButton: MonoBehaviour, IInteractable
             {
                 StartCoroutine(Shredder());
             }
+        }
+        else 
+        {
+            GameObject.FindAnyObjectByType<PlayerController>().GetComponent<PlayerController>().DenyInteract(denyText[0]);
+            return;
         }
     }
 

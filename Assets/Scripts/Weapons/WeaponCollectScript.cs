@@ -8,6 +8,8 @@ public class WeaponCollectScript : MonoBehaviour, IInteractable
     public bool collected = false;
 
     public bool canInteract { get; set; } = true;
+    [SerializeField] private string[] denials = new string[0];
+    public string[] denyText { get { return denials; } set { denials = value; } }
 
     /*void OnTriggerEnter(Collider _other) 
     {

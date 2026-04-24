@@ -4,6 +4,9 @@ public class AmmoDispenser : MonoBehaviour, IInteractable
 {
     public bool canInteract { get; set; } = true;
 
+    [SerializeField] private string[] denials = new string[0];
+    public string[] denyText { get { return denials; } set { denials = value; } }
+
     public int numOfUses = 10000000; //Public because this is going to be changed later and fuck getters amirite or amirite
     private int counter = 0;
     public int price; //How much an ammo box costs 
@@ -26,11 +29,16 @@ public class AmmoDispenser : MonoBehaviour, IInteractable
             Debug.Log("Ammo Dispenser Spawned Ammo");
             Instantiate(ammoBox, placeAmmoLocation.position, Quaternion.identity);
             counter++;
-            
+
             if (counter >= numOfUses)
             {
                 canInteract = false;
             }
+        }
+        else 
+        {
+            Debug.Log("Ammo Dispenser - Denied");
+            GameObject.FindAnyObjectByType<PlayerController>().GetComponent<PlayerController>().DenyInteract(denyText[0]);
         }
     }
 

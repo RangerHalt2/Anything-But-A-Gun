@@ -50,6 +50,9 @@ public class WeaponChest : MonoBehaviour, IInteractable
 
     private List<GameObject> spawnedWeapons = new List<GameObject>();
 
+    [SerializeField] private string[] denials = new string[0];
+    public string[] denyText { get { return denials; } set { denials = value; } }
+
     public bool canInteract { get; set; } = true;
     #endregion
 

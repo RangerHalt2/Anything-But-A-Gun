@@ -12,6 +12,9 @@ public class AmmoBox : MonoBehaviour, IInteractable
 
     public int magazineGain = 2; //Number of full magazines that the weapon gets upon pickup.
 
+    [SerializeField] private string[] denials = new string[0];
+    public string[] denyText { get { return denials; } set { denials = value; } }
+
     public void Interact() 
     {
         wh = GameObject.FindAnyObjectByType<WeaponHandler>();

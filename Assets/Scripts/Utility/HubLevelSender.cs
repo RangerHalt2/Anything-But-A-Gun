@@ -3,6 +3,9 @@ using UnityEngine.Rendering;
 
 public class HubLevelSender : MonoBehaviour, IInteractable
 {
+    [SerializeField] private string[] denials = new string[0];
+    public string[] denyText { get { return denials; } set { denials = value; } }
+
     [SerializeField] private string LevelName;
     private SceneController sceneController;
     [SerializeField] private Vector3 nextScenePos;
