@@ -126,7 +126,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 10, y: 3.56, z: 1}
+  m_Size: {x: 10, y: 3.56, z: 5}
   m_Center: {x: 0.021569218, y: 2.97, z: 0}
 --- !u!1 &3183115842390308597
 GameObject:
@@ -432,8 +432,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 10, y: 6.16, z: 1}
-  m_Center: {x: 0, y: -1.92, z: 0}
+  m_Size: {x: 10, y: 6.86, z: 5}
+  m_Center: {x: 0, y: -2.25, z: 0}
 --- !u!1 &6869341791139861971
 GameObject:
   m_ObjectHideFlags: 0
@@ -641,9 +641,11 @@ MonoBehaviour:
   healthBarActiveOnStartup: 0
   healthBar: {fileID: 1355918863046188060}
   healthDisplayText: {fileID: 0}
+  healthBarPrefab: {fileID: 0}
   hitEffect: {fileID: 1679044714977926775, guid: 227ededbef0066649ae73724748f7732, type: 3}
   deathEffect: {fileID: 615666183915522401, guid: 9240d42a70497a842b241983850f223e, type: 3}
   isPlayer: 0
+  isBoss: 0
   EXPDrop: 0
   gameOverCanvas: {fileID: 0}
   inGameCanvas: {fileID: 0}
@@ -656,7 +658,7 @@ MonoBehaviour:
   ShiningArmor: 0
   bloodVFX: {fileID: 1507508908773131031}
   minParticle: 0
-  maxParticle: 40
+  maxParticle: 20
   minSpeed: 10
   maxSpeed: 60
   infiniteHealthOn: 0
@@ -683,10 +685,10 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 0
+  m_UseGravity: 1
   m_IsKinematic: 1
   m_Interpolate: 0
-  m_Constraints: 4
+  m_Constraints: 122
   m_CollisionDetection: 0
 --- !u!114 &640667046206538452
 MonoBehaviour:

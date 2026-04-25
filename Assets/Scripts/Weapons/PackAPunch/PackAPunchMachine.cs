@@ -82,6 +82,11 @@ public class PackAPunchMachine : MonoBehaviour, IInteractable
             GameObject.FindAnyObjectByType<PlayerController>().GetComponent<PlayerController>().DenyInteract(denyText[2]);
             return;
         }
+        else if (wc.GetPackAPunchIndex() != -1)
+        {
+            GameObject.FindAnyObjectByType<PlayerController>().GetComponent<PlayerController>().DenyInteract(denyText[3]);
+            return;
+        }
     }
 
 
