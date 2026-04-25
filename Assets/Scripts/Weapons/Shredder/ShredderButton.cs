@@ -60,6 +60,11 @@ public class ShredderButton: MonoBehaviour, IInteractable
             {
                 StartCoroutine(Shredder());
             }
+            else
+            {
+                GameObject.FindAnyObjectByType<PlayerController>().GetComponent<PlayerController>().DenyInteract(denyText[1]);
+                return;
+            }
         }
         else 
         {
