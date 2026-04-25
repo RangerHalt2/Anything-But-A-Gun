@@ -183,6 +183,7 @@ public class Health : MonoBehaviour
     // Applies a certain amount of damage to an object
     public void TakeDamage(float damageAmount, Transform sourcePosition)
     {
+        if (isDead) return;
         if (infiniteHealthOn) return;
         if (ShiningArmor)
         {
@@ -287,6 +288,7 @@ public class Health : MonoBehaviour
         // Applies a certain amount of healing to an object
         public void ReceiveHealing(float healingAmount)
     {
+        if (isDead) return; //The player cannot heal while dead.
         // Add the healing amount to the object's current health
         currentHealth += healingAmount;
         Debug.Log(gameObject.name + " received " + healingAmount + " healing. Current Health: " + currentHealth + "/" + maxHealth + ".");
