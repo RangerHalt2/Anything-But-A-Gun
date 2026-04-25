@@ -29,17 +29,20 @@ public class LavaPuddleScript : MonoBehaviour, IWeaponLevel
 
     private void OnCollisionStay(Collision collision)
     {
-        OnColliderStay(collision);
+        Health health = collision.gameObject.GetComponentInParent<Health>();
+        OnColliderStay(health);
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        Health health = other.gameObject.GetComponentInParent<Health>();
+        OnColliderStay(health);
     }
 
     //LB: On Collider Stay isn't a real function??? I moved this call to OnCollisionStay.
-    void OnColliderStay(Collision _other)
+    void OnColliderStay(Health health)
     {
-        // Attempt to reference the health script on the collided object
-        Health health = _other.gameObject.GetComponentInParent<Health>();
-
-        // If the object has a health script
-        if (health != null)
+        if (health != null && health.teamID != 0)
         {
             // Deal damage to targets health equal to projectile's damage
             health.TakeDamage(cummulativeDamage * Time.deltaTime, this.transform);
