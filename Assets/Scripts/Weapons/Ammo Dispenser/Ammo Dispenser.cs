@@ -24,8 +24,9 @@ public class AmmoDispenser : MonoBehaviour, IInteractable
 
     public void Interact()
     {
-        if (ecoMan.SpendPTO(price) && counter < numOfUses)
+        if (ecoMan.PTOAmount >= price && counter < numOfUses)
         {
+            ecoMan.SpendPTO(price);
             Debug.Log("Ammo Dispenser Spawned Ammo");
             Instantiate(ammoBox, placeAmmoLocation.position, Quaternion.identity);
             counter++;
@@ -35,9 +36,14 @@ public class AmmoDispenser : MonoBehaviour, IInteractable
                 canInteract = false;
             }
         }
-        else 
+        else if (counter >= numOfUses)
         {
-            Debug.Log("Ammo Dispenser - Denied");
+            Debug.Log("Ammo Dispenser - Num of Uses too many");
+            GameObject.FindAnyObjectByType<PlayerController>().GetComponent<PlayerController>().DenyInteract(denyText[1]);
+        }
+        else
+        {
+            Debug.Log("Ammo Dispenser - Not Enough PTO");
             GameObject.FindAnyObjectByType<PlayerController>().GetComponent<PlayerController>().DenyInteract(denyText[0]);
         }
     }
