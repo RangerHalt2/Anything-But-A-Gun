@@ -58,7 +58,6 @@ public class StyleGaugeController : MonoBehaviour
             score += difBetweenLevels;
             if (letter[level] != null) { letter[level].SetActive(false); }
             level--;
-            Debug.Log("Level is now: " + level);
             if (letter[level] != null) { letter[level].SetActive(true); }
             if (gaugeVFX != null)
             {
@@ -66,16 +65,18 @@ public class StyleGaugeController : MonoBehaviour
                 main.simulationSpeed -= simulationSpeedChange;
             }
         }
-        else if (score <= 0 && level == 0) 
+        else if (score <= 0 && level <= 0) 
         {
             score = 0;
             if(totalGauge != null)
                 totalGauge.SetActive(false);
             if(gaugeVFX != null)
                 gaugeVFX.SetActive(false);
+
+            bWBoxVolume.blendDistance = color[0];
         }
 
-        if (score > difBetweenLevels && level < maxLevel) //Increase your level and change the letter (This will also be where filters are applied)
+        else if (score > difBetweenLevels && level < maxLevel) //Increase your level and change the letter (This will also be where filters are applied)
         {
             score -= difBetweenLevels;
             if (letter[level] != null) { letter[level].SetActive(false); }
@@ -87,6 +88,12 @@ public class StyleGaugeController : MonoBehaviour
                 var main = gaugeVFX.GetComponent<ParticleSystem>().main;
                 main.simulationSpeed += simulationSpeedChange; 
             }
+
+            if (level < maxLevel)
+            { bWBoxVolume.blendDistance = color[level + 1]; }
+            else 
+            { bWBoxVolume.blendDistance = color[level]; }
+
 
             // RL: event for achivements
             if (level == maxLevel)
@@ -103,9 +110,10 @@ public class StyleGaugeController : MonoBehaviour
         float fillPercent = Mathf.Clamp01(score / difBetweenLevels);
         scoreFill.fillAmount = fillPercent;
 
-        //Blend Distance 
-        if (bWBoxVolume.blendDistance < color[level]) { bWBoxVolume.blendDistance += (Time.deltaTime / level) * colorChangeSpeed; }
-        else if (bWBoxVolume.blendDistance > color[level]) { bWBoxVolume.blendDistance -= (Time.deltaTime / level) * colorChangeSpeed; ; }
+        //Blend Distance
+        if (level == maxLevel) { bWBoxVolume.blendDistance = color[level]; }
+        else if (bWBoxVolume.blendDistance < color[level]) { bWBoxVolume.blendDistance += (Time.deltaTime / color[level]) * colorChangeSpeed; }
+        else if (bWBoxVolume.blendDistance > color[level]) { bWBoxVolume.blendDistance -= (Time.deltaTime / color[level]) * colorChangeSpeed; }
         else { bWBoxVolume.blendDistance = color[level]; }
     }
 
