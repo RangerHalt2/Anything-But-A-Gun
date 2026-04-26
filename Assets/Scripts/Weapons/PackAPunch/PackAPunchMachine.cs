@@ -20,6 +20,8 @@ public class PackAPunchMachine : MonoBehaviour, IInteractable
     [Tooltip("Allows the promotion machine to ignore the player's currently unlocked achievements and spawn even if conditions are not met.")]
     [SerializeField] private bool forceSpawn = true;
 
+    [SerializeField] GameObject sfx;
+
     // RL: Added check for Achievement Manager to see if Promotion Machines should be enable based on whether or not the player has the achievement beat_first_level AKA Nine-To-Five
     public void Start()
     {
@@ -64,6 +66,8 @@ public class PackAPunchMachine : MonoBehaviour, IInteractable
             bool worked = wc.AddPackAPunch();
             if (worked)
             {
+                if(sfx != null)
+                    Instantiate(sfx, transform.position, transform.rotation, null);
                 counter++;
                 GameEvent.OnWeaponModified?.Invoke();
                 EconomyManager.Instance.PTOAmount -= price;

@@ -15,6 +15,8 @@ public class AmmoDispenser : MonoBehaviour, IInteractable
 
     [SerializeField] private Transform placeAmmoLocation;
 
+    [SerializeField] private GameObject sfx;
+
     private EconomyManager ecoMan;
 
     private void Start() 
@@ -30,6 +32,9 @@ public class AmmoDispenser : MonoBehaviour, IInteractable
             Debug.Log("Ammo Dispenser Spawned Ammo");
             Instantiate(ammoBox, placeAmmoLocation.position, Quaternion.identity);
             counter++;
+
+            if(sfx != null)
+                Instantiate(sfx, transform.position, transform.rotation, null);
 
             if (counter >= numOfUses)
             {
