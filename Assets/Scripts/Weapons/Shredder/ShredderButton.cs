@@ -16,6 +16,8 @@ public class ShredderButton: MonoBehaviour, IInteractable
     [SerializeField] private LayerMask interactableLayer;
     [SerializeField] private BoxCollider boxTrigger;
 
+    [SerializeField] private GameObject sfx;
+
     [SerializeField] private string[] denials = new string[0];
     public string[] denyText { get { return denials; } set { denials = value; } }
 
@@ -78,6 +80,9 @@ public class ShredderButton: MonoBehaviour, IInteractable
         counter++;
         bool blast = false;
         
+        if(sfx != null)
+                Instantiate(sfx, transform.position, transform.rotation, null);
+
         Instantiate(blastVFX, boxTrigger.transform.position, transform.rotation);
         yield return new WaitForSeconds(3);
 
