@@ -87,7 +87,7 @@ public class UIManager : MonoBehaviour
     // Toggles whether or not the game is currently paused
     public void TogglePause()
     {
-        Debug.Log("UI MANAGER - Toggling Pause");
+        Debug.Log("UI MANAGER - Toggling Pause: " + !isPaused);
         // If pausing is allowed
         if (allowPause)
         {

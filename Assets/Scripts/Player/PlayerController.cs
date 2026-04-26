@@ -257,11 +257,22 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame     UPDATED BY JAIME AND RYAN 11/3/25
     void Update()
     {
-        if (playerHealth.isDead || !isSpawned) return;
+        if (playerHealth.isDead || !isSpawned)
+        {
+            Debug.Log("PLAYER CONTROLLER - The player is dead or not spawned. Player cannot move");
+            return;
+        }
+        if (winEvent != null && winEvent.hasWon)
+        {
+            Debug.Log("PLAYER CONTROLLER - The player has won the game! Player cannot move");
+            return;
+        }
 
-        if (winEvent != null  && winEvent.hasWon) return;
-
-        if (UIManager.instance != null && UIManager.instance.IsPaused) return;
+        if (UIManager.instance != null && UIManager.instance.IsPaused)
+        {
+            Debug.Log("PLAYER CONTROLLER - The game is paused, preventing the player from moving.");
+            return;
+        }
 
         CheckHeadBump();
         
