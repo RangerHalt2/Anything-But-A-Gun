@@ -87,7 +87,7 @@ public class WinEvent : MonoBehaviour
                     {
                         GameEvent.OnLevelCompleted?.Invoke("office");
                     }
-                    else if (nextSceneName == "Level Gen 4")
+                    else if (nextSceneName == "XL_Staircase")
                     {
                         GameEvent.OnLevelCompleted?.Invoke("lab");
                     }
