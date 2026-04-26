@@ -1044,7 +1044,7 @@ GameObject:
   - component: {fileID: 8028808698383411549}
   - component: {fileID: 2857797128129348419}
   - component: {fileID: 5286318544928792962}
-  - component: {fileID: 15921976458398123}
+  - component: {fileID: 2648225632134336300}
   m_Layer: 0
   m_Name: ElfirTpose
   m_TagString: Untagged
@@ -1120,11 +1120,11 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1.95, z: 1}
+  m_Size: {x: 1, y: 1.95, z: 0.6}
   m_Center: {x: 0, y: 1, z: 0}
 --- !u!195 &2233732436472139857
 NavMeshAgent:
@@ -1230,7 +1230,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7aaedb4a5edcc3643988ac4f00966e8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Health
-  teamID: 0
+  teamID: 1
   maxHealth: 1000
   currentHealth: 1000
   nonlethalDefeat: 0
@@ -1296,7 +1296,7 @@ MonoBehaviour:
   minGain: 3
   maxGain: 5
   bonusPTOAchievements: 0
---- !u!54 &15921976458398123
+--- !u!54 &2648225632134336300
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
