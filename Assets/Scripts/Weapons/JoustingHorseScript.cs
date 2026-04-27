@@ -11,6 +11,7 @@ public class JoustingHorseScript : WeaponClass
     [SerializeField] private float joustTime; //How long the joust is
     [SerializeField] private float joustCD;
     [SerializeField] private ParticleSystem dashEffect;
+    [SerializeField] private ParticleSystem rainbowSparkleLines;
     private float joustCharge; //Time before next joust 
     [SerializeField] private float timeBetweenJoustCharges;
     private int maxJousts;
@@ -32,6 +33,10 @@ public class JoustingHorseScript : WeaponClass
         jCS = GetComponentInChildren<JoustingColliderScript>();
         jCS.myTeamID = pc.gameObject.GetComponent<Health>().teamID;
         jCS.damage = baseDamage;
+        if (rainbowSparkleLines != null)
+        {
+            rainbowSparkleLines.Stop();
+        }
     }
 
     public override void Shoot()
@@ -86,12 +91,17 @@ public class JoustingHorseScript : WeaponClass
         pc.movementSpeed = pcBaseSpeed;
         joustingCollider.enabled = false;
         pc.canDash = true;
+        if(rainbowSparkleLines != null)
+            rainbowSparkleLines.Stop();
     }
 
     private IEnumerator JOUST() 
     {
         pc.canDash = false;
         joustingCollider.enabled = true;
+
+        if (rainbowSparkleLines != null)
+            rainbowSparkleLines.Play();
 
         float startTime = Time.time;
         Vector3 dashDirection = Camera.main.gameObject.transform.forward;
@@ -112,7 +122,7 @@ public class JoustingHorseScript : WeaponClass
             pc.GetPlayerCharacterController().Move(dashDirection * pc.movementSpeed * joustForce * Time.deltaTime);
             yield return null;
         }
-        if (dashEffect != null) dashEffect.Stop();
+        if (rainbowSparkleLines != null) rainbowSparkleLines.Stop();
 
         yield return new WaitForSeconds(joustCD); //Time before new joust can start
         joustingCollider.enabled = false;
