@@ -109,7 +109,7 @@ public class AmmoManager : MonoBehaviour
     public bool CancelReload()
     {
         bool ret = true;
-        if(canCancelReload)
+        if (canCancelReload)
             StopCoroutine(Reload());
         else
             ret = false;
@@ -157,7 +157,7 @@ public class AmmoManager : MonoBehaviour
                 // Reduce current ammo by ammoConsumption
                 currentAmmo -= ammoConsumption;
             }
-            
+
             updateDisplay();
             return;
         }
@@ -203,97 +203,77 @@ public class AmmoManager : MonoBehaviour
         }
 
         switch (reloadMode)
-            {
-                // Reload method for weapons that use a "Magazine"
-                case ReloadMode.Magazine:
-                    // Set the reloading bool to true
-                    reloading = true;
-                    
-                    updateDisplay();
+        {
+            // Reload method for weapons that use a "Magazine"
+            case ReloadMode.Magazine:
+                // Set the reloading bool to true
+                reloading = true;
 
-                    yield return new WaitForSeconds(reloadTime * (1 - reloadTimeReduction));
+                updateDisplay();
 
-                    // If reloading has not been cancelled
-                    if (reloading)
-                    {
-                        // If the player has infinite reserve ammo
-                        if (reserveAmmo == -1)
-                        {
-                            // Set current ammo to the capacity
-                            currentAmmo = ammoCapacity;
-                        }
-                        // Else if the player currently has more than enough ammo in reserve to fully reload...
-                        else if (reserveAmmo >= ammoCapacity)
-                        {
-                            // Fully reload their magazine
-                            currentAmmo = ammoCapacity;
-                            // Reduce reserve ammo by the capacity of the weapon
-                            reserveAmmo -= ammoCapacity;
-                        }
-                        // If the player does not have enough ammo to fully reload their weapon
-                        else
-                        {
-                            // Set current ammo to the amount of ammo in reserve
-                            currentAmmo = reserveAmmo;
-                            // Set the reserve Ammo to 0
-                            reserveAmmo = 0;
-                        }
-                    }
-                    // Set reloading to false
-                    reloading = false;
-                    if(reloadVFX != null)
-                        reloadVFX.Stop();
-                if (weaponObject != null) 
+                yield return new WaitForSeconds(reloadTime * (1 - reloadTimeReduction));
+
+                // If reloading has not been cancelled
+                if (reloading)
                 {
-                    foreach (GameObject mesh in weaponObject) 
+                    // If the player has infinite reserve ammo
+                    if (reserveAmmo == -1)
                     {
-                        if(mesh != null)
+                        // Set current ammo to the capacity
+                        currentAmmo = ammoCapacity;
+                    }
+                    // Else if the player currently has more than enough ammo in reserve to fully reload...
+                    else if (reserveAmmo >= ammoCapacity && currentAmmo == 0)
+                    {
+                        currentAmmo = ammoCapacity; // Fully reload their magazine
+                        reserveAmmo -= ammoCapacity;    // Reduce reserve ammo by the capacity of the weapon
+                    }
+                    else if (reserveAmmo >= ammoCapacity)
+                    {
+                        reserveAmmo -= (ammoCapacity - currentAmmo); //Subtract the difference
+                        currentAmmo = ammoCapacity;
+                    }
+                    // If the player does not have enough ammo to fully reload their weapon
+                    else
+                    {
+                        // Set current ammo to the amount of ammo in reserve
+                        currentAmmo = reserveAmmo;
+                        // Set the reserve Ammo to 0
+                        reserveAmmo = 0;
+                    }
+                }
+                // Set reloading to false
+                reloading = false;
+                if (reloadVFX != null)
+                    reloadVFX.Stop();
+                if (weaponObject != null)
+                {
+                    foreach (GameObject mesh in weaponObject)
+                    {
+                        if (mesh != null)
                             mesh.SetActive(true);
                     }
-                    
+
                 }
 
                 updateDisplay();
-                    break;
-                // Reload method for weapons that reload each round individually
-                case ReloadMode.IndividualRounds:
-                    // Set reloading bool to true
-                    reloading = true;
-                    updateDisplay();
-
-                    while (currentAmmo < ammoCapacity && (reserveAmmo > 0 || reserveAmmo == -1))
-                    {
-                        // Wait for reload time
-                        yield return new WaitForSeconds(reloadTime);
-
-                        // Check if reloading has been canceled
-                        if (!reloading)
-                        {
-                            break;
-                        }
-
-                        // Add one round to the player's current ammo
-                        currentAmmo += 1;
-
-                        if (reserveAmmo > 0)
-                        {
-                            reserveAmmo -= 1;
-                        }
-
-                        updateDisplay();
-                    }
-                    // Set reloading to false
-                    reloading = false;
-                    updateDisplay();
-                    break;
-
-            case ReloadMode.Recharge:
+                break;
+            // Reload method for weapons that reload each round individually
+            case ReloadMode.IndividualRounds:
                 // Set reloading bool to true
                 reloading = true;
                 updateDisplay();
 
+                while (currentAmmo < ammoCapacity && (reserveAmmo > 0 || reserveAmmo == -1))
+                {
                     // Wait for reload time
                     yield return new WaitForSeconds(reloadTime);
+
+                    // Check if reloading has been canceled
+                    if (!reloading)
+                    {
+                        break;
+                    }
 
                     // Add one round to the player's current ammo
                     currentAmmo += 1;
@@ -304,7 +284,30 @@ public class AmmoManager : MonoBehaviour
                     }
 
                     updateDisplay();
-               
+                }
+                // Set reloading to false
+                reloading = false;
+                updateDisplay();
+                break;
+
+            case ReloadMode.Recharge:
+                // Set reloading bool to true
+                reloading = true;
+                updateDisplay();
+
+                // Wait for reload time
+                yield return new WaitForSeconds(reloadTime);
+
+                // Add one round to the player's current ammo
+                currentAmmo += 1;
+
+                if (reserveAmmo > 0)
+                {
+                    reserveAmmo -= 1;
+                }
+
+                updateDisplay();
+
                 // Set reloading to false
                 reloading = false;
                 updateDisplay();
@@ -323,7 +326,7 @@ public class AmmoManager : MonoBehaviour
     {
         // Used if there is a TMPro Display assinged
 
-        if(ammoDisplayText == null)
+        if (ammoDisplayText == null)
             ammoDisplayText = GameObject.FindGameObjectWithTag("AmmoCounter").GetComponent<TextMeshProUGUI>();
 
         if (ammoDisplayText != null)
