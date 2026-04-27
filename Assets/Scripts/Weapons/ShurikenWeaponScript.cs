@@ -68,8 +68,9 @@ public class ShurikenWeaponScript : WeaponClass
 
     }
 
-    private void Update()
+    private new void Update()
     {
+        base.Update();
         timer -= Time.deltaTime;
     }
 
