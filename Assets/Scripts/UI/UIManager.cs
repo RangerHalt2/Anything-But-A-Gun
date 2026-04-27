@@ -1,5 +1,6 @@
 // Created By: Ryan Lupoli
 // Manages the UI during gameplay and allows for easy navigation between pages
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -35,6 +36,8 @@ public class UIManager : MonoBehaviour
 
     [SerializeField] private GameObject defaultSelectedPauseObject;
     [SerializeField] private GameObject[] pauseTabButtons;
+
+    private Stack<int> pageHistory = new Stack<int>();
 
     #endregion
 
@@ -96,7 +99,7 @@ public class UIManager : MonoBehaviour
     private void Update()
     {
         //This handles the return button on the controller:
-        if (inputManager != null && inputManager.ControllerBack)
+        if (inputManager != null && inputManager.ControllerBack && isPaused)
         {
             Debug.Log("UI MANAGER - Controller Back ran");
             inputManager.ControllerBack = false;
@@ -106,8 +109,16 @@ public class UIManager : MonoBehaviour
                 TogglePause();
                 return;
             }
-            GoToPage(previousPage);
-            if(currentPage == 7)
+            int poppedPage = pageHistory.Pop();
+            Debug.Log("UI MANAGER - page history: after pop ");
+            PrintStack();
+            GoToPage(poppedPage);
+            Debug.Log("UI MANAGER - page history: before second pop ");
+            PrintStack();
+            pageHistory.Pop();
+            Debug.Log("UI MANAGER - page history: after second pop ");
+            PrintStack();
+            if (currentPage == 7)
                 EventSystem.current.SetSelectedGameObject(pauseTabButtons[0]);
             else if (currentPage == 8)
                 EventSystem.current.SetSelectedGameObject(pauseTabButtons[1]);
@@ -126,6 +137,7 @@ public class UIManager : MonoBehaviour
     public void TogglePause()
     {
         Debug.Log("UI MANAGER - Toggling Pause: " + !isPaused);
+        pageHistory.Clear();
         // If pausing is allowed
         if (allowPause && !IsTitleScreen)
         {
@@ -200,7 +212,21 @@ public class UIManager : MonoBehaviour
             previousPage = currentPage;
             pages[pageIndex].gameObject.SetActive(true);
             currentPage = pageIndex;
+            pageHistory.Push(previousPage);
+            Debug.Log("UI MANAGER - page history & added: ");
+            PrintStack();
         }
+    }
+
+    //For debugging purposes this prints the Stack History
+    private void PrintStack()
+    {
+        string history = "";
+        foreach(int i in pageHistory)
+        {
+            history += i.ToString()+"\n";
+        }
+        Debug.Log("UI MANAGER - History:\n" + history);
     }
 
     // Turns all pages on or off according to the activated parameter
