@@ -133,6 +133,7 @@ public class BBBatScript : WeaponClass
     private float cummulativeDamage;
     private WeaponLevel currentWeaponLevel;
     [SerializeField] private float growthRate;
+    private float timer = 0;
 
 
     private void Start()
@@ -146,7 +147,7 @@ public class BBBatScript : WeaponClass
         if (!launched)
         {
             // If enough time has passed since the last round was fired
-            if ((Time.timeSinceLevelLoad - lastFired) > fireRate)
+            if (timer <= 0)
             {
                 // If there is an assigned ammo manager, and that ammo manager has at least one round of ammo loaded
                 if (ammoManager != null && ammoManager.GetCurrentAmmo() > 0)
@@ -162,8 +163,7 @@ public class BBBatScript : WeaponClass
                             SpawnProjectile();
                         }
                         // Update lastFired
-                        lastFired = Time.timeSinceLevelLoad;
-
+                        timer = fireRate;
                     }
                 }
                 else if (ammoManager != null)
@@ -185,6 +185,12 @@ public class BBBatScript : WeaponClass
             }
         }
     } //"Virtual" allows children to override it
+
+    private new void Update()
+    {
+        base.Update();
+        timer -= Time.deltaTime;
+    }
 
 
     public override void SpawnProjectile()
