@@ -107,7 +107,7 @@
                 },
                 {
                     "name": "Controller Check",
-                    "type": "PassThrough",
+                    "type": "Button",
                     "id": "13677b5e-e631-4568-bddb-26b111e41baf",
                     "expectedControlType": "",
                     "processors": "",
@@ -127,6 +127,15 @@
                     "name": "Drop",
                     "type": "Button",
                     "id": "a112c2d8-fe75-48cc-9ab2-6c6c77260dff",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Controller Back",
+                    "type": "Button",
+                    "id": "94847026-18bf-4d0b-920c-f6fba7bd3380",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -604,6 +613,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Drop",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d3a79ae8-def4-4c9b-a2bb-bab933805f01",
+                    "path": "<Gamepad>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Controller Back",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

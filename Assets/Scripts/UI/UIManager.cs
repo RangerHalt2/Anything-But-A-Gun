@@ -2,6 +2,7 @@
 // Manages the UI during gameplay and allows for easy navigation between pages
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem; 
 
 public class UIManager : MonoBehaviour
@@ -20,6 +21,7 @@ public class UIManager : MonoBehaviour
     [Header("Pause Settings")]
     [Tooltip("Reference to InputActions Asset.")]
     [SerializeField] private InputActionAsset UIControls;
+    private InputManager inputManager;
     // Reference to pause action from the InputActionsAsset
     private InputAction pauseAction;
     [Tooltip("The index of the pause page in the pages list.")]
@@ -29,7 +31,10 @@ public class UIManager : MonoBehaviour
     // Whether or not the game is currently paused
     public bool isPaused = false;
     public bool IsPaused => isPaused;
+    public bool IsTitleScreen = false;
 
+    [SerializeField] private GameObject defaultSelectedPauseObject;
+    [SerializeField] private GameObject[] pauseTabButtons;
 
     #endregion
 
@@ -54,6 +59,7 @@ public class UIManager : MonoBehaviour
         allowPause = true;
     }
 
+
     private void OnEnable()
     {
         pauseAction.performed += OnPausePerformed;
@@ -75,6 +81,8 @@ public class UIManager : MonoBehaviour
     void Start()
     {
         InitilizeFirstPage();
+        inputManager = GameObject.FindAnyObjectByType<InputManager>();
+        EventSystem.current.SetSelectedGameObject(defaultSelectedPauseObject);
     }
 
     // Sets up the first page. Ensures that only the default page is enabled on startup
@@ -84,12 +92,42 @@ public class UIManager : MonoBehaviour
         currentPage = pausePageIndex;
     }
 
+
+    private void Update()
+    {
+        //This handles the return button on the controller:
+        if (inputManager != null && inputManager.ControllerBack)
+        {
+            Debug.Log("UI MANAGER - Controller Back ran");
+            inputManager.ControllerBack = false;
+            if (previousPage == currentPage) return; //whatever base case
+            if (currentPage == 1)
+            {
+                TogglePause();
+                return;
+            }
+            GoToPage(previousPage);
+            if(currentPage == 7)
+                EventSystem.current.SetSelectedGameObject(pauseTabButtons[0]);
+            else if (currentPage == 8)
+                EventSystem.current.SetSelectedGameObject(pauseTabButtons[1]);
+            else if (currentPage == 9)
+                EventSystem.current.SetSelectedGameObject(pauseTabButtons[2]);
+        }
+
+        if (IsTitleScreen)
+        {
+            if(defaultSelectedPauseObject != null)
+                EventSystem.current.SetSelectedGameObject(defaultSelectedPauseObject);
+        }
+    }
+
     // Toggles whether or not the game is currently paused
     public void TogglePause()
     {
         Debug.Log("UI MANAGER - Toggling Pause: " + !isPaused);
         // If pausing is allowed
-        if (allowPause)
+        if (allowPause && !IsTitleScreen)
         {
             // If the game is currently paused, un-pause it
             if (isPaused)
@@ -120,6 +158,7 @@ public class UIManager : MonoBehaviour
                     {
                         // Go to pause page
                         GoToPage(pausePageIndex);
+                        EventSystem.current.SetSelectedGameObject(defaultSelectedPauseObject);
                     }
                     // If any other page, go to the previous page
                     else
@@ -133,6 +172,7 @@ public class UIManager : MonoBehaviour
             else
             {
                 // Go to pause UI Page
+                EventSystem.current.SetSelectedGameObject(defaultSelectedPauseObject);
                 previousPage = currentPage;
                 GoToPage(pausePageIndex);
                 currentPage = pausePageIndex;

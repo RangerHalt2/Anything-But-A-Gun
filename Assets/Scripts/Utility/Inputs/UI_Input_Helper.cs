@@ -54,6 +54,10 @@ public class UI_Input_Helper : MonoBehaviour
     {
         if (inputManager != null)
         {
+            // Debug.Log($"isKeyboard: {isKeyboard} | ControllerLast: {inputManager.ControllerLast}");
+            if (isKeyboard == inputManager.ControllerLast || !isKeyboard == !inputManager.ControllerLast)
+                ControllerKeyboardToggle(!inputManager.ControllerLast);
+
             UP_Keybind.text = inputManager.moveAction.GetBindingDisplayString(1);
             DOWN_Keybind.text = inputManager.moveAction.GetBindingDisplayString(2);
             LEFT_KeyBind.text = inputManager.moveAction.GetBindingDisplayString(3);
@@ -91,16 +95,19 @@ public class UI_Input_Helper : MonoBehaviour
 
     public void ControllerKeyboardToggle(bool keyboard)
     {
-        if (keyboard)
+        Debug.Log("UI_INPUT_HELPER - TOGGLING KEYBOARD CONTROLLER VIEW");
+;        if (keyboard)
         {
             KeyboardCanvas.gameObject.SetActive(true);
             ControllerCanvas.gameObject.SetActive(false);
+            
         }
         else
         {
             KeyboardCanvas.gameObject.SetActive(false);
             ControllerCanvas.gameObject.SetActive(true);
         }
+        isKeyboard = keyboard;
     }
 
     public void UpdateSensitivity()
