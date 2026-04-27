@@ -50,6 +50,7 @@ public class WeaponSpawner : MonoBehaviour, IInteractable
     [SerializeField] private GameObject weaponShopCanvas;
     [Tooltip("Reference to the TMPro object which displays the weapons price.")]
     [SerializeField] private TextMeshProUGUI weaponPriceTextbox;
+    [SerializeField] private GameObject sfx;
 
     [SerializeField] private string[] denials = new string[0];
     public string[] denyText { get { return denials; } set { denials = value; } }
@@ -144,6 +145,8 @@ public class WeaponSpawner : MonoBehaviour, IInteractable
             // Try to spend the player's money to purchase a weapon
             if (economyManager.SpendPTO(weaponPrice))
             {
+                if(sfx != null)
+                    Instantiate(sfx, transform.position, transform.rotation, null);
                 // Disable the WeaponShopCanvas
                 weaponShopCanvas.SetActive(false);
                 canInteract = false;

@@ -9892,6 +9892,7 @@ MonoBehaviour:
     m_Bits: 16384
   interactCooldown: 0.5
   interactionText: {fileID: 0}
+  denyText: {fileID: 0}
   isSpawned: 0
   canDoubleJump: 0
   dashUnlocked: 0
@@ -9979,6 +9980,10 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: a112c2d8-fe75-48cc-9ab2-6c6c77260dff
     m_ActionName: 'Player/Drop[/Keyboard/v]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 94847026-18bf-4d0b-920c-f6fba7bd3380
+    m_ActionName: 'Player/Controller Back[/SwitchProControllerHID/buttonEast]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -10080,14 +10085,16 @@ MonoBehaviour:
   healthBarActiveOnStartup: 1
   healthBar: {fileID: 0}
   healthDisplayText: {fileID: 0}
+  healthBarPrefab: {fileID: 0}
   hitEffect: {fileID: 6015612841358465451, guid: 1d0c6d75c570bbd49bf4edd36fe51c93, type: 3}
   deathEffect: {fileID: 6015612841358465451, guid: 3e5017668810bdb4483e16198c42208e, type: 3}
   isPlayer: 1
+  isBoss: 0
   EXPDrop: 0
   gameOverCanvas: {fileID: 0}
   inGameCanvas: {fileID: 0}
   isDead: 0
-  damageNoise: {fileID: 6015612841358465451, guid: 571c9937053209b4b9b7c03d8991ec49, type: 3}
+  damageNoise: {fileID: 0}
   deathNoise: []
   style: {fileID: 0}
   ShiningArmor: 0

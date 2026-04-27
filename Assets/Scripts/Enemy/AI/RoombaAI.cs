@@ -37,7 +37,7 @@ public class RoombaAI : EnemyClass
     //private bool hasShownDetectionSprite = false;
 
     [Header("Sound and Visual Effects")]
-    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private GameObject explosionsfx;
     [SerializeField] private GameObject explosionPrefab;
     private bool soundPlayed = false;
 
@@ -67,8 +67,8 @@ public class RoombaAI : EnemyClass
         if (detectionSprite != null)
             detectionSprite.SetActive(false);
 
-        if (audioSource == null)
-            audioSource = GetComponent<AudioSource>();
+        /*if (audioSource == null)
+            audioSource = GetComponent<AudioSource>();*/
     }
 
     private void Start()
@@ -191,28 +191,31 @@ public class RoombaAI : EnemyClass
     {
         yield return new WaitForSeconds(explosionDelay);
 
-        if (!soundPlayed)
-            PlaySoundEffect();
+        /*if (!soundPlayed)
+            PlaySoundEffect();*/
 
-        float delay = (audioSource != null && audioSource.clip != null) ? audioSource.clip.length : 0f;
-        yield return new WaitForSeconds(delay);
+        //float delay = (audioSource != null && audioSource.clip != null) ? audioSource.clip.length : 0f;
+        //yield return new WaitForSeconds(delay);
 
         PlayExplosion();
     }
 
-    private void PlaySoundEffect()
+    /*private void PlaySoundEffect()
     {
         if (audioSource != null && audioSource.clip != null)
             audioSource.Play();
 
         soundPlayed = true;
-    }
+    }*/
 
     private void PlayExplosion()
     {
         if (explosionPrefab != null && !hasExploded)
         {
             hasExploded = true;
+
+            if(explosionsfx != null)
+                Instantiate(explosionsfx, transform.position, transform.rotation, null);
 
             if (meshRenderer != null) meshRenderer.enabled = false;
             if (col != null) col.enabled = false;
