@@ -5,12 +5,14 @@ using UnityEngine.UI;
 public class SplashScreenHandler : MonoBehaviour
 {
     [SerializeField] private float delay = 3f;
+    private float halfDelay;
     [SerializeField] private Image splashScreen;
     private float timer = 0f;
 
     private void Start()
     {
         if (delay < 0f) delay = 2f;
+        halfDelay = delay / 2f;
         Invoke(nameof(DelayedStart), delay);
     }
 
@@ -20,10 +22,15 @@ public class SplashScreenHandler : MonoBehaviour
         if (splashScreen != null)
         {
             Color color = splashScreen.color;
-            if (timer <= (delay / 2))
-                color.a = Mathf.Lerp(0f, 1f, timer / (delay / 2));
-            if (timer > (delay / 2))
-                color.a = Mathf.Lerp(1f, 0f, timer / (delay / 2));
+            if (timer <= halfDelay)
+                color.a = Mathf.Lerp(0f, 1f, timer / halfDelay);
+            else if (timer <= halfDelay * 1.1f)
+                color.a = 1f;
+            else
+            {
+                float t = (timer - halfDelay) / halfDelay;
+                color.a = Mathf.Lerp(1f, 0f, t);
+            }
             splashScreen.color = color;
         }
     }
