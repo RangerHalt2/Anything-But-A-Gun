@@ -198,6 +198,7 @@ public class AchievementManager : MonoBehaviour
         GameEvent.spendPTO += HandleConsumerism;
         GameEvent.OnWeaponPickup += CheckAllWeaponsCollected;
         GameEvent.Glue += HandleGlue;
+        GameEvent.AnimalCruelty += HandleAnimalCruelty;
     }
 
     private void OnDisable()
@@ -244,6 +245,10 @@ public class AchievementManager : MonoBehaviour
     void HandleGlue()
     {
         UnlockAchievement("glue_maker");
+    }
+    void HandleAnimalCruelty()
+    {
+        UnlockAchievement("animal_cruelty");
     }
 
     void CheckAllWeaponsCollected(GameObject weapon)

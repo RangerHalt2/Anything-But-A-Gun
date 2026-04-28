@@ -99,6 +99,10 @@ public class ShredderButton: MonoBehaviour, IInteractable
                 {
                     GameEvent.Glue?.Invoke();
                 }
+                if (weapon.GetWeaponName() == "Cat and Toast")
+                {
+                    GameEvent.AnimalCruelty?.Invoke();
+                }
             }
 
             Destroy(obj);
