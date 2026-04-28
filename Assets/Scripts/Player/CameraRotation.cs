@@ -15,6 +15,8 @@ public class CameraRotation : MonoBehaviour
 
     private float rotationX;
 
+    [HideInInspector] public bool hasWon = false;
+
     private Health playerHealth;
     private UIManager uiManager;
 
@@ -44,7 +46,7 @@ public class CameraRotation : MonoBehaviour
     }
     private void Update()
     {
-        if (playerHealth.isDead) return;
+        if (playerHealth.isDead || hasWon) return;
 
         if (winEvent != null  && winEvent.hasWon) return;
 

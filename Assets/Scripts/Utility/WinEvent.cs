@@ -84,6 +84,9 @@ public class WinEvent : MonoBehaviour
                     PlayerController player = GameObject.FindAnyObjectByType<PlayerController>();
                     if (player != null) player.hasWon = true;
 
+                    CameraRotation playerCamera = GameObject.FindAnyObjectByType<CameraRotation>();
+                    if (playerCamera != null) playerCamera.hasWon = true;
+
                     end = GameObject.FindAnyObjectByType<EndingGrade>();
                     if (end != null && endScorePlaying != true) // added endScorePlaying variable to make sure the ending stuff only runs once
                     {
