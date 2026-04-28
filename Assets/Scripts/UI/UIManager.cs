@@ -103,13 +103,17 @@ public class UIManager : MonoBehaviour
         {
             Debug.Log("UI MANAGER - Controller Back ran");
             inputManager.ControllerBack = false;
-            if (previousPage == currentPage) return; //whatever base case
-            if (currentPage == 1)
+            if(pageHistory.Count <= 0) // Base case for empty stack
             {
                 TogglePause();
                 return;
             }
             int poppedPage = pageHistory.Pop();
+            if(poppedPage == 1 || currentPage == 1)
+            {
+                TogglePause();
+                return;
+            }
             Debug.Log("UI MANAGER - page history: after pop ");
             PrintStack();
             GoToPage(poppedPage);

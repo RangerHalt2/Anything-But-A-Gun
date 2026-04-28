@@ -33,6 +33,11 @@ public class UISelector : MonoBehaviour
             if(obj != null)
                 EventSystem.current.SetSelectedGameObject(obj);
         }
+
+        if (EventSystem.current.currentSelectedGameObject == null)
+        {
+            GameObject obj = GameObject.Find("B_HowToPlay");
+        }
     }
 
 }
