@@ -19,6 +19,9 @@ public class WinEvent : MonoBehaviour
     public WaveManager doorOpen;
     public gammaSlider volume;
 
+    [SerializeField] private GameObject gameOverCanvas;
+    [SerializeField] public GameObject inGameCanvas;
+
     public EndingGrade end; // added by Aaron
     private bool endScorePlaying; // added by Aaron
 
@@ -34,6 +37,12 @@ public class WinEvent : MonoBehaviour
         {
             Debug.LogWarning("Win Event: UI Manager could not be found in current scene!");
         }
+
+        if (GameObject.FindAnyObjectByType<StyleGaugeController>() != null)
+            inGameCanvas = GameObject.FindAnyObjectByType<StyleGaugeController>().gameObject;
+
+        if (GameObject.FindAnyObjectByType<EndingGrade>() != null)
+            gameOverCanvas = GameObject.FindAnyObjectByType<EndingGrade>().gameObject;
 
         sceneController = FindFirstObjectByType<SceneController>();
         if (sceneController == null)
@@ -57,9 +66,23 @@ public class WinEvent : MonoBehaviour
                 // If the UI Manager exists
                 if (uiManager != null)
                 {
-                    uiManager.TogglePause();
+                    //uiManager.TogglePause();
                     // Pull up the winPage
                     //uiManager.GoToPage(winPageIndex); //LB: Deprecated, using the ending score now.
+
+                    if (GameObject.FindAnyObjectByType<StyleGaugeController>(FindObjectsInactive.Include) != null)
+                        inGameCanvas = GameObject.FindAnyObjectByType<StyleGaugeController>(FindObjectsInactive.Include).gameObject;
+
+                    if (GameObject.FindAnyObjectByType<EndingGrade>(FindObjectsInactive.Include) != null)
+                        gameOverCanvas = GameObject.FindAnyObjectByType<EndingGrade>(FindObjectsInactive.Include).gameObject;
+                    else Debug.Log("WIN EVENT - The EndingGrade was null");
+
+                    gameOverCanvas.SetActive(true);
+                    inGameCanvas.SetActive(false);
+                    Cursor.lockState = CursorLockMode.None;
+
+                    PlayerController player = GameObject.FindAnyObjectByType<PlayerController>();
+                    if (player != null) player.hasWon = true;
 
                     end = GameObject.FindAnyObjectByType<EndingGrade>();
                     if (end != null && endScorePlaying != true) // added endScorePlaying variable to make sure the ending stuff only runs once

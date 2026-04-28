@@ -80,6 +80,8 @@ public class PlayerController : MonoBehaviour
     private float baseDashChargeTime;
     [SerializeField] private int bonusDashes = 0;
     private int baseDashCount;
+
+    [HideInInspector] public bool hasWon;
     #endregion
 
     #region Getters/Setters
@@ -257,9 +259,9 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame     UPDATED BY JAIME AND RYAN 11/3/25
     void Update()
     {
-        if (playerHealth.isDead || !isSpawned)
+        if (playerHealth.isDead || !isSpawned || hasWon)
         {
-            Debug.Log("PLAYER CONTROLLER - The player is dead or not spawned. Player cannot move");
+            Debug.Log("PLAYER CONTROLLER - The player is dead or not spawned. Player cannot move. Or the player has won.");
             return;
         }
         if (winEvent != null && winEvent.hasWon)

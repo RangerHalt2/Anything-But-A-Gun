@@ -35,6 +35,11 @@ public class RoomWaveSpawner : MonoBehaviour
         interval = (int)(spawnAllBySeconds / (num_of_waves-1));
     }
 
+    private void OnDestroy()
+    {
+        
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("Player") && current_wave < num_of_waves && !waveOneSpawned)
@@ -110,6 +115,8 @@ public class RoomWaveSpawner : MonoBehaviour
 
     private void HandleEnemyDeath(EnemyClass enemy)
     {
+        if (this == null || this.gameObject == null) return; // Guard check
+
         Debug.Log("ROOM WAVE SPAWNER - Handle Enemy Death Event");
         enemySpawner.aliveEnemies.Remove(enemy);
 

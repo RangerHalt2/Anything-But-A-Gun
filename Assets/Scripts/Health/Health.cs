@@ -320,8 +320,26 @@ public class Health : MonoBehaviour
         {
             if(healthBar != null)
             {
-                Destroy(healthBar);
+                Destroy(healthBar.gameObject);
             }
+
+            //LB: Remove the enemy wave spawner
+            GameObject waveSpawner = GameObject.Find("Room Doors (Mobs)");
+            if (waveSpawner != null)
+                Destroy(waveSpawner);
+
+            //LB: All enemies in the scene die if the boss dies
+            EnemyClass[] allEnemies = GameObject.FindObjectsByType<EnemyClass>(FindObjectsSortMode.None);
+            foreach (EnemyClass enemy in allEnemies)
+            {
+                Health enemyHealth = enemy.GetComponent<Health>();
+                if (enemyHealth != null && enemyHealth.isBoss) continue;
+                float maxHealth = enemyHealth.maxHealth;
+
+                enemyHealth.TakeDamage(maxHealth, enemy.transform);
+            }
+
+
         }
 
         // Destroy the game object
