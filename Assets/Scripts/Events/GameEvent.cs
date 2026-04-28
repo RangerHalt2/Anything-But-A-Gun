@@ -18,4 +18,5 @@ public static class GameEvent
     public static Action StyleMaxxed; // Event to be triggered when the player maxes out the style meter
 
     public static Action Glue; // Triggered following the descruction of a jousting horse
+    public static Action AnimalCruelty;
 }
