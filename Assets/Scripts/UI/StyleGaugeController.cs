@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.Rendering;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class StyleGaugeController : MonoBehaviour
@@ -44,6 +45,12 @@ public class StyleGaugeController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        string levelName = SceneManager.GetActiveScene().name;
+        if (levelName == "Level Gen 5")
+        {
+            bWBoxVolume.blendDistance = color[maxLevel - 1];
+            return;
+        }
         if (stall > 0) //Stalls the score decrease
         {
             stall -= Time.deltaTime;
