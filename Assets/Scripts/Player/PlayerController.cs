@@ -340,7 +340,7 @@ public class PlayerController : MonoBehaviour
             Interact();
         }
 
-        // TakeScreenShot();
+        TakeScreenShot();
 
         TimerDecrement();
     }
