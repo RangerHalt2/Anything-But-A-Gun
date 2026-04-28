@@ -95,7 +95,7 @@ public class ShredderButton: MonoBehaviour, IInteractable
             WeaponClass weapon = obj.GetComponent<WeaponClass>();
             if(weapon != null)
             {
-                if (weapon.GetWeaponName() == "Jousting Horse")
+                if (weapon.GetWeaponName() == "Rainbow Dash")
                 {
                     GameEvent.Glue?.Invoke();
                 }
