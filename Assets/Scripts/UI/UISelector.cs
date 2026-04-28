@@ -38,6 +38,16 @@ public class UISelector : MonoBehaviour
         {
             GameObject obj = GameObject.Find("B_HowToPlay"); //LB: ???? where's the rest
         }
+
+        if(EventSystem.current.currentSelectedGameObject == null)
+        {
+            GameObject obj = GameObject.Find("BTN_QUIT_Confirm");
+            if(obj != null)
+            {
+                EventSystem.current.SetSelectedGameObject(obj);
+            }
+        }
+
     }
 
 }
