@@ -17,7 +17,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6209765174877242391
 Transform:
   m_ObjectHideFlags: 0
@@ -5327,7 +5327,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.7
+      scalar: 0.5
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -10104,7 +10104,7 @@ MonoBehaviour:
   reloadTimeReduction: 0
   reloadEffect: {fileID: 6985806122707607359, guid: 95346eec370133543a2372ec2afd4783, type: 3}
   bottomlessMagazines: 0
-  reloadVFX: {fileID: 3754406364032493419}
+  reloadVFX: {fileID: 3593266255362202919}
   weaponObject:
   - {fileID: 4754063312990842014}
 --- !u!65 &4591394418674582347
@@ -10207,6 +10207,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WeaponCollectScript
   collected: 0
+  denials: []
 --- !u!54 &6590022951441714457
 Rigidbody:
   m_ObjectHideFlags: 0
