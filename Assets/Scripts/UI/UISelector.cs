@@ -23,7 +23,7 @@ public class UISelector : MonoBehaviour
 
     private void Update()
     {
-        if (EventSystem.current.currentSelectedGameObject == null && inputManager.ControllerLast)
+        if (EventSystem.current.currentSelectedGameObject == null && inputManager != null && inputManager.ControllerLast)
         {
             GameObject obj = GameObject.Find("B_Audio");
             if(obj == null)
@@ -36,7 +36,7 @@ public class UISelector : MonoBehaviour
 
         if (EventSystem.current.currentSelectedGameObject == null)
         {
-            GameObject obj = GameObject.Find("B_HowToPlay");
+            GameObject obj = GameObject.Find("B_HowToPlay"); //LB: ???? where's the rest
         }
     }
 

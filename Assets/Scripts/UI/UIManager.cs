@@ -1,6 +1,7 @@
 // Created By: Ryan Lupoli
 // Manages the UI during gameplay and allows for easy navigation between pages
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -39,6 +40,9 @@ public class UIManager : MonoBehaviour
 
     private Stack<int> pageHistory = new Stack<int>();
 
+    [SerializeField] private Canvas quitConfirmCanvas;
+    [SerializeField] private GameObject confirmButton;
+
     #endregion
 
     void Awake()
@@ -58,6 +62,9 @@ public class UIManager : MonoBehaviour
         var uiMap = UIControls.FindActionMap("UI", true);
         pauseAction = uiMap.FindAction("Pause", true);
 
+        pauseAction.performed += OnPausePerformed;
+        UIControls.Enable();
+
         //EW: Added to fix the kill screen. See Die() in Health for more information
         allowPause = true;
     }
@@ -65,6 +72,7 @@ public class UIManager : MonoBehaviour
 
     private void OnEnable()
     {
+        Debug.Log("UI MANAGER - OnEnable fired, subscribing to pause action");
         pauseAction.performed += OnPausePerformed;
         UIControls.Enable();
     }
@@ -132,7 +140,7 @@ public class UIManager : MonoBehaviour
 
         if (IsTitleScreen)
         {
-            if(defaultSelectedPauseObject != null)
+            if(defaultSelectedPauseObject != null && EventSystem.current.currentSelectedGameObject == null)
                 EventSystem.current.SetSelectedGameObject(defaultSelectedPauseObject);
         }
     }
@@ -202,6 +210,15 @@ public class UIManager : MonoBehaviour
                 return;
             }
         }
+        else
+        {
+            
+            if (IsTitleScreen)
+            {
+                ShowQuitConfirm(); 
+                return;
+            }
+        }
     }
 
     // Go to a page by the page's index
@@ -248,6 +265,30 @@ public class UIManager : MonoBehaviour
                     page.gameObject.SetActive(activated);
                 }
             }
+        }
+    }
+
+    private void ShowQuitConfirm()
+    {
+        if(quitConfirmCanvas != null)
+        {
+            Debug.Log("UI MANAGER - Showing the Quit Confirm Now!");
+            quitConfirmCanvas.gameObject.SetActive(true);
+            StartCoroutine(SetSelectedNextFrame(confirmButton));
+        }
+    }
+
+    private IEnumerator SetSelectedNextFrame(GameObject target)
+    {
+        yield return null; // Wait one frame
+        EventSystem.current.SetSelectedGameObject(target);
+    }
+
+    public void RejectQuit()
+    {
+        if (quitConfirmCanvas != null)
+        {
+            quitConfirmCanvas.gameObject.SetActive(false);
         }
     }
 
