@@ -115,7 +115,7 @@ public class Health : MonoBehaviour
 
                 // Set position (UI uses RectTransform!)
                 RectTransform rt = bossBarInstance.GetComponent<RectTransform>();
-                rt.anchoredPosition = new Vector2(-170f, -425f);
+                rt.anchoredPosition = new Vector2(0f, 400f);
                 rt.localScale = Vector3.one;
 
                 // Assign HealthBar script
