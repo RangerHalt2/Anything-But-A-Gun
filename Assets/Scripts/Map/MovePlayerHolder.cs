@@ -111,18 +111,16 @@ public class MovePlayerHolder : MonoBehaviour
             playerHealth.currentHealth = playerHealth.maxHealth;
             playerHealth.updateDisplay();
             Debug.Log("MOVE PLAYER HOLDER - Reset the Health");
+        }
 
-            WeaponHandler wh = GameObject.FindAnyObjectByType<WeaponHandler>();
-            if(wh != null)
+        WeaponHandler wh = GameObject.FindAnyObjectByType<WeaponHandler>();
+        if (wh != null)
+        {
+            AmmoManager am = wh.currentWeapon.GetComponent<AmmoManager>();
+            if (am != null)
             {
-                AmmoManager am = wh.currentWeapon.GetComponent<AmmoManager>();
-                if (am != null)
-                {
-                    am.updateDisplay();
-                }
+                am.updateDisplay();
             }
-            
-
         }
 
         Cursor.lockState = CursorLockMode.Locked;
