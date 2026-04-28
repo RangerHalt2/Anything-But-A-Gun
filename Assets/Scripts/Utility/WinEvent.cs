@@ -19,6 +19,9 @@ public class WinEvent : MonoBehaviour
     public WaveManager doorOpen;
     public gammaSlider volume;
 
+    public EndingGrade end; // added by Aaron
+    private bool endScorePlaying; // added by Aaron
+
     [SerializeField]
     public unlockButton2 button2;
 
@@ -56,7 +59,18 @@ public class WinEvent : MonoBehaviour
                 {
                     uiManager.TogglePause();
                     // Pull up the winPage
-                    uiManager.GoToPage(winPageIndex);
+                    //uiManager.GoToPage(winPageIndex); //LB: Deprecated, using the ending score now.
+
+                    end = GameObject.FindAnyObjectByType<EndingGrade>();
+                    if (end != null && endScorePlaying != true) // added endScorePlaying variable to make sure the ending stuff only runs once
+                    {
+                        endScorePlaying = true;
+                        StartCoroutine(end.EndingGradeCoroutine());
+                        Debug.Log("Win Event - END ISNOT NULL AND COROUTINE IS STARTING");
+                    }
+                    else
+                        Debug.Log("Win Event - END IS NULL");
+
                     // Set timeScale to 0 (to stop enemies form killing the player)
                     Time.timeScale = 0f;
                     // Unlock Cursor
