@@ -197,6 +197,7 @@ public class AchievementManager : MonoBehaviour
         GameEvent.StyleMaxxed += HandleStyleMaxxed;
         GameEvent.spendPTO += HandleConsumerism;
         GameEvent.OnWeaponPickup += CheckAllWeaponsCollected;
+        GameEvent.Glue += HandleGlue;
     }
 
     private void OnDisable()
@@ -238,6 +239,11 @@ public class AchievementManager : MonoBehaviour
     void HandleConsumerism()
     {
         UnlockAchievement("consumer");
+    }
+
+    void HandleGlue()
+    {
+        UnlockAchievement("glue_maker");
     }
 
     void CheckAllWeaponsCollected(GameObject weapon)

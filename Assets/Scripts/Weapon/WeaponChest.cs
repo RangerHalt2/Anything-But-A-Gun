@@ -1,7 +1,9 @@
 // Created By: Ryan Lupoli
 // A Specialized version of the Weapon Spawner Script designed to allow for multiple weapons to be spawned at once, with the player only being allowed to select 1
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Profiling;
 
 public class WeaponChest : MonoBehaviour, IInteractable
 {
@@ -44,6 +46,8 @@ public class WeaponChest : MonoBehaviour, IInteractable
     [Header("DEBUG")]
     [Tooltip("Determnies whether or not this is the starter chest.")]
     [SerializeField] private bool starterChest = false;
+    [Tooltip("Determnies whether or not this is the retaining chest.")]
+    [SerializeField] private bool retainingChest = false;
     [Tooltip("Overrides the player's level with the specified integer. If value is -1, then the player's actual level will be read")]
     [Range(-1, 10)][SerializeField] private int playerLevelOverride = -1;
     [SerializeField] private bool forceSpawn = true;
@@ -77,11 +81,19 @@ public class WeaponChest : MonoBehaviour, IInteractable
                 numberOfWeaponsToSpawn = numberOfExtraWeaponsToSpawn;
             }
         }
-        SpawnWeapons();
     }
 
     void Start()
     {
+        StartCoroutine(SpawnWeaponsDelayed());
+    }
+
+    private IEnumerator SpawnWeaponsDelayed()
+    {
+        yield return null;
+
+        SpawnWeapons();
+
         if (AchievementManager.Instance != null)
         {
             // If the player has not obtained the achievement Nine-To-Five (ID: beat_first_level) and the promotion is not set to be force spawned
@@ -90,9 +102,11 @@ public class WeaponChest : MonoBehaviour, IInteractable
                 DestroySpawnedWeapons();
 
                 Destroy(gameObject);
-                return;
+                yield break;
             }
         }
+
+        var recorder = RunDataRecorder.Instance;
     }
 
     private void OnEnable()
@@ -125,21 +139,35 @@ public class WeaponChest : MonoBehaviour, IInteractable
         int spawnCount = Mathf.Min(numberOfWeaponsToSpawn, spawnPoints.Length);
 
         List<GameObject> usedPrefabs = new List<GameObject>();
-
-        for (int i = 0; i < spawnCount; i++)
+        if(retainingChest)
         {
-            // Select a random Weapon
-            GameObject selectedWeapon = GetRandomWeaponNoDupes(usedPrefabs);
+            var recorder = RunDataRecorder.Instance;
+            if (recorder == null || !recorder.HasPreviousRunData)
+            {
+                Debug.Log("WeaponChest: No previous run data found. Destroying retaining chest.");
 
-            if (selectedWeapon == null)
-                continue;
+                Destroy(gameObject);
+                return;
+            }
+            SpawnRetainedWeapons(spawnCount, usedPrefabs);
+        }
+        else
+        {
+            for (int i = 0; i < spawnCount; i++)
+            {
+                // Select a random Weapon
+                GameObject selectedWeapon = GetRandomWeaponNoDupes(usedPrefabs);
 
-            // Instantiate the weapon at one of the spawn points
-            GameObject weapon = Instantiate(selectedWeapon, spawnPoints[i].position, spawnPoints[i].rotation);
+                if (selectedWeapon == null)
+                    continue;
 
-            // Add the Weapon to the list of spwanedWeapons
-            spawnedWeapons.Add(weapon);
-            usedPrefabs.Add(selectedWeapon);
+                // Instantiate the weapon at one of the spawn points
+                GameObject weapon = Instantiate(selectedWeapon, spawnPoints[i].position, spawnPoints[i].rotation);
+
+                // Add the Weapon to the list of spwanedWeapons
+                spawnedWeapons.Add(weapon);
+                usedPrefabs.Add(selectedWeapon);
+            }
         }
         weaponsSpawned = true;
     }
@@ -260,4 +288,151 @@ public class WeaponChest : MonoBehaviour, IInteractable
 
         spawnedWeapons.Clear();
     }
+
+    #region Previous Run Chest Logic
+    // Used to identify weapons in the chest's pools by name
+    private List<GameObject> GetWeaponsByName(string weaponName)
+    {
+        List<GameObject> matches = new List<GameObject>();
+
+        List<GameObject> allPools = new List<GameObject>();
+        allPools.AddRange(commonWeaponPool);
+        allPools.AddRange(uncommonWeaponPool);
+        allPools.AddRange(rareWeaponPool);
+
+        foreach (var weapon in allPools)
+        {
+            WeaponClass wc = weapon.GetComponent<WeaponClass>();
+            if (wc != null && wc.GetWeaponName() == weaponName)
+            {
+                matches.Add(weapon);
+            }
+        }
+
+        return matches;
+    }
+
+    // Gets a weapon that is not found in the list of names
+    private GameObject GetWeaponNotFromNames(List<string> excludedNames, List<GameObject> used)
+    {
+        List<GameObject> allWeapons = new List<GameObject>();
+        allWeapons.AddRange(commonWeaponPool);
+        allWeapons.AddRange(uncommonWeaponPool);
+        allWeapons.AddRange(rareWeaponPool);
+
+        List<GameObject> valid = new List<GameObject>();
+
+        foreach (var weapon in allWeapons)
+        {
+            WeaponClass wc = weapon.GetComponent<WeaponClass>();
+
+            if (wc == null) continue;
+
+            if (!excludedNames.Contains(wc.GetWeaponName()) && !used.Contains(weapon))
+            {
+                valid.Add(weapon);
+            }
+        }
+
+        if (valid.Count == 0)
+            return null;
+
+        return valid[Random.Range(0, valid.Count)];
+    }
+
+    // Converts a list of weapon names to a list of weapon prefabs found within the chest's pools
+    private List<GameObject> ConvertNamesToPrefabs(List<string> weaponNames)
+    {
+        List<GameObject> results = new List<GameObject>();
+
+        foreach (var name in weaponNames)
+        {
+            List<GameObject> matches = GetWeaponsByName(name);
+
+            if (matches.Count > 0)
+            {
+                GameObject randomVariant = matches[Random.Range(0, matches.Count)];
+                results.Add(randomVariant);
+            }
+        }
+
+        return results;
+    }
+
+    // Spawns weapons, attempting to take two from the player's prior run and one which they did not obtain
+    private void SpawnRetainedWeapons (int spawnCount, List<GameObject> usedPrefabs)
+    {
+        var recorder = RunDataRecorder.Instance;
+
+        List<string> prevNames = (recorder != null && recorder.HasPreviousRunData)
+            ? recorder.GetPreviousRunWeapons()
+            : new List<string>();
+
+        // The list of weapon prefabs created from the list of weapon names
+        List<GameObject> prevPrefabs = ConvertNamesToPrefabs(prevNames);
+
+        //
+        for (int i = 0; i < prevPrefabs.Count; i++)
+        {
+            int rand = Random.Range(0, prevPrefabs.Count);
+            (prevPrefabs[i], prevPrefabs[rand]) = (prevPrefabs[rand], prevPrefabs[i]);
+        }
+
+        int index = 0;
+        
+        int retainedCount = Mathf.Min(2, prevPrefabs.Count);
+        // Spawn up to two retained weapons
+        for (int i = 0; i < retainedCount && index < spawnCount; i++, index++)
+        {
+            SpawnWeapon(prevPrefabs[i], index, usedPrefabs);
+        }
+
+        // Fill remaining slots with random weapons
+        while(index < spawnCount)
+        {
+            GameObject fallbackWeapon;
+
+            if (prevPrefabs.Count == 0)
+            {
+                // no prior data -> pure random
+                fallbackWeapon = GetRandomWeaponNoDupes(usedPrefabs);
+            }
+            else
+            {
+                fallbackWeapon = GetWeaponNotFromNames(prevNames, usedPrefabs);
+
+                if (fallbackWeapon == null)
+                {
+                    fallbackWeapon = GetRandomWeaponNoDupes(usedPrefabs);
+                }
+            }
+
+            SpawnWeapon(fallbackWeapon, index, usedPrefabs);
+            index++;
+        }
+    }
+
+    private void SpawnWeapon(GameObject prefab, int index, List<GameObject> usedPrefabs)
+    {
+        if (prefab == null)
+            return;
+
+        if (index >= spawnPoints.Length)
+        {
+            Debug.LogWarning("WeaponChest: Spawn index out of bounds!");
+            return;
+        }
+
+        // Instantiate at the correct spawn point
+        GameObject weaponInstance = Instantiate(
+            prefab,
+            spawnPoints[index].position,
+            spawnPoints[index].rotation
+        );
+
+        // Track it
+        spawnedWeapons.Add(weaponInstance);
+        usedPrefabs.Add(prefab);
+    }
+    #endregion
 }

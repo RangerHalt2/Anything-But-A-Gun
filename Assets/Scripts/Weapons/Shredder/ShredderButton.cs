@@ -91,6 +91,16 @@ public class ShredderButton: MonoBehaviour, IInteractable
             Debug.Log("ShreddedButton tried to delete " + obj);
 
             pc.GetComponent<EconomyManager>().PTOAmount += obj.GetComponent<WeaponClass>().PTOAmount;
+
+            WeaponClass weapon = obj.GetComponent<WeaponClass>();
+            if(weapon != null)
+            {
+                if (weapon.GetWeaponName() == "Jousting Horse")
+                {
+                    GameEvent.Glue?.Invoke();
+                }
+            }
+
             Destroy(obj);
         }
     }

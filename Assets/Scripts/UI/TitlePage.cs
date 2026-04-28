@@ -19,20 +19,20 @@ public class TitlePage : MonoBehaviour
 
     public void PlayGame ()
     {
+        GameEvent.RunEnded?.Invoke();
+
         PlayerController controller = GameObject.FindAnyObjectByType<PlayerController>();
         if(controller != null)
         {
             Destroy(controller.gameObject);
         }
 
-        GameEvent.RunEnded?.Invoke();
-
         GameObject canvas = GameObject.Find("Master Canvas");
-       
-        GameEvent.RunStarted?.Invoke();
 
         loader.LoadScene("Level Gen 5");
         CleanupDontDestroyOnLoad.DestroyAllDontDestroyOnLoad(transform.root.gameObject);
+
+        GameEvent.RunStarted?.Invoke();
     }
     public void QuitGame()
     {

@@ -9,7 +9,12 @@ public class RunDataRecorder : MonoBehaviour
 
     private RunData currentRunData = new RunData();
 
+    private RunData previousRunData = new RunData();
+    public bool HasPreviousRunData { get; private set; } = false;
+
     private string filePath;
+
+    private string previousRunFilePath;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
@@ -26,19 +31,28 @@ public class RunDataRecorder : MonoBehaviour
         }
 
         filePath = Path.Combine(Application.persistentDataPath, "runData.json");
+        previousRunFilePath = Path.Combine(Application.persistentDataPath, "previousRunData.json");
+
+        if (File.Exists(previousRunFilePath))
+        {
+            string json = File.ReadAllText(previousRunFilePath);
+            previousRunData = JsonUtility.FromJson<RunData>(json);
+
+            HasPreviousRunData = previousRunData.weaponsCollected != null && previousRunData.weaponsCollected.Count > 0;
+        }
     }
 
     #region Event Management
     private void OnEnable()
     {
-        GameEvent.RunStarted += StartNewRun;
+        GameEvent.RunEnded += StartNewRun;
         GameEvent.OnEnemyKilled += OnEnemyKilled;
         GameEvent.OnLevelCompleted += OnLevelCompleted;
     }
 
     private void OnDisable()
     {
-        GameEvent.RunStarted -= StartNewRun;
+        GameEvent.RunEnded -= StartNewRun;
         GameEvent.OnEnemyKilled -= OnEnemyKilled;
         GameEvent.OnLevelCompleted -= OnLevelCompleted;
     }
@@ -100,6 +114,15 @@ public class RunDataRecorder : MonoBehaviour
     // Intended to be called at the start of every run
     public void StartNewRun()
     {
+        Debug.Log("Run Data Recorder: StartNewRun CALLED");
+        // Save CURRENT run as previous run snapshot
+        string json = JsonUtility.ToJson(currentRunData, true);
+        File.WriteAllText(previousRunFilePath, json);
+
+        // Load into memory as previous run too
+        previousRunData = JsonUtility.FromJson<RunData>(json);
+        HasPreviousRunData = previousRunData.weaponsCollected != null && previousRunData.weaponsCollected.Count > 0;
+
         currentRunData = new RunData();
         SaveRunData();
     }
@@ -113,6 +136,11 @@ public class RunDataRecorder : MonoBehaviour
     public int GetLevelsCompleted()
     {
         return currentRunData.levelsCompleted;
+    }
+
+    public List<string> GetPreviousRunWeapons()
+    {
+        return previousRunData.weaponsCollected;
     }
     #endregion
 }
