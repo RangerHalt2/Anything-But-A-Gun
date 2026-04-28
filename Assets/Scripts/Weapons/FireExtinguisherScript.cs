@@ -12,6 +12,7 @@ public class FireExtinguisherScript : WeaponClass
     [SerializeField] private Transform projectileSpawnPoint;
     //private float lastFired = Mathf.NegativeInfinity;
 
+
     private WeaponLevel weaponLevelRef;
 
     private float timer = 0f;
@@ -64,8 +65,9 @@ public class FireExtinguisherScript : WeaponClass
         }
     }
 
-    private void Update()
+    private new void Update()
     {
+        base.Update();
         timer -= Time.deltaTime;
     }
 

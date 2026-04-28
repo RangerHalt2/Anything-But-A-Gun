@@ -28,6 +28,7 @@ public class Projectile : MonoBehaviour, IWeaponLevel
     [SerializeField] private float teamID;
     [Tooltip("The amount of damage dealt to a target")]
     [SerializeField] public float baseDamage;
+    [HideInInspector] public float maxDamage;
     [Tooltip("Damage to be added per level to the projectile")]
     [SerializeField] private float growthRate = 1.15f;
 
@@ -128,6 +129,7 @@ public class Projectile : MonoBehaviour, IWeaponLevel
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        maxDamage = baseDamage;
         rb = GetComponent<Rigidbody>();
         // Turn off default gravity since we'll be using a custom one
         rb.useGravity = false;
