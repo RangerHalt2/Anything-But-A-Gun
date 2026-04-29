@@ -51,7 +51,14 @@ public class CameraRotation : MonoBehaviour
         if (winEvent != null  && winEvent.hasWon) return;
 
         if (UIManager.instance != null && UIManager.instance.IsPaused) return;
-        
+
+        UIManager uIManager = GameObject.FindAnyObjectByType<UIManager>();
+        if (uIManager != null && uIManager.isPaused)
+        {
+            Debug.Log("PLAYER CONTROLLER - The game is paused, preventing the player from moving.");
+            return;
+        }
+
         Rotate(inputs.LookInput);
     }
 

@@ -387,6 +387,19 @@ public class Health : MonoBehaviour
                 Debug.Log("HEALTH - UI MANAGER INSTANCE IS PAUSED DOES NOT TOGGLE UN-PAUSE THE GAME");
             UIManager.instance.allowPause = false; //EW: Set this way to keep the player from pausing and unpausing after death because unpausing makes the main game UI show up.
             isDead = true;
+
+            BossBarIndicator bossBar = GameObject.FindAnyObjectByType<BossBarIndicator>();
+            if (bossBar != null)
+            {
+                Destroy(bossBar.gameObject);
+            }
+
+            if (GameObject.FindAnyObjectByType<EndingGrade>(FindObjectsInactive.Include) != null)
+                gameOverCanvas = GameObject.FindAnyObjectByType<EndingGrade>(FindObjectsInactive.Include).gameObject;
+
+            if (GameObject.FindAnyObjectByType<StyleGaugeController>(FindObjectsInactive.Include) != null)
+                inGameCanvas = GameObject.FindAnyObjectByType<StyleGaugeController>(FindObjectsInactive.Include).gameObject;
+
             gameOverCanvas.SetActive(true);
             inGameCanvas.SetActive(false);
             Cursor.lockState = CursorLockMode.None;

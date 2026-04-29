@@ -14,7 +14,7 @@ public class MovePlayerHolder : MonoBehaviour
         Debug.LogWarning("Code Started; Attempting to Find Player Holder");
         PlayerController controller = GameObject.FindAnyObjectByType<PlayerController>();
         if (controller != null)
-        {   
+        {
             Debug.LogWarning("Player Holder FOUND");
             StartCoroutine(LateStart(controller));
         }
@@ -56,9 +56,19 @@ public class MovePlayerHolder : MonoBehaviour
             Debug.Log("MOVE PLAYER HOLDER - turning off the loading screen");
         }
 
-        UIManager uiManager = GameObject.FindAnyObjectByType<UIManager>();
-        if (uiManager != null)
+        UIManager[] uiManagers = GameObject.FindObjectsByType<UIManager>(FindObjectsSortMode.None);
+
+
+        if (uiManagers.Length > 1)
         {
+            Destroy(uiManagers[0].gameObject);
+
+            yield return null; // waits one frame for Destroy to complete
+        }
+
+        foreach (UIManager uiManager in uiManagers)
+        {
+            if (uiManager == null) continue;
             uiManager.enabled = false; //Refreshes it's subscriptions
             uiManager.enabled = true;
             uiManager.GoToPage(0);
@@ -75,12 +85,11 @@ public class MovePlayerHolder : MonoBehaviour
             }
         }
 
-        
 
         if (killStyleMeter)
         {
             StyleGaugeController sc = GameObject.FindAnyObjectByType<StyleGaugeController>();
-            if(sc != null)
+            if (sc != null)
             {
                 sc.Initialize();
                 Debug.Log("MOVE PLAYER HOLDER - Killed the Style Meter");
