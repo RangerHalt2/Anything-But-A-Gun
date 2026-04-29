@@ -9,6 +9,8 @@ public class SplashScreenHandler : MonoBehaviour
     [SerializeField] private Image splashScreen;
     private float timer = 0f;
 
+    [SerializeField] private string nextScene;
+
     private void Start()
     {
         if (delay < 0f) delay = 2f;
@@ -38,6 +40,6 @@ public class SplashScreenHandler : MonoBehaviour
 
     private void DelayedStart()
     {
-        SceneManager.LoadScene("Title Screen");
+        SceneManager.LoadScene(nextScene);
     }
 }
