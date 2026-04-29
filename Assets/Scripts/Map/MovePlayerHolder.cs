@@ -85,6 +85,14 @@ public class MovePlayerHolder : MonoBehaviour
                 sc.Initialize();
                 Debug.Log("MOVE PLAYER HOLDER - Killed the Style Meter");
             }
+
+            Player_Level playerLevel = GameObject.FindAnyObjectByType<Player_Level>();
+            if (playerLevel != null)
+            {
+                playerLevel.EXP = 0;
+                playerLevel.AddEXP(1); // Hard resets their level
+            }
+
         }
 
         if (resetHealth)
