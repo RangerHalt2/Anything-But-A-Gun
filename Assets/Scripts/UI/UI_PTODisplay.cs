@@ -20,6 +20,9 @@ public class UI_PTODisplay : MonoBehaviour
 
     private void Update()
     {
-        moneyText.text = m_EconomyManager.PTOAmount.ToString();
+
+        EconomyManager eco = GameObject.FindAnyObjectByType<EconomyManager>();
+
+        moneyText.text = eco.PTOAmount.ToString();
     }
 }
