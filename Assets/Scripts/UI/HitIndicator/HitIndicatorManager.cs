@@ -13,13 +13,25 @@ public class HitIndicatorManager : MonoBehaviour
     {
         playerController = GameObject.FindAnyObjectByType<PlayerController>();
         playerHealth = playerController.GetComponent<Health>();
-        Debug.Log("HIT INDICATOR MANAGER - Instance ID: " + playerHealth.GetInstanceID());
-        playerHealth.PlayerTookDamage += SpawnIndicator;
-        Debug.Log("HIT INDICATOR MANAGER - Player Controller, Health, and Listeners are complete");
-        Debug.Log("HIT INDICATOR MANAGER - Subscribed: " + playerHealth.HasDamageListeners());
+        if (playerHealth != null)
+        {
+            Debug.Log("HIT INDICATOR MANAGER - Instance ID: " + playerHealth.GetInstanceID());
+            playerHealth.PlayerTookDamage += SpawnIndicator;
+            Debug.Log("HIT INDICATOR MANAGER - Player Controller, Health, and Listeners are complete");
+            Debug.Log("HIT INDICATOR MANAGER - Subscribed: " + playerHealth.HasDamageListeners());
+        }
     }
 
     //public void Confirm
+
+    private void Update()
+    {
+        if (playerHealth == null)
+        {
+            playerHealth = playerController.GetComponent<Health>();
+            playerHealth.PlayerTookDamage += SpawnIndicator;
+        }
+    }
 
     public void AssignTookDamageEvent()
     {

@@ -276,6 +276,14 @@ public class PlayerController : MonoBehaviour
             return;
         }
 
+        UIManager uIManager = GameObject.FindAnyObjectByType<UIManager>();
+        if (uIManager != null && uIManager.isPaused)
+        {
+            Debug.Log("PLAYER CONTROLLER - The game is paused, preventing the player from moving.");
+            return;
+        }
+
+
         CheckHeadBump();
         
         if(!inputs.JumpPressed() && characterController.isGrounded)
@@ -340,7 +348,7 @@ public class PlayerController : MonoBehaviour
             Interact();
         }
 
-        TakeScreenShot();
+        //TakeScreenShot();
 
         TimerDecrement();
     }

@@ -42,7 +42,7 @@ public class EndingGrade : MonoBehaviour
         yourScoreObject.SetActive(false);
         endingScoreObject.SetActive(false);
         letterGradeObject.SetActive(false);
-        buttonGroupObject.SetActive(false); // set this to false!!!
+        //buttonGroupObject.SetActive(false); // set this to false!!!
     }
 
     public IEnumerator EndingGradeCoroutine(){ // Run this coroutine when the player gets game over
@@ -137,7 +137,7 @@ public class EndingGrade : MonoBehaviour
             Instantiate(letterGradeSFX, transform.position, transform.rotation, null);
 
         yield return new WaitForSecondsRealtime(0.5f);
-        buttonGroupObject.SetActive(true);
+        //buttonGroupObject.SetActive(true);
 
         yield break;
     }
