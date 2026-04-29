@@ -161,17 +161,18 @@ public class EnemyClass : MonoBehaviour
     {
         int randomGain = UnityEngine.Random.Range(minGain, maxGain);
         int randomChance = UnityEngine.Random.Range(0, 101);
-
-        if(randomChance <= chanceToGetMoney)
+        EconomyManager eco = GameObject.FindAnyObjectByType<EconomyManager>();
+        if (randomChance <= chanceToGetMoney)
         {
-            EconomyManager.Instance.PTOAmount += randomGain;
+
+           eco.PTOAmount += randomGain;
         }
 
         // RL: If the random chance was low enough to be under the chance provided by bonus PTO achievements, grant the player more money
         if (randomChance <= (bonusPTOAchievements * 5))
         {
             randomGain = UnityEngine.Random.Range(minGain, maxGain);
-            EconomyManager.Instance.PTOAmount += bonusPTOAchievements * 2;
+            eco.PTOAmount += bonusPTOAchievements * 2;
         }
         GameEvent.gainPTO?.Invoke();
 

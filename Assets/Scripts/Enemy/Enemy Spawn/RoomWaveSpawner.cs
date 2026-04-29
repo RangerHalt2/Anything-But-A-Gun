@@ -127,14 +127,15 @@ public class RoomWaveSpawner : MonoBehaviour
 
         if(current_wave == num_of_waves && doors_to_remove != null && enemySpawner.aliveEnemies.Count <= 0)
         {
-            if(EconomyManager.Instance != null)
-                EconomyManager.Instance.PTOAmount += PTOGain;
+            EconomyManager eco = GameObject.FindAnyObjectByType<EconomyManager>();
+            if(eco != null)
+                eco.PTOAmount += PTOGain;
 
             // RL: roll chance for bonus money
             int randomChance = UnityEngine.Random.Range(0, 101);
             if (randomChance <= (bonusPTOAchievements * 5))
             {
-                EconomyManager.Instance.PTOAmount += bonusPTOAchievements * 2;
+                eco.PTOAmount += bonusPTOAchievements * 2;
             }
             GameEvent.gainPTO?.Invoke();
 

@@ -42,7 +42,8 @@ public class PackAPunchMachine : MonoBehaviour, IInteractable
         Debug.Log(wc);
         Debug.Log(wh);
 
-        if (EconomyManager.Instance == null || EconomyManager.Instance.PTOAmount < price)
+        EconomyManager eco = GameObject.FindAnyObjectByType<EconomyManager>();
+        if (eco == null || eco.PTOAmount < price)
         {
             Debug.Log("PACK A PUNCH MACINE - the player does not have enough money or the EconomyManager is null");
             GameObject.FindAnyObjectByType<PlayerController>().GetComponent<PlayerController>().DenyInteract(denyText[0]);
@@ -70,7 +71,7 @@ public class PackAPunchMachine : MonoBehaviour, IInteractable
                     Instantiate(sfx, transform.position, transform.rotation, null);
                 counter++;
                 GameEvent.OnWeaponModified?.Invoke();
-                EconomyManager.Instance.PTOAmount -= price;
+                eco.PTOAmount -= price;
             }
             if (counter == numOfUses)
             {

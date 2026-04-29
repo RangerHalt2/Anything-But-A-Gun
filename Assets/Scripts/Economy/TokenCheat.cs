@@ -23,7 +23,8 @@ public class TokenCheat : MonoBehaviour
 
     void Clicked(bool isOn)
     {
-        EconomyManager.Instance.ToggleInfinitePTO();
+        EconomyManager eco = GameObject.FindAnyObjectByType<EconomyManager>();
+        eco.ToggleInfinitePTO();
     }
 
 }
