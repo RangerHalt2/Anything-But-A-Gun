@@ -45,6 +45,8 @@ public class AmmoManager : MonoBehaviour
     [Tooltip("Reference to TMPro Ammo Counter.")]
     private GameObject ammoCounter;
     [SerializeField] private TextMeshProUGUI ammoDisplayText;
+    private GameObject reserveAmmoCounter;
+    [SerializeField] private TextMeshProUGUI reserveAmmoDisplayText;
 
     [Header("Reload Animations Stuff")]
     [SerializeField] private float reloadTimeReduction;
@@ -125,6 +127,7 @@ public class AmmoManager : MonoBehaviour
         reserveAmmo = maxAmmo;
         currentAmmo = ammoCapacity;
         ammoDisplayText = GameObject.FindGameObjectWithTag("AmmoCounter").GetComponent<TextMeshProUGUI>();
+        reserveAmmoDisplayText = GameObject.FindGameObjectWithTag("ReserveAmmoCounter").GetComponent<TextMeshProUGUI>();
 
         ApplyAchievementRewards();
         updateDisplay();
@@ -328,6 +331,8 @@ public class AmmoManager : MonoBehaviour
 
         if (ammoDisplayText == null)
             ammoDisplayText = GameObject.FindGameObjectWithTag("AmmoCounter").GetComponent<TextMeshProUGUI>();
+        if (reserveAmmoDisplayText == null)
+            reserveAmmoDisplayText = GameObject.FindGameObjectWithTag("ReserveAmmoCounter").GetComponent<TextMeshProUGUI>();
 
         if (ammoDisplayText != null)
         {
@@ -335,11 +340,13 @@ public class AmmoManager : MonoBehaviour
             {
                 if (reserveAmmo == -1)
                 {
-                    ammoDisplayText.text = string.Format(currentAmmo + " / " + ammoCapacity + " (Reserve: Infinite)");
+                    ammoDisplayText.text = string.Format(currentAmmo + " / " + ammoCapacity);
+                    reserveAmmoDisplayText.text = string.Format("Reserve: Infinite");
                 }
                 else
                 {
-                    ammoDisplayText.text = string.Format(currentAmmo + " / " + ammoCapacity + " (Reserve: " + reserveAmmo + ")");
+                    ammoDisplayText.text = string.Format(currentAmmo + " / " + ammoCapacity);
+                    reserveAmmoDisplayText.text = string.Format("Reserve: " + reserveAmmo);
                 }
             }
             else
