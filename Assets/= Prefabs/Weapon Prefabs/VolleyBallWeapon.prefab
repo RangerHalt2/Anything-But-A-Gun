@@ -227,8 +227,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df2d13e84e38fb446a97a180533aba8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AmmoManager
-  maxAmmo: -1
-  reserveAmmo: -1
+  maxAmmo: 90
+  reserveAmmo: 90
   ammoCapacity: 10
   currentAmmo: 10
   ammoConsumption: 1
@@ -282,7 +282,7 @@ MonoBehaviour:
   fireRate: 0.75
   reloadTime: 1
   AmmoCapacity: 10
-  reserveAmmo: -1
+  reserveAmmo: 90
   acceptablePackAPunchOptions:
   - {fileID: 11400000, guid: eca31965d964ef9468c904da4cdb57b8, type: 2}
   - {fileID: 11400000, guid: 400b49d056ae7e44fafc9f2feebd7aca, type: 2}
@@ -313,6 +313,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WeaponCollectScript
   collected: 0
+  denials: []
 --- !u!114 &1192011955155942802
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -116,6 +116,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WeaponCollectScript
   collected: 0
+  denials: []
 --- !u!65 &5462082225701915407
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -225,7 +226,8 @@ MonoBehaviour:
   reloadTime: 1.75
   AmmoCapacity: 100
   reserveAmmo: 1600
-  acceptablePackAPunchOptions: []
+  acceptablePackAPunchOptions:
+  - {fileID: 11400000, guid: 845ea49dcec02064782de58ccb5d7fa4, type: 2}
   onomatopeiaVFX: {fileID: 0}
   onomatopeiaCooldown: 1.5
   shakeConfig:
