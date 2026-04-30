@@ -10060,7 +10060,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Hitscan
   teamID: 0
-  baseDamage: 9
+  baseDamage: 6
   growthRate: 1.15
   externalDmgMod: 1
   canCrit: 0
@@ -10091,16 +10091,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df2d13e84e38fb446a97a180533aba8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AmmoManager
-  maxAmmo: 2000
-  reserveAmmo: 2000
-  ammoCapacity: 250
-  currentAmmo: 250
+  maxAmmo: 1500
+  reserveAmmo: 1500
+  ammoCapacity: 225
+  currentAmmo: 225
   ammoConsumption: 1
   reloadTime: 3
   canCancelReload: 0
   reloadMode: 0
   crosshair: {fileID: 0}
   ammoDisplayText: {fileID: 0}
+  reserveAmmoDisplayText: {fileID: 0}
   reloadTimeReduction: 0
   reloadEffect: {fileID: 6985806122707607359, guid: 95346eec370133543a2372ec2afd4783, type: 3}
   bottomlessMagazines: 0
@@ -10178,8 +10179,8 @@ MonoBehaviour:
   levelDamage: 1.15
   fireRate: 0.03
   reloadTime: 2
-  AmmoCapacity: 250
-  reserveAmmo: 2000
+  AmmoCapacity: 225
+  reserveAmmo: 1500
   acceptablePackAPunchOptions:
   - {fileID: 11400000, guid: 400b49d056ae7e44fafc9f2feebd7aca, type: 2}
   - {fileID: 11400000, guid: 845ea49dcec02064782de58ccb5d7fa4, type: 2}
