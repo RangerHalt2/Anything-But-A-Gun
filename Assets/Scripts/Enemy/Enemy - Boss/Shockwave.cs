@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 public class Shockwave : MonoBehaviour
 {
@@ -6,9 +7,24 @@ public class Shockwave : MonoBehaviour
     [SerializeField] private float damage = 20f;
     [SerializeField] private float teamID = 1;
 
+    [Header("Timing Settings")]
+    [SerializeField] private float colliderActiveTime = 0.2f;
+    [SerializeField] private float lifetime = 1f;
+
+    private Collider col;
+
     void Start()
     {
-        Destroy(gameObject, 3f);
+        col = GetComponent<Collider>();
+
+        StartCoroutine(DisableColliderAfterDelay(colliderActiveTime));
+        Destroy(gameObject, lifetime);
+    }
+
+    private IEnumerator DisableColliderAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        col.enabled = false;
     }
 
     private void OnTriggerEnter(Collider other)
