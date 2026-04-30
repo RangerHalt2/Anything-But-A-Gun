@@ -101,6 +101,7 @@ public class PaperAirplaneWeaponScript : WeaponClass
                 Component comp = projectileGameObject.AddComponent(components[currPackAPunchIndex]);
             }
             PlayOnomatopeia();
+            RandomGunShot(projectileGameObject.transform);
             AirplaneProjectileScript airProj = projectileGameObject.GetComponent<AirplaneProjectileScript>();
             airProj.SetWeaponLevelReference(weaponLevelRef);
         }
