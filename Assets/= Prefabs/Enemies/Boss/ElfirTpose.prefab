@@ -1044,6 +1044,7 @@ GameObject:
   - component: {fileID: 2857797128129348419}
   - component: {fileID: 5286318544928792962}
   - component: {fileID: 2648225632134336300}
+  - component: {fileID: 6925595332124704649}
   m_Layer: 0
   m_Name: ElfirTpose
   m_TagString: Untagged
@@ -1154,10 +1155,10 @@ MonoBehaviour:
   bigShotAnimSpeed: 1.5
   walkAnimSpeed: 1.5
   shockwavePrefab: {fileID: 5488626105025168993, guid: 9f7b8d6afe1685e408a8be50a467da67, type: 3}
-  shockwaveCount: 3
-  waveSize: 2
+  shockwaveCount: 4
+  waveSize: 1.6
   timeBetweenWaves: 0.4
-  initialScale: {x: 1, y: 1, z: 1}
+  initialScale: {x: 2, y: 2, z: 2}
   missilePrefab: {fileID: 5829067527375754046, guid: cefa14863c558a7488e45ebdb200bdc1, type: 3}
   missileSpacing: 9
   bigShotPrefab: {fileID: 527883547968066752, guid: 98ad5382de9429b4e9cd76bb1d8522dc, type: 3}
@@ -1311,6 +1312,21 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &6925595332124704649
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1614305653943938999}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59058d5255cda744c96aa6071c10f354, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MissilesExtraVFX
+  missileVFXPrefab: {fileID: 3812109199270877985, guid: 47fc9b926ca5e3a4aaeb2cf7210277d0, type: 3}
+  vfxSpawnPoint: {fileID: 791220259752636991}
+  lifetime: 1.2
 --- !u!1 &1631397945547100700
 GameObject:
   m_ObjectHideFlags: 0
@@ -2608,6 +2624,37 @@ Transform:
   m_Children:
   - {fileID: 3621035493955519414}
   m_Father: {fileID: 4711580697187250716}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &3754122720674667168
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 791220259752636991}
+  m_Layer: 0
+  m_Name: MIssileSpawnPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &791220259752636991
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3754122720674667168}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0.35}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2768617138466636422}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3799029006230779226
 GameObject:
@@ -5553,7 +5600,8 @@ Transform:
   m_LocalPosition: {x: 1.4210854e-16, y: 0.22995971, z: -0.000000014305114}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 791220259752636991}
   m_Father: {fileID: 5746082395026115566}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &9201117200006762438

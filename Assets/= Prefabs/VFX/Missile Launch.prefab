@@ -26,14 +26,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3812109199270877985}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.21221174, y: 0, z: 0, w: 0.97722375}
+  m_LocalRotation: {x: -0.14228977, y: 0.05159103, z: -0.070119634, w: 0.9859895}
   m_LocalPosition: {x: -15.45068, y: 2.82, z: 12.82}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2940447218616155684}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: -24.504, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -15.864, y: 7.268, z: -9.15}
 --- !u!198 &5924945094807517273
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -117,7 +117,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 2
+      scalar: 1
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -612,7 +612,7 @@ ParticleSystem:
     gravityModifier:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0
+      scalar: -2.3
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -977,7 +977,7 @@ ParticleSystem:
     m_BurstCount: 0
     m_Bursts: []
   SizeModule:
-    enabled: 0
+    enabled: 1
     curve:
       serializedVersion: 2
       minMaxState: 1
@@ -988,22 +988,22 @@ ParticleSystem:
         m_Curve:
         - serializedVersion: 3
           time: 0
-          value: 0
-          inSlope: 0
-          outSlope: 1
+          value: 1
+          inSlope: -0.026467873
+          outSlope: -0.026467873
           tangentMode: 0
           weightedMode: 0
-          inWeight: 0.33333334
-          outWeight: 0.33333334
+          inWeight: 0
+          outWeight: 0.21839078
         - serializedVersion: 3
           time: 1
-          value: 1
-          inSlope: 1
-          outSlope: 0
+          value: 0
+          inSlope: -2.8736494
+          outSlope: -2.8736494
           tangentMode: 0
           weightedMode: 0
-          inWeight: 0.33333334
-          outWeight: 0.33333334
+          inWeight: 0.048276007
+          outWeight: 0
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
@@ -2849,7 +2849,7 @@ ParticleSystem:
     separateAxes: 0
     frequency: 0.25
     damping: 1
-    octaves: 1
+    octaves: 2
     octaveMultiplier: 0.5
     octaveScale: 2
     quality: 1
@@ -3817,7 +3817,7 @@ ParticleSystem:
     - serializedVersion: 3
       emitter: {fileID: 644109328978370255}
       type: 0
-      properties: 0
+      properties: 2
       emitProbability: 1
   LightsModule:
     enabled: 0
@@ -5125,7 +5125,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.5
+      scalar: 1.9
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -5824,22 +5824,22 @@ ParticleSystem:
         serializedVersion: 2
         m_Curve:
         - serializedVersion: 3
-          time: 0
+          time: 0.30344915
           value: 1
-          inSlope: -1
-          outSlope: -1
+          inSlope: -1.4356453
+          outSlope: -1.4356453
           tangentMode: 34
           weightedMode: 0
           inWeight: 0
-          outWeight: 0
+          outWeight: 0.33333334
         - serializedVersion: 3
           time: 1
           value: 0
-          inSlope: -1
-          outSlope: -1
+          inSlope: -1.4356453
+          outSlope: -1.4356453
           tangentMode: 34
           weightedMode: 0
-          inWeight: 0
+          inWeight: 0.33333334
           outWeight: 0
         m_PreInfinity: 2
         m_PostInfinity: 2
@@ -6147,7 +6147,7 @@ ParticleSystem:
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 0.5421879, b: 0, a: 1}
-        key1: {r: 0.6226415, g: 0.6226415, b: 0.6226415, a: 0.78431374}
+        key1: {r: 0.46226418, g: 0.46226418, b: 0.46226418, a: 0.78431374}
         key2: {r: 0.6226415, g: 0.6226415, b: 0.6226415, a: 0}
         key3: {r: 0, g: 0, b: 0, a: 0}
         key4: {r: 0, g: 0, b: 0, a: 0}
@@ -6155,7 +6155,7 @@ ParticleSystem:
         key6: {r: 0, g: 0, b: 0, a: 0}
         key7: {r: 0, g: 0, b: 0, a: 0}
         ctime0: 5243
-        ctime1: 45875
+        ctime1: 32101
         ctime2: 45875
         ctime3: 0
         ctime4: 0
