@@ -193,7 +193,17 @@ public class Health : MonoBehaviour
         }
         // Subtract the damage amount from the health of the object
         // Player have a percentage of their damage reduced by their obtained slop kill achievments
-        float recievedDamage = damageAmount * (1 - (resistanceAchievements * .025f));
+        float recievedDamage = damageAmount;
+
+        if (isPlayer)
+        {
+            recievedDamage = damageAmount * (1 - (resistanceAchievements * .025f));
+            if(currentHealth <= maxHealth * 0.5f)
+            {
+                recievedDamage *= 0.6f;
+            }
+        }
+
         currentHealth -= recievedDamage;
         if (damageNoise != null && damageTimer <= 0)
         {
