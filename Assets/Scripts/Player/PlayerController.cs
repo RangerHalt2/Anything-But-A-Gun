@@ -94,7 +94,7 @@ public class PlayerController : MonoBehaviour
     #endregion
 
     [SerializeField] private GameObject dashSound;
-    void Awake() 
+    void Awake()
     {
         if (Instance != null && Instance != this)
         {
@@ -120,7 +120,7 @@ public class PlayerController : MonoBehaviour
         weaponHandler = GetComponent<WeaponHandler>();
         winEvent = GameObject.FindAnyObjectByType<WinEvent>();
 
-        if(dashEffect != null) dashEffect.Stop();
+        if (dashEffect != null) dashEffect.Stop();
 
         Dashes = maxDashLimit;
 
@@ -141,7 +141,7 @@ public class PlayerController : MonoBehaviour
             interactionText = GameObject.FindAnyObjectByType<InteractionTextIndicator>().GetComponent<TextMeshProUGUI>();
 
         }
-        if (GameObject.FindAnyObjectByType<DenialTextIndicator>()) 
+        if (GameObject.FindAnyObjectByType<DenialTextIndicator>())
         {
             denyText = GameObject.FindAnyObjectByType<DenialTextIndicator>().GetComponent<TextMeshProUGUI>();
         }
@@ -170,21 +170,23 @@ public class PlayerController : MonoBehaviour
 
         verticalForce = verticalForce + gravity * Time.deltaTime;
         verticalForce = Mathf.Clamp(verticalForce, terminalVelocity, -terminalVelocity);
-    
+
         move.y = verticalForce * Time.deltaTime;
 
         characterController.Move(move);
-        if (characterController.isGrounded){ 
+        if (characterController.isGrounded)
+        {
             verticalForce = -0.05f; //Vertical Force must always be slightly negative?
             momentum = Vector3.zero;
             hasDoubleJumped = false;
         }
-        if (!characterController.isGrounded) {
-            momentum = new Vector3(( Mathf.Abs(move.x) - momentumDecay < 0f) ? 0f : move.x - (move.x < 0f ? -momentumDecay : momentumDecay),
+        if (!characterController.isGrounded)
+        {
+            momentum = new Vector3((Mathf.Abs(move.x) - momentumDecay < 0f) ? 0f : move.x - (move.x < 0f ? -momentumDecay : momentumDecay),
                 0,
                 (Mathf.Abs(move.z) - momentumDecay < 0f) ? 0f : move.z - (move.z < 0f ? -momentumDecay : momentumDecay));
-            if(momentum.x > maxMomentum) momentum.x = maxMomentum;
-            if(momentum.z > maxMomentum) momentum.z = maxMomentum;
+            if (momentum.x > maxMomentum) momentum.x = maxMomentum;
+            if (momentum.z > maxMomentum) momentum.z = maxMomentum;
         }
 
         //Debug.Log("Momentum: " + momentum);
@@ -199,7 +201,7 @@ public class PlayerController : MonoBehaviour
 
     private void StartDash()
     {
-        if(dashUnlocked)
+        if (dashUnlocked)
         {
             if (canDash && dashes > 0)
             {
@@ -208,7 +210,7 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
-    
+
 
     private IEnumerator Dash()
     {
@@ -216,7 +218,7 @@ public class PlayerController : MonoBehaviour
         canDash = false;
         float startTime = Time.time;
         Vector3 dashDirection = transform.forward * inputs.MoveInput.y + transform.right * inputs.MoveInput.x;
-        if (dashDirection.sqrMagnitude < 0.1 * 0.1f) 
+        if (dashDirection.sqrMagnitude < 0.1 * 0.1f)
         {
             dashDirection = transform.forward;
         }
@@ -283,13 +285,13 @@ public class PlayerController : MonoBehaviour
             return;
         }
 
-        if(interactionText == null)
+        if (interactionText == null)
             interactionText = GameObject.FindAnyObjectByType<InteractionTextIndicator>().GetComponent<TextMeshProUGUI>();
 
 
         CheckHeadBump();
-        
-        if(!inputs.JumpPressed() && characterController.isGrounded)
+
+        if (!inputs.JumpPressed() && characterController.isGrounded)
         {
             verticalForce = -2f;
         }
@@ -310,7 +312,7 @@ public class PlayerController : MonoBehaviour
                 hasDoubleJumped = true;
             }
         }
-
+        HandleMidGameWeaponView();
         Rotate(inputs.LookInput);
         Move(inputs.MoveInput);
 
@@ -318,7 +320,7 @@ public class PlayerController : MonoBehaviour
         {
             weaponHandler.FireWeapon();
         }
-        else 
+        else
         {
             weaponHandler.StopFireWeapon();
         }
@@ -341,7 +343,7 @@ public class PlayerController : MonoBehaviour
             dashCharge += Time.deltaTime; //This one says if you don't have the max dash charges, build up to a new one
         }
         if (dashCharge >= dashChargeTime)
-        { 
+        {
             dashCharge = 0;
             Dashes++; //This one says if you have enough charge for a new dash, store the new dash
         }
@@ -354,6 +356,23 @@ public class PlayerController : MonoBehaviour
         //TakeScreenShot();
 
         TimerDecrement();
+    }
+
+    private void HandleMidGameWeaponView()
+    {
+        WeaponHandler wh = GameObject.FindAnyObjectByType<WeaponHandler>();
+        if (wh != null)
+        {
+            GameObject weaponObj = wh.GetCurrentWeapon();
+            WeaponClass weapon = weaponObj.GetComponent<WeaponClass>();
+            if (weapon != null)
+            {
+                if(inputs.MidGameUIView)
+                    weapon.ShowInfo();
+                else
+                    weapon.HideInfo();
+            }
+        }
     }
 
     private void CheckHeadBump()
@@ -477,20 +496,20 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void DenyInteract(string text) 
+    public void DenyInteract(string text)
     {
         Debug.Log("PlayerController DenyInteract " + text);
         //Start Coroutine (So we can wait a second)
         StartCoroutine(Denial(text));
-        
+
     }
 
-    private IEnumerator Denial(string text) 
+    private IEnumerator Denial(string text)
     {
         interactFail = true;
         //Turn off interact text
         LeftInteract();
-        if (denyText != null) 
+        if (denyText != null)
         {
             //Change deny interact text to string (which comes from the IInteractible object and depends on the item)
             denyText.text = text;

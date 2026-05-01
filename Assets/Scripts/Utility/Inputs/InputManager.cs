@@ -28,6 +28,7 @@ public class InputManager : MonoBehaviour
     [SerializeField] private string controllerCheck = "Controller Check";
     [SerializeField] private string keyboardCheck = "Keyboard Check";
     [SerializeField] private string controllerBack = "Controller Back";
+    [SerializeField] private string midGameUIView = "MidGameUIView";
 
     private Dictionary<RebindableAction, InputAction> actionMap;
 
@@ -60,6 +61,7 @@ public class InputManager : MonoBehaviour
     public InputAction controllerAction { get; private set; }
     public InputAction keyboardAction { get; private set; }
     public InputAction controllerBackAction { get; private set; }
+    public InputAction MidGameUIViewAction { get; private set; }
 
     //LB: This is the getters and setters for the inputs, this will be used to manage their values overall
     public Vector2 MoveInput { get; private set; }
@@ -76,6 +78,7 @@ public class InputManager : MonoBehaviour
     public bool CheatsInput { get; private set; }
     public bool ControllerLast { get; set; } = false;
     public bool ControllerBack { get; set; }
+    public bool MidGameUIView { get; private set; }
     //LB: Instance Handler
     public static InputManager Instance { get; private set; }
 
@@ -115,6 +118,7 @@ public class InputManager : MonoBehaviour
         controllerAction = playerControls.FindActionMap(actionMapName).FindAction(controllerCheck);
         keyboardAction = playerControls.FindActionMap(actionMapName).FindAction(keyboardCheck);
         controllerBackAction = playerControls.FindActionMap(actionMapName).FindAction(controllerBack);
+        MidGameUIViewAction = playerControls.FindActionMap(actionMapName).FindAction(midGameUIView);
 
 
         actionMap = new Dictionary<RebindableAction, InputAction>
@@ -175,6 +179,9 @@ public class InputManager : MonoBehaviour
 
         controllerBackAction.performed += context => ControllerBack = true;
         controllerBackAction.canceled += context => ControllerBack = false;
+
+        MidGameUIViewAction.performed += context => MidGameUIView = true;
+        MidGameUIViewAction.canceled += context => MidGameUIView = false;
     }
 
     //LB: Enable and Disable the actions

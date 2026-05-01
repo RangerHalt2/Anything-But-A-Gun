@@ -67,7 +67,7 @@ public class PackAPunchMachine : MonoBehaviour, IInteractable
             bool worked = wc.AddPackAPunch();
             if (worked)
             {
-                if(sfx != null)
+                if (sfx != null)
                     Instantiate(sfx, transform.position, transform.rotation, null);
                 counter++;
                 GameEvent.OnWeaponModified?.Invoke();
@@ -97,7 +97,7 @@ public class PackAPunchMachine : MonoBehaviour, IInteractable
 
     private void OnTriggerEnter(Collider other)
     {
-        
+
     }
 
     private void OnCollisionStay(Collision collision)

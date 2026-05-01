@@ -9,6 +9,8 @@ public class LookAtDetector : MonoBehaviour
     [Tooltip("The layer used by objects which can be interacted with.")]
     [SerializeField] private LayerMask interactableLayer;
 
+    private InputManager inputs;
+
     private WeaponClass currentWeapon;
 
     // Update is called once per frame
@@ -17,6 +19,13 @@ public class LookAtDetector : MonoBehaviour
         // Shoot a ray cast to see if player is looking at something
         Ray ray = new Ray(transform.position, transform.forward);
         UIManager uiManager = GameObject.FindAnyObjectByType<UIManager>();
+        inputs = GameObject.FindAnyObjectByType<InputManager>();
+        if (inputs != null && inputs.MidGameUIView)
+        {
+            Debug.Log("LOOK AT DETECTOR - preventing a second ui from showing up.");
+            ClearWeapon();
+            return;
+        }
         if (uiManager != null && uiManager.isPaused)
         {
             Debug.Log("LOOK AT DETECTOR - Game is paused preventing the ray from firing");

@@ -24,24 +24,24 @@ public class OfficeCatScript : WeaponClass
         // If enough time has passed since the last round was fired
         if (timer <= 0)
         {
-                // If there is an assigned ammo manager, and that ammo manager has at least one round of ammo loaded
-                if (ammoManager != null && ammoManager.GetCurrentAmmo() > 0)
+            // If there is an assigned ammo manager, and that ammo manager has at least one round of ammo loaded
+            if (ammoManager != null && ammoManager.GetCurrentAmmo() > 0)
+            {
+                // Attempt to fire the weapon
+                ammoManager.Fire();
+                // If the weapon is not reloading
+                if (!ammoManager.IsReloading())
                 {
-                    // Attempt to fire the weapon
-                    ammoManager.Fire();
-                    // If the weapon is not reloading
-                    if (!ammoManager.IsReloading())
+
+                    if (projectilePrefab != null)
                     {
-
-                        if (projectilePrefab != null)
-                        {
-                            SpawnProjectile();
-                        }
-                        // Update lastFired
-                        timer = fireRate;
-
+                        SpawnProjectile();
                     }
+                    // Update lastFired
+                    timer = fireRate;
+
                 }
+            }
             else if (ammoManager != null)
             {
                 if (ammoManager.GetReserveAmmo() > 0 || ammoManager.GetReserveAmmo() == -1)
