@@ -16,6 +16,13 @@ public class LookAtDetector : MonoBehaviour
     {
         // Shoot a ray cast to see if player is looking at something
         Ray ray = new Ray(transform.position, transform.forward);
+        UIManager uiManager = GameObject.FindAnyObjectByType<UIManager>();
+        if (uiManager != null && uiManager.isPaused)
+        {
+            Debug.Log("LOOK AT DETECTOR - Game is paused preventing the ray from firing");
+            ClearWeapon();
+            return;
+        }
         if (Physics.Raycast(ray, out RaycastHit hit, maxLookDistance, interactableLayer))
         {
             // Check if the player is looking at a weapon
