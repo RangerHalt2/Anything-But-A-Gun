@@ -21,6 +21,8 @@ public class LoadingScene : MonoBehaviour
 
     public void LoadScene(string sceneName)
     {
+        UIManager uiManager = GameObject.FindAnyObjectByType<UIManager>();
+        uiManager.allowPause = false;
         StartCoroutine(LoadSceneAsync(sceneName));
     }
 

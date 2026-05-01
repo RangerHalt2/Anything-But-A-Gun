@@ -30,6 +30,27 @@ public class HubLevelSender : MonoBehaviour, IInteractable
         }
     }
 
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
+        {
+            PlayerController pc = other.gameObject.GetComponent<PlayerController>();
+
+            pc.CheckInteract();
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
+        {
+            PlayerController pc = other.gameObject.GetComponent<PlayerController>();
+
+            pc.CheckInteract();
+            pc.LeftInteract();
+        }
+    }
+
     private void Start()
     {
         sceneController = GameObject.FindAnyObjectByType<SceneController>();
