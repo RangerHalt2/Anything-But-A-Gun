@@ -283,6 +283,9 @@ public class PlayerController : MonoBehaviour
             return;
         }
 
+        if(interactionText == null)
+            interactionText = GameObject.FindAnyObjectByType<InteractionTextIndicator>().GetComponent<TextMeshProUGUI>();
+
 
         CheckHeadBump();
         

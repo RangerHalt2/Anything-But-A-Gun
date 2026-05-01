@@ -27,6 +27,8 @@ public class RoomWaveSpawner : MonoBehaviour
 
     private bool waveOneSpawned = false;
 
+    [SerializeField] private bool spawnOnlyByTime = false;
+
     private int bonusPTOAchievements = 0;
     
     private void Start()
@@ -121,7 +123,7 @@ public class RoomWaveSpawner : MonoBehaviour
         Debug.Log("ROOM WAVE SPAWNER - Handle Enemy Death Event");
         enemySpawner.aliveEnemies.Remove(enemy);
 
-        if (enemySpawner.aliveEnemies.Count <= 1  && current_wave < num_of_waves)
+        if (enemySpawner.aliveEnemies.Count <= 1  && current_wave < num_of_waves && !spawnOnlyByTime)
         {
             StartCoroutine(SpawnWaves());
         }
