@@ -9899,6 +9899,7 @@ MonoBehaviour:
   dashUnlocked: 0
   dashCooldownReduction: 0
   bonusDashes: 0
+  hasWon: 0
   dashSound: {fileID: 5383701307693267320, guid: 2d5ca1d5bd3429b418eb2fd209337431, type: 3}
 --- !u!114 &3398571290749484056
 MonoBehaviour:
@@ -9985,6 +9986,10 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 94847026-18bf-4d0b-920c-f6fba7bd3380
     m_ActionName: 'Player/Controller Back[/SwitchProControllerHID/buttonEast]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: a68cf49c-7414-48f1-9b9e-3c001ff23569
+    m_ActionName: 'Player/MidGameUIView[/Keyboard/tab]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -10466,7 +10471,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.01
-  far clip plane: 200
+  far clip plane: 1000
   field of view: 60.000004
   orthographic: 0
   orthographic size: 5
@@ -15660,3 +15665,4 @@ MonoBehaviour:
   maxLookingAngle: 80
   minLookingAngle: -80
   controllerSens: 7
+  hasWon: 0
