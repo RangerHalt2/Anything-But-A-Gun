@@ -32,21 +32,21 @@ public class StaplerScript : WeaponClass
                 // If the weapon is not reloading
                 if (!ammoManager.IsReloading())
                 {
-                        if (hitscan != null)
-                        {
-                            hitscan.Shoot();
-                            PlayOnomatopeia();
-                            RandomGunShot(transform); // Added by Aaron 4/12/26
-                            // Play sound effect (added by Aaron) (commented out by Aaron 4/12/26)
-                            //if (gunShot != null)
-                            //   Instantiate(gunShot, transform.position, transform.rotation, null);
+                    if (hitscan != null)
+                    {
+                        hitscan.Shoot();
+                        PlayOnomatopeia();
+                        RandomGunShot(transform); // Added by Aaron 4/12/26
+                                                  // Play sound effect (added by Aaron) (commented out by Aaron 4/12/26)
+                                                  //if (gunShot != null)
+                                                  //   Instantiate(gunShot, transform.position, transform.rotation, null);
 
-                            // Old sound effect player (commented out by Aaron)
-                            /*if(gunShot != null)
-                            {
-                                Instantiate(gunShot, transform.position, transform.rotation, null);
-                            }*/
-                        }
+                        // Old sound effect player (commented out by Aaron)
+                        /*if(gunShot != null)
+                        {
+                            Instantiate(gunShot, transform.position, transform.rotation, null);
+                        }*/
+                    }
                     // Update lastFired
                     timer = fireRate;
                 }
@@ -66,7 +66,7 @@ public class StaplerScript : WeaponClass
                     }
                 }
             }
-            
+
         }
     }
 
