@@ -126,11 +126,14 @@ public class AmmoManager : MonoBehaviour
         // Set current Ammo to maximum
         reserveAmmo = maxAmmo;
         currentAmmo = ammoCapacity;
-        ammoDisplayText = GameObject.FindGameObjectWithTag("AmmoCounter").GetComponent<TextMeshProUGUI>();
-        reserveAmmoDisplayText = GameObject.FindGameObjectWithTag("ReserveAmmoCounter").GetComponent<TextMeshProUGUI>();
+        if(GameObject.FindGameObjectWithTag("AmmoCounter") != null)
+            ammoDisplayText = GameObject.FindGameObjectWithTag("AmmoCounter").GetComponent<TextMeshProUGUI>();
+        if(GameObject.FindGameObjectWithTag("ReserveAmmoCounter") != null)
+            reserveAmmoDisplayText = GameObject.FindGameObjectWithTag("ReserveAmmoCounter").GetComponent<TextMeshProUGUI>();
 
         ApplyAchievementRewards();
-        updateDisplay();
+        if(ammoDisplayText != null && reserveAmmoDisplayText != null)
+            updateDisplay();
     }
 
     // Update is called once per frame

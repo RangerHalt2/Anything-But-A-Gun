@@ -286,7 +286,7 @@ public class PlayerController : MonoBehaviour
         }
 
         if (interactionText == null)
-            interactionText = GameObject.FindAnyObjectByType<InteractionTextIndicator>().GetComponent<TextMeshProUGUI>();
+            interactionText = GameObject.FindAnyObjectByType<InteractionTextIndicator>(FindObjectsInactive.Include).GetComponent<TextMeshProUGUI>();
 
 
         CheckHeadBump();
