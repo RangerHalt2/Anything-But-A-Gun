@@ -19,10 +19,8 @@ public class WeaponHandler : MonoBehaviour
 
     [SerializeField] private InputManager inputManager;
     private float scrollValue;
-    
-    private float lastSwitch = Mathf.NegativeInfinity;
 
-    private float switchTimer = 0; 
+    private float switchTimer = 0;
     [SerializeField] private float weaponSwitchRate = 0.5f;
 
     private float dropTimer = 0;
@@ -54,7 +52,7 @@ public class WeaponHandler : MonoBehaviour
             currentWeapon.transform.position = weaponLocation.position;
         }
         SwitchGun();
-        switchTimer  -= Time.deltaTime;
+        switchTimer -= Time.deltaTime;
         dropTimer -= Time.deltaTime;
     }
 
@@ -113,55 +111,59 @@ public class WeaponHandler : MonoBehaviour
         //Debug.Log("WEAPON HANDLER - Passed all NULL checks");
 
         // If enough time has passed since the last round was fired
+        if (switchTimer > 0)
+        {
+            Debug.Log("Weapon Handler - Switch Timer is greater than 0");
+            return;
+        }
 
-        
-            if (weapons.Count > 1 && (scrollValue != 0 || inputManager.NextInput != 0) && !currentWeapon.GetComponent<AmmoManager>().IsReloading())
+        if (weapons.Count > 1 && (scrollValue != 0 || inputManager.NextInput != 0) && !currentWeapon.GetComponent<AmmoManager>().IsReloading())
+        {
+            currentWeapon.SetActive(false); //Deactivate (not destroy) current weapon
+        }
+        else
+        {
+            return;
+        }
+
+
+        //If player scrolls
+        if ((scrollValue > 0 || inputManager.NextInput > 0f) && !currentWeapon.GetComponent<AmmoManager>().IsReloading()) //Scroll up
+        {
+            weaponSlot++;
+
+            if (weaponSlot >= weapons.Count) //Actually check if it's a gun. If not, change back to first gun
             {
-                currentWeapon.SetActive(false); //Deactivate (not destroy) current weapon
+                weaponSlot = 0;
+                currentWeapon = weapons[weaponSlot];
+                currentWeapon.GetComponent<AmmoManager>().updateDisplay();
             }
             else
             {
-                return;
+                currentWeapon = weapons[weaponSlot]; //Set current weapon to next weapon
+                currentWeapon.GetComponent<AmmoManager>().updateDisplay();
             }
-
-
-            //If player scrolls
-            if ((scrollValue > 0 || inputManager.NextInput > 0f) && !currentWeapon.GetComponent<AmmoManager>().IsReloading()) //Scroll up
+            switchTimer = weaponSwitchRate;
+            //Play equip animation and activate new current weapon
+        }
+        else if ((scrollValue < 0 || inputManager.NextInput < 0f) && !currentWeapon.GetComponent<AmmoManager>().IsReloading()) //Scroll down
+        {
+            weaponSlot--;
+            if (weaponSlot < 0) //Actually check if it's a gun. If not, change to base
             {
-                weaponSlot++;
-
-                if (weaponSlot >= weapons.Count) //Actually check if it's a gun. If not, change back to first gun
-                {
-                    weaponSlot = 0;
-                    currentWeapon = weapons[weaponSlot];
-                    currentWeapon.GetComponent<AmmoManager>().updateDisplay();
-                }
-                else
-                {
-                    currentWeapon = weapons[weaponSlot]; //Set current weapon to next weapon
-                    currentWeapon.GetComponent<AmmoManager>().updateDisplay();
-                }
-
-                //Play equip animation and activate new current weapon
+                weaponSlot = weapons.Count - 1;
+                currentWeapon = weapons[weaponSlot];
+                currentWeapon.GetComponent<AmmoManager>().updateDisplay();
             }
-            else if ((scrollValue < 0 || inputManager.NextInput < 0f) && !currentWeapon.GetComponent<AmmoManager>().IsReloading()) //Scroll down
+            else
             {
-                weaponSlot--;
-                if (weaponSlot < 0) //Actually check if it's a gun. If not, change to base
-                {
-                    weaponSlot = weapons.Count - 1;
-                    currentWeapon = weapons[weaponSlot];
-                    currentWeapon.GetComponent<AmmoManager>().updateDisplay();
-                }
-                else
-                {
-                    currentWeapon = weapons[weaponSlot]; //Set current weapon to next weapon
-                    currentWeapon.GetComponent<AmmoManager>().updateDisplay();
-                }
-
-                //Play equip animation and activate new current weapon
-
+                currentWeapon = weapons[weaponSlot]; //Set current weapon to next weapon
+                currentWeapon.GetComponent<AmmoManager>().updateDisplay();
             }
+            switchTimer = weaponSwitchRate;
+            //Play equip animation and activate new current weapon
+
+        }
 
         if (currentWeapon.activeSelf == false)
         {
@@ -265,7 +267,7 @@ public class WeaponHandler : MonoBehaviour
         {
             weapons.Remove(dropWeapon);
             weaponSlot = 0;
-            if(swapToStapler)
+            if (swapToStapler)
                 currentWeapon = weapons[weaponSlot];
             currentWeapon.SetActive(false);
             currentWeapon.SetActive(true);
@@ -316,6 +318,7 @@ public class WeaponHandler : MonoBehaviour
         }
     }
 
+
     public void ToggleCheats() //Enables/Disables unlimited ammo
     {
         if (!cheatsEnabled)
@@ -324,7 +327,7 @@ public class WeaponHandler : MonoBehaviour
             currentWeapon.GetComponent<AmmoManager>().reserveAmmo = -1;
             currentWeapon.GetComponent<AmmoManager>().updateDisplay();
         }
-        else 
+        else
         {
             cheatsEnabled = false;
             foreach (var weapon in weapons)

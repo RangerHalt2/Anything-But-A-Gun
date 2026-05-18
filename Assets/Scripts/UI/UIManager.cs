@@ -272,8 +272,8 @@ public class UIManager : MonoBehaviour
         if(quitConfirmCanvas != null)
         {
             Debug.Log("UI MANAGER - Showing the Quit Confirm Now!");
-            Cursor.lockState = CursorLockMode.None;
             quitConfirmCanvas.gameObject.SetActive(true);
+            Cursor.lockState = CursorLockMode.None;
             StartCoroutine(SetSelectedNextFrame(confirmButton));
         }
     }
